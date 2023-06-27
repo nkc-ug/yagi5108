@@ -18,8 +18,8 @@ const customTheme = createTheme({
 });
 
 const commonProp = {
-  width: 300,
-  height: 200,
+  padding: 3,
+  margin: 3,
 };
 
 const Form = () => {
