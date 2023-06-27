@@ -1,12 +1,14 @@
 import React from "react";
 import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
+import Form from "./Form";
 import bgImage from "../image/背景.png";
 
 const App = () => {
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   return (
     <div>
       <Box
@@ -29,6 +31,7 @@ const App = () => {
             alignItems: "center",
             height: "100%",
             maxHeight: "100vh",
+            position: "relative",
           }}
         >
           <img
@@ -36,6 +39,18 @@ const App = () => {
             alt=""
             style={{ width: "auto", height: "auto", maxHeight: "100%" }}
           />
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            bottom={0}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Form />
+          </Box>
           <div style={{ position: "absolute", top: 5, left: 0 }}>
             <Tutorial
               open={open}
