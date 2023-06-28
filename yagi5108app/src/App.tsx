@@ -1,5 +1,7 @@
 import { Container, Box } from '@mui/material';
+import ReactAudioPlayer from 'react-audio-player';
 import bgImage from '../image/背景.png';
+import bgm from '../Audio/自然の中でゆったりと.mp3';
 
 const App = () => {
   return (
@@ -21,10 +23,11 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
           height: '100%',
-          maxHeight: '100vh', 
+          maxHeight: '100vh',
         }}
       >
-        <img src={bgImage} alt="" style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
+        <img src={bgImage} style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
+        <ReactAudioPlayer src={bgm} autoPlay loop volume={0.5}  />
       </Container>
     </Box>
   );
