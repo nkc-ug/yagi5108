@@ -38,7 +38,7 @@ const App: React.FC = () => {
           alignItems: 'center',
           height: '100%',
           maxHeight: '100vh',
-        }}
+        }}  
       >                                                                                          
         <img src={bgImage} alt="" style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
         <audio ref={audioRef} src={bgm} loop />
