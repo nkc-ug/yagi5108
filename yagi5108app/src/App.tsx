@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
@@ -6,9 +6,20 @@ import bgImage from "../image/背景.png";
 import BottonGroups from "./ButtonGroups";
 
 const App = () => {
+  //tutorial用の定数たち
   const [open, setOpen] = React.useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  //form用の定数たち
+  const [inputText, setInputText] = useState("");
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value);
+  };
+  const handleSubmit = () => {
+    console.log(inputText);
+    setInputText("");
+  };
 
   return (
     <div>
@@ -50,7 +61,11 @@ const App = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Form />
+            <Form
+              inputText={inputText}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
           </Box>
           <Box
             position="absolute"

@@ -1,3 +1,5 @@
+import * as React from "react";
+import { FC } from "react";
 import { createTheme, alpha } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -6,6 +8,11 @@ import { amber } from "@mui/material/colors";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
+type Props = {
+  inputText: string;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
 const customTheme = createTheme({
   palette: {
     warning: {
@@ -22,7 +29,7 @@ const commonProp = {
   margin: 3,
 };
 
-const Form = () => {
+const Form: FC<Props> = (props) => {
   return (
     <ThemeProvider theme={customTheme}>
       <Box
@@ -30,7 +37,7 @@ const Form = () => {
         zIndex={1}
         sx={{
           ...commonProp,
-          backgroundColor: alpha(customTheme.palette.secondary.main, 0.5), // 半透明にする
+          backgroundColor: alpha(customTheme.palette.secondary.main, 0.5),
           "& .MuiTextField-root": { m: 2, width: "25ch" },
         }}
       >
@@ -45,10 +52,14 @@ const Form = () => {
             id="standard-basic"
             label="言葉を入力"
             variant="standard"
+            value={props.inputText}
+            onChange={props.handleChange}
           />
         </Box>
         <Box textAlign={"center"}>
-          <Button variant="outlined">草を生やす</Button>
+          <Button variant="outlined" onClick={props.handleSubmit}>
+            草を生やす
+          </Button>
         </Box>
       </Box>
     </ThemeProvider>
