@@ -1,9 +1,23 @@
-import { Container, Box } from '@mui/material';
-import ReactAudioPlayer from 'react-audio-player';
+import { Container, Box, Button } from '@mui/material';
+import { useRef, useState } from 'react';
 import bgImage from '../image/背景.png';
 import bgm from '../Audio/自然の中でゆったりと.mp3';
 
-const App = () => {
+const App: React.FC = () => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleBGM = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <Box
       style={{
@@ -26,8 +40,11 @@ const App = () => {
           maxHeight: '100vh',
         }}
       >
-        <img src={bgImage} style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
-        <ReactAudioPlayer src={bgm} autoPlay loop volume={0.5}  />
+        <img src={bgImage} alt="" style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
+        <audio ref={audioRef} src={bgm} loop />
+        <Button variant="contained" onClick={toggleBGM}>
+          {isPlaying ? 'Stop' : 'Play'}
+        </Button>
       </Container>
     </Box>
   );
