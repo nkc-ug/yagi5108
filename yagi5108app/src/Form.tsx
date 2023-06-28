@@ -11,8 +11,9 @@ import Button from "@mui/material/Button";
 type Props = {
   inputText: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
+
 const customTheme = createTheme({
   palette: {
     warning: {
@@ -54,10 +55,20 @@ const Form: FC<Props> = (props) => {
             variant="standard"
             value={props.inputText}
             onChange={props.handleChange}
+            inputProps={{
+              maxLength: 1 - 15,
+            }}
           />
         </Box>
         <Box textAlign={"center"}>
-          <Button variant="outlined" onClick={props.handleSubmit}>
+          <Button
+            variant="outlined"
+            onClick={
+              props.inputText.trim() !== "" ? props.handleSubmit : undefined
+            }
+            disabled={props.inputText.trim() === ""}
+          >
+            {" "}
             草を生やす
           </Button>
         </Box>
