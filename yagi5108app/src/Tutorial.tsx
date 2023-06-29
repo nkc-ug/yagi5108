@@ -7,7 +7,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import backgroundImage from "../image/Tutorial_img.jpg";
+import backgroundImage from "../image/tutorial.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 const style = {
   position: "absolute" as const,

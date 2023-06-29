@@ -56,7 +56,7 @@ const Form: FC<Props> = (props) => {
             value={props.inputText}
             onChange={props.handleChange}
             inputProps={{
-              maxLength: 1 - 15,
+              maxLength: 10,
             }}
           />
         </Box>
@@ -68,7 +68,6 @@ const Form: FC<Props> = (props) => {
             }
             disabled={props.inputText.trim() === ""}
           >
-            {" "}
             草を生やす
           </Button>
         </Box>
