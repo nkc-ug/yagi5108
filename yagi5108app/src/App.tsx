@@ -3,6 +3,7 @@ import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
 import Flower from "./Flower";
+import Syokuzi from "./syokuzi";
 import bgImage from "../image/背景.png";
 import BottonGroups from "./ButtonGroups";
 
@@ -72,13 +73,25 @@ const App = () => {
             position="absolute"
             top={250}
             left={0}
-            right={0}
+            right={50}
             bottom={0}
             display="flex"
             justifyContent="center"
             alignItems="center"
           >
             <Flower />
+          </Box>
+          <Box
+            position="absolute"
+            top={35}
+            left={0}
+            right={40}
+            bottom={0}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Syokuzi />
           </Box>
           <Box
             position="absolute"

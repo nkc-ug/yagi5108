@@ -9,7 +9,7 @@ import kana_kazitu from "../image/kana_kazitu.png";
 import tano_hana from "../image/tano_hana.png";
 import tano_kazitu from "../image/tano_kazitu.png";
 
-const BoxWithRandomBox = () => {
+const Flower = () => {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);
   const [random, setRandom] = useState<number | null>(null);
   useEffect(() => {
@@ -24,26 +24,12 @@ const BoxWithRandomBox = () => {
     setRandomNumber(randomNum);
   }, []);
 
-  const getRandomPosition = () => {
-    const boxWidth = 300;
-    const boxHeight = 270;
-
-    // ランダムな位置を計算
-    const posX = Math.floor(Math.random() * (boxWidth - 70));
-    const posY = Math.floor(Math.random() * (boxHeight - 70));
-
-    return {
-      left: posX,
-      top: posY,
-    };
-  };
-
   return (
     <Box
       sx={{
         position: "relative",
-        width: "300px",
-        height: "270px",
+        width: "70px",
+        height: "70px",
       }}
     >
       {randomNumber !== null
@@ -55,7 +41,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${yoro_hana})`,
@@ -68,7 +54,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${yoro_kazitu})`,
@@ -84,7 +70,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${ikari_hana})`,
@@ -97,7 +83,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${ikari_kazitu})`,
@@ -113,7 +99,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${kana_hana})`,
@@ -126,7 +112,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${kana_kazitu})`,
@@ -142,7 +128,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${tano_hana})`,
@@ -155,7 +141,7 @@ const BoxWithRandomBox = () => {
                   <Box
                     sx={{
                       position: "absolute",
-                      ...getRandomPosition(),
+
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${tano_kazitu})`,
@@ -173,4 +159,4 @@ const BoxWithRandomBox = () => {
     </Box>
   );
 };
-export default BoxWithRandomBox;
+export default Flower;
