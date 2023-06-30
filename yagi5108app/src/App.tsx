@@ -1,15 +1,17 @@
-import React, { useState } from "react";
-import { Container, Box } from "@mui/material";
+import { useRef, useState } from "react";
+import { Container, Box, Button } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
 import Flower from "./Flower";
 import Syokuzi from "./syokuzi";
 import bgImage from "../image/背景.png";
 import BottonGroups from "./ButtonGroups";
+import bgm from "../Audio/自然の中でゆったりと.mp3";
+import RandomWalker from "./RandomWalker";
 
 const App = () => {
   //tutorial用の定数たち
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -21,6 +23,20 @@ const App = () => {
   const handleSubmit = () => {
     console.log(inputText);
     setInputText("");
+  };
+
+  const audioRef = useRef<HTMLAudioElement | null>(null); //bgmの設定
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleBGM = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
   return (
@@ -111,6 +127,11 @@ const App = () => {
               openclick={handleOpen}
               closeclick={handleClose}
             />
+            <RandomWalker />
+            <audio ref={audioRef} src={bgm} loop />
+            <Button variant="contained" onClick={toggleBGM}>
+              {isPlaying ? "Stop" : "Play"}
+            </Button>
           </div>
         </Container>
       </Box>
