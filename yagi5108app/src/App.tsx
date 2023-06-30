@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react';
 import { Container, Box, Button } from '@mui/material';
-import RandomImage from './RandomImage.tsx';
-import bgm from '../Audio/自然の中でゆったりと.mp3';
+import { useRef, useState } from 'react';
 import bgImage from '../image/背景.png';
+import bgm from '../Audio/自然の中でゆったりと.mp3';
+import RandomWalker from './RandomWalker';
 
 const App: React.FC = () => {
-  const audioRef = useRef<HTMLAudioElement | null>(null); // BGMの設定
+  const audioRef = useRef<HTMLAudioElement | null>(null); //bgmの設定
   const [isPlaying, setIsPlaying] = useState(false);
 
   const toggleBGM = () => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause()
+        audioRef.current.pause();
       } else {
         audioRef.current.play();
       }
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <Box
+    <Box                           //背景の設定
       style={{
         backgroundColor: 'black',
         width: '100vw',
@@ -39,11 +39,10 @@ const App: React.FC = () => {
           alignItems: 'center',
           height: '100%',
           maxHeight: '100vh',
-          position: 'relative',
-        }}
-      >
-        <img src={bgImage} alt="" style={{ position: 'absolute', width: '100%', height: '100%' }} />
-        <RandomImage src={"yagi5108app/image/yagi_syokuzi.png"} />
+        }}  
+      >                                                                                          
+        <img src={bgImage} alt="" style={{ width: 'auto', height: 'auto', maxHeight: '100%' }} />
+        <RandomWalker />
         <audio ref={audioRef} src={bgm} loop />
         <Button variant="contained" onClick={toggleBGM}>
           {isPlaying ? 'Stop' : 'Play'}
