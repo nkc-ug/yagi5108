@@ -12,12 +12,15 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.6",
     "axios": "^1.4.0",
     "dayjs": "^1.11.8",
     "firebase": "^9.23.0",
     "react": "^18.2.0",
+    "react-audio-player": "^0.17.0",
     "react-dom": "^18.2.0",
+    "react-howler": "^5.2.0",
     "react-router-dom": "^6.14.0",
     "recoil": "^0.7.7"
   },
