@@ -9,6 +9,7 @@ import BottonGroups from "./ButtonGroups";
 import RandomWalker from "./RandomWalker";
 import BGMPlayer from "./Bgm";
 import bgm from "../Audio/自然の中でゆったりと.mp3";
+import EmotionApi from "./EmotionApi";
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -19,9 +20,11 @@ const App: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
+
+  //山本、追加
+  const [emotionData] = useState<number[]>([0, 0, 0, 0, 0]);
   const handleSubmit = () => {
-    console.log(inputText);
-    setInputText("");
+    return <EmotionApi text={inputText} emotionData={emotionData} />;
   };
 
   return (
