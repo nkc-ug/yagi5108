@@ -85,8 +85,8 @@ const RandomWalker: React.FC = () => {
         ref={walkerRef}
         style={{
           position: "absolute",
-          width: "100px",
-          height: "100px",
+          width: "130px",
+          height: "130px",
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           left: `${position.x}px`,
@@ -94,12 +94,6 @@ const RandomWalker: React.FC = () => {
           transition: "left 2s ease-in-out, top 2s ease-in-out", // 移動アニメーションの時間を延長（2秒）
         }}
       />
-      <button
-        style={{ position: "absolute", top: "10px", right: "10px" }}
-        onClick={toggleRangeVisibility}
-      >
-        {rangeVisible ? "Hide Range" : "Show Range"}
-      </button>
     </div>
   );
 };

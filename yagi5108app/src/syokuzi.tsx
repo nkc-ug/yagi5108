@@ -18,8 +18,8 @@ const Syokuzi = () => {
         <Box
           sx={{
             position: "absolute",
-            width: "150px",
-            height: "150px",
+            width: "130px",
+            height: "130px",
             backgroundImage: `url(${yagi_syokuzi})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
