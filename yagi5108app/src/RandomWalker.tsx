@@ -4,7 +4,7 @@ import yagi_right from "../image/yagi_right.png";
 
 const RandomWalker: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 100, y: 300 });
+  const [position, setPosition] = useState({ x: 300, y: 200 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [rangeVisible, setRangeVisible] = useState(false);
 
@@ -46,16 +46,12 @@ const RandomWalker: React.FC = () => {
       setPosition({ x: newX, y: newY });
     };
 
-    const intervalId = setInterval(updatePosition, 3000); // 移動アニメーションの時間を延長（2000ミリ秒）
+    const intervalId = setInterval(updatePosition, 3500); // 移動アニメーションの時間を延長（2000ミリ秒）
 
     return () => {
       clearInterval(intervalId);
     };
   }, [containerSize]);
-
-  const toggleRangeVisibility = () => {
-    setRangeVisible(!rangeVisible);
-  };
 
   const backgroundImage =
     position.x > containerSize.width / 2 ? yagi_right : yagi_left;

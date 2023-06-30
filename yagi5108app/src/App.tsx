@@ -4,8 +4,8 @@ import Tutorial from "./Tutorial";
 import Form from "./Form";
 import Flower from "./Flower";
 import Syokuzi from "./syokuzi";
+import Setting from "./settings";
 import bgImage from "../image/背景.png";
-import BottonGroups from "./ButtonGroups";
 import RandomWalker from "./RandomWalker";
 import BGMPlayer from "./Bgm";
 import bgm from "../Audio/自然の中でゆったりと.mp3";
@@ -52,7 +52,7 @@ const App: React.FC = () => {
           <img
             src={bgImage}
             alt=""
-            style={{ width: "auto", height: "auto", maxHeight: "100%" }}
+            style={{ width: "auto", height: "auto", maxHeight: "100vh" }}
           />
           <Box
             position="absolute"
@@ -116,16 +116,14 @@ const App: React.FC = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-          >
-            <BottonGroups />
-          </Box>
+          ></Box>
           <div style={{ position: "absolute", top: 5, left: 0 }}>
             <Tutorial
               open={open}
               openclick={handleOpen}
               closeclick={handleClose}
             />
-
+            <Setting />
             <BGMPlayer src={bgm} />
           </div>
         </Container>
