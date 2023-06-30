@@ -24,7 +24,8 @@ const App: React.FC = () => {
   //山本、追加
   const [emotionData] = useState<number[]>([0, 0, 0, 0, 0]);
   const handleSubmit = () => {
-    return <EmotionApi text={inputText} emotionData={emotionData} />;
+    <EmotionApi text={inputText} emotionData={emotionData} />;
+    setInputText("");
   };
 
   return (
