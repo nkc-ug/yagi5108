@@ -11,7 +11,7 @@ const App: React.FC = () => {
   const toggleBGM = () => {
     if (audioRef.current) {
       if (isPlaying) {
-        audioRef.current.pause();
+        audioRef.current.pause()
       } else {
         audioRef.current.play();
       }
