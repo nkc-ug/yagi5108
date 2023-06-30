@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
 import Flower from "./Flower";
 import Syokuzi from "./syokuzi";
+import Setting from "./settings";
 import bgImage from "../image/背景.png";
-import BottonGroups from "./ButtonGroups";
+import RandomWalker from "./RandomWalker";
+import BGMPlayer from "./Bgm";
+import bgm from "../Audio/自然の中でゆったりと.mp3";
 
-const App = () => {
-  //tutorial用の定数たち
-  const [open, setOpen] = React.useState(true);
+const App: React.FC = () => {
+  const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  //form用の定数たち
   const [inputText, setInputText] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -51,7 +52,7 @@ const App = () => {
           <img
             src={bgImage}
             alt=""
-            style={{ width: "auto", height: "auto", maxHeight: "100%" }}
+            style={{ width: "auto", height: "auto", maxHeight: "100vh" }}
           />
           <Box
             position="absolute"
@@ -83,6 +84,19 @@ const App = () => {
           </Box>
           <Box
             position="absolute"
+            top={200}
+            left={0}
+            right={100}
+            bottom={0}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <RandomWalker />
+          </Box>
+
+          <Box
+            position="absolute"
             top={35}
             left={0}
             right={40}
@@ -102,15 +116,15 @@ const App = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-          >
-            <BottonGroups />
-          </Box>
+          ></Box>
           <div style={{ position: "absolute", top: 5, left: 0 }}>
             <Tutorial
               open={open}
               openclick={handleOpen}
               closeclick={handleClose}
             />
+            <Setting />
+            <BGMPlayer src={bgm} />
           </div>
         </Container>
       </Box>
