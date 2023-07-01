@@ -30,3 +30,4 @@ export const SyokuziCon = () => {
     </div>
   );
 };
+export default SyokuziCon;

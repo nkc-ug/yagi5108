@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-function Emotion({
-  text,
-  emotionData,
-}: {
-  text: string;
-  emotionData: number[];
-}) {
-  const apiUri = "https://test-f6bkalktuq-uc.a.run.app/test/?text=" + text;
+function Emotion({ text, emotionData }: { text: string; emotionData: number[] }) {
+  const apiUri = 'https://test-f6bkalktuq-uc.a.run.app/test/?text=' + text;
 
-  const [answer, setAanswer] = useState<any>("");
-  const [updateEmotionData, setUpdateEmotionData] = useState<number[]>([
-    ...emotionData,
-  ]);
+  const [answer, setAanswer] = useState<any>('');
+  const [updateEmotionData, setUpdateEmotionData] = useState<number[]>([...emotionData]);
 
   useEffect(() => {
     fetch(apiUri)
@@ -21,7 +13,7 @@ function Emotion({
       .catch((error) => console.log(error));
   }, []);
 
-  const [maxEmotion, setMaxEmotion] = useState<string>("");
+  const [maxEmotion, setMaxEmotion] = useState<string>('');
   const [maxScore, setMaxScore] = useState<number>(-Infinity);
 
   let index = 1;
@@ -41,28 +33,28 @@ function Emotion({
   }
 
   switch (maxEmotion) {
-    case "happy":
+    case 'happy':
       setUpdateEmotionData((prevEmotionData) => {
         const updatedData = [...prevEmotionData];
         updatedData[4] = 1;
         return updatedData;
       });
       break;
-    case "anger":
+    case 'anger':
       setUpdateEmotionData((prevEmotionData) => {
         const updatedData = [...prevEmotionData];
         updatedData[4] = 2;
         return updatedData;
       });
       break;
-    case "sad":
+    case 'sad':
       setUpdateEmotionData((prevEmotionData) => {
         const updatedData = [...prevEmotionData];
         updatedData[4] = 3;
         return updatedData;
       });
       break;
-    case "enjoyable":
+    case 'enjoyable':
       setUpdateEmotionData((prevEmotionData) => {
         const updatedData = [...prevEmotionData];
         updatedData[4] = 4;

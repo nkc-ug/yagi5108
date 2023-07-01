@@ -3,18 +3,19 @@ import { Container, Box } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
+import Syokuzi from './SyokuziCon';
+import Setting from './SettingsCon';
 import bgImage from './assets/backGround.png';
 import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';
-import bgm from '../Audio/自然の中でゆったりと.mp3';
+import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
-import { SyokuziCon } from './SyokuziCon';
-import { SettingCon } from './SettingsCon';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const [inputText, setInputText] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -100,7 +101,7 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <SyokuziCon />
+            <Syokuzi />
           </Box>
           <Box
             position="absolute"
@@ -112,11 +113,13 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           ></Box>
+
           <Box style={{ position: 'absolute', top: 5, left: 500 }}>
             <BGMPlayer src={bgm} />
           </Box>
           <div style={{ position: 'absolute', top: 5, left: 0 }}>
             <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+
           </div>
         </Container>
       </Box>
