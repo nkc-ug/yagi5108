@@ -1,12 +1,12 @@
-import * as React from "react";
-import { FC } from "react";
-import { createTheme, alpha } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { amber } from "@mui/material/colors";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import * as React from 'react';
+import { FC } from 'react';
+import { createTheme, alpha } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { amber } from '@mui/material/colors';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 type Props = {
   inputText: string;
@@ -20,7 +20,7 @@ const customTheme = createTheme({
       main: alpha(amber[700], 0.5),
     },
     secondary: {
-      main: "#f0f0f0",
+      main: '#f0f0f0',
     },
   },
 });
@@ -39,16 +39,16 @@ const Form: FC<Props> = (props) => {
         sx={{
           ...commonProp,
           backgroundColor: alpha(customTheme.palette.secondary.main, 0.5),
-          "& .MuiTextField-root": { m: 2, width: "25ch" },
+          '& .MuiTextField-root': { m: 2, width: '25ch' },
         }}
       >
-        <Typography variant="h5" textAlign={"center"}>
+        <Typography variant="h5" textAlign={'center'}>
           ヤギに食べさせる言葉を
         </Typography>
-        <Typography variant="h5" textAlign={"center"}>
+        <Typography variant="h5" textAlign={'center'}>
           入力してください
         </Typography>
-        <Box textAlign={"center"}>
+        <Box textAlign={'center'}>
           <TextField
             id="standard-basic"
             label="言葉を入力"
@@ -60,13 +60,11 @@ const Form: FC<Props> = (props) => {
             }}
           />
         </Box>
-        <Box textAlign={"center"}>
+        <Box textAlign={'center'}>
           <Button
             variant="outlined"
-            onClick={
-              props.inputText.trim() !== "" ? props.handleSubmit : undefined
-            }
-            disabled={props.inputText.trim() === ""}
+            onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
+            disabled={props.inputText.trim() === ''}
           >
             草を生やす
           </Button>
