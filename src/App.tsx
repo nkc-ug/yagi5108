@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Box, Stack, Grid } from '@mui/material';
+import { Container, Stack, Grid } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
@@ -8,7 +8,6 @@ import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';
 import bgm from '../Audio/自然の中でゆったりと.mp3';
 import EmotionApi from './EmotionApi';
-import { SyokuziCon } from './SyokuziCon';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
