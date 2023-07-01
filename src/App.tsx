@@ -10,6 +10,7 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
+import { height } from '@mui/system';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -110,7 +111,9 @@ const App: React.FC = () => {
             <Grid item xs={1}></Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={3}></Grid>
+            <Grid item xs={3}>
+              <Box sx={{ height: '100px' }}></Box>
+            </Grid>
             <Grid item xs={6}>
               <Flower emotionData={emotionData} eat={eat} showImage={showImage} />
             </Grid>
@@ -121,7 +124,7 @@ const App: React.FC = () => {
               <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
             </Grid>
             <Grid item xs={6} bgcolor="red">
-              <RandomWalker />
+              {pop && !eat && <RandomWalker />}
             </Grid>
             <Grid item xs={4} bgcolor="blue"></Grid>
           </Grid>

@@ -46,7 +46,7 @@ const RandomWalker: React.FC = () => {
       setPosition({ x: newX, y: newY });
     };
 
-    const intervalId = setInterval(updatePosition, 3500); // 移動アニメーションの時間を延長（2000ミリ秒）
+    const intervalId = setInterval(updatePosition, 5000); // 移動アニメーションの時間を延長（2000ミリ秒）
 
     return () => {
       clearInterval(intervalId);
@@ -86,7 +86,7 @@ const RandomWalker: React.FC = () => {
           backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transition: 'left 2s ease-in-out, top 2s ease-in-out', // 移動アニメーションの時間を延長（2秒）
+          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
         }}
       />
     </div>
