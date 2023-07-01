@@ -1,5 +1,5 @@
 //進化用
-type emotionDataType = {
+export type emotionDataType = {
   happy: number;
   anger: number;
   sad: number;

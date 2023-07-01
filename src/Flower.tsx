@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FC } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from './assets/yoro_hana.png';
 import yoro_kazitu from './assets/yoro_kazitu.png';
@@ -10,22 +11,21 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
-import { left } from '@popperjs/core';
+import { emotionDataType } from './Revolution';
 
-const Flower = () => {
+type Props = {
+  emotionData: emotionDataType;
+};
+const Flower: FC<Props> = (props) => {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);
   const [random, setRandom] = useState<number | null>(null);
+
   useEffect(() => {
     // 0または1のランダムな数を生成
     const random = Math.floor(Math.random() * 2);
     setRandom(random);
   }, []);
-  //受け取るであろう値の実験
-  useEffect(() => {
-    // 0から3までのランダムな数を生成
-    const randomNum = Math.floor(Math.random() * 4);
-    setRandomNumber(randomNum);
-  }, []);
+
   const [showImage, setShowImage] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,10 +33,11 @@ const Flower = () => {
     }, 2000);
   });
 
+  const emoId = props.emotionData.emoId;
   return (
     <Box>
       <div>
-        {randomNumber !== null
+        {emoId !== 0
           ? (() => {
               switch (randomNumber) {
                 //嬉
