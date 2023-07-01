@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 
-const Syokuzi = () => {
+export const SyokuziCon = () => {
   const [showImage, setShowImage] = useState(true);
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,5 +30,3 @@ const Syokuzi = () => {
     </div>
   );
 };
-
-export default Syokuzi;

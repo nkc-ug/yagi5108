@@ -23,7 +23,7 @@ const actions = [
   { icon: <RotateLeftIcon sx={{ fontSize: 22 }} />, name: 'リセット' }, // Specify the fontSize for the icon
 ];
 
-const Setting = () => {
+export const SettingCon = () => {
   return (
     <Box sx={{ position: 'relative', mt: 3, height: 320 }}>
       <StyledSpeedDial
@@ -38,4 +38,3 @@ const Setting = () => {
     </Box>
   );
 };
-export default Setting;
