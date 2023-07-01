@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Stack, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, Stack, Grid, Box } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
@@ -9,11 +9,15 @@ import BGMPlayer from './Bgm';
 import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
+import Popup from './popup';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
+  const [pop, handlepop] = useState(true);
+  const [eat, handleeat] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [showImage, setShowImage] = useState(true);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(1);
@@ -42,6 +46,14 @@ const App: React.FC = () => {
     setEmotionData(await EmotionApi(inputText, emotionData));
     handleGrass();
     setInputText('');
+    handlepop(false);
+  };
+  const popSubmit = () => {
+    handlepop(true);
+    handleeat(true);
+  };
+  const walking = () => {
+    handleeat(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
@@ -51,6 +63,21 @@ const App: React.FC = () => {
       setTypeId(Revolution(emotionData));
     }
   };
+
+  useEffect(() => {
+    if (eat) {
+      const timer = setTimeout(() => {
+        setShowImage(false);
+        walking();
+      }, 2000);
+
+      // クリーンアップ関数を返すことで、タイマーがキャンセルされる
+      return () => clearTimeout(timer);
+    } else {
+      // eatがfalseの場合はタイマーをキャンセルする
+      setShowImage(true);
+    }
+  }, [eat]);
 
   return (
     <div>
@@ -76,19 +103,23 @@ const App: React.FC = () => {
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={12}>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={10}>
               <Form inputText={inputText} handleChange={handleChange} handleSubmit={handleSubmit} />
             </Grid>
+            <Grid item xs={1}></Grid>
           </Grid>
           <Grid container>
             <Grid item xs={3}></Grid>
             <Grid item xs={6}>
-              <Flower />
+              <Flower emotionData={emotionData} eat={eat} showImage={showImage} />
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={2} bgcolor="yellow"></Grid>
+            <Grid item xs={2} bgcolor="yellow">
+              <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
+            </Grid>
             <Grid item xs={6} bgcolor="red">
               <RandomWalker />
             </Grid>

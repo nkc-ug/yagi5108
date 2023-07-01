@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FC } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from './assets/yoro_hana.png';
 import yoro_kazitu from './assets/yoro_kazitu.png';
@@ -10,36 +11,31 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
+import { emotionDataType } from './Revolution';
 
-const Flower = () => {
-  const [randomNumber, setRandomNumber] = useState<number | null>(null);
+type Props = {
+  emotionData: emotionDataType;
+  eat: boolean;
+  showImage: boolean;
+};
+const Flower: FC<Props> = (props) => {
   const [random, setRandom] = useState<number | null>(null);
+
   useEffect(() => {
     // 0または1のランダムな数を生成
     const random = Math.floor(Math.random() * 2);
     setRandom(random);
-  }, []);
-  //受け取るであろう値の実験
-  useEffect(() => {
-    // 0から3までのランダムな数を生成
-    const randomNum = Math.floor(Math.random() * 4);
-    setRandomNumber(randomNum);
-  }, []);
-  const [showImage, setShowImage] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowImage(false);
-    }, 2000);
   });
 
+  const emoId = props.emotionData.emoId;
   return (
     <Box>
       <div>
-        {randomNumber !== null
+        {props.eat
           ? (() => {
-              switch (randomNumber) {
+              switch (emoId) {
                 //嬉
-                case 0:
+                case 1:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -66,7 +62,7 @@ const Flower = () => {
                     />
                   );
                 //怒
-                case 1:
+                case 2:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -93,7 +89,7 @@ const Flower = () => {
                     />
                   );
                 //哀
-                case 2:
+                case 3:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -120,7 +116,7 @@ const Flower = () => {
                     />
                   );
                 //楽
-                case 3:
+                case 4:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -151,37 +147,39 @@ const Flower = () => {
               }
             })()
           : null}
-        {showImage ? (
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '130px',
-              height: '130px',
-              backgroundImage: `url(${yagi_syokuzi})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              marginTop: '-130px',
-              marginLeft: '25px',
-              zIndex: -1,
-            }}
-          />
-        ) : (
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '130px',
-              height: '130px',
-              backgroundImage: `url(${yagi_left})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              marginTop: '-130px',
-              marginLeft: '25px',
-              zIndex: -1,
-            }}
-          />
-        )}
+        {props.eat ? (
+          props.showImage ? (
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '130px',
+                height: '130px',
+                backgroundImage: `url(${yagi_syokuzi})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                marginTop: '-130px',
+                marginLeft: '25px',
+                zIndex: -1,
+              }}
+            />
+          ) : (
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '130px',
+                height: '130px',
+                backgroundImage: `url(${yagi_left})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                marginTop: '-130px',
+                marginLeft: '25px',
+                zIndex: -1,
+              }}
+            />
+          )
+        ) : null}
       </div>
     </Box>
   );
