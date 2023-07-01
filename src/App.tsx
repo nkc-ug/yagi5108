@@ -21,10 +21,24 @@ const App: React.FC = () => {
     setInputText(event.target.value);
   };
 
-  //山本、追加
-  const [emotionData] = useState<number[]>([0, 0, 0, 0, 0]);
+  //追加
+  type emotionDataType = {
+    happy: number;
+    anger: number;
+    sad: number;
+    enjoyable: number;
+    emoId: number;
+  };
+  const [emotionData, setEmotionData] = useState<emotionDataType>({
+    happy: 0,
+    anger: 0,
+    sad: 0,
+    enjoyable: 0,
+    emoId: 0,
+  });
   const handleSubmit = () => {
-    const updateEmotionData = EmotionApi({ text: inputText, emotionData: emotionData });
+    let updateEmotionData = EmotionApi(inputText, emotionData);
+    setEmotionData(updateEmotionData);
     setInputText('');
   };
 
@@ -119,7 +133,6 @@ const App: React.FC = () => {
           </Box>
           <div style={{ position: 'absolute', top: 5, left: 0 }}>
             <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
-
           </div>
         </Container>
       </Box>
