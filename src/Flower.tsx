@@ -10,7 +10,6 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
-import { left } from '@popperjs/core';
 
 const Flower = () => {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);

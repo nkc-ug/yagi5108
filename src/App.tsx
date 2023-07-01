@@ -3,8 +3,6 @@ import { Container, Stack, Grid } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
-import Syokuzi from './SyokuziCon';
-import Setting from './SettingsCon';
 import bgImage from './assets/backGround.png';
 import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';

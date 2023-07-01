@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -38,7 +38,6 @@ const BGMPlayer: React.FC<BGMPlayerProps> = ({ src }) => {
           <MusicNoteIcon />
         </Button>
       </ThemeProvider>
-
     </>
   );
 };
