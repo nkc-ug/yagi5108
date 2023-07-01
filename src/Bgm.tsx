@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Button } from "@mui/material";
+import React, { useRef, useState } from 'react';
+import { Button } from '@mui/material';
 
 interface BGMPlayerProps {
   src: string;
@@ -24,7 +24,7 @@ const BGMPlayer: React.FC<BGMPlayerProps> = ({ src }) => {
     <>
       <audio ref={audioRef} src={src} loop />
       <Button variant="contained" onClick={toggleBGM}>
-        {isPlaying ? "Stop" : "Play"}
+        {isPlaying ? 'Stop' : 'Play'}
       </Button>
     </>
   );
