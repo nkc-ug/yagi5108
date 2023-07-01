@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const handleClose = () => setOpen(false);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
-  const [eatCount, setEatCount] = useState(0);
+  const [eatCount, setEatCount] = useState(1);
   const [typeId, setTypeId] = useState(-1);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
