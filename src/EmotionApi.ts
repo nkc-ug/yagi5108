@@ -36,19 +36,15 @@ const Emotion = async (text: string, emotionData: emotionDataType) => {
   switch (maxEmotion) {
     case 'happy':
       updateEmotionData.emoId = 1;
-      console.log('debug:最大感情：嬉しい');
       break;
     case 'anger':
       updateEmotionData.emoId = 2;
-      console.log('debug:最大感情：怒り');
       break;
     case 'sad':
       updateEmotionData.emoId = 3;
-      console.log('debug:最大感情：悲しい');
       break;
     case 'enjoyable':
       updateEmotionData.emoId = 4;
-      console.log('debug:最大感情：楽しい');
       break;
   }
 
