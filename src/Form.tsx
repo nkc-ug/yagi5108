@@ -34,7 +34,6 @@ const Form: FC<Props> = (props) => {
   return (
     <ThemeProvider theme={customTheme}>
       <Box
-        position="absolute"
         zIndex={1}
         sx={{
           ...commonProp,
