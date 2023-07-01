@@ -5,6 +5,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import BGMPlayer from './Bgm';
+import bgm from '../Audio/自然の中でゆったりと.mp3';
 
 const StyledSpeedDial = styled(SpeedDial)(({ theme }) => ({
   position: 'absolute',
@@ -34,6 +36,7 @@ export const SettingCon = () => {
         {actions.map((action) => (
           <SpeedDialAction key={action.name} icon={action.icon} tooltipTitle={action.name} />
         ))}
+        <BGMPlayer src={bgm} />
       </StyledSpeedDial>
     </Box>
   );
