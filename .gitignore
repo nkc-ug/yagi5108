@@ -27,3 +27,4 @@ dist-ssr
 .env
 functions/.env.yagi5108
 ui-debug.log
+.firebase/*
