@@ -24,21 +24,20 @@ const App: React.FC = () => {
   //追加
   type emotionDataType = {
     happy: number;
-    angry: number;
+    anger: number;
     sad: number;
     enjoyable: number;
     emoId: number;
   };
   const [emotionData, setEmotionData] = useState<emotionDataType>({
     happy: 0,
-    angry: 0,
+    anger: 0,
     sad: 0,
     enjoyable: 0,
     emoId: 0,
   });
-  const handleSubmit = () => {
-    let updateEmotionData = EmotionApi(inputText, emotionData);
-    setEmotionData(updateEmotionData);
+  const handleSubmit = async () => {
+    setEmotionData(await EmotionApi(inputText, emotionData));
     setInputText('');
   };
 
