@@ -16,6 +16,7 @@ import { emotionDataType } from './Revolution';
 type Props = {
   emotionData: emotionDataType;
   eat: boolean;
+  showImage: boolean;
 };
 const Flower: FC<Props> = (props) => {
   const [random, setRandom] = useState<number | null>(null);
@@ -24,13 +25,6 @@ const Flower: FC<Props> = (props) => {
     // 0または1のランダムな数を生成
     const random = Math.floor(Math.random() * 2);
     setRandom(random);
-  }, []);
-
-  const [showImage, setShowImage] = useState(true);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowImage(false);
-    }, 2000);
   });
 
   const emoId = props.emotionData.emoId;
@@ -153,37 +147,39 @@ const Flower: FC<Props> = (props) => {
               }
             })()
           : null}
-        {showImage ? (
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '130px',
-              height: '130px',
-              backgroundImage: `url(${yagi_syokuzi})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              marginTop: '-130px',
-              marginLeft: '25px',
-              zIndex: -1,
-            }}
-          />
-        ) : (
-          <Box
-            sx={{
-              position: 'absolute',
-              width: '130px',
-              height: '130px',
-              backgroundImage: `url(${yagi_left})`,
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              marginTop: '-130px',
-              marginLeft: '25px',
-              zIndex: -1,
-            }}
-          />
-        )}
+        {props.eat ? (
+          props.showImage ? (
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '130px',
+                height: '130px',
+                backgroundImage: `url(${yagi_syokuzi})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                marginTop: '-130px',
+                marginLeft: '25px',
+                zIndex: -1,
+              }}
+            />
+          ) : (
+            <Box
+              sx={{
+                position: 'absolute',
+                width: '130px',
+                height: '130px',
+                backgroundImage: `url(${yagi_left})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                marginTop: '-130px',
+                marginLeft: '25px',
+                zIndex: -1,
+              }}
+            />
+          )
+        ) : null}
       </div>
     </Box>
   );

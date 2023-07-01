@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
@@ -17,6 +17,7 @@ const App: React.FC = () => {
   const [eat, handleeat] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [showImage, setShowImage] = useState(true);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(0);
@@ -51,6 +52,9 @@ const App: React.FC = () => {
     handlepop(true);
     handleeat(true);
   };
+  const walking = () => {
+    handleeat(false);
+  };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     console.log('草生成用');
@@ -59,6 +63,21 @@ const App: React.FC = () => {
       setTypeId(Revolution(emotionData));
     }
   };
+
+  useEffect(() => {
+    if (eat) {
+      const timer = setTimeout(() => {
+        setShowImage(false);
+        walking();
+      }, 2000);
+
+      // クリーンアップ関数を返すことで、タイマーがキャンセルされる
+      return () => clearTimeout(timer);
+    } else {
+      // eatがfalseの場合はタイマーをキャンセルする
+      setShowImage(true);
+    }
+  }, [eat]);
 
   return (
     <div>
@@ -93,7 +112,7 @@ const App: React.FC = () => {
           <Grid container>
             <Grid item xs={3}></Grid>
             <Grid item xs={6}>
-              <Flower emotionData={emotionData} eat={eat} />
+              <Flower emotionData={emotionData} eat={eat} showImage={showImage} />
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>
