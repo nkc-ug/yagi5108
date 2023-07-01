@@ -10,18 +10,22 @@ import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';
 import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
+import Revolution from './Revolution';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
+  const [eatCount, setEatCount] = useState(0);
+  const [typeId, setTypeId] = useState(-1);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
 
   //追加
+  //emotionData管理用のtypeの追加
   type emotionDataType = {
     happy: number;
     anger: number;
@@ -38,7 +42,16 @@ const App: React.FC = () => {
   });
   const handleSubmit = async () => {
     setEmotionData(await EmotionApi(inputText, emotionData));
+    handleGrass();
     setInputText('');
+  };
+  //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
+  const handleGrass = () => {
+    console.log('草生成用');
+    setEatCount(eatCount + 1);
+    if (eatCount >= 5) {
+      setTypeId(Revolution(emotionData));
+    }
   };
 
   return (
