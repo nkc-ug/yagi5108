@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(0);
   const [typeId, setTypeId] = useState(-1);
@@ -25,6 +25,7 @@ const App: React.FC = () => {
   };
 
   //追加
+  //emotionData管理用のtypeの追加
   type emotionDataType = {
     happy: number;
     anger: number;
@@ -44,6 +45,7 @@ const App: React.FC = () => {
     handleGrass();
     setInputText('');
   };
+  //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     console.log('草生成用');
     setEatCount(eatCount + 1);
