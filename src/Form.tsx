@@ -1,7 +1,5 @@
-import * as React from 'react';
 import { FC } from 'react';
-import { createTheme, alpha } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material/styles';
+import { createTheme, alpha, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { amber } from '@mui/material/colors';
