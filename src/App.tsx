@@ -8,8 +8,8 @@ import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';
 import bgm from '../Audio/自然の中でゆったりと.mp3';
 import EmotionApi from './EmotionApi';
-import Setting from './Settings';
-import Syokuzi from './Syokuzi';
+import { SyokuziCon } from './SyokuziCon';
+import { SettingCon } from './SettingsCon';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -100,7 +100,7 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Syokuzi />
+            <SyokuziCon />
           </Box>
           <Box
             position="absolute"
@@ -115,7 +115,7 @@ const App: React.FC = () => {
 
           <div style={{ position: 'absolute', top: 5, left: 0 }}>
             <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
-            <Setting />
+            <SettingCon />
             <BGMPlayer src={bgm} />
           </div>
         </Container>
