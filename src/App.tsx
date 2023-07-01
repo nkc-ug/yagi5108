@@ -112,11 +112,11 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           ></Box>
-
+          <Box style={{ position: 'absolute', top: 5, left: 500 }}>
+            <BGMPlayer src={bgm} />
+          </Box>
           <div style={{ position: 'absolute', top: 5, left: 0 }}>
             <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
-            <SettingCon />
-            <BGMPlayer src={bgm} />
           </div>
         </Container>
       </Box>
