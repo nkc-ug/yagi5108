@@ -1,5 +1,4 @@
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import { Box, Button } from '@mui/material';
 import { createTheme, alpha, ThemeProvider } from '@mui/material/styles';
 import { amber } from '@mui/material/colors';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';

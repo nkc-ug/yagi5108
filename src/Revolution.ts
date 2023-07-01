@@ -13,12 +13,12 @@ const revolution = (emotionData: emotionDataType) => {
   let index = 0;
   for (const emotion in emotionData) {
     index++;
-    if (Number(emotion) > max) {
-      max = Number(emotion);
+    if (emotionData[emotion as keyof emotionDataType] > max && index < 4) {
+      max = emotionData[emotion as keyof emotionDataType];
       maxEmotion = index;
     }
   }
-  return index;
+  return maxEmotion;
 };
 
 export default revolution;
