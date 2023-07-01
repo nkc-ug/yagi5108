@@ -4,7 +4,7 @@ import yagi_right from './assets/yagi_right.png';
 
 const RandomWalker: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 300, y: 200 });
+  const [position, setPosition] = useState({ x: 65, y: -130 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [rangeVisible, setRangeVisible] = useState(false);
 

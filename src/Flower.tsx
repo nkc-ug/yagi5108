@@ -8,6 +8,9 @@ import kana_hana from './assets/kana_hana.png';
 import kana_kazitu from './assets/kana_kazitu.png';
 import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
+import yagi_syokuzi from './assets/yagi_syokuzi.png';
+import yagi_left from './assets/yagi_left.png';
+import { left } from '@popperjs/core';
 
 const Flower = () => {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);
@@ -23,145 +26,164 @@ const Flower = () => {
     const randomNum = Math.floor(Math.random() * 4);
     setRandomNumber(randomNum);
   }, []);
-
-  const getRandomPosition = () => {
-    const boxWidth = 300;
-    const boxHeight = 270;
-
-    // ランダムな位置を計算
-    const posX = Math.floor(Math.random() * (boxWidth - 70));
-    const posY = Math.floor(Math.random() * (boxHeight - 70));
-
-    return {
-      left: posX,
-      top: posY,
-    };
-  };
+  const [showImage, setShowImage] = useState(true);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowImage(false);
+    }, 2000);
+  });
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        width: '70px',
-        height: '70px',
-      }}
-    >
-      {randomNumber !== null
-        ? (() => {
-            switch (randomNumber) {
-              //嬉
-              case 0:
-                return random == 0 ? (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${yoro_hana})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                ) : (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${yoro_kazitu})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                );
-              //怒
-              case 1:
-                return random == 0 ? (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${ikari_hana})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                ) : (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${ikari_kazitu})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                );
-              //哀
-              case 2:
-                return random == 0 ? (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${kana_hana})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                ) : (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${kana_kazitu})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                );
-              //楽
-              case 3:
-                return random == 0 ? (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${tano_hana})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                ) : (
-                  <Box
-                    sx={{
-                      position: 'absolute',
-                      width: '70px',
-                      height: '70px',
-                      backgroundImage: `url(${tano_kazitu})`,
-                      backgroundSize: 'cover',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                  />
-                );
-              default:
-                return null;
-            }
-          })()
-        : null}
+    <Box>
+      <div>
+        {randomNumber !== null
+          ? (() => {
+              switch (randomNumber) {
+                //嬉
+                case 0:
+                  return random == 0 ? (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${yoro_hana})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${yoro_kazitu})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  );
+                //怒
+                case 1:
+                  return random == 0 ? (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${ikari_hana})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${ikari_kazitu})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  );
+                //哀
+                case 2:
+                  return random == 0 ? (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${kana_hana})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${kana_kazitu})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  );
+                //楽
+                case 3:
+                  return random == 0 ? (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${tano_hana})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  ) : (
+                    <Box
+                      sx={{
+                        width: '70px',
+                        height: '70px',
+                        backgroundImage: `url(${tano_kazitu})`,
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                        zIndex: 1,
+                      }}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            })()
+          : null}
+        {showImage ? (
+          <Box
+            sx={{
+              position: 'absolute',
+              width: '130px',
+              height: '130px',
+              backgroundImage: `url(${yagi_syokuzi})`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              marginTop: '-130px',
+              marginLeft: '25px',
+              zIndex: -1,
+            }}
+          />
+        ) : (
+          <Box
+            sx={{
+              position: 'absolute',
+              width: '130px',
+              height: '130px',
+              backgroundImage: `url(${yagi_left})`,
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              marginTop: '-130px',
+              marginLeft: '25px',
+              zIndex: -1,
+            }}
+          />
+        )}
+      </div>
     </Box>
   );
 };
