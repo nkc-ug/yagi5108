@@ -8,7 +8,6 @@ type emotionDataType = {
 };
 
 const revolution = (emotionData: emotionDataType) => {
-  console.log(emotionData);
   let max = -Infinity;
   let maxEmotion = 0;
   let index = 0;
@@ -18,10 +17,7 @@ const revolution = (emotionData: emotionDataType) => {
       max = emotionData[emotion as keyof emotionDataType];
       maxEmotion = index;
     }
-    console.log(index);
-    console.log(maxEmotion);
   }
-  console.log('進化先:' + maxEmotion);
   return maxEmotion;
 };
 
