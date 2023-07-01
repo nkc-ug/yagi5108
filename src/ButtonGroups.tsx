@@ -1,11 +1,11 @@
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import { createTheme, alpha, ThemeProvider } from "@mui/material/styles";
-import { amber } from "@mui/material/colors";
-import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
-import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
-import PetsIcon from "@mui/icons-material/Pets";
-import BedtimeIcon from "@mui/icons-material/Bedtime";
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { createTheme, alpha, ThemeProvider } from '@mui/material/styles';
+import { amber } from '@mui/material/colors';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import PetsIcon from '@mui/icons-material/Pets';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
 
 const customTheme = createTheme({
   palette: {
@@ -13,7 +13,7 @@ const customTheme = createTheme({
       main: alpha(amber[700], 0.5),
     },
     secondary: {
-      main: "#f0f0f0",
+      main: '#f0f0f0',
     },
   },
 });
@@ -23,18 +23,18 @@ const BottonGroups = () => {
     <ThemeProvider theme={customTheme}>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           backgroundColor: alpha(customTheme.palette.secondary.main, 0.5),
           padding: 1,
         }}
       >
         <Button
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             margin: 1.5,
           }}
         >
@@ -43,9 +43,9 @@ const BottonGroups = () => {
         </Button>
         <Button
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             margin: 1.5,
           }}
         >
@@ -54,9 +54,9 @@ const BottonGroups = () => {
         </Button>
         <Button
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             margin: 1.5,
           }}
         >
@@ -65,9 +65,9 @@ const BottonGroups = () => {
         </Button>
         <Button
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
             margin: 1.5,
           }}
         >

@@ -38,6 +38,7 @@ const BGMPlayer: React.FC<BGMPlayerProps> = ({ src }) => {
           <MusicNoteIcon />
         </Button>
       </ThemeProvider>
+
     </>
   );
 };
