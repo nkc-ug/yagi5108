@@ -1,64 +1,58 @@
-import React, { useState } from "react";
-import { Container, Box } from "@mui/material";
-import Tutorial from "./Tutorial";
-import Form from "./Form";
-import Flower from "./Flower";
-import Syokuzi from "./syokuzi";
-import Setting from "./settings";
-import bgImage from "../image/背景.png";
-import RandomWalker from "./RandomWalker";
-import BGMPlayer from "./Bgm";
-import bgm from "../Audio/自然の中でゆったりと.mp3";
-import EmotionApi from "./EmotionApi";
+import React, { useState } from 'react';
+import { Container, Box } from '@mui/material';
+import Tutorial from './Tutorial';
+import Form from './Form';
+import Flower from './Flower';
+import bgImage from './assets/backGround.png';
+import RandomWalker from './RandomWalker';
+import BGMPlayer from './Bgm';
+import bgm from '../Audio/自然の中でゆったりと.mp3';
+import EmotionApi from './EmotionApi';
+import Setting from './Settings';
+import Syokuzi from './Syokuzi';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
 
-
   //山本、追加
   const [emotionData] = useState<number[]>([0, 0, 0, 0, 0]);
   const handleSubmit = () => {
-    <EmotionApi text={inputText} emotionData={emotionData} />;
-    setInputText("");
+    const updateEmotionData = EmotionApi({ text: inputText, emotionData: emotionData });
+    setInputText('');
   };
 
   return (
     <div>
       <Box
         style={{
-          backgroundColor: "black",
-          width: "100vw",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: 'black',
+          width: '100vw',
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
-
         position="relative"
       >
         <Container
           maxWidth="sm"
           disableGutters
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            maxHeight: "100vh",
-            position: "relative",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
+            maxHeight: '100vh',
+            position: 'relative',
           }}
         >
-          <img
-            src={bgImage}
-            alt=""
-            style={{ width: "auto", height: "auto", maxHeight: "100vh" }}
-          />
+          <img src={bgImage} alt="" style={{ width: 'auto', height: 'auto', maxHeight: '100vh' }} />
           <Box
             position="absolute"
             top={0}
@@ -69,11 +63,7 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Form
-              inputText={inputText}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
+            <Form inputText={inputText} handleChange={handleChange} handleSubmit={handleSubmit} />
           </Box>
           <Box
             position="absolute"
@@ -123,12 +113,8 @@ const App: React.FC = () => {
             alignItems="center"
           ></Box>
 
-          <div style={{ position: "absolute", top: 5, left: 0 }}>
-            <Tutorial
-              open={open}
-              openclick={handleOpen}
-              closeclick={handleClose}
-            />
+          <div style={{ position: 'absolute', top: 5, left: 0 }}>
+            <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
             <Setting />
             <BGMPlayer src={bgm} />
           </div>
