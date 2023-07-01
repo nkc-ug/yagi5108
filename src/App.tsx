@@ -24,14 +24,14 @@ const App: React.FC = () => {
   //追加
   type emotionDataType = {
     happy: number;
-    anger: number;
+    angry: number;
     sad: number;
     enjoyable: number;
     emoId: number;
   };
   const [emotionData, setEmotionData] = useState<emotionDataType>({
     happy: 0,
-    anger: 0,
+    angry: 0,
     sad: 0,
     enjoyable: 0,
     emoId: 0,

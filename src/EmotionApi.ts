@@ -3,14 +3,14 @@ import axios from 'axios';
 
 type emotionDataType = {
   happy: number;
-  anger: number;
+  angry: number;
   sad: number;
   enjoyable: number;
   emoId: number;
 };
 
 const Emotion = (text: string, emotionData: emotionDataType): emotionDataType => {
-  const [ans, setAns] = useState<emotionDataType>();
+  let ans = {} as emotionDataType;
   let updateEmotionData = {} as emotionDataType;
   let maxEmotion = '';
   let maxScore = -Infinity;
@@ -19,14 +19,20 @@ const Emotion = (text: string, emotionData: emotionDataType): emotionDataType =>
     const res = await axios.get('https://test-f6bkalktuq-uc.a.run.app/test/?text=' + text);
     const fetchEmotionData = res.data as emotionDataType;
     console.log(fetchEmotionData);
-    setAns(fetchEmotionData);
+    ans = {
+      happy: fetchEmotionData.happy,
+      angry: fetchEmotionData.angry,
+      sad: fetchEmotionData.sad,
+      enjoyable: fetchEmotionData.enjoyable,
+      emoId: 0,
+    };
   };
   fetchAPI();
   /*fetch('https://test-f6bkalktuq-uc.a.run.app/test/?text=' + text).then((res) => {
     res.json().then((data) => {
       setAns({
         happy: data.happy,
-        anger: data.anger,
+        angry: data.angry,
         sad: data.sad,
         enjoyable: data.enjoyable
       });
@@ -47,7 +53,7 @@ const Emotion = (text: string, emotionData: emotionDataType): emotionDataType =>
       updateEmotionData.emoId = 1;
       console.log('debug:最大感情：嬉しい');
       break;
-    case 'anger':
+    case 'angry':
       updateEmotionData.emoId = 2;
       console.log('debug:最大感情：怒り');
       break;
@@ -66,7 +72,7 @@ const Emotion = (text: string, emotionData: emotionDataType): emotionDataType =>
   //console.log(updateEmotionData);
 
   updateEmotionData.happy += ans.happy;
-  updateEmotionData.anger += ans.anger;
+  updateEmotionData.angry += ans.angry;
   updateEmotionData.sad += ans.sad;
   updateEmotionData.enjoyable += ans.enjoyable;
 
