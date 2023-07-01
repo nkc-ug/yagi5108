@@ -10,6 +10,7 @@ import RandomWalker from './RandomWalker';
 import BGMPlayer from './Bgm';
 import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
+import Revolution from './Revolution';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -17,6 +18,8 @@ const App: React.FC = () => {
   const handleClose = () => setOpen(false);
 
   const [inputText, setInputText] = useState('');
+  const [eatCount, setEatCount] = useState(0);
+  const [typeId, setTypeId] = useState(-1);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
@@ -38,7 +41,15 @@ const App: React.FC = () => {
   });
   const handleSubmit = async () => {
     setEmotionData(await EmotionApi(inputText, emotionData));
+    handleGrass();
     setInputText('');
+  };
+  const handleGrass = () => {
+    console.log('草生成用');
+    setEatCount(eatCount + 1);
+    if (eatCount >= 5) {
+      setTypeId(Revolution(emotionData));
+    }
   };
 
   return (
