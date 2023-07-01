@@ -24,6 +24,21 @@ const Flower = () => {
     setRandomNumber(randomNum);
   }, []);
 
+  const getRandomPosition = () => {
+    const boxWidth = 300;
+    const boxHeight = 270;
+
+    // ランダムな位置を計算
+    const posX = Math.floor(Math.random() * (boxWidth - 70));
+    const posY = Math.floor(Math.random() * (boxHeight - 70));
+
+    return {
+      left: posX,
+      top: posY,
+    };
+  };
+
+
   return (
     <Box
       sx={{
@@ -41,7 +56,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${yoro_hana})`,
@@ -54,7 +68,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${yoro_kazitu})`,
@@ -70,7 +83,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${ikari_hana})`,
@@ -83,7 +95,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${ikari_kazitu})`,
@@ -99,7 +110,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${kana_hana})`,
@@ -112,7 +122,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${kana_kazitu})`,
@@ -128,7 +137,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${tano_hana})`,
@@ -141,7 +149,6 @@ const Flower = () => {
                   <Box
                     sx={{
                       position: "absolute",
-
                       width: "70px",
                       height: "70px",
                       backgroundImage: `url(${tano_kazitu})`,

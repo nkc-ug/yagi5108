@@ -43,7 +43,9 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Button onClick={openclick} color="primary">
+        <Button onClick={openclick} 
+        color="primary"
+        >
           <QuestionMarkIcon />
         </Button>
         <Modal

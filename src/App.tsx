@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
@@ -15,11 +15,11 @@ const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const [inputText, setInputText] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
+
 
   //山本、追加
   const [emotionData] = useState<number[]>([0, 0, 0, 0, 0]);
@@ -39,6 +39,7 @@ const App: React.FC = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
+
         position="relative"
       >
         <Container
@@ -121,6 +122,7 @@ const App: React.FC = () => {
             justifyContent="center"
             alignItems="center"
           ></Box>
+
           <div style={{ position: "absolute", top: 5, left: 0 }}>
             <Tutorial
               open={open}
