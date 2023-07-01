@@ -38,3 +38,4 @@ export const SettingCon = () => {
     </Box>
   );
 };
+export default SettingCon;
