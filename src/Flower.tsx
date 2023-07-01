@@ -15,9 +15,9 @@ import { emotionDataType } from './Revolution';
 
 type Props = {
   emotionData: emotionDataType;
+  eat: boolean;
 };
 const Flower: FC<Props> = (props) => {
-  const [randomNumber, setRandomNumber] = useState<number | null>(null);
   const [random, setRandom] = useState<number | null>(null);
 
   useEffect(() => {
@@ -37,11 +37,11 @@ const Flower: FC<Props> = (props) => {
   return (
     <Box>
       <div>
-        {emoId !== 0
+        {props.eat
           ? (() => {
-              switch (randomNumber) {
+              switch (emoId) {
                 //嬉
-                case 0:
+                case 1:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -68,7 +68,7 @@ const Flower: FC<Props> = (props) => {
                     />
                   );
                 //怒
-                case 1:
+                case 2:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -95,7 +95,7 @@ const Flower: FC<Props> = (props) => {
                     />
                   );
                 //哀
-                case 2:
+                case 3:
                   return random == 0 ? (
                     <Box
                       sx={{
@@ -122,7 +122,7 @@ const Flower: FC<Props> = (props) => {
                     />
                   );
                 //楽
-                case 3:
+                case 4:
                   return random == 0 ? (
                     <Box
                       sx={{

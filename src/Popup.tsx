@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import { emotionDataType } from './Revolution';
 import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
+import yagi_syokuzi from './assets/yagi_syokuzi.png';
+import yagi_left from './assets/yagi_left.png';
 
 type Props = {
   emotionData: emotionDataType;
@@ -28,7 +30,9 @@ const Popup: FC<Props> = (props) => {
             border: '2px solid #FFF',
             boxShadow: 24,
             p: 4,
-            backgroundColor: 'blue',
+            backgroundImage: `url(${yagi_left})`,
+            backgroundPosition: '-50px -300px',
+            backgroundColor: 'brack',
             zIndex: 1,
           }}
         >
@@ -43,7 +47,7 @@ const Popup: FC<Props> = (props) => {
       ) : (
         <Box
           sx={{
-            position: 'absolute' as const,
+            position: 'absolute',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
@@ -53,7 +57,9 @@ const Popup: FC<Props> = (props) => {
             border: '2px solid #FFF',
             boxShadow: 24,
             p: 4,
-            backgroundColor: 'red',
+            backgroundImage: `url(${yagi_syokuzi})`,
+            backgroundPosition: '-50px -300px',
+            backgroundColor: 'brack',
             zIndex: 1,
           }}
         >

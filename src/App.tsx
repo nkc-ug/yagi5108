@@ -14,6 +14,7 @@ import Popup from './popup';
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const [pop, handlepop] = useState(true);
+  const [eat, handleeat] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
@@ -48,6 +49,7 @@ const App: React.FC = () => {
   };
   const popSubmit = () => {
     handlepop(true);
+    handleeat(true);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
@@ -91,7 +93,7 @@ const App: React.FC = () => {
           <Grid container>
             <Grid item xs={3}></Grid>
             <Grid item xs={6}>
-              <Flower emotionData={emotionData} />
+              <Flower emotionData={emotionData} eat={eat} />
             </Grid>
             <Grid item xs={3}></Grid>
           </Grid>
