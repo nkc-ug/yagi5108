@@ -7,7 +7,7 @@ import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import backgroundImage from "../image/tutorial.png";
+import backgroundImage from "./assets/tutorial.png";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 const style = {
   position: "absolute" as const,
@@ -43,12 +43,15 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Button onClick={openclick} color="primary">
+        <Button
+          onClick={openclick}
+          color='primary'
+        >
           <QuestionMarkIcon />
         </Button>
         <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
           open={open}
           onClose={closeclick}
           closeAfterTransition
@@ -62,9 +65,9 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
           <Fade in={open}>
             <Box sx={style}>
               <Typography
-                id="transition-modal-title"
-                variant="h6"
-                component="h2"
+                id='transition-modal-title'
+                variant='h6'
+                component='h2'
                 textAlign={"center"}
                 sx={{
                   fontSize: "40px",
@@ -73,35 +76,35 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
                 遊び方
               </Typography>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, fontSize: "25px" }}
                 textAlign={"center"}
               >
                 言葉を入力して草を生やそう！
               </Typography>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, fontSize: "25px" }}
                 textAlign={"center"}
               >
                 入力した言葉が持つ喜怒哀楽によって生えてくる草が変わるよ！
               </Typography>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, fontSize: "25px" }}
                 textAlign={"center"}
               >
                 生えてきた草をヤギが食べるよ！
               </Typography>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, fontSize: "25px" }}
                 textAlign={"center"}
               >
                 たくさん食べたヤギは進化するよ！
               </Typography>
               <Typography
-                id="transition-modal-description"
+                id='transition-modal-description'
                 sx={{ mt: 2, fontSize: "25px" }}
                 textAlign={"center"}
               >

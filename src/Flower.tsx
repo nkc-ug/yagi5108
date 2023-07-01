@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import yoro_hana from "../image/yoro_hana.png";
-import yoro_kazitu from "../image/yoro_kazitu.png";
-import ikari_hana from "../image/ikari_hana.png";
-import ikari_kazitu from "../image/ikari_kazitu.png";
-import kana_hana from "../image/kana_hana.png";
-import kana_kazitu from "../image/kana_kazitu.png";
-import tano_hana from "../image/tano_hana.png";
-import tano_kazitu from "../image/tano_kazitu.png";
+import yoro_hana from "./assets/yoro_hana.png";
+import yoro_kazitu from "./assets/yoro_kazitu.png";
+import ikari_hana from "./assets/ikari_hana.png";
+import ikari_kazitu from "./assets/ikari_kazitu.png";
+import kana_hana from "./assets/kana_hana.png";
+import kana_kazitu from "./assets/kana_kazitu.png";
+import tano_hana from "./assets/tano_hana.png";
+import tano_kazitu from "./assets/tano_kazitu.png";
 
 const BoxWithRandomBox = () => {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);

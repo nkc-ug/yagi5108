@@ -3,7 +3,7 @@ import { Container, Box } from "@mui/material";
 import Tutorial from "./Tutorial";
 import Form from "./Form";
 import Flower from "./Flower";
-import bgImage from "../image/背景.png";
+import bgImage from "./assets/backGround.png";
 import BottonGroups from "./ButtonGroups";
 
 const App = () => {
@@ -33,10 +33,10 @@ const App = () => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        position="relative"
+        position='relative'
       >
         <Container
-          maxWidth="sm"
+          maxWidth='sm'
           disableGutters
           style={{
             display: "flex",
@@ -49,18 +49,18 @@ const App = () => {
         >
           <img
             src={bgImage}
-            alt=""
+            alt=''
             style={{ width: "auto", height: "auto", maxHeight: "100%" }}
           />
           <Box
-            position="absolute"
+            position='absolute'
             top={0}
             left={0}
             right={0}
             bottom={250}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
           >
             <Form
               inputText={inputText}
@@ -69,26 +69,26 @@ const App = () => {
             />
           </Box>
           <Box
-            position="absolute"
+            position='absolute'
             top={250}
             left={0}
             right={0}
             bottom={0}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
           >
             <Flower />
           </Box>
           <Box
-            position="absolute"
+            position='absolute'
             top={630}
             left={0}
             right={0}
             bottom={0}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
           >
             <BottonGroups />
           </Box>
