@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
-import yagi_left from "../image/yagi_left.png";
-import yagi_right from "../image/yagi_right.png";
+import React, { useRef, useEffect, useState } from 'react';
+import yagi_left from './assets/yagi_left.png';
+import yagi_right from './assets/yagi_right.png';
 
 const RandomWalker: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
@@ -53,41 +53,40 @@ const RandomWalker: React.FC = () => {
     };
   }, [containerSize]);
 
-  const backgroundImage =
-    position.x > containerSize.width / 2 ? yagi_right : yagi_left;
+  const backgroundImage = position.x > containerSize.width / 2 ? yagi_right : yagi_left;
 
   return (
     <div
       style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
+        position: 'relative',
+        width: '100%',
+        height: '100%',
       }}
     >
       {rangeVisible && (
         <div
           style={{
-            position: "absolute",
+            position: 'absolute',
             left: `${containerSize.width / 2 - 150}px`,
             top: `${containerSize.height / 2 - 150}px`,
-            width: "300px",
-            height: "300px",
-            border: "2px dashed red",
-            boxSizing: "border-box",
+            width: '300px',
+            height: '300px',
+            border: '2px dashed red',
+            boxSizing: 'border-box',
           }}
         />
       )}
       <div
         ref={walkerRef}
         style={{
-          position: "absolute",
-          width: "130px",
-          height: "130px",
+          position: 'absolute',
+          width: '130px',
+          height: '130px',
           backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
+          backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transition: "left 2s ease-in-out, top 2s ease-in-out", // 移動アニメーションの時間を延長（2秒）
+          transition: 'left 2s ease-in-out, top 2s ease-in-out', // 移動アニメーションの時間を延長（2秒）
         }}
       />
     </div>

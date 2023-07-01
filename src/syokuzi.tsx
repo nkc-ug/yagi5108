@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import yagi_syokuzi from "../image/yagi_syokuzi.png";
+import { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import yagi_syokuzi from './assets/yagi_syokuzi.png';
 
 const Syokuzi = () => {
   const [showImage, setShowImage] = useState(true);
@@ -17,13 +17,13 @@ const Syokuzi = () => {
       {showImage && (
         <Box
           sx={{
-            position: "absolute",
-            width: "130px",
-            height: "130px",
+            position: 'absolute',
+            width: '130px',
+            height: '130px',
             backgroundImage: `url(${yagi_syokuzi})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
           }}
         />
       )}
