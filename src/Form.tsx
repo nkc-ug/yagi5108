@@ -46,7 +46,8 @@ const Form: FC<Props> = (props) => {
         </Box>
         <Box textAlign={'center'}>
           <Button
-            variant="outlined"
+            variant="contained"
+            sx={{ color: 'white' }}
             onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
             disabled={props.inputText.trim() === ''}
           >
