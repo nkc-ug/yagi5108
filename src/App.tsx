@@ -84,7 +84,6 @@ const App: React.FC = () => {
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
-    console.log('草生成用');
     setEatCount(eatCount + 1);
     if (eatCount >= 4) {
       setTypeId(Revolution(emotionData));
@@ -105,6 +104,10 @@ const App: React.FC = () => {
       setShowImage(true);
     }
   }, [eat]);
+
+  const isDisableTextField = () => {
+    return eatCount > 4;
+  };
 
   return (
     <div>
@@ -143,6 +146,7 @@ const App: React.FC = () => {
                     inputText={inputText}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    isDisableTextField={isDisableTextField()}
                   />
                 </Grid>
                 <Grid item xs={1}></Grid>

@@ -8,6 +8,7 @@ type Props = {
   inputText: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isDisableTextField: boolean;
 };
 
 const commonProp = {
@@ -25,13 +26,24 @@ const Form: FC<Props> = (props) => {
           '& .MuiTextField-root': { m: 2, width: '25ch' },
         }}
       >
-        <Typography variant="h5" textAlign={'center'}>
+        <Typography
+          variant="h5"
+          textAlign={'center'}
+          sx={{
+            opacity: props.isDisableTextField ? 0 : 1,
+          }}
+        >
           ヤギにたべさせることばを
         </Typography>
         <Typography variant="h5" textAlign={'center'}>
-          いれてね
+          {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'いれてね'}
         </Typography>
-        <Box textAlign={'center'}>
+        <Box
+          textAlign={'center'}
+          sx={{
+            opacity: props.isDisableTextField ? 0 : 1,
+          }}
+        >
           <TextField
             id="standard-basic"
             label="ことばを入れてね"
@@ -46,14 +58,26 @@ const Form: FC<Props> = (props) => {
           />
         </Box>
         <Box textAlign={'center'}>
-          <Button
-            variant="contained"
-            sx={{ color: 'white' }}
-            onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
-            disabled={props.inputText.trim() === ''}
-          >
-            草をあげる
-          </Button>
+          {props.isDisableTextField ? (
+            <Button
+              variant="contained"
+              sx={{ color: 'white' }}
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              ゲームをリスタートする
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              sx={{ color: 'white' }}
+              onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
+              disabled={props.inputText.trim() === ''}
+            >
+              草をあげる
+            </Button>
+          )}
         </Box>
       </Box>
     </div>
