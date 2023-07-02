@@ -10,6 +10,7 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
+import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 
 const App: React.FC = () => {
@@ -132,31 +133,23 @@ const App: React.FC = () => {
                   handleSubmit={handleSubmit}
                 />
               </Grid>
-              <Grid item xs={1}></Grid>
+             <Grid item xs={1}></Grid>
+          </Grid>
+          <Grid container>
+            <Grid item xs={3}>
+              <Box sx={{ height: '100px' }}></Box>
             </Grid>
-            <Grid container>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={6}>
-                <Flower
-                  emotionData={emotionData}
-                  eat={eat}
-                  showImage={showImage}
-                  randomNum={random ?? 0}
-                />
-              </Grid>
+            <Grid item xs={6}>
+              <Flower emotionData={emotionData} eat={eat} showImage={showImage} /></Grid>
               <Grid item xs={3}></Grid>
             </Grid>
             <Grid container>
               <Grid item xs={2} bgcolor="yellow">
-                <Popup
-                  emotionData={emotionData}
-                  pop={pop}
-                  popSubmit={popSubmit}
-                  randomNum={random ?? 0}
-                />
+                <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
               </Grid>
               <Grid item xs={6} bgcolor="red">
                 {dispWalker ? <RandomWalker /> : null}
+                <EvolutionWalk typeId={typeId} />
               </Grid>
               <Grid item xs={4} bgcolor="blue"></Grid>
             </Grid>
