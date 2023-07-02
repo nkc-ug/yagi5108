@@ -15,7 +15,7 @@ const Emotion = async (text: string, emotionData: emotionDataType) => {
   let maxScore = -Infinity;
   updateEmotionData = emotionData;
   const fetchAPI = async () => {
-    const res = await axios.get('https://test-f6bkalktuq-uc.a.run.app/test/?text=' + text);
+    const res = await axios.get('https://callgpt-f6bkalktuq-uc.a.run.app?text=' + text);
     const fetchEmotionData = res.data as emotionDataType;
     ans = {
       happy: Number(fetchEmotionData.happy),
