@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box, ThemeProvider, Button, Typography } from '@mui/material';
+import { Container, Stack, Grid, Box, ThemeProvider } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
 import bgImage from './assets/backGround.png';
 import RandomWalker from './RandomWalker';
-import BGMPlayer from './Bgm';
-import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
 import Revopopup from './Revopopup';
 import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
+import { NavBar } from './NavBar';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -117,29 +116,55 @@ const App: React.FC = () => {
             <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
           </Container>
           <Container disableGutters maxWidth="sm" style={{ zIndex: 1, marginTop: 20 }}>
-            <Grid container>
-              <Grid item xs={2}>
-                <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+            <Box sx={{ height: '80vh' }}>
+              <Grid container>
+                <Grid item xs={2}>
+                  <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+                </Grid>
+                <Grid item xs={8}></Grid>
+                <Grid item xs={2}>
+                  {/* <BGMPlayer src={bgm} /> */}
+                </Grid>
               </Grid>
-              <Grid item xs={8}></Grid>
-              <Grid item xs={2}>
-                <BGMPlayer src={bgm} />
+              <Grid container>
+                <Grid item xs={1}></Grid>
+                <Grid item xs={10}>
+                  <Form
+                    inputText={inputText}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                  />
+                </Grid>
+                <Grid item xs={1}></Grid>
               </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={1}></Grid>
-              <Grid item xs={10}>
-                <Form
-                  inputText={inputText}
-                  handleChange={handleChange}
-                  handleSubmit={handleSubmit}
-                />
+              <Grid container>
+                <Grid item xs={3}>
+                  <Box sx={{ height: '100px' }}></Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <Flower
+                    emotionData={emotionData}
+                    eat={eat}
+                    showImage={showImage}
+                    randomNum={random ?? 0}
+                  />
+                </Grid>
+                <Grid item xs={3}></Grid>
               </Grid>
-              <Grid item xs={1}></Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={3}>
-                <Box sx={{ height: '100px' }}></Box>
+              <Grid container>
+                <Grid item xs={2} bgcolor="yellow">
+                  <Popup
+                    emotionData={emotionData}
+                    pop={pop}
+                    popSubmit={popSubmit}
+                    randomNum={random ?? 0}
+                  />
+                </Grid>
+                <Grid item xs={6} bgcolor="red">
+                  {dispWalker ? <RandomWalker /> : null}
+                  <EvolutionWalk typeId={typeId} />
+                </Grid>
+                <Grid item xs={4} bgcolor="blue"></Grid>
               </Grid>
               <Grid item xs={6}>
                 <Flower
@@ -167,8 +192,20 @@ const App: React.FC = () => {
               </Grid>
               <Grid item xs={4} bgcolor="blue"></Grid>
             </Grid>
+            </Box>
           </Container>
         </Stack>
+        <Container
+          maxWidth="sm"
+          disableGutters
+          sx={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          }}
+        >
+          <NavBar handleTutorialChange={handleOpen} />
+        </Container>
       </ThemeProvider>
     </div>
   );
