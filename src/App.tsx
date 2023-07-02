@@ -12,6 +12,7 @@ import Revopopup from './Revopopup';
 import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 import { NavBar } from './NavBar';
+import Evoanimee from './Evoanimee';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -76,7 +77,7 @@ const App: React.FC = () => {
   const handleGrass = () => {
     console.log('草生成用');
     setEatCount(eatCount + 1);
-    if (eatCount >= 5) {
+    if (eatCount >= 4) {
       setTypeId(Revolution(emotionData));
     }
   };
@@ -164,7 +165,9 @@ const App: React.FC = () => {
                   {dispWalker ? <RandomWalker /> : null}
                   <EvolutionWalk typeId={typeId} />
                 </Grid>
-                <Grid item xs={4} bgcolor="blue"></Grid>
+                <Grid item xs={4} bgcolor="blue">
+                  <Evoanimee typeId={typeId} />
+                </Grid>
               </Grid>
               <Grid item xs={6}>
                 <Flower
@@ -175,23 +178,22 @@ const App: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={3}></Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={2} bgcolor="yellow">
-                <Popup
-                  emotionData={emotionData}
-                  pop={pop}
-                  popSubmit={popSubmit}
-                  randomNum={random ?? 0}
-                />
-                 {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+              <Grid container>
+                <Grid item xs={2} bgcolor="yellow">
+                  <Popup
+                    emotionData={emotionData}
+                    pop={pop}
+                    popSubmit={popSubmit}
+                    randomNum={random ?? 0}
+                  />
+                  {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+                </Grid>
+                <Grid item xs={6} bgcolor="red">
+                  {dispWalker ? <RandomWalker /> : null}
+                  <EvolutionWalk typeId={typeId} />
+                </Grid>
+                <Grid item xs={4} bgcolor="blue"></Grid>
               </Grid>
-              <Grid item xs={6} bgcolor="red">
-                {dispWalker ? <RandomWalker /> : null}
-                <EvolutionWalk typeId={typeId} />
-              </Grid>
-              <Grid item xs={4} bgcolor="blue"></Grid>
-            </Grid>
             </Box>
           </Container>
         </Stack>
