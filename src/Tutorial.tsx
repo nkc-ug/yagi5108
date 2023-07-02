@@ -35,9 +35,9 @@ type Props = {
 const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
   return (
     <div>
-      <IconButton onClick={openclick} color="primary">
+      {/* <IconButton onClick={openclick} color="primary">
         <QuestionMarkIcon fontSize="large" color="primary" />
-      </IconButton>
+      </IconButton> */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

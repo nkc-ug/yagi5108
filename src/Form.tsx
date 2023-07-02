@@ -35,6 +35,7 @@ const Form: FC<Props> = (props) => {
           <TextField
             id="standard-basic"
             label="ことばを入れてね"
+            type="text"
             variant="standard"
             autoCapitalize="off"
             value={props.inputText}
