@@ -90,7 +90,11 @@ const App: React.FC = () => {
     <div>
       <ThemeProvider theme={theme}>
         <Stack direction="row" justifyContent="center">
-          <Container disableGutters maxWidth="sm" style={{ position: 'absolute', top: 0 }}>
+          <Container
+            disableGutters
+            maxWidth="sm"
+            style={{ position: 'absolute', top: 0, bottom: -1 }}
+          >
             <img
               src={bgImage}
               style={{
@@ -99,6 +103,7 @@ const App: React.FC = () => {
                 objectFit: 'cover',
               }}
             />
+            <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
           </Container>
           <Container disableGutters maxWidth="sm" style={{ zIndex: 1, marginTop: 20 }}>
             <Grid container>
