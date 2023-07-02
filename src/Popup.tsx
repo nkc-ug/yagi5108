@@ -1,9 +1,8 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { emotionDataType } from './Revolution';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
 import yoro_hana from './assets/yoro_hana.png';
 import yoro_kazitu from './assets/yoro_kazitu.png';
@@ -24,25 +23,78 @@ const Popup: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
 
-  const dispItemStr = () => {
-    switch (emoId) {
-      //嬉
-      case 1:
-        return 'よろこびの草が';
-      //怒
-      case 2:
-        return '怒りの草が';
-      //悲
-      case 3:
-        return '悲しみの草が';
-      //楽
-      case 4:
-        return '楽しみの草が';
+  type DispItem = {
+    text: string;
+    img: string;
+  };
+
+  const [dispItem, setDispItem] = useState<DispItem>({
+    text: '',
+    img: '',
+  });
+
+  const changeItem = () => {
+    if (emoId == 1 && random == 0) {
+      setDispItem({
+        text: 'よろこびの草が',
+        img: yoro_hana,
+      });
+      return;
+    }
+    if (emoId == 1 && random == 1) {
+      setDispItem({
+        text: 'よろこびの果実が',
+        img: yoro_kazitu,
+      });
+      return;
+    }
+    if (emoId == 2 && random == 0) {
+      setDispItem({
+        text: '怒りの草が',
+        img: ikari_hana,
+      });
+      return;
+    }
+    if (emoId == 2 && random == 1) {
+      setDispItem({
+        text: '怒りの果実が',
+        img: ikari_kazitu,
+      });
+      return;
+    }
+    if (emoId == 3 && random == 0) {
+      setDispItem({
+        text: '悲しみの草が',
+        img: kana_hana,
+      });
+      return;
+    }
+    if (emoId == 3 && random == 1) {
+      setDispItem({
+        text: '悲しみの果実が',
+        img: kana_kazitu,
+      });
+      return;
+    }
+    if (emoId == 4 && random == 0) {
+      setDispItem({
+        text: '楽しみの草が',
+        img: tano_hana,
+      });
+      return;
+    }
+    if (emoId == 4 && random == 1) {
+      setDispItem({
+        text: '楽しみの果実が',
+        img: tano_kazitu,
+      });
+      return;
     }
   };
 
-  // const dispItemImg = () => {
-  //   if(emoId == 1 && ){
+  useEffect(() => {
+    changeItem();
+  }, [emoId, random]);
 
   return (
     <div>
@@ -81,31 +133,30 @@ const Popup: FC<Props> = (props) => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '300px',
-            height: '300px',
             boxShadow: 24,
-            p: 5,
-            backgroundImage: `url(${yagi_syokuzi})`,
             backgroundPosition: '-50px -300px',
             backgroundColor: 'brack',
             zIndex: 1,
             borderRadius: '10px',
           }}
         >
-          <Stack sx={{ p: 5, borderRadius: '10px', bgcolor: 'white' }}>
+          <Stack sx={{ p: 5, borderRadius: '10px', bgcolor: 'white' }} spacing={3}>
             <Stack spacing={1} textAlign="center">
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                {dispItemStr()}
+                {dispItem.text}
               </Typography>
               <Typography id="transition-modal-description" sx={{ opacity: 0.6, fontSize: '25px' }}>
                 生えました！
               </Typography>
             </Stack>
-            <Box></Box>
+            <Stack justifyContent="center" direction="row">
+              <img src={dispItem.img} style={{ width: '100px' }} />
+            </Stack>
             <Button
               size="large"
               variant="contained"
               onClick={props.popSubmit}
-              sx={{ mt: 10, mx: 2, color: 'white' }}
+              sx={{ mx: 2, color: 'white' }}
             >
               食べさせる
             </Button>
