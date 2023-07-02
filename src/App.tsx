@@ -28,7 +28,14 @@ const App: React.FC = () => {
     setInputText(event.target.value);
   };
 
+  type RandomType = 0 | 1 | null;
+
   const [dispWalker, setDispWalker] = useState(true);
+  const [random, setRandom] = useState<RandomType>(null);
+
+  const changeRnadom = () => {
+    random === 0 ? setRandom(1) : setRandom(0);
+  };
 
   //追加
   //emotionData管理用のtypeの追加
@@ -51,6 +58,7 @@ const App: React.FC = () => {
     handleGrass();
     setInputText('');
     handlepop(false);
+    changeRnadom();
   };
   const popSubmit = () => {
     handlepop(true);
