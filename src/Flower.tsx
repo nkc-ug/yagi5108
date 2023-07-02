@@ -17,17 +17,11 @@ type Props = {
   emotionData: emotionDataType;
   eat: boolean;
   showImage: boolean;
+  randomNum: number;
 };
 const Flower: FC<Props> = (props) => {
-  const [random, setRandom] = useState<number | null>(null);
-
-  useEffect(() => {
-    // 0または1のランダムな数を生成
-    const random = Math.floor(Math.random() * 2);
-    setRandom(random);
-  });
-
   const emoId = props.emotionData.emoId;
+  const random = props.randomNum;
   return (
     <Box>
       <div>
@@ -173,8 +167,8 @@ const Flower: FC<Props> = (props) => {
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                marginTop: '-130px',
-                marginLeft: '25px',
+                marginTop: '-125px',
+                marginLeft: '22px',
                 zIndex: -1,
               }}
             />

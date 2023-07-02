@@ -1,12 +1,40 @@
 import React, { useRef, useEffect, useState } from 'react';
-import yagi_left from './assets/yagi_left.png';
-import yagi_right from './assets/yagi_right.png';
+import { FC } from 'react';
+import yagi_yorokobi from './assets/yagi_yorokobi.png';
+import yagi_ikari from './assets/yagi_iakri.png';
+import yagi_kanasimi from './assets/yagi_kanasimi.png';
+import yagi_tanosii from './assets/yagi_tanosii.png';
+import yagi_yorokobi_right from './assets/yagi_yorokobi_right.png';
+import yagi_ikari_right from './assets/yagi_iakri_right.png';
+import yagi_kanasimi_right from './assets/yagi_kanasimi_right.png';
+import yagi_tanosii_right from './assets/yagi_tanosii_right.png';
 
-const RandomWalker: React.FC = () => {
+type Props = {
+  typeId: number;
+};
+
+const EvolutionWalk: React.FC<Props> = (props) => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 65, y: 0 });
+  const [position, setPosition] = useState({ x: 65, y: -130 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   const [rangeVisible, setRangeVisible] = useState(false);
+
+  const getImagePath = (typeId: number) => {
+    switch (typeId) {
+      case 1:
+        return position.x > containerSize.width / 2 ? yagi_yorokobi_right : yagi_yorokobi;
+      case 2:
+        return position.x > containerSize.width / 2 ? yagi_ikari_right : yagi_ikari;
+      case 3:
+        return position.x > containerSize.width / 2 ? yagi_kanasimi_right : yagi_kanasimi;
+      case 4:
+        return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
+      default:
+        null;
+    }
+  };
+
+  const backgroundImage = getImagePath(props.typeId);
 
   useEffect(() => {
     const walkerElement = walkerRef.current;
@@ -53,8 +81,6 @@ const RandomWalker: React.FC = () => {
     };
   }, [containerSize]);
 
-  const backgroundImage = position.x > containerSize.width / 2 ? yagi_right : yagi_left;
-
   return (
     <div
       style={{
@@ -93,4 +119,4 @@ const RandomWalker: React.FC = () => {
   );
 };
 
-export default RandomWalker;
+export default EvolutionWalk;

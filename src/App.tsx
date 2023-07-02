@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box } from '@mui/material';
+import { Container, Stack, Grid, Box, ThemeProvider, Button, Typography } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
@@ -11,6 +11,9 @@ import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
 import Revopopup from './Revopopup';
+import EvolutionWalk from './EvolutionWalk';
+import { theme } from './theme/theme';
+
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const [pop, handlepop] = useState(true);
@@ -25,6 +28,15 @@ const App: React.FC = () => {
   const [revopopup, setrevopopup] = useState(false); //追加
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
+  };
+
+  type RandomType = 0 | 1 | null;
+
+  const [dispWalker, setDispWalker] = useState(true);
+  const [random, setRandom] = useState<RandomType>(null);
+
+  const changeRnadom = () => {
+    random === 0 ? setRandom(1) : setRandom(0);
   };
 
   //追加
@@ -48,14 +60,15 @@ const App: React.FC = () => {
     handleGrass();
     setInputText('');
     handlepop(false);
-
-    if (eatCount >= 5) {
-      setrevopopup(true);
-    }
+    changeRnadom();
   };
   const popSubmit = () => {
     handlepop(true);
     handleeat(true);
+    setDispWalker(false);
+    setTimeout(() => {
+      setDispWalker(true);
+    }, 2000);
   };
   const walking = () => {
     handleeat(false);
@@ -86,55 +99,77 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Stack direction="row" justifyContent="center">
-        <Container disableGutters maxWidth="sm" style={{ position: 'absolute' }}>
-          <img
-            src={bgImage}
-            style={{
-              height: '90vh',
-              width: '100%',
-              objectFit: 'cover',
-            }}
-          />
-        </Container>
-        <Container disableGutters maxWidth="sm" style={{ zIndex: 1 }}>
-          <Grid container>
-            <Grid item xs={2}>
-              <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+      <ThemeProvider theme={theme}>
+        <Stack direction="row" justifyContent="center">
+          <Container
+            disableGutters
+            maxWidth="sm"
+            style={{ position: 'absolute', top: 0, bottom: -1 }}
+          >
+            <img
+              src={bgImage}
+              style={{
+                height: '90vh',
+                width: '100%',
+                objectFit: 'cover',
+              }}
+            />
+            <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
+          </Container>
+          <Container disableGutters maxWidth="sm" style={{ zIndex: 1, marginTop: 20 }}>
+            <Grid container>
+              <Grid item xs={2}>
+                <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+              </Grid>
+              <Grid item xs={8}></Grid>
+              <Grid item xs={2}>
+                <BGMPlayer src={bgm} />
+              </Grid>
             </Grid>
-            <Grid item xs={8}></Grid>
-            <Grid item xs={2}>
-              <BGMPlayer src={bgm} />
+            <Grid container>
+              <Grid item xs={1}></Grid>
+              <Grid item xs={10}>
+                <Form
+                  inputText={inputText}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                />
+              </Grid>
+              <Grid item xs={1}></Grid>
             </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={10}>
-              <Form inputText={inputText} handleChange={handleChange} handleSubmit={handleSubmit} />
+            <Grid container>
+              <Grid item xs={3}>
+                <Box sx={{ height: '100px' }}></Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Flower
+                  emotionData={emotionData}
+                  eat={eat}
+                  showImage={showImage}
+                  randomNum={random ?? 0}
+                />
+              </Grid>
+              <Grid item xs={3}></Grid>
             </Grid>
-            <Grid item xs={1}></Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={3}></Grid>
-            <Grid item xs={6}>
-              <Flower emotionData={emotionData} eat={eat} showImage={showImage} />
+            <Grid container>
+              <Grid item xs={2} bgcolor="yellow">
+                <Popup
+                  emotionData={emotionData}
+                  pop={pop}
+                  popSubmit={popSubmit}
+                  randomNum={random ?? 0}
+                />
+                 {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+              </Grid>
+              <Grid item xs={6} bgcolor="red">
+                {dispWalker ? <RandomWalker /> : null}
+                <EvolutionWalk typeId={typeId} />
+              </Grid>
+              <Grid item xs={4} bgcolor="blue"></Grid>
             </Grid>
-            <Grid item xs={3}></Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={2} bgcolor="yellow">
-              {' '}
-              {/*表示タイミング調整必須*/}
-              <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
-              {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
-            </Grid>
-            <Grid item xs={6} bgcolor="red">
-              <RandomWalker />
-            </Grid>
-            <Grid item xs={4} bgcolor="blue"></Grid>
-          </Grid>
-        </Container>
-      </Stack>
+          </Container>
+        </Stack>
+      </ThemeProvider>
     </div>
   );
 };
