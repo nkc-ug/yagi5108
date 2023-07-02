@@ -10,7 +10,6 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
-import { height } from '@mui/system';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
