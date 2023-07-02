@@ -25,12 +25,13 @@ const Revopopup: FC<Props> = (props) => {
                 border: '2px solid #FFF',
                 boxShadow: 24,
                 p: 4,
-                backgroundImage: `url(${yagi_blck})`,
-                backgroundPosition: '-50px -300px',
+                //backgroundImage: `url(${yagi_blck})`,
+
                 backgroundColor: 'brack',
                 zIndex: 1,
               }}
             >
+              <img src={yagi_blck} style={{ width:'150px' }}/>
               <Typography
                 id="transition-modal-description"
                 sx={{ mt: 2, fontSize: '25px' }}
