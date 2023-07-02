@@ -10,6 +10,7 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
+import Revopopup from './Revopopup';
 import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 
@@ -19,11 +20,12 @@ const App: React.FC = () => {
   const [eat, handleeat] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [showImage, setShowImage] = useState(true);
+  const [showImage, setShowImage] = useState(false);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(1);
   const [typeId, setTypeId] = useState(-1);
+  const [revopopup, setrevopopup] = useState(false); //追加
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
@@ -157,6 +159,7 @@ const App: React.FC = () => {
                   popSubmit={popSubmit}
                   randomNum={random ?? 0}
                 />
+                 {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
               </Grid>
               <Grid item xs={6} bgcolor="red">
                 {dispWalker ? <RandomWalker /> : null}
