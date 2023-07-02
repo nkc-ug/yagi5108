@@ -10,7 +10,7 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
-
+import Revopopup from './Revopopup'
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const [pop, handlepop] = useState(true);
@@ -117,8 +117,9 @@ const App: React.FC = () => {
             <Grid item xs={3}></Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={2} bgcolor="yellow">
-              <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
+            <Grid item xs={2} bgcolor="yellow"> {/*表示タイミング調整必須*/}
+              <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />    
+              <Revopopup eatCount={eatCount} /> {/*鈴木追加*/}
             </Grid>
             <Grid item xs={6} bgcolor="red">
               <RandomWalker />
