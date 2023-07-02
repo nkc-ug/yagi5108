@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box, ThemeProvider } from '@mui/material';
+import { Container, Stack, Grid, Box, ThemeProvider, CircularProgress } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
 import Flower from './Flower';
@@ -39,6 +39,8 @@ const App: React.FC = () => {
     random === 0 ? setRandom(1) : setRandom(0);
   };
 
+  const [dispCircle, setDispCircle] = useState(false);
+
   const [evoPop, setEvopop] = useState(true);
   const [evoWalk, setevoWalk] = useState(false);
   //追加
@@ -58,9 +60,11 @@ const App: React.FC = () => {
     emoId: 0,
   });
   const handleSubmit = async () => {
-    setEmotionData(await EmotionApi(inputText, emotionData));
-    handleGrass();
+    setDispCircle(true);
     setInputText('');
+    setEmotionData(await EmotionApi(inputText, emotionData));
+    setDispCircle(false);
+    handleGrass();
     handlepop(false);
     changeRnadom();
   };
@@ -223,6 +227,20 @@ const App: React.FC = () => {
         >
           <NavBar handleTutorialChange={handleOpen} />
         </Container>
+        {dispCircle ? (
+          <Container
+            maxWidth="sm"
+            disableGutters
+            sx={{
+              position: 'absolute',
+              top: '30vh',
+            }}
+          >
+            <Stack direction="row" justifyContent="center" zIndex={10}>
+              <CircularProgress size={60} />
+            </Stack>
+          </Container>
+        ) : null}
       </ThemeProvider>
     </div>
   );

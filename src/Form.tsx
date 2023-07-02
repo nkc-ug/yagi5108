@@ -33,10 +33,10 @@ const Form: FC<Props> = (props) => {
             opacity: props.isDisableTextField ? 0 : 1,
           }}
         >
-          ヤギにたべさせることばを
+          ヤギにたべさせる
         </Typography>
         <Typography variant="h5" textAlign={'center'}>
-          {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'いれてね'}
+          {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
         <Box
           textAlign={'center'}
