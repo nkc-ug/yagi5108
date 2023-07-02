@@ -133,19 +133,30 @@ const App: React.FC = () => {
                   handleSubmit={handleSubmit}
                 />
               </Grid>
-             <Grid item xs={1}></Grid>
-          </Grid>
-          <Grid container>
-            <Grid item xs={3}>
-              <Box sx={{ height: '100px' }}></Box>
+              <Grid item xs={1}></Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Flower emotionData={emotionData} eat={eat} showImage={showImage} /></Grid>
+            <Grid container>
+              <Grid item xs={3}>
+                <Box sx={{ height: '100px' }}></Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Flower
+                  emotionData={emotionData}
+                  eat={eat}
+                  showImage={showImage}
+                  randomNum={random ?? 0}
+                />
+              </Grid>
               <Grid item xs={3}></Grid>
             </Grid>
             <Grid container>
               <Grid item xs={2} bgcolor="yellow">
-                <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
+                <Popup
+                  emotionData={emotionData}
+                  pop={pop}
+                  popSubmit={popSubmit}
+                  randomNum={random ?? 0}
+                />
               </Grid>
               <Grid item xs={6} bgcolor="red">
                 {dispWalker ? <RandomWalker /> : null}
