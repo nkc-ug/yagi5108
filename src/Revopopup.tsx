@@ -7,12 +7,14 @@ import yagi_blck from './assets/black_yagi.png';
 type Props = {
   eatCount: number;
   pop: boolean;
+  evolution: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  evoPop: boolean;
 };
 
 const Revopopup: FC<Props> = (props) => {
   return (
     <div>
-      {props.pop ? (
+      {props.pop && props.evoPop ? (
         <div>
           {props.eatCount >= 5 ? (
             <Box
@@ -42,7 +44,7 @@ const Revopopup: FC<Props> = (props) => {
                 <Button
                   size="large"
                   variant="contained"
-                  // onClick={props.popSubmit}
+                  onClick={props.evolution}
                   sx={{ mx: 2, color: 'white' }}
                 >
                   ヤギをみまもる
