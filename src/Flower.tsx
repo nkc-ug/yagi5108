@@ -167,8 +167,8 @@ const Flower: FC<Props> = (props) => {
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                marginTop: '-130px',
-                marginLeft: '25px',
+                marginTop: '-125px',
+                marginLeft: '22px',
                 zIndex: -1,
               }}
             />
