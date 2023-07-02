@@ -10,6 +10,7 @@ import bgm from './Audio/Bgm.mp3';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
+import EvolutionWalk from './EvolutionWalk';
 
 const App: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -124,6 +125,7 @@ const App: React.FC = () => {
             </Grid>
             <Grid item xs={6} bgcolor="red">
               {pop && !eat && <RandomWalker />}
+              <EvolutionWalk typeId={typeId} />
             </Grid>
             <Grid item xs={4} bgcolor="blue"></Grid>
           </Grid>
