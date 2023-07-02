@@ -135,7 +135,6 @@ const Popup: FC<Props> = (props) => {
             width: '300px',
             boxShadow: 24,
             backgroundPosition: '-50px -300px',
-            backgroundColor: 'brack',
             zIndex: 1,
             borderRadius: '10px',
           }}

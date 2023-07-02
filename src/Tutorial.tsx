@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import backgroundImage from './assets/tutorial.png';
-import { IconButton, Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 const style = {
   position: 'absolute' as const,
@@ -20,7 +18,8 @@ const style = {
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  border: '2px solid #FFF',
+  border: '1.5px solid #FFF',
+  borderRadius: '10px',
   boxShadow: 24,
   p: 4,
   outline: 'none',
@@ -52,7 +51,7 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
         }}
       >
         <Fade in={open}>
-          <Box sx={style}>
+          <Stack sx={style} spacing={3}>
             <Typography
               id="transition-modal-title"
               variant="h5"
@@ -71,16 +70,15 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
               </Typography>
               <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
                 ことばによって <br />
-                ヤギのようすがかわるよ🐐
-              </Typography>
-              <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
-                たくさんたべたやぎは
-                <br />
-                しんかするよ！
-                <br />
+                ヤギのようすがかわるよ
               </Typography>
             </Stack>
-          </Box>
+            <Stack justifyContent="center" direction="row">
+              <Button variant="contained" sx={{ color: 'white' }} onClick={closeclick}>
+                やぎとあそぶ
+              </Button>
+            </Stack>
+          </Stack>
         </Fade>
       </Modal>
     </div>

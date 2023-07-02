@@ -175,7 +175,6 @@ const App: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={3}></Grid>
-
               <Grid container>
                 <Grid item xs={2} bgcolor="yellow">
                   <Popup

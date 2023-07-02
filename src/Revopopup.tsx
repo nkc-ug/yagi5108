@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import yagi_blck from './assets/black_yagi.png';
+
 type Props = {
   eatCount: number;
   pop: boolean;
 };
+
 const Revopopup: FC<Props> = (props) => {
   return (
     <div>
@@ -20,26 +22,32 @@ const Revopopup: FC<Props> = (props) => {
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
                 width: '300px',
-                height: '300px',
-                color: '#000',
-                border: '2px solid #FFF',
                 boxShadow: 24,
-                p: 4,
-                //backgroundImage: `url(${yagi_blck})`,
-
-                backgroundColor: 'brack',
+                backgroundPosition: '-50px -300px',
                 zIndex: 1,
+                borderRadius: '10px',
               }}
             >
-              <img src={yagi_blck} style={{ width:'150px' }}/>
-              <Typography
-                id="transition-modal-description"
-                sx={{ mt: 2, fontSize: '25px' }}
-                textAlign={'center'}
-              >
-                おやおや。。ヤギの様子が....
-              </Typography>
-              <Button variant="contained" /*onClick={props.popSubmit}*/>見てみる</Button>
+              <Stack sx={{ p: 5, borderRadius: '10px', bgcolor: 'white' }} spacing={3}>
+                <Stack justifyContent="center" direction="row">
+                  <img src={yagi_blck} style={{ width: '150px' }} />
+                </Stack>
+                <Stack spacing={1} textAlign="center">
+                  <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+                    おやおや..?
+                    <br />
+                    ヤギのようすが....
+                  </Typography>
+                </Stack>
+                <Button
+                  size="large"
+                  variant="contained"
+                  // onClick={props.popSubmit}
+                  sx={{ mx: 2, color: 'white' }}
+                >
+                  ヤギをみまもる
+                </Button>
+              </Stack>
             </Box>
           ) : null}
         </div>
