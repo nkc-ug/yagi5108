@@ -5,10 +5,14 @@ import Button from '@mui/material/Button';
 import yagi_blck from './assets/black_yagi.png';
 type Props = {
   eatCount : number
+  pop : boolean
 };
-const Popup: FC<Props> = (props) => {
+const Revopopup: FC<Props> = (props) => {
   return (
-    <div>
+    {props.pop ? (
+      null
+    ):(
+      <div>
       {props.eatCount >= 5 ?(
                 <Box
                 sx={{
@@ -43,6 +47,7 @@ const Popup: FC<Props> = (props) => {
         null
       )}
     </div>
-  );
+    )}
+      );
 };
-export default Popup;
+export default Revopopup;
