@@ -28,6 +28,13 @@ const App: React.FC = () => {
   };
 
   const [dispWalker, setDispWalker] = useState(true);
+  const [random, setRandom] = useState<number | null>(null);
+
+  useEffect(() => {
+    // 0または1のランダムな数を生成
+    const random = Math.floor(Math.random() * 2);
+    setRandom(random);
+  });
 
   //追加
   //emotionData管理用のtypeの追加
@@ -129,13 +136,23 @@ const App: React.FC = () => {
             <Grid container>
               <Grid item xs={3}></Grid>
               <Grid item xs={6}>
-                <Flower emotionData={emotionData} eat={eat} showImage={showImage} />
+                <Flower
+                  emotionData={emotionData}
+                  eat={eat}
+                  showImage={showImage}
+                  randomNum={random ?? 0}
+                />
               </Grid>
               <Grid item xs={3}></Grid>
             </Grid>
             <Grid container>
               <Grid item xs={2} bgcolor="yellow">
-                <Popup emotionData={emotionData} pop={pop} popSubmit={popSubmit} />
+                <Popup
+                  emotionData={emotionData}
+                  pop={pop}
+                  popSubmit={popSubmit}
+                  randomNum={random ?? 0}
+                />
               </Grid>
               <Grid item xs={6} bgcolor="red">
                 {dispWalker ? <RandomWalker /> : null}
