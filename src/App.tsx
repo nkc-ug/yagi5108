@@ -8,6 +8,7 @@ import RandomWalker from './RandomWalker';
 import EmotionApi from './EmotionApi';
 import Revolution from './Revolution';
 import Popup from './Popup';
+import Revopopup from './Revopopup';
 import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 import { NavBar } from './NavBar';
@@ -18,11 +19,12 @@ const App: React.FC = () => {
   const [eat, handleeat] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [showImage, setShowImage] = useState(true);
+  const [showImage, setShowImage] = useState(false);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(1);
   const [typeId, setTypeId] = useState(-1);
+  const [revopopup, setrevopopup] = useState(false); //追加
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
@@ -164,6 +166,32 @@ const App: React.FC = () => {
                 </Grid>
                 <Grid item xs={4} bgcolor="blue"></Grid>
               </Grid>
+              <Grid item xs={6}>
+                <Flower
+                  emotionData={emotionData}
+                  eat={eat}
+                  showImage={showImage}
+                  randomNum={random ?? 0}
+                />
+              </Grid>
+              <Grid item xs={3}></Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs={2} bgcolor="yellow">
+                <Popup
+                  emotionData={emotionData}
+                  pop={pop}
+                  popSubmit={popSubmit}
+                  randomNum={random ?? 0}
+                />
+                 {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+              </Grid>
+              <Grid item xs={6} bgcolor="red">
+                {dispWalker ? <RandomWalker /> : null}
+                <EvolutionWalk typeId={typeId} />
+              </Grid>
+              <Grid item xs={4} bgcolor="blue"></Grid>
+            </Grid>
             </Box>
           </Container>
         </Stack>
