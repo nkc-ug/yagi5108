@@ -175,23 +175,23 @@ const App: React.FC = () => {
                 />
               </Grid>
               <Grid item xs={3}></Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={2} bgcolor="yellow">
-                <Popup
-                  emotionData={emotionData}
-                  pop={pop}
-                  popSubmit={popSubmit}
-                  randomNum={random ?? 0}
-                />
-                 {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+
+              <Grid container>
+                <Grid item xs={2} bgcolor="yellow">
+                  <Popup
+                    emotionData={emotionData}
+                    pop={pop}
+                    popSubmit={popSubmit}
+                    randomNum={random ?? 0}
+                  />
+                  {<Revopopup eatCount={eatCount} pop={pop} />} {/*鈴木追加*/}
+                </Grid>
+                <Grid item xs={6} bgcolor="red">
+                  {dispWalker ? <RandomWalker /> : null}
+                  <EvolutionWalk typeId={typeId} />
+                </Grid>
+                <Grid item xs={4} bgcolor="blue"></Grid>
               </Grid>
-              <Grid item xs={6} bgcolor="red">
-                {dispWalker ? <RandomWalker /> : null}
-                <EvolutionWalk typeId={typeId} />
-              </Grid>
-              <Grid item xs={4} bgcolor="blue"></Grid>
-            </Grid>
             </Box>
           </Container>
         </Stack>
