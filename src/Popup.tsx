@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { emotionDataType } from './Revolution';
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
@@ -63,16 +62,25 @@ const Popup: FC<Props> = (props) => {
             zIndex: 1,
           }}
         >
-          <Typography
-            id="transition-modal-description"
-            sx={{ mt: 2, fontSize: '25px' }}
-            textAlign={'center'}
-          >
-            草生成完了！
-          </Typography>
-          <Button variant="contained" onClick={props.popSubmit}>
-            食べさせる！
-          </Button>
+          <Stack>
+            <Box sx={{ mt: 2, borderRadius: '10px', bgcolor: 'white' }}>
+              <Typography
+                id="transition-modal-description"
+                sx={{ opacity: 0.6, p: 1, fontSize: '25px' }}
+                textAlign={'center'}
+              >
+                草をあげました！
+              </Typography>
+            </Box>
+            <Button
+              size="large"
+              variant="contained"
+              onClick={props.popSubmit}
+              sx={{ mt: 10, mx: 10, color: 'white' }}
+            >
+              食べさせる
+            </Button>
+          </Stack>
         </Box>
       )}
     </div>
