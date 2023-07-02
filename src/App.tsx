@@ -165,7 +165,11 @@ const App: React.FC = () => {
                 </Grid>
                 <Grid item xs={6} bgcolor="red"></Grid>
                 <Grid item xs={4} bgcolor="blue">
-                  {revopopup ? <Evoanimee typeId={typeId} WalkEvo={WalkEvo} /> : null}
+                  {revopopup ? (
+                    evoWalk ? null : (
+                      <Evoanimee typeId={typeId} WalkEvo={WalkEvo} />
+                    )
+                  ) : null}
                 </Grid>
               </Grid>
               <Grid item xs={6}>
