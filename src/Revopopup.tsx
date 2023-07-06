@@ -12,9 +12,11 @@ type Props = {
 };
 
 const Revopopup: FC<Props> = (props) => {
+  const isDispPop = props.pop && props.evoPop;
+
   return (
     <div>
-      {props.pop && props.evoPop ? (
+      {isDispPop ? (
         <div>
           {props.eatCount >= 5 ? (
             <Box

@@ -30,7 +30,7 @@ const EvolutionWalk: React.FC<Props> = (props) => {
       case 4:
         return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
       default:
-        null;
+        return;
     }
   };
 
@@ -89,7 +89,7 @@ const EvolutionWalk: React.FC<Props> = (props) => {
         height: '100%',
       }}
     >
-      {rangeVisible && (
+      {rangeVisible ? (
         <div
           style={{
             position: 'absolute',
@@ -101,7 +101,7 @@ const EvolutionWalk: React.FC<Props> = (props) => {
             boxSizing: 'border-box',
           }}
         />
-      )}
+      ) : null}
       <div
         ref={walkerRef}
         style={{

@@ -9,10 +9,10 @@ import yagi_yorokobi from './assets/yagi_yorokobi.png';
 
 type Props = {
   typeId: number;
-  WalkEvo: () => void;
+  walkEvo: () => void;
 };
 
-const Evoanimee: React.FC<Props> = (props) => {
+const Evoanimee: FC<Props> = ({ typeId, walkEvo }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
 
   useEffect(() => {

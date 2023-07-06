@@ -22,6 +22,15 @@ type Props = {
 const Flower: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
+
+  const bgurl = () => {
+    switch (emoId) {
+      //嬉
+      case 1:
+        return yoro_hana;
+    }
+  };
+
   return (
     <Box>
       <div>
@@ -35,7 +44,7 @@ const Flower: FC<Props> = (props) => {
                       sx={{
                         width: '70px',
                         height: '70px',
-                        backgroundImage: `url(${yoro_hana})`,
+                        backgroundImage: `url(${bgurl})`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',

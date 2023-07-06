@@ -18,17 +18,19 @@ const App: React.FC = () => {
   const [open, setOpen] = useState(true);
   const [pop, handlepop] = useState(true);
   const [eat, handleeat] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const [showImage, setShowImage] = useState(false);
   //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [inputText, setInputText] = useState('');
   const [eatCount, setEatCount] = useState(1);
   const [typeId, setTypeId] = useState(-1);
   const [revopopup, setrevopopup] = useState(false); //追加
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   type RandomType = 0 | 1 | null;
 
@@ -36,7 +38,8 @@ const App: React.FC = () => {
   const [random, setRandom] = useState<RandomType>(null);
 
   const changeRnadom = () => {
-    random === 0 ? setRandom(1) : setRandom(0);
+    const setItem = random === 0 ? 1 : 0;
+    setRandom(setItem);
   };
 
   const [dispCircle, setDispCircle] = useState(false);
@@ -52,13 +55,17 @@ const App: React.FC = () => {
     enjoyable: number;
     emoId: number;
   };
-  const [emotionData, setEmotionData] = useState<emotionDataType>({
+
+  const emotionInitialData = {
     happy: 0,
     anger: 0,
     sad: 0,
     enjoyable: 0,
     emoId: 0,
-  });
+  };
+
+  const [emotionData, setEmotionData] = useState<emotionDataType>(emotionInitialData);
+
   const handleSubmit = async () => {
     setDispCircle(true);
     setInputText('');
@@ -132,13 +139,13 @@ const App: React.FC = () => {
             />
             <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
           </Container>
-          <Container disableGutters maxWidth="sm" style={{ zIndex: 1, marginTop: 20 }}>
+          <Container disableGutters maxWidth="sm" sx={{ zIndex: 1, mt: 20 }}>
             <Box sx={{ height: '80vh' }}>
               <Grid container>
                 <Grid item xs={2}>
                   <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
                 </Grid>
-                <Grid item xs={8}></Grid>
+                <Grid item xs={8} />
                 <Grid item xs={2}>
                   {/* <BGMPlayer src={bgm} /> */}
                 </Grid>
@@ -163,7 +170,7 @@ const App: React.FC = () => {
                 <Grid item xs={3}></Grid>
               </Grid>
               <Grid container>
-                <Grid item xs={2} bgcolor="yellow">
+                <Grid item xs={2} sx={{ bgcolor: 'yellow' }}>
                   <Popup
                     emotionData={emotionData}
                     pop={pop}
@@ -173,11 +180,7 @@ const App: React.FC = () => {
                 </Grid>
                 <Grid item xs={6} bgcolor="red"></Grid>
                 <Grid item xs={4} bgcolor="blue">
-                  {revopopup ? (
-                    evoWalk ? null : (
-                      <Evoanimee typeId={typeId} WalkEvo={WalkEvo} />
-                    )
-                  ) : null}
+                  {revopopup && evoWalk ? null : <Evoanimee typeId={typeId} WalkEvo={WalkEvo} />}
                 </Grid>
               </Grid>
               <Grid item xs={6}>
