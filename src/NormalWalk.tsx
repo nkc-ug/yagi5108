@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import yagi_left from './assets/yagi_left.png';
 import yagi_right from './assets/yagi_right.png';
 
-const RandomWalker: React.FC = () => {
+const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 65, y: 0 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
@@ -93,4 +93,4 @@ const RandomWalker: React.FC = () => {
   );
 };
 
-export default RandomWalker;
+export default NormalWalk;

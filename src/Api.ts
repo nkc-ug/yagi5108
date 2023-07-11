@@ -8,7 +8,7 @@ type emotionDataType = {
   emoId: number;
 };
 
-export const Emotion = async (text: string, emotionData: emotionDataType) => {
+export const Api = async (text: string, emotionData: emotionDataType) => {
   let ans = {} as emotionDataType;
   let updateEmotionData = {} as emotionDataType;
   let maxEmotion = '';
