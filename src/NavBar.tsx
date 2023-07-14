@@ -7,7 +7,7 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import bgm from './Audio/Bgm.mp3';
 
 type Props = {
-  handleTutorialChange: () => void;
+  handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 export const NavBar: FC<Props> = ({ handleTutorialChange }) => {

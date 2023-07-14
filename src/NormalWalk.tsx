@@ -32,10 +32,10 @@ const NormalWalk: React.FC = () => {
   useEffect(() => {
     if (!walkerRef.current) return; // walkerRef.currentがnullの場合、処理を終了
 
-    const startX = containerSize.width / 2 - 150; // 開始位置のx座標
-    const startY = containerSize.height / 2 - 150; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 150; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 150; // 終了位置のy座標
+    const startX = containerSize.width / 2 - 130; // 開始位置のx座標
+    const startY = containerSize.height / 2 - 130; // 開始位置のy座標
+    const endX = containerSize.width / 2 + 130; // 終了位置のx座標
+    const endY = containerSize.height / 2 + 130; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = startX + Math.random() * (endX - startX);

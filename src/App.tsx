@@ -13,9 +13,9 @@ import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 import { NavBar } from './NavBar';
 import Pulse from './Pulse';
+import { useDiscloser } from './hooks/useDiscloser';
 
 const App: React.FC = () => {
-  const [isTutorialModalOpen, setIsTutorialModalOpen] = useState(true); //遊び方の表示
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
   const [eat, handleeat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
@@ -33,8 +33,8 @@ const App: React.FC = () => {
     setInputText(event.target.value);
   };
 
-  const handleTutorialModalOpen = () => setIsTutorialModalOpen(true);
-  const handleTutorialModalClose = () => setIsTutorialModalOpen(false);
+  const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
+    useDiscloser(true);
 
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
@@ -215,6 +215,7 @@ const App: React.FC = () => {
             left: 0,
             right: 0,
             bottom: 30,
+            zIndex: 3,
           }}
         >
           <NavBar handleTutorialChange={handleTutorialModalOpen} />
