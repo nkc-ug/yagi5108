@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from './assets/yoro_hana.png';
@@ -11,7 +10,7 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
-import { emotionDataType } from './Revolution';
+import { emotionDataType } from './Branch';
 
 type Props = {
   emotionData: emotionDataType;
@@ -19,9 +18,18 @@ type Props = {
   showImage: boolean;
   randomNum: number;
 };
-const Flower: FC<Props> = (props) => {
+const Eat: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
+
+  const bgurl = () => {
+    switch (emoId) {
+      //嬉
+      case 1:
+        return yoro_hana;
+    }
+  };
+
   return (
     <Box>
       <div>
@@ -35,7 +43,7 @@ const Flower: FC<Props> = (props) => {
                       sx={{
                         width: '70px',
                         height: '70px',
-                        backgroundImage: `url(${yoro_hana})`,
+                        backgroundImage: `url(${bgurl})`,
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
@@ -178,4 +186,4 @@ const Flower: FC<Props> = (props) => {
     </Box>
   );
 };
-export default Flower;
+export default Eat;

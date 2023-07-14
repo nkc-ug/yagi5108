@@ -2,67 +2,68 @@ import React, { useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box, ThemeProvider, CircularProgress } from '@mui/material';
 import Tutorial from './Tutorial';
 import Form from './Form';
-import Flower from './Flower';
+import Eat from './Eat';
 import bgImage from './assets/backGround.png';
-import RandomWalker from './RandomWalker';
-import EmotionApi from './EmotionApi';
-import Revolution from './Revolution';
-import Popup from './Popup';
-import Revopopup from './Revopopup';
+import NormalWalk from './NormalWalk';
+import { getEmotionApi } from './getEmotionApi';
+import Branch from './Branch';
+import FlowerPopup from './FlowerPopup';
+import EvolutionPopup from './EvolutionPopup';
 import EvolutionWalk from './EvolutionWalk';
 import { theme } from './theme/theme';
 import { NavBar } from './NavBar';
-import Evoanimee from './Evoanimee';
+import Pulse from './Pulse';
+import { useDiscloser } from './hooks/useDiscloser';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(true);
-  const [pop, handlepop] = useState(true);
-  const [eat, handleeat] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [showImage, setShowImage] = useState(false);
-  //食べた回数と進化先の変数の追加(eatCount,typeId)
-  const [inputText, setInputText] = useState('');
-  const [eatCount, setEatCount] = useState(1);
-  const [typeId, setTypeId] = useState(-1);
-  const [revopopup, setrevopopup] = useState(false); //追加
+  const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
+  const [eat, handleeat] = useState(false); //食事するヤギの表示
+  const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
+  const [inputText, setInputText] = useState(''); //フォームに入力された文字を管理
+  const [eatCount, setEatCount] = useState(1); //食べた回数と進化先の変数の追加(eatCount,typeId)
+  const [typeId, setTypeId] = useState(-1); //進化先のIDを格納
+  const [EvoPopup, setEvoPopup] = useState(false); //進化するタイミングで表示されるポップアップの表示
+  const [dispWalker, setDispWalker] = useState(true); //通常状態の移動するヤギの表示
+  const [random, setRandom] = useState<RandomType>(null); //草か果実かを定める
+  const [evoPop, setEvopop] = useState(true); //進化時のポップアップの表示
+  const [evoWalk, setevoWalk] = useState(false); //進化したヤギの表示
+  const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
 
+  const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
+    useDiscloser(true);
+
   type RandomType = 0 | 1 | null;
-
-  const [dispWalker, setDispWalker] = useState(true);
-  const [random, setRandom] = useState<RandomType>(null);
-
   const changeRnadom = () => {
-    random === 0 ? setRandom(1) : setRandom(0);
+    const setItem = random === 0 ? 1 : 0;
+    setRandom(setItem);
   };
-
-  const [dispCircle, setDispCircle] = useState(false);
-
-  const [evoPop, setEvopop] = useState(true);
-  const [evoWalk, setevoWalk] = useState(false);
-  //追加
-  //emotionData管理用のtypeの追加
   type emotionDataType = {
+    //emotionData管理用のtypeの追加
     happy: number;
     anger: number;
     sad: number;
     enjoyable: number;
     emoId: number;
   };
-  const [emotionData, setEmotionData] = useState<emotionDataType>({
+
+  const emotionInitialData = {
     happy: 0,
     anger: 0,
     sad: 0,
     enjoyable: 0,
     emoId: 0,
-  });
+  };
+
+  const [emotionData, setEmotionData] = useState<emotionDataType>(emotionInitialData);
+
   const handleSubmit = async () => {
     setDispCircle(true);
     setInputText('');
-    setEmotionData(await EmotionApi(inputText, emotionData));
+    setEmotionData(await getEmotionApi(inputText, emotionData));
     setDispCircle(false);
     handleGrass();
     handlepop(false);
@@ -80,17 +81,18 @@ const App: React.FC = () => {
     handleeat(false);
   };
   const evolution = () => {
-    setrevopopup(true);
+    setEvoPopup(true);
     setEvopop(false);
+    setevoWalk(true);
   };
   const WalkEvo = () => {
-    setevoWalk(true);
+    setevoWalk(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     setEatCount(eatCount + 1);
     if (eatCount >= 4) {
-      setTypeId(Revolution(emotionData));
+      setTypeId(Branch(emotionData));
     }
   };
 
@@ -132,19 +134,21 @@ const App: React.FC = () => {
             />
             <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
           </Container>
-          <Container disableGutters maxWidth="sm" style={{ zIndex: 1, marginTop: 20 }}>
+          <Container disableGutters maxWidth="sm" sx={{ zIndex: 1, mt: 20 }}>
             <Box sx={{ height: '80vh' }}>
               <Grid container>
                 <Grid item xs={2}>
-                  <Tutorial open={open} openclick={handleOpen} closeclick={handleClose} />
+                  <Tutorial
+                    open={isTutorialModalOpen}
+                    openclick={handleTutorialModalOpen}
+                    closeclick={handleTutorialModalClose}
+                  />
                 </Grid>
-                <Grid item xs={8}></Grid>
-                <Grid item xs={2}>
-                  {/* <BGMPlayer src={bgm} /> */}
-                </Grid>
+                <Grid item xs={8} />
+                <Grid item xs={2} />
               </Grid>
               <Grid container>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={1} />
                 <Grid item xs={10}>
                   <Form
                     inputText={inputText}
@@ -153,65 +157,52 @@ const App: React.FC = () => {
                     isDisableTextField={isDisableTextField()}
                   />
                 </Grid>
-                <Grid item xs={1}></Grid>
+                <Grid item xs={1} />
               </Grid>
               <Grid container>
                 <Grid item xs={3}>
-                  <Box sx={{ height: '100px' }}></Box>
+                  <Box sx={{ height: '100px' }} />
                 </Grid>
-                <Grid item xs={6}></Grid>
-                <Grid item xs={3}></Grid>
+                <Grid item xs={6} />
+                <Grid item xs={3} />
               </Grid>
               <Grid container>
-                <Grid item xs={2} bgcolor="yellow">
-                  <Popup
+                <Grid item xs={2} sx={{ bgcolor: 'yellow' }}>
+                  <FlowerPopup
                     emotionData={emotionData}
                     pop={pop}
                     popSubmit={popSubmit}
                     randomNum={random ?? 0}
                   />
                 </Grid>
-                <Grid item xs={6} bgcolor="red"></Grid>
-                <Grid item xs={4} bgcolor="blue">
-                  {revopopup ? (
-                    evoWalk ? null : (
-                      <Evoanimee typeId={typeId} WalkEvo={WalkEvo} />
-                    )
-                  ) : null}
+                <Grid item xs={6} />
+                <Grid item xs={4}>
+                  {EvoPopup && evoWalk ? <Pulse typeId={typeId} walkEvo={WalkEvo} /> : null}
                 </Grid>
               </Grid>
               <Grid item xs={6}>
-                <Flower
+                <Eat
                   emotionData={emotionData}
                   eat={eat}
                   showImage={showImage}
                   randomNum={random ?? 0}
                 />
               </Grid>
-              <Grid item xs={3}></Grid>
+              <Grid item xs={3} />
               <Grid container>
                 <Grid item xs={2} bgcolor="yellow">
-                  <Popup
-                    emotionData={emotionData}
+                  <EvolutionPopup
+                    eatCount={eatCount}
                     pop={pop}
-                    popSubmit={popSubmit}
-                    randomNum={random ?? 0}
+                    evolution={evolution}
+                    evoPop={evoPop}
                   />
-                  {
-                    <Revopopup
-                      eatCount={eatCount}
-                      pop={pop}
-                      evolution={evolution}
-                      evoPop={evoPop}
-                    />
-                  }{' '}
-                  {/*鈴木追加*/}
                 </Grid>
                 <Grid item xs={6} bgcolor="red">
-                  {dispWalker && evoPop ? <RandomWalker /> : null}
-                  {evoWalk ? <EvolutionWalk typeId={typeId} /> : null}
+                  {dispWalker && evoPop ? <NormalWalk /> : null}
+                  {evoWalk ? null : <EvolutionWalk typeId={typeId} />}
                 </Grid>
-                <Grid item xs={4} bgcolor="blue"></Grid>
+                <Grid item xs={4} />
               </Grid>
             </Box>
           </Container>
@@ -223,9 +214,11 @@ const App: React.FC = () => {
             position: 'absolute',
             left: 0,
             right: 0,
+            bottom: 30,
+            zIndex: 3,
           }}
         >
-          <NavBar handleTutorialChange={handleOpen} />
+          <NavBar handleTutorialChange={handleTutorialModalOpen} />
         </Container>
         {dispCircle ? (
           <Container

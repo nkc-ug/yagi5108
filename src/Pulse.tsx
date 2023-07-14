@@ -9,10 +9,10 @@ import yagi_yorokobi from './assets/yagi_yorokobi.png';
 
 type Props = {
   typeId: number;
-  WalkEvo: () => void;
+  walkEvo: () => void;
 };
 
-const Evoanimee: React.FC<Props> = (props) => {
+const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Evoanimee: React.FC<Props> = (props) => {
     setTimeout(() => {
       clearInterval(intervalId);
       setIsDisplayLeft(false);
-      props.WalkEvo();
+      walkEvo();
     }, 5000); // 8000ミリ秒 (8秒) 後に処理を停止する
 
     return () => {
@@ -51,7 +51,7 @@ const Evoanimee: React.FC<Props> = (props) => {
     }
   };
 
-  const backgroundImage = getImagePath(props.typeId);
+  const backgroundImage = getImagePath(typeId);
 
   return (
     <div>
@@ -69,4 +69,4 @@ const Evoanimee: React.FC<Props> = (props) => {
   );
 };
 
-export default Evoanimee;
+export default Pulse;

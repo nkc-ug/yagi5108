@@ -25,6 +25,8 @@ const style = {
   outline: 'none',
 };
 
+const labelList = ['あそびかた', 'ことばをたべさせて', 'やぎをそだてよう！'];
+
 type Props = {
   open: boolean;
   openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -38,8 +40,6 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
         <QuestionMarkIcon fontSize="large" color="primary" />
       </IconButton> */}
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         open={open}
         onClose={closeclick}
         closeAfterTransition
@@ -63,6 +63,11 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
               あそびかた
             </Typography>
             <Stack justifyContent="center" spacing={1}>
+              {labelList.map((label) => (
+                <Typography variant="h6" textAlign={'center'}>
+                  {label}
+                </Typography>
+              ))}
               <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
                 ことばをたべさせて
                 <br />

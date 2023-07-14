@@ -11,10 +11,12 @@ type Props = {
   evoPop: boolean;
 };
 
-const Revopopup: FC<Props> = (props) => {
+const EvolutionPopup: FC<Props> = (props) => {
+  const isDispPop = props.pop && props.evoPop;
+
   return (
     <div>
-      {props.pop && props.evoPop ? (
+      {isDispPop ? (
         <div>
           {props.eatCount >= 5 ? (
             <Box
@@ -57,4 +59,4 @@ const Revopopup: FC<Props> = (props) => {
     </div>
   );
 };
-export default Revopopup;
+export default EvolutionPopup;

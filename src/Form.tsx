@@ -11,9 +11,10 @@ type Props = {
   isDisableTextField: boolean;
 };
 
-const commonProp = {
+const boxStyles = {
   padding: 1,
   margin: 3,
+  '& .MuiTextField-root': { m: 2, width: '25ch' },
 };
 
 const Form: FC<Props> = (props) => {
@@ -22,8 +23,7 @@ const Form: FC<Props> = (props) => {
       <Box
         zIndex={1}
         sx={{
-          ...commonProp,
-          '& .MuiTextField-root': { m: 2, width: '25ch' },
+          ...boxStyles,
         }}
       >
         <Typography
@@ -35,7 +35,7 @@ const Form: FC<Props> = (props) => {
         >
           ヤギにたべさせる
         </Typography>
-        <Typography variant="h5" textAlign={'center'}>
+        <Typography variant="h5" textAlign="center">
           {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
         <Box

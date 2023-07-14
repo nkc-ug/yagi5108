@@ -7,7 +7,7 @@ export type emotionDataType = {
   emoId: number;
 };
 
-const revolution = (emotionData: emotionDataType) => {
+const Branch = (emotionData: emotionDataType) => {
   let max = -Infinity;
   let maxEmotion = 0;
   let index = 0;
@@ -21,4 +21,4 @@ const revolution = (emotionData: emotionDataType) => {
   return maxEmotion;
 };
 
-export default revolution;
+export default Branch;

@@ -2,12 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 import yagi_left from './assets/yagi_left.png';
 import yagi_right from './assets/yagi_right.png';
 
-const RandomWalker: React.FC = () => {
+const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 65, y: 0 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [rangeVisible, setRangeVisible] = useState(false);
-
   useEffect(() => {
     const walkerElement = walkerRef.current;
     if (!walkerElement) return;
@@ -34,10 +32,10 @@ const RandomWalker: React.FC = () => {
   useEffect(() => {
     if (!walkerRef.current) return; // walkerRef.currentがnullの場合、処理を終了
 
-    const startX = containerSize.width / 2 - 150; // 開始位置のx座標
-    const startY = containerSize.height / 2 - 150; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 150; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 150; // 終了位置のy座標
+    const startX = containerSize.width / 2 - 130; // 開始位置のx座標
+    const startY = containerSize.height / 2 - 130; // 開始位置のy座標
+    const endX = containerSize.width / 2 + 130; // 終了位置のx座標
+    const endY = containerSize.height / 2 + 130; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = startX + Math.random() * (endX - startX);
@@ -63,19 +61,6 @@ const RandomWalker: React.FC = () => {
         height: '100%',
       }}
     >
-      {rangeVisible && (
-        <div
-          style={{
-            position: 'absolute',
-            left: `${containerSize.width / 2 - 150}px`,
-            top: `${containerSize.height / 2 - 150}px`,
-            width: '300px',
-            height: '300px',
-            border: '2px dashed red',
-            boxSizing: 'border-box',
-          }}
-        />
-      )}
       <div
         ref={walkerRef}
         style={{
@@ -86,11 +71,11 @@ const RandomWalker: React.FC = () => {
           backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
+          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
         }}
       />
     </div>
   );
 };
 
-export default RandomWalker;
+export default NormalWalk;

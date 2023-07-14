@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { emotionDataType } from './Revolution';
+import { emotionDataType } from './Branch';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import yagi_left from './assets/yagi_left.png';
@@ -19,7 +19,7 @@ type Props = {
   popSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
   randomNum: number;
 };
-const Popup: FC<Props> = (props) => {
+const FlowerPopup: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
 
@@ -165,4 +165,4 @@ const Popup: FC<Props> = (props) => {
     </div>
   );
 };
-export default Popup;
+export default FlowerPopup;
