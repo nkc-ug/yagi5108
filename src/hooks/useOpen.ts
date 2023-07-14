@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useOpen = (initOpen: boolean) => {
+export const useDiscloser = (initOpen: boolean) => {
   const [isOpen, setIsOpen] = useState(initOpen);
 
   const open = () => setIsOpen(true);

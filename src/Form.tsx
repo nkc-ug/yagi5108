@@ -11,7 +11,7 @@ type Props = {
   isDisableTextField: boolean;
 };
 
-const commonProp = {
+const common = {
   padding: 1,
   margin: 3,
   '& .MuiTextField-root': { m: 2, width: '25ch' },
@@ -23,7 +23,7 @@ const Form: FC<Props> = (props) => {
       <Box
         zIndex={1}
         sx={{
-          ...commonProp,
+          ...common,
         }}
       >
         <Typography

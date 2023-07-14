@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { FC } from 'react';
 import yagi_yorokobi from './assets/yagi_yorokobi.png';
 import yagi_ikari from './assets/yagi_iakri.png';
 import yagi_kanasimi from './assets/yagi_kanasimi.png';
@@ -17,7 +16,6 @@ const EvolutionWalk: React.FC<Props> = (props) => {
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 65, y: -130 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [rangeVisible, setRangeVisible] = useState(false);
 
   const getImagePath = (typeId: number) => {
     switch (typeId) {
@@ -30,7 +28,7 @@ const EvolutionWalk: React.FC<Props> = (props) => {
       case 4:
         return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
       default:
-        return;
+        return null;
     }
   };
 
@@ -89,19 +87,6 @@ const EvolutionWalk: React.FC<Props> = (props) => {
         height: '100%',
       }}
     >
-      {rangeVisible ? (
-        <div
-          style={{
-            position: 'absolute',
-            left: `${containerSize.width / 2 - 150}px`,
-            top: `${containerSize.height / 2 - 150}px`,
-            width: '300px',
-            height: '300px',
-            border: '2px dashed red',
-            boxSizing: 'border-box',
-          }}
-        />
-      ) : null}
       <div
         ref={walkerRef}
         style={{

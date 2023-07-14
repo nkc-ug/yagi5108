@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { FC } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from './assets/yoro_hana.png';

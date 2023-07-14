@@ -6,8 +6,6 @@ const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 65, y: 0 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-  const [rangeVisible, setRangeVisible] = useState(false);
-
   useEffect(() => {
     const walkerElement = walkerRef.current;
     if (!walkerElement) return;
@@ -63,19 +61,6 @@ const NormalWalk: React.FC = () => {
         height: '100%',
       }}
     >
-      {rangeVisible && (
-        <div
-          style={{
-            position: 'absolute',
-            left: `${containerSize.width / 2 - 150}px`,
-            top: `${containerSize.height / 2 - 150}px`,
-            width: '300px',
-            height: '300px',
-            border: '2px dashed red',
-            boxSizing: 'border-box',
-          }}
-        />
-      )}
       <div
         ref={walkerRef}
         style={{
@@ -86,7 +71,7 @@ const NormalWalk: React.FC = () => {
           backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
+          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
         }}
       />
     </div>
