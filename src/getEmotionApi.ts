@@ -1,12 +1,7 @@
 import axios from 'axios';
+import { EmotionDataType } from './types/EmotionDataType';
 
-type emotionDataType = {
-  happy: number;
-  anger: number;
-  sad: number;
-  enjoyable: number;
-  emoId: number;
-};
+type emotionDataType = EmotionDataType;
 
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
   let ans = {} as emotionDataType;
@@ -18,10 +13,10 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
     const res = await axios.get(`https://callgpt-f6bkalktuq-uc.a.run.app?text=${text}`);
     const fetchEmotionData = res.data as emotionDataType;
     ans = {
-      happy: Number(fetchEmotionData.happy),
-      anger: Number(fetchEmotionData.anger),
-      sad: Number(fetchEmotionData.sad),
-      enjoyable: Number(fetchEmotionData.enjoyable),
+      Joy: Number(fetchEmotionData.Joy),
+      Anger: Number(fetchEmotionData.Anger),
+      Sorrow: Number(fetchEmotionData.Sorrow),
+      Enjoyable: Number(fetchEmotionData.Enjoyable),
       emoId: 0,
     };
   };
@@ -34,24 +29,24 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
     }
   }
   switch (maxEmotion) {
-    case 'happy':
+    case 'Joy':
       updateEmotionData.emoId = 1;
       break;
-    case 'anger':
+    case 'Anger':
       updateEmotionData.emoId = 2;
       break;
-    case 'sad':
+    case 'Sorrow':
       updateEmotionData.emoId = 3;
       break;
-    case 'enjoyable':
+    case 'Enjoyable':
       updateEmotionData.emoId = 4;
       break;
   }
 
-  updateEmotionData.happy += ans.happy;
-  updateEmotionData.anger += ans.anger;
-  updateEmotionData.sad += ans.sad;
-  updateEmotionData.enjoyable += ans.enjoyable;
+  updateEmotionData.Joy += ans.Joy;
+  updateEmotionData.Anger += ans.Anger;
+  updateEmotionData.Sorrow += ans.Sorrow;
+  updateEmotionData.Enjoyable += ans.Enjoyable;
 
   return updateEmotionData;
 };

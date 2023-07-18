@@ -14,6 +14,7 @@ import { theme } from './theme/theme';
 import { NavBar } from './NavBar';
 import Pulse from './Pulse';
 import { useDiscloser } from './hooks/useDiscloser';
+import { EmotionDataType } from './types/EmotionDataType';
 
 const App: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -41,20 +42,13 @@ const App: React.FC = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
   };
-  type emotionDataType = {
-    //emotionData管理用のtypeの追加
-    happy: number;
-    anger: number;
-    sad: number;
-    enjoyable: number;
-    emoId: number;
-  };
+  type emotionDataType = EmotionDataType;
 
   const emotionInitialData = {
-    happy: 0,
-    anger: 0,
-    sad: 0,
-    enjoyable: 0,
+    Joy: 0,
+    Anger: 0,
+    Sorrow: 0,
+    Enjoyable: 0,
     emoId: 0,
   };
 
