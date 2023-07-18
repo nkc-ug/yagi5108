@@ -10,10 +10,10 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 import yagi_syokuzi from './assets/yagi_syokuzi.png';
 import yagi_left from './assets/yagi_left.png';
-import { emotionDataType } from './Branch';
+import { EmotionDataType } from './types/EmotionDataType';
 
 type Props = {
-  emotionData: emotionDataType;
+  emotionData: EmotionDataType;
   eat: boolean;
   showImage: boolean;
   randomNum: number;
