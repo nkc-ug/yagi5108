@@ -1,12 +1,7 @@
 import axios from 'axios';
+import EmoDataType from './types/import-EmoType';
 
-type emotionDataType = {
-  Joy: number;
-  Anger: number;
-  Sorrow: number;
-  Enjoyable: number;
-  emoId: number;
-};
+type emotionDataType = EmoDataType.EmoNum.emoDataType;
 
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
   let ans = {} as emotionDataType;

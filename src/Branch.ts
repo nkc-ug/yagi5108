@@ -1,11 +1,6 @@
-//進化用
-export type emotionDataType = {
-  Joy: number;
-  Anger: number;
-  Sorrow: number;
-  Enjoyable: number;
-  emoId: number;
-};
+import EmoDataType from './types/import-EmoType';
+
+type emotionDataType = EmoDataType.EmoNum.emoDataType;
 
 const Branch = (emotionData: emotionDataType) => {
   let max = -Infinity;
