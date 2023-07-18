@@ -43,18 +43,18 @@ const App: React.FC = () => {
   };
   type emotionDataType = {
     //emotionData管理用のtypeの追加
-    happy: number;
-    anger: number;
-    sad: number;
-    enjoyable: number;
+    Joy: number;
+    Anger: number;
+    Sorrow: number;
+    Enjoyable: number;
     emoId: number;
   };
 
   const emotionInitialData = {
-    happy: 0,
-    anger: 0,
-    sad: 0,
-    enjoyable: 0,
+    Joy: 0,
+    Anger: 0,
+    Sorrow: 0,
+    Enjoyable: 0,
     emoId: 0,
   };
 

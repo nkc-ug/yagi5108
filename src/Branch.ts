@@ -1,9 +1,9 @@
 //進化用
 export type emotionDataType = {
-  happy: number;
-  anger: number;
-  sad: number;
-  enjoyable: number;
+  Joy: number;
+  Anger: number;
+  Sorrow: number;
+  Enjoyable: number;
   emoId: number;
 };
 
