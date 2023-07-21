@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { emotionDataType } from './Branch';
+import { EmotionDataType } from './types/EmotionDataType';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import yagi_left from './assets/yagi_left.png';
@@ -14,7 +14,7 @@ import tano_hana from './assets/tano_hana.png';
 import tano_kazitu from './assets/tano_kazitu.png';
 
 type Props = {
-  emotionData: emotionDataType;
+  emotionData: EmotionDataType;
   pop: boolean;
   popSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
   randomNum: number;
