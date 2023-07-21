@@ -1,58 +1,55 @@
-import * as React from "react";
-import { FC } from "react";
-import { createTheme, alpha } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import { amber } from "@mui/material/colors";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+import { FC } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 type Props = {
   inputText: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isDisableTextField: boolean;
 };
 
-const customTheme = createTheme({
-  palette: {
-    warning: {
-      main: alpha(amber[700], 0.5),
-    },
-    secondary: {
-      main: "#f0f0f0",
-    },
-  },
-});
-
-const commonProp = {
-  padding: 3,
+const boxStyles = {
+  padding: 1,
   margin: 3,
+  '& .MuiTextField-root': { m: 2, width: '25ch' },
 };
 
 const Form: FC<Props> = (props) => {
   return (
-    <ThemeProvider theme={customTheme}>
+    <div>
       <Box
-        position="absolute"
         zIndex={1}
         sx={{
-          ...commonProp,
-          backgroundColor: alpha(customTheme.palette.secondary.main, 0.5),
-          "& .MuiTextField-root": { m: 2, width: "25ch" },
+          ...boxStyles,
         }}
       >
-        <Typography variant="h5" textAlign={"center"}>
-          ヤギに食べさせる言葉を
+        <Typography
+          variant="h5"
+          textAlign={'center'}
+          sx={{
+            opacity: props.isDisableTextField ? 0 : 1,
+          }}
+        >
+          ヤギにたべさせる
         </Typography>
-        <Typography variant="h5" textAlign={"center"}>
-          入力してください
+        <Typography variant="h5" textAlign="center">
+          {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
-        <Box textAlign={"center"}>
+        <Box
+          textAlign={'center'}
+          sx={{
+            opacity: props.isDisableTextField ? 0 : 1,
+          }}
+        >
           <TextField
             id="standard-basic"
-            label="言葉を入力"
+            label="ことばを入れてね"
+            type="text"
             variant="standard"
+            autoCapitalize="off"
             value={props.inputText}
             onChange={props.handleChange}
             inputProps={{
@@ -60,19 +57,30 @@ const Form: FC<Props> = (props) => {
             }}
           />
         </Box>
-        <Box textAlign={"center"}>
-          <Button
-            variant="outlined"
-            onClick={
-              props.inputText.trim() !== "" ? props.handleSubmit : undefined
-            }
-            disabled={props.inputText.trim() === ""}
-          >
-            草を生やす
-          </Button>
+        <Box textAlign={'center'}>
+          {props.isDisableTextField ? (
+            <Button
+              variant="contained"
+              sx={{ color: 'white' }}
+              onClick={() => {
+                window.location.reload();
+              }}
+            >
+              ゲームをリスタートする
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              sx={{ color: 'white' }}
+              onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
+              disabled={props.inputText.trim() === ''}
+            >
+              草をあげる
+            </Button>
+          )}
         </Box>
       </Box>
-    </ThemeProvider>
+    </div>
   );
 };
 

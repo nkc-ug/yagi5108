@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
-import { Button } from "@mui/material";
+import { useRef, useState } from 'react';
+import { IconButton } from '@mui/material';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 interface BGMPlayerProps {
   src: string;
@@ -23,9 +24,9 @@ const BGMPlayer: React.FC<BGMPlayerProps> = ({ src }) => {
   return (
     <>
       <audio ref={audioRef} src={src} loop />
-      <Button variant="contained" onClick={toggleBGM}>
-        {isPlaying ? "Stop" : "Play"}
-      </Button>
+      <IconButton onClick={toggleBGM}>
+        <MusicNoteIcon fontSize="large" color="primary" />
+      </IconButton>
     </>
   );
 };
