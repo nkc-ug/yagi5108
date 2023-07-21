@@ -4,7 +4,7 @@ import yagi_right from './assets/yagi_right.png';
 
 const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 65, y: 0 });
+  const [position, setPosition] = useState({ x: 120, y: -50 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
   useEffect(() => {
     const walkerElement = walkerRef.current;
@@ -32,10 +32,10 @@ const NormalWalk: React.FC = () => {
   useEffect(() => {
     if (!walkerRef.current) return; // walkerRef.currentがnullの場合、処理を終了
 
-    const startX = containerSize.width / 2 - 130; // 開始位置のx座標
-    const startY = containerSize.height / 2 - 130; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 130; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 130; // 終了位置のy座標
+    const startX = containerSize.width / 2 - 150; // 開始位置のx座標
+    const startY = containerSize.height / 2 - 150; // 開始位置のy座標
+    const endX = containerSize.width / 2 + 100; // 終了位置のx座標
+    const endY = containerSize.height / 2 + 30; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = startX + Math.random() * (endX - startX);
