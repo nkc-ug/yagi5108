@@ -34,7 +34,7 @@ const EvolutionPopup: FC<Props> = (props) => {
             >
               <Stack sx={{ p: 5, borderRadius: '10px', bgcolor: 'white' }} spacing={3}>
                 <Stack justifyContent="center" direction="row">
-                  <img src={yagi_blck} style={{ width: '150px' }} />
+                  <img src={yagi_blck} style={{ width: '150px' }} alt=""/>
                 </Stack>
                 <Stack spacing={1} textAlign="center">
                   <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
