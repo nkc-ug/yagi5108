@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['main', 'develop']
+
+jobs:
+  rome:
+    name: Run rome scanning
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Rome
+        run: |
+          npm install rome@12.0.0
+
+      - name: Run Rome
+        run: npx rome check ./src

@@ -38,7 +38,7 @@ const Eat: FC<Props> = (props) => {
               switch (emoId) {
                 //嬉
                 case 1:
-                  return random == 0 ? (
+                  return random === 0 ? (
                     <Box
                       sx={{
                         width: '70px',
@@ -65,7 +65,8 @@ const Eat: FC<Props> = (props) => {
                   );
                 //怒
                 case 2:
-                  return random == 0 ? (
+                  return random ===
+                   0 ? (
                     <Box
                       sx={{
                         width: '70px',
@@ -92,7 +93,7 @@ const Eat: FC<Props> = (props) => {
                   );
                 //哀
                 case 3:
-                  return random == 0 ? (
+                  return random === 0 ? (
                     <Box
                       sx={{
                         width: '70px',
@@ -119,7 +120,7 @@ const Eat: FC<Props> = (props) => {
                   );
                 //楽
                 case 4:
-                  return random == 0 ? (
+                  return random === 0 ? (
                     <Box
                       sx={{
                         width: '70px',

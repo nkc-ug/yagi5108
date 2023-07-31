@@ -85,7 +85,7 @@ const App: React.FC = () => {
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     setEatCount(eatCount + 1);
-    if (eatCount >= 4) {
+    if (eatCount >= 3) {
       setTypeId(Branch(emotionData));
     }
   };
@@ -125,6 +125,7 @@ const App: React.FC = () => {
                 width: '100%',
                 objectFit: 'cover',
               }}
+              alt=""
             />
             <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
           </Container>

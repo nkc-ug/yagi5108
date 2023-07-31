@@ -16,14 +16,14 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    //let intervalId: NodeJS.Timeout;
 
     const startBlinking = () => {
       setIsDisplayLeft((prevDisplay) => !prevDisplay);
     };
 
     // eslint-disable-next-line prefer-const
-    intervalId = setInterval(startBlinking, 300); // 300ミリ秒ごとに切り替える
+    const intervalId = setInterval(startBlinking, 300); // 300ミリ秒ごとに切り替える
 
     setTimeout(() => {
       clearInterval(intervalId);
