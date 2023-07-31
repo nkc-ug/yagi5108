@@ -149,7 +149,7 @@ const FlowerPopup: FC<Props> = (props) => {
               </Typography>
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <img src={dispItem.img} style={{ width: '100px' }} />
+              <img src={dispItem.img} style={{ width: '100px' }} alt=""/>
             </Stack>
             <Button
               size="large"
