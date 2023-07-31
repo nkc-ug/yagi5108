@@ -208,7 +208,7 @@ const App: React.FC = () => {
             position: 'absolute',
             left: 0,
             right: 0,
-            bottom: 30,
+            bottom: 10,
             zIndex: 3,
           }}
         >
