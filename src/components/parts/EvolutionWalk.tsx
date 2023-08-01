@@ -1,11 +1,39 @@
 import React, { useRef, useEffect, useState } from 'react';
-import yagi_left from './assets/yagi_left.png';
-import yagi_right from './assets/yagi_right.png';
+import yagi_yorokobi from '../../assets/yagi_yorokobi.png';
+import yagi_ikari from '../../assets/yagi_iakri.png';
+import yagi_kanasimi from '../../assets/yagi_kanasimi.png';
+import yagi_tanosii from '../../assets/yagi_tanosii.png';
+import yagi_yorokobi_right from '../../assets/yagi_yorokobi_right.png';
+import yagi_ikari_right from '../../assets/yagi_iakri_right.png';
+import yagi_kanasimi_right from '../../assets/yagi_kanasimi_right.png';
+import yagi_tanosii_right from '../../assets/yagi_tanosii_right.png';
 
-const NormalWalk: React.FC = () => {
+type Props = {
+  typeId: number;
+};
+
+const EvolutionWalk: React.FC<Props> = (props) => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 120, y: -50 });
+  const [position, setPosition] = useState({ x: 65, y: -130 });
   const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+
+  const getImagePath = (typeId: number) => {
+    switch (typeId) {
+      case 1:
+        return position.x > containerSize.width / 2 ? yagi_yorokobi_right : yagi_yorokobi;
+      case 2:
+        return position.x > containerSize.width / 2 ? yagi_ikari_right : yagi_ikari;
+      case 3:
+        return position.x > containerSize.width / 2 ? yagi_kanasimi_right : yagi_kanasimi;
+      case 4:
+        return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
+      default:
+        return null;
+    }
+  };
+
+  const backgroundImage = getImagePath(props.typeId);
+
   useEffect(() => {
     const walkerElement = walkerRef.current;
     if (!walkerElement) return;
@@ -34,8 +62,8 @@ const NormalWalk: React.FC = () => {
 
     const startX = containerSize.width / 2 - 150; // 開始位置のx座標
     const startY = containerSize.height / 2 - 150; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 100; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 30; // 終了位置のy座標
+    const endX = containerSize.width / 2 + 150; // 終了位置のx座標
+    const endY = containerSize.height / 2 + 150; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = startX + Math.random() * (endX - startX);
@@ -50,8 +78,6 @@ const NormalWalk: React.FC = () => {
       clearInterval(intervalId);
     };
   }, [containerSize]);
-
-  const backgroundImage = position.x > containerSize.width / 2 ? yagi_right : yagi_left;
 
   return (
     <div
@@ -71,11 +97,11 @@ const NormalWalk: React.FC = () => {
           backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
+          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
         }}
       />
     </div>
   );
 };
 
-export default NormalWalk;
+export default EvolutionWalk;

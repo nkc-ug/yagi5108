@@ -1,17 +1,17 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { EmotionDataType } from './types/EmotionDataType';
+import { EmotionDataType } from '../../types/EmotionDataType';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_left from './assets/yagi_left.png';
-import yoro_hana from './assets/yoro_hana.png';
-import yoro_kazitu from './assets/yoro_kazitu.png';
-import ikari_hana from './assets/ikari_hana.png';
-import ikari_kazitu from './assets/ikari_kazitu.png';
-import kana_hana from './assets/kana_hana.png';
-import kana_kazitu from './assets/kana_kazitu.png';
-import tano_hana from './assets/tano_hana.png';
-import tano_kazitu from './assets/tano_kazitu.png';
+import yagi_left from '../../assets/yagi_left.png';
+import yoro_hana from '../../assets/yoro_hana.png';
+import yoro_kazitu from '../../assets/yoro_kazitu.png';
+import ikari_hana from '../../assets/ikari_hana.png';
+import ikari_kazitu from '../../assets/ikari_kazitu.png';
+import kana_hana from '../../assets/kana_hana.png';
+import kana_kazitu from '../../assets/kana_kazitu.png';
+import tano_hana from '../../assets/tano_hana.png';
+import tano_kazitu from '../../assets/tano_kazitu.png';
 
 type Props = {
   emotionData: EmotionDataType;
@@ -149,7 +149,7 @@ const FlowerPopup: FC<Props> = (props) => {
               </Typography>
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <img src={dispItem.img} style={{ width: '100px' }} alt=""/>
+              <img src={dispItem.img} style={{ width: '100px' }} alt="" />
             </Stack>
             <Button
               size="large"
