@@ -15,6 +15,7 @@ import { NavBar } from '../parts/NavBar';
 import Pulse from '../parts/Pulse';
 import { useDiscloser } from '../../hooks/useDiscloser';
 import { EmotionDataType } from '../../types/EmotionDataType';
+import { eatLimit } from '../../types/EatLimit';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -85,7 +86,8 @@ export const AppView: React.FC = () => {
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     setEatCount(eatCount + 1);
-    if (eatCount >= 3) {
+
+    if (eatCount >= eatLimit) {
       setTypeId(Branch(emotionData));
     }
   };
@@ -106,7 +108,7 @@ export const AppView: React.FC = () => {
   }, [eat]);
 
   const isDisableTextField = () => {
-    return eatCount > 3;
+    return eatCount > eatLimit;
   };
 
   return (
