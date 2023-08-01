@@ -5,7 +5,7 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={'/'} element={<AppView />}></Route>
+        <Route path={'/'} element={<AppView />} />
       </Routes>
     </BrowserRouter>
   );
