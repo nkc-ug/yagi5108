@@ -6,7 +6,7 @@ import Eat from '../parts/Eat';
 import bgImage from '../../assets/backGround.png';
 import NormalWalk from '../parts/NormalWalk';
 import { getEmotionApi } from '../parts/getEmotionApi';
-import Branch from '../parts/Branch';
+import { Branch } from '../parts/Branch';
 import FlowerPopup from '../parts/FlowerPopup';
 import EvolutionPopup from '../parts/EvolutionPopup';
 import EvolutionWalk from '../parts/EvolutionWalk';
