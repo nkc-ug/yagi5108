@@ -30,6 +30,9 @@ export const AppView: React.FC = () => {
   const [evoPop, setEvopop] = useState(true); //進化時のポップアップの表示
   const [evoWalk, setevoWalk] = useState(false); //進化したヤギの表示
   const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
+  const [EmotionMax, setMax] = useState<number>(0);
+  const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
+  const [overlap, setOverlap] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -87,7 +90,18 @@ export const AppView: React.FC = () => {
   const handleGrass = () => {
     setEatCount(eatCount + 1);
 
-    setTypeId(Branch(emotionData));
+    // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
+    setTypeId(
+      Branch({
+        emotionData,
+        EmotionMax,
+        setMax,
+        Emotion,
+        setEmotion,
+        overlap,
+        setOverlap,
+      })
+    );
   };
 
   useEffect(() => {
