@@ -60,9 +60,9 @@ export const AppView: React.FC = () => {
     setInputText('');
     setEmotionData(await getEmotionApi(inputText, emotionData));
     setDispCircle(false);
-    handleGrass();
     handlepop(false);
     changeRnadom();
+    handleGrass();
   };
   const popSubmit = () => {
     handlepop(true);
@@ -87,9 +87,7 @@ export const AppView: React.FC = () => {
   const handleGrass = () => {
     setEatCount(eatCount + 1);
 
-    if (eatCount >= eatLimit) {
-      setTypeId(Branch(emotionData));
-    }
+    setTypeId(Branch(emotionData));
   };
 
   useEffect(() => {

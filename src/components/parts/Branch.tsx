@@ -5,7 +5,7 @@ import { eatLimit } from '../../types/EatLimit';
 type emotionDataType = EmotionDataType;
 
 const Branch = (emotionData: emotionDataType) => {
-  const [EmotionMax, setMax] = useState<number>(0);
+  const [EmotionMax, setMax] = useState<number>(1);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [cnt, setCnt] = useState<number>(0);
   setMax(emotionData.emoId);
@@ -17,14 +17,6 @@ const Branch = (emotionData: emotionDataType) => {
     newEmotion[index] += 1;
     setEmotion(newEmotion);
   };
-
-  {
-    /*  {
-    cnt === 1
-      ? setMax(Emotion.indexOf(Math.max(...Emotion)))
-      : setMax(Math.floor(Math.random() * 3) + 1);
-  }*/
-  }
 
   // switch文の中にロジックを移動
   switch (EmotionMax) {
@@ -54,8 +46,12 @@ const Branch = (emotionData: emotionDataType) => {
       }
       break;
   }
-
-  return EmotionMax;
+  {
+    cnt === 1
+      ? setMax(Emotion.indexOf(Math.max(...Emotion)))
+      : setMax(Math.floor(Math.random() * 3) + 1);
+  }
+  return EmotionMax + 1;
 };
 
 export default Branch;
