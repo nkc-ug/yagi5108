@@ -83,7 +83,7 @@ const FlowerPopup: FC<Props> = (props) => {
       });
       return;
     }
-    if (emoId === 4 && random === 1) {
+    if (emoId === 4 && random == 1) {
       setDispItem({
         text: '楽しみの果実が',
         img: tano_kazitu,
