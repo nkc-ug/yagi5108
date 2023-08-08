@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box, ThemeProvider, CircularProgress } from '@mui/material';
-import Tutorial from '../parts/Tutorial';
-import Form from '../parts/Form';
-import Eat from '../parts/Eat';
-import bgImage from '../../assets/backGround.png';
-import NormalWalk from '../parts/NormalWalk';
-import { getEmotionApi } from '../parts/getEmotionApi';
-import { Branch } from '../parts/Branch';
-import FlowerPopup from '../parts/FlowerPopup';
-import EvolutionPopup from '../parts/EvolutionPopup';
-import EvolutionWalk from '../parts/EvolutionWalk';
-import { theme } from '../../theme/theme';
-import { NavBar } from '../parts/NavBar';
-import Pulse from '../parts/Pulse';
-import { useDiscloser } from '../../hooks/useDiscloser';
-import { EmotionDataType } from '../../types/EmotionDataType';
-import { eatLimit } from '../../types/EatLimit';
+import Tutorial from '../components/Tutorial';
+import Form from '../components/Form';
+import Eat from '../components/Eat';
+import bgImage from '../assets/backGround.png';
+import NormalWalk from '../components/NormalWalk';
+import { getEmotionApi } from '../components/getEmotionApi';
+import { Branch } from '../components/Branch';
+import FlowerPopup from '../components/FlowerPopup';
+import EvolutionPopup from '../components/EvolutionPopup';
+import EvolutionWalk from '../components/EvolutionWalk';
+import { theme } from '../theme/theme';
+import { NavBar } from '../components/NavBar';
+import Pulse from '../components/Pulse';
+import { useDiscloser } from '../hooks/useDiscloser';
+import { EmotionDataType } from '../types/EmotionDataType';
+import { eatLimit } from '../types/EatLimit';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示

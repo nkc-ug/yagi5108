@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import yagi_left from '../../assets/yagi_left.png';
-import yagi_right from '../../assets/yagi_right.png';
+import yagi_left from '../assets/yagi_left.png';
+import yagi_right from '../assets/yagi_right.png';
 
 const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_blck from '../../assets/black_yagi.png';
+import yagi_blck from '../assets/black_yagi.png';
 
 type Props = {
   eatCount: number;

@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-import yagi_yorokobi from '../../assets/yagi_yorokobi.png';
-import yagi_ikari from '../../assets/yagi_iakri.png';
-import yagi_kanasimi from '../../assets/yagi_kanasimi.png';
-import yagi_tanosii from '../../assets/yagi_tanosii.png';
-import yagi_yorokobi_right from '../../assets/yagi_yorokobi_right.png';
-import yagi_ikari_right from '../../assets/yagi_iakri_right.png';
-import yagi_kanasimi_right from '../../assets/yagi_kanasimi_right.png';
-import yagi_tanosii_right from '../../assets/yagi_tanosii_right.png';
+import yagi_yorokobi from '../assets/yagi_yorokobi.png';
+import yagi_ikari from '../assets/yagi_iakri.png';
+import yagi_kanasimi from '../assets/yagi_kanasimi.png';
+import yagi_tanosii from '../assets/yagi_tanosii.png';
+import yagi_yorokobi_right from '../assets/yagi_yorokobi_right.png';
+import yagi_ikari_right from '../assets/yagi_iakri_right.png';
+import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
+import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
 
 type Props = {
   typeId: number;

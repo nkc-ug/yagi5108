@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { EmotionDataType } from '../../types/EmotionDataType';
+import { EmotionDataType } from '../types/EmotionDataType';
 
 type emotionDataType = EmotionDataType;
 

@@ -3,7 +3,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import backgroundImage from '../../assets/tutorial.png';
+import backgroundImage from '../assets/tutorial.png';
 import { Button, Stack } from '@mui/material';
 
 const style = {
