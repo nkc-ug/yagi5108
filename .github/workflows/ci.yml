@@ -51,4 +51,4 @@ jobs:
           npm install rome@11.0.0
 
       - name: Run Rome
-        run: npx rome check ./macha/src
+        run: npx rome check ./src
