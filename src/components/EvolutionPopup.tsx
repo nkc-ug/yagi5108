@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
+import { EATLIMIT } from '../const/eatLimit';
 import yagi_blck from '../assets/black_yagi.png';
 
 type Props = {
@@ -18,7 +19,7 @@ const EvolutionPopup: FC<Props> = (props) => {
     <div>
       {isDispPop ? (
         <div>
-          {props.eatCount >= 4 ? (
+          {props.eatCount > EATLIMIT ? (
             <Box
               sx={{
                 position: 'absolute',

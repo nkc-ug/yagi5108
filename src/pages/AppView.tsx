@@ -15,7 +15,7 @@ import { NavBar } from '../components/NavBar';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
-import { eatLimit } from '../types/EatLimit';
+import { EATLIMIT } from '../const/eatLimit';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -120,7 +120,7 @@ export const AppView: React.FC = () => {
   }, [eat]);
 
   const isDisableTextField = () => {
-    return eatCount > eatLimit;
+    return eatCount > EATLIMIT;
   };
 
   return (
