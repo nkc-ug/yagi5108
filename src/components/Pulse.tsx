@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { FC } from 'react';
-import yagi_left from './assets/yagi_left.png';
-import yagi_ikari from './assets/yagi_iakri.png';
-import yagi_tanosii from './assets/yagi_tanosii.png';
-import yagi_kanasimi from './assets/yagi_kanasimi.png';
-import yagi_yorokobi from './assets/yagi_yorokobi.png';
+import yagi_left from '../assets/yagi_left.png';
+import yagi_ikari from '../assets/yagi_iakri.png';
+import yagi_tanosii from '../assets/yagi_tanosii.png';
+import yagi_kanasimi from '../assets/yagi_kanasimi.png';
+import yagi_yorokobi from '../assets/yagi_yorokobi.png';
 
 type Props = {
   typeId: number;

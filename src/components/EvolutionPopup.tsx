@@ -2,7 +2,8 @@ import { FC } from 'react';
 import Box from '@mui/material/Box';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_blck from './assets/black_yagi.png';
+import { EATLIMIT } from '../const/eatLimit';
+import yagi_blck from '../assets/black_yagi.png';
 
 type Props = {
   eatCount: number;
@@ -18,7 +19,7 @@ const EvolutionPopup: FC<Props> = (props) => {
     <div>
       {isDispPop ? (
         <div>
-          {props.eatCount >= 5 ? (
+          {props.eatCount > EATLIMIT ? (
             <Box
               sx={{
                 position: 'absolute',
@@ -34,7 +35,7 @@ const EvolutionPopup: FC<Props> = (props) => {
             >
               <Stack sx={{ p: 5, borderRadius: '10px', bgcolor: 'white' }} spacing={3}>
                 <Stack justifyContent="center" direction="row">
-                  <img src={yagi_blck} style={{ width: '150px' }} alt=""/>
+                  <img src={yagi_blck} style={{ width: '150px' }} alt="" />
                 </Stack>
                 <Stack spacing={1} textAlign="center">
                   <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
