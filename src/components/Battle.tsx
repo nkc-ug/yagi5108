@@ -25,32 +25,6 @@ const style = {
   outline: 'none',
 };
 
-const min = 1;
-const max = 4;
-const setmonster = Math.floor(Math.random() * (max - min + 1)) + min;
-const [monsterlabel1,setmonsterlabel1] = useState('');
-const [monsterlabel2,setmonsterlabel2] = useState('');
-
-switch(setmonster){
-  case 1:
-    setmonsterlabel1('よろこびのかんじょうに')
-    setmonsterlabel2('やぎをよろこびのかんじょうに')
-  break;
-  case 2:
-    setmonsterlabel1('いかりのかんじょうに')
-    setmonsterlabel2('やぎをいかりのかんじょうに')
-  break;
-  case 3:
-    setmonsterlabel1('かなしいのかんじょうに')
-    setmonsterlabel2('やぎをかなしいのかんじょうに')
-  break;
-  case 4:
-    setmonsterlabel1('たのしいのかんじょうに')
-    setmonsterlabel2('やぎをたのしいかんじょうに')
-  break;
-  
-}
-const labelList = ['このモンスターは',monsterlabel1, 'よわいようだ！','ことばをたべさせて',monsterlabel2,"やぎをそだてよう"];
 
 type Props = {
   Bopen: boolean;
@@ -59,6 +33,33 @@ type Props = {
 };
 
 const Battle: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
+  const min = 1;
+  const max = 4;
+  const setmonster = Math.floor(Math.random() * (max - min + 1)) + min;
+  const [monsterlabel1,setmonsterlabel1] = useState('');
+  const [monsterlabel2,setmonsterlabel2] = useState('');
+  const labelList = ['このモンスターは',monsterlabel1, 'よわいようだ！','ことばをたべさせて',monsterlabel2,"やぎをそだてよう"];
+
+  switch(setmonster){
+    case 1:
+      setmonsterlabel1('よろこびのかんじょうに')
+      setmonsterlabel2('やぎをよろこびのかんじょうに')
+    break;
+    case 2:
+      setmonsterlabel1('いかりのかんじょうに')
+      setmonsterlabel2('やぎをいかりのかんじょうに')
+    break;
+    case 3:
+      setmonsterlabel1('かなしいのかんじょうに')
+      setmonsterlabel2('やぎをかなしいのかんじょうに')
+    break;
+    case 4:
+      setmonsterlabel1('たのしいのかんじょうに')
+      setmonsterlabel2('やぎをたのしいかんじょうに')
+    break;
+  
+}
+
   return (
     <div>
       <Modal
