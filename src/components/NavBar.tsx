@@ -4,13 +4,15 @@ import HelpIcon from '@mui/icons-material/Help';
 import SearchIcon from '@mui/icons-material/Search';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import bgm from '../Audio/Bgm.mp3';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
+export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange}) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -40,6 +42,12 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           icon={<HelpIcon />}
           onClick={handleTutorialChange}
           sx={{ color: 'white' }}
+        />
+        <BottomNavigationAction
+         label="たたかう"
+         icon={<CoronavirusIcon />}
+         onClick={handleBattleChange}
+         sx={{ color: 'white' }}
         />
         <BottomNavigationAction label="やぎをみる" icon={<SearchIcon />} sx={{ color: 'white' }} />
         <BottomNavigationAction

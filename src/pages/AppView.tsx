@@ -14,8 +14,10 @@ import { theme } from '../theme/theme';
 import { NavBar } from '../components/NavBar';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
+import { useBatcloser } from '../hooks/useBatcloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
+import Battle from '../components/Battle';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -40,7 +42,8 @@ export const AppView: React.FC = () => {
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
-
+  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } =
+    useBatcloser(true);
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
     const setItem = random === 0 ? 1 : 0;
@@ -152,6 +155,11 @@ export const AppView: React.FC = () => {
                     openclick={handleTutorialModalOpen}
                     closeclick={handleTutorialModalClose}
                   />
+                 <Battle
+                  Bopen={isBattleModalOpen}
+                  Bopenclick={handleBattleModalOpen}
+                  Bcloseclick={handleBattleModalClose}
+                  /> 
                 </Grid>
                 <Grid item xs={8} />
                 <Grid item xs={2} />
@@ -227,7 +235,7 @@ export const AppView: React.FC = () => {
             zIndex: 3,
           }}
         >
-          <NavBar handleTutorialChange={handleTutorialModalOpen} />
+          <NavBar handleTutorialChange={handleTutorialModalOpen} handleBattleChange={handleTutorialModalOpen}/>
         </Container>
         {dispCircle ? (
           <Container
