@@ -25,8 +25,13 @@ const style = {
   outline: 'none',
 };
 
-const labelList = ['あそびかた', 'ことばをたべさせて', 'やぎをそだてよう！'];
-
+const labelList = new Map([
+  ['title', 'あそびかた'],
+  ['text', 'ことばをたべさせて'],
+  ['text', 'ヤギをそだてよう！'],
+  ['text', 'ことばによって '],
+  ['text', 'ヤギのようすがかわるよ'],
+]);
 type Props = {
   open: boolean;
   openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -60,23 +65,14 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
                 fontSize: '40px',
               }}
             >
-              あそびかた
+              {labelList.get('title')}
             </Typography>
             <Stack justifyContent="center" spacing={1}>
-              {labelList.map((label) => (
-                <Typography variant="h6" textAlign={'center'}>
-                  {label}
+              {[...labelList].map(([key, value]) => (
+                <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
+                  {labelList.get(value)}
                 </Typography>
               ))}
-              <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
-                ことばをたべさせて
-                <br />
-                やぎをそだてよう！
-              </Typography>
-              <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
-                ことばによって <br />
-                ヤギのようすがかわるよ
-              </Typography>
             </Stack>
             <Stack justifyContent="center" direction="row">
               <Button variant="contained" sx={{ color: 'white' }} onClick={closeclick}>
