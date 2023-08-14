@@ -26,11 +26,10 @@ const style = {
 };
 
 const labelList = new Map([
-  ['title', 'あそびかた'],
-  ['text', 'ことばをたべさせて'],
-  ['text', 'ヤギをそだてよう！'],
-  ['text', 'ことばによって '],
-  ['text', 'ヤギのようすがかわるよ'],
+  [0, 'ことばをたべさせて'],
+  [1, 'ヤギをそだてよう！'],
+  [2, 'ことばによって '],
+  [3, 'ヤギのようすがかわるよ'],
 ]);
 type Props = {
   open: boolean;
@@ -65,12 +64,12 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
                 fontSize: '40px',
               }}
             >
-              {labelList.get('title')}
+              あそびかた
             </Typography>
             <Stack justifyContent="center" spacing={1}>
               {[...labelList].map(([key, value]) => (
-                <Typography variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
-                  {labelList.get(value)}
+                <Typography key={key} variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
+                  {labelList.get(key)}
                 </Typography>
               ))}
             </Stack>
