@@ -33,11 +33,10 @@ const labelList = new Map([
 ]);
 type Props = {
   open: boolean;
-  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
+const Tutorial: FC<Props> = ({ open, closeclick }) => {
   return (
     <div>
       {/* <IconButton onClick={openclick} color="primary">
@@ -67,7 +66,7 @@ const Tutorial: FC<Props> = ({ open, openclick, closeclick }) => {
               あそびかた
             </Typography>
             <Stack justifyContent="center" spacing={1}>
-              {[...labelList].map(([key, value]) => (
+              {[...labelList].map(([key]) => (
                 <Typography key={key} variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
                   {labelList.get(key)}
                 </Typography>
