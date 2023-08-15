@@ -147,11 +147,7 @@ export const AppView: React.FC = () => {
             <Box sx={{ height: '80vh' }}>
               <Grid container>
                 <Grid item xs={2}>
-                  <Tutorial
-                    open={isTutorialModalOpen}
-                    openclick={handleTutorialModalOpen}
-                    closeclick={handleTutorialModalClose}
-                  />
+                  <Tutorial open={isTutorialModalOpen} closeclick={handleTutorialModalClose} />
                 </Grid>
                 <Grid item xs={8} />
                 <Grid item xs={2} />
