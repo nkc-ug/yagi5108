@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_right from '../assets/yagi_right.png';
+import yagi_efect from '../Audio/やぎの鳴き声.mp3';
 
 const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
@@ -53,6 +54,15 @@ const NormalWalk: React.FC = () => {
 
   const backgroundImage = position.x > containerSize.width / 2 ? yagi_right : yagi_left;
 
+  const [play, isPlaying] = useState(true);
+  const yagiAudio = () => {
+    isPlaying(!play);
+    new Audio(yagi_efect).play();
+  };
+  const audioPlay = () => {
+    yagiAudio();
+  };
+
   return (
     <div
       style={{
@@ -73,6 +83,7 @@ const NormalWalk: React.FC = () => {
           top: `${position.y}px`,
           transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
         }}
+        onClick={audioPlay}
       />
     </div>
   );

@@ -7,6 +7,7 @@ import yagi_yorokobi_right from '../assets/yagi_yorokobi_right.png';
 import yagi_ikari_right from '../assets/yagi_iakri_right.png';
 import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
 import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
+import yagi_efect from '../Audio/やぎの鳴き声.mp3';
 
 type Props = {
   typeId: number;
@@ -79,6 +80,15 @@ const EvolutionWalk: React.FC<Props> = (props) => {
     };
   }, [containerSize]);
 
+  const [play, isPlaying] = useState(true);
+  const yagiAudio = () => {
+    isPlaying(!play);
+    new Audio(yagi_efect).play();
+  };
+  const audioPlay = () => {
+    yagiAudio();
+  };
+
   return (
     <div
       style={{
@@ -99,6 +109,7 @@ const EvolutionWalk: React.FC<Props> = (props) => {
           top: `${position.y}px`,
           transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
         }}
+        onClick={audioPlay}
       />
     </div>
   );
