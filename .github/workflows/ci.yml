@@ -7,7 +7,7 @@ on:
     branches: ['main', 'develop']
 
 jobs:
-  eslint: --fix "./src"
+  eslint: --fix "../src"
     name: Run eslint scanning         
     runs-on: ubuntu-latest  
     steps:
