@@ -94,7 +94,7 @@ const FlowerPopup: FC<Props> = (props) => {
 
   useEffect(() => {
     changeItem();
-  }, [emoId, random]);
+  });
 
   return (
     <div>

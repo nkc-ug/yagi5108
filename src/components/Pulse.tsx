@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Box } from '@mui/material';
 import { FC } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_ikari from '../assets/yagi_iakri.png';
@@ -34,7 +34,7 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  });
 
   const getImagePath = (typeId: number) => {
     switch (typeId) {
