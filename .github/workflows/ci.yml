@@ -7,7 +7,7 @@ on:
     branches: ['main', 'develop']
 
 jobs:
-  eslint:
+  eslint: 
     name: Run eslint scanning         
     runs-on: ubuntu-latest  
     steps:
@@ -21,8 +21,8 @@ jobs:
 
       - name: Run ESLint                                  #ESLintを実行する  
         run:
-          npx eslint . --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif ./src
+          npx eslint ./src --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif
+          --output-file eslint-results.sarif 
         continue-on-error: true
 
       - name: Upload analysis results to GitHub           #githubに解析結果をアップロード
