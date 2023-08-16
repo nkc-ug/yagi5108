@@ -43,7 +43,7 @@ export const AppView: React.FC = () => {
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
   const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } =
-    useBatcloser(true);
+    useBatcloser(false);
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
     const setItem = random === 0 ? 1 : 0;
@@ -235,7 +235,7 @@ export const AppView: React.FC = () => {
             zIndex: 3,
           }}
         >
-          <NavBar handleTutorialChange={handleTutorialModalOpen} handleBattleChange={handleTutorialModalOpen}/>
+          <NavBar handleTutorialChange={handleTutorialModalOpen} handleBattleChange={handleBattleModalOpen}/>
         </Container>
         {dispCircle ? (
           <Container

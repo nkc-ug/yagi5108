@@ -31,14 +31,12 @@ type Props = {
   Bcloseclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battle: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
-  const min = 1;
-  const max = 4;
-  const setmonster = Math.floor(Math.random() * (max - min + 1)) + min;
+const Battleresult: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
   const [monsterlabel1,setmonsterlabel1] = useState('');
   const [monsterlabel2,setmonsterlabel2] = useState('');
   const labelList = ['このモンスターは',monsterlabel1, 'よわいようだ！','ことばをたべさせて',monsterlabel2,"やぎをそだてよう"];
 
+  {/*
   useEffect(() => {
   switch(setmonster){
     case 1:
@@ -59,6 +57,7 @@ const Battle: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
     break;
     }
   }, [setmonster]);
+*/}
   
 
 
@@ -105,4 +104,4 @@ const Battle: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
     </div>
   );
 };
-export default Battle;
+export default Battleresult;
