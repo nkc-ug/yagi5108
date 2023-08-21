@@ -5,6 +5,8 @@ import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import backgroundImage from '../assets/tutorial.png';
 import { Button, Stack } from '@mui/material';
+import { EATLIMIT } from '../const/eatLimit';
+import { EmotionDataType } from '../types/EmotionDataType';
 
 const style = {
   position: 'absolute' as const,
@@ -26,46 +28,29 @@ const style = {
 };
 
 type Props = {
+  eatCount: number;
   Bopen: boolean;
+  emotionData: EmotionDataType;
   Bopenclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   Bcloseclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battleresult: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
-  const [monsterlabel1,setmonsterlabel1] = useState('');
-  const [monsterlabel2,setmonsterlabel2] = useState('');
-  const labelList = ['このモンスターは',monsterlabel1, 'よわいようだ！','ことばをたべさせて',monsterlabel2,"やぎをそだてよう"];
-
-  {/*
-  useEffect(() => {
-  switch(setmonster){
-    case 1:
-      setmonsterlabel1('よろこびのかんじょうに')
-      setmonsterlabel2('やぎをよろこびのかんじょうに')
-    break;
-    case 2:
-      setmonsterlabel1('いかりのかんじょうに')
-      setmonsterlabel2('やぎをいかりのかんじょうに')
-    break;
-    case 3:
-      setmonsterlabel1('かなしいのかんじょうに')
-      setmonsterlabel2('やぎをかなしいのかんじょうに')
-    break;
-    case 4:
-      setmonsterlabel1('たのしいのかんじょうに')
-      setmonsterlabel2('やぎをたのしいかんじょうに')
-    break;
-    }
-  }, [setmonster]);
-*/}
+const Battleresult: FC<Props> = (Props) => {
+  const [label,setlabel] = useState('');
+  const emoId = Props.emotionData.emoId;
   
-
+if (setmonster === emoId){
+  setlabel("ヤギはたたかいにかったようだ！やぎをほめよう！")
+}else{
+  setlabel("ヤギはたたかいにまけてしまった！やぎをはげまそう！")
+}
 
   return (
     <div>
+      {Props.eatCount > EATLIMIT ? (
       <Modal
-        open={Bopen}
-        onClose={Bcloseclick}
+        open={Props.Bopen}
+        onClose={Props.Bcloseclick}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -74,7 +59,7 @@ const Battleresult: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
           },
         }}
       >
-        <Fade in={Bopen}>
+        <Fade in={Props.Bopen}>
           <Stack sx={style} spacing={3}>
             <Typography
               id="transition-modal-title"
@@ -84,23 +69,24 @@ const Battleresult: FC<Props> = ({ Bopen, Bopenclick, Bcloseclick }) => {
                 fontSize: '40px',
               }}
             >
-              モンスターがあらわれた！！
+              ヤギはモンスターとたたかった！
             </Typography>
             <Stack justifyContent="center" spacing={1}>
-              {labelList.map((label) => (
-                <Typography key={label} variant="h6" textAlign={'center'}>
+              
+                <Typography variant="h6" textAlign={'center'}>
                   {label}
                 </Typography>
-              ))}
+          
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <Button variant="contained" sx={{ color: 'white' }} onClick={Bcloseclick}>
-                やぎをそだてる
+              <Button variant="contained" sx={{ color: 'white' }} onClick={Props.Bcloseclick}>
+                たたかいをつづける
               </Button>
             </Stack>
           </Stack>
         </Fade>
       </Modal>
+      ) : null}
     </div>
   );
 };

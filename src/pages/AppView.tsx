@@ -18,6 +18,7 @@ import { useBatcloser } from '../hooks/useBatcloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/Battle';
+import Battleresult from '../components/Battleresult';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -35,6 +36,7 @@ export const AppView: React.FC = () => {
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
+  const [monster, setmonster] = useState('');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -156,6 +158,11 @@ export const AppView: React.FC = () => {
                     closeclick={handleTutorialModalClose}
                   />
                  <Battle
+                  Bopen={isBattleModalOpen}
+                  Bopenclick={handleBattleModalOpen}
+                  Bcloseclick={handleBattleModalClose}
+                  /> 
+                  <Battleresult
                   Bopen={isBattleModalOpen}
                   Bopenclick={handleBattleModalOpen}
                   Bcloseclick={handleBattleModalClose}
