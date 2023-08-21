@@ -36,11 +36,13 @@ export const AppView: React.FC = () => {
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
-  const [monster, setmonster] = useState('');
+  const [monster, setmonster] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
+
+  setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
@@ -158,11 +160,15 @@ export const AppView: React.FC = () => {
                     closeclick={handleTutorialModalClose}
                   />
                  <Battle
+                 monster={monster}
                   Bopen={isBattleModalOpen}
                   Bopenclick={handleBattleModalOpen}
                   Bcloseclick={handleBattleModalClose}
                   /> 
                   <Battleresult
+                  monster={monster}
+                  eatCount={eatCount}
+                  emotionData={emotionData}
                   Bopen={isBattleModalOpen}
                   Bopenclick={handleBattleModalOpen}
                   Bcloseclick={handleBattleModalClose}

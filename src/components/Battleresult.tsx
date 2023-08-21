@@ -28,6 +28,7 @@ const style = {
 };
 
 type Props = {
+  monster: number;
   eatCount: number;
   Bopen: boolean;
   emotionData: EmotionDataType;
@@ -39,7 +40,7 @@ const Battleresult: FC<Props> = (Props) => {
   const [label,setlabel] = useState('');
   const emoId = Props.emotionData.emoId;
   
-if (setmonster === emoId){
+if (Props.monster === emoId){
   setlabel("ヤギはたたかいにかったようだ！やぎをほめよう！")
 }else{
   setlabel("ヤギはたたかいにまけてしまった！やぎをはげまそう！")
