@@ -34,7 +34,7 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
     return () => {
       clearInterval(intervalId);
     };
-  });
+  }, [walkEvo]);
 
   const getImagePath = (typeId: number) => {
     switch (typeId) {
