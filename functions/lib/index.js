@@ -132,8 +132,7 @@ exports.gptwrapper = (0, https_1.onRequest)({ cors: [/firebase\.com$/, 'flutter.
             res.status(500).send('GPTError');
             return;
         }
-        const aiResObj = JSON.parse(aiResText);
-        res.status(200).send(aiResObj);
+        res.status(200).send(openAiRes.data);
         return;
     }
     catch (e) {

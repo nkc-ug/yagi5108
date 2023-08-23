@@ -155,8 +155,7 @@ exports.gptwrapper = onRequest({ cors: [/firebase\.com$/, 'flutter.com'] }, asyn
       return;
     }
 
-    const aiResObj = JSON.parse(aiResText);
-    res.status(200).send(aiResObj);
+    res.status(200).send(openAiRes.data);
     return;
   } catch (e) {
     res.status(500).send(e);
