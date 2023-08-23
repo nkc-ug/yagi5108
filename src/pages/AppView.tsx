@@ -41,13 +41,13 @@ export const AppView: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
-
-  setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+  useEffect(() => {
+    setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+  }, [monster]);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
-  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } =
-    useBatcloser(false);
+  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } = useBatcloser(false);
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
     const setItem = random === 0 ? 1 : 0;
@@ -159,20 +159,20 @@ export const AppView: React.FC = () => {
                     openclick={handleTutorialModalOpen}
                     closeclick={handleTutorialModalClose}
                   />
-                 <Battle
-                 monster={monster}
-                  Bopen={isBattleModalOpen}
-                  Bopenclick={handleBattleModalOpen}
-                  Bcloseclick={handleBattleModalClose}
-                  /> 
+                  <Battle
+                    monster={monster}
+                    Bopen={isBattleModalOpen}
+                    Bopenclick={handleBattleModalOpen}
+                    Bcloseclick={handleBattleModalClose}
+                  />
                   <Battleresult
-                  monster={monster}
-                  eatCount={eatCount}
-                  emotionData={emotionData}
-                  Bopen={isBattleModalOpen}
-                  Bopenclick={handleBattleModalOpen}
-                  Bcloseclick={handleBattleModalClose}
-                  /> 
+                    monster={monster}
+                    eatCount={eatCount}
+                    emotionData={emotionData}
+                    Bopen={isBattleModalOpen}
+                    Bopenclick={handleBattleModalOpen}
+                    Bcloseclick={handleBattleModalClose}
+                  />
                 </Grid>
                 <Grid item xs={8} />
                 <Grid item xs={2} />
@@ -248,7 +248,10 @@ export const AppView: React.FC = () => {
             zIndex: 3,
           }}
         >
-          <NavBar handleTutorialChange={handleTutorialModalOpen} handleBattleChange={handleBattleModalOpen}/>
+          <NavBar
+            handleTutorialChange={handleTutorialModalOpen}
+            handleBattleChange={handleBattleModalOpen}
+          />
         </Container>
         {dispCircle ? (
           <Container

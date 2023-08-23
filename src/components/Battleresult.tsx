@@ -37,56 +37,55 @@ type Props = {
 };
 
 const Battleresult: FC<Props> = (Props) => {
-  const [label,setlabel] = useState('');
+  const [label, setlabel] = useState('');
   const emoId = Props.emotionData.emoId;
-  
-if (Props.monster === emoId){
-  setlabel("ヤギはたたかいにかったようだ！やぎをほめよう！")
-}else{
-  setlabel("ヤギはたたかいにまけてしまった！やぎをはげまそう！")
-}
+  useEffect(() => {
+    if (Props.monster === emoId) {
+      setlabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
+    } else {
+      setlabel('ヤギはたたかいにまけてしまった！やぎをはげまそう！');
+    }
+  }, []);
 
   return (
     <div>
       {Props.eatCount > EATLIMIT ? (
-      <Modal
-        open={Props.Bopen}
-        onClose={Props.Bcloseclick}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={Props.Bopen}>
-          <Stack sx={style} spacing={3}>
-            <Typography
-              id="transition-modal-title"
-              variant="h5"
-              textAlign={'center'}
-              sx={{
-                fontSize: '40px',
-              }}
-            >
-              ヤギはモンスターとたたかった！
-            </Typography>
-            <Stack justifyContent="center" spacing={1}>
-              
+        <Modal
+          open={Props.Bopen}
+          onClose={Props.Bcloseclick}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500,
+            },
+          }}
+        >
+          <Fade in={Props.Bopen}>
+            <Stack sx={style} spacing={3}>
+              <Typography
+                id="transition-modal-title"
+                variant="h5"
+                textAlign={'center'}
+                sx={{
+                  fontSize: '40px',
+                }}
+              >
+                ヤギはモンスターとたたかった！
+              </Typography>
+              <Stack justifyContent="center" spacing={1}>
                 <Typography variant="h6" textAlign={'center'}>
                   {label}
                 </Typography>
-          
+              </Stack>
+              <Stack justifyContent="center" direction="row">
+                <Button variant="contained" sx={{ color: 'white' }} onClick={Props.Bcloseclick}>
+                  たたかいをつづける
+                </Button>
+              </Stack>
             </Stack>
-            <Stack justifyContent="center" direction="row">
-              <Button variant="contained" sx={{ color: 'white' }} onClick={Props.Bcloseclick}>
-                たたかいをつづける
-              </Button>
-            </Stack>
-          </Stack>
-        </Fade>
-      </Modal>
+          </Fade>
+        </Modal>
       ) : null}
     </div>
   );
