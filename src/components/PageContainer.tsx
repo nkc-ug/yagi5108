@@ -23,7 +23,7 @@ export const PageContainer: FC<Props> = ({ updatePageSize }) => {
     const containerWidth = containerElement.clientWidth;
     const containerHeight = containerElement.clientHeight;
     updatePageSize({ width: containerWidth, height: containerHeight });
-  }, [updatePageSize]);
+  }, []);
 
   useLayoutEffect(() => {
     updateContainerSize(); // 初回描画時にコンテナサイズを更新
@@ -40,7 +40,7 @@ export const PageContainer: FC<Props> = ({ updatePageSize }) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, []);
+  }, [updateContainerSize]);
 
   return (
     <Container
