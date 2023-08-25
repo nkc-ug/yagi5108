@@ -25,10 +25,10 @@ type Props = {
 const Eat: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
-  const [position, setPosition] = useState({
+  const position = {
     x: (props.containerSize.width / 5) * 3,
     y: (props.containerSize.height / 12) * 11,
-  });
+  };
   const grassTop = position.y + 68;
   const grassLeft = position.x - 10;
   return (

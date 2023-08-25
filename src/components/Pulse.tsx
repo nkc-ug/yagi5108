@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { FC } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_ikari from '../assets/yagi_iakri.png';
@@ -18,10 +18,10 @@ type Props = {
 
 const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
-  const [position, setPosition] = useState({
+  const position = {
     x: (containerSize.width / 5) * 3,
     y: (containerSize.height / 12) * 11,
-  });
+  };
   useEffect(() => {
     //let intervalId: NodeJS.Timeout;
 

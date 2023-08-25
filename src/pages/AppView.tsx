@@ -15,11 +15,10 @@ import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import { Link, Outlet } from 'react-router-dom';
 import noon from '../assets/noon.png';
-import night from '../assets/night.png';
-import sougen from '../assets/sougen.png';
-import umi from '../assets/umi.png';
+// import night from '../assets/night.png';
+// import sougen from '../assets/sougen.png';
+// import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 
