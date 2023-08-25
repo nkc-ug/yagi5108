@@ -34,7 +34,7 @@ export const PageContainer: FC<Props> = ({ updatePageSize }) => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [updatePageSize]);
+  }, []);
 
   return (
     <Container
