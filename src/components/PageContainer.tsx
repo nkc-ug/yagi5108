@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, FC } from 'react';
+import React, { useRef, useLayoutEffect, FC, useCallback } from 'react';
 import { Container } from '@mui/material';
 
 type Props = {
@@ -13,20 +13,26 @@ type Props = {
 export const PageContainer: FC<Props> = ({ updatePageSize }) => {
   const walkerRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  const updateContainerSize = useCallback(() => {
     const walkerElement = walkerRef.current;
     if (!walkerElement) return;
 
     const containerElement = walkerElement.parentElement;
     if (!containerElement) return;
 
-    const updateContainerSize = () => {
-      const containerWidth = containerElement.clientWidth;
-      const containerHeight = containerElement.clientHeight;
-      updatePageSize({ width: containerWidth, height: containerHeight });
-    };
+    const containerWidth = containerElement.clientWidth;
+    const containerHeight = containerElement.clientHeight;
+    updatePageSize({ width: containerWidth, height: containerHeight });
+  }, [updatePageSize]);
 
+  useLayoutEffect(() => {
     updateContainerSize(); // 初回描画時にコンテナサイズを更新
+
+    const walkerElement = walkerRef.current;
+    if (!walkerElement) return;
+
+    const containerElement = walkerElement.parentElement;
+    if (!containerElement) return;
 
     const resizeObserver = new ResizeObserver(updateContainerSize);
     resizeObserver.observe(containerElement);
