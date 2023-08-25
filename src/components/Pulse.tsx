@@ -10,11 +10,18 @@ import yagi_yorokobi from '../assets/yagi_yorokobi.png';
 type Props = {
   typeId: number;
   walkEvo: () => void;
+  containerSize: {
+    width: number;
+    height: number;
+  };
 };
 
-const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
+const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
-
+  const [position, setPosition] = useState({
+    x: (containerSize.width / 5) * 3,
+    y: (containerSize.height / 12) * 11,
+  });
   useEffect(() => {
     //let intervalId: NodeJS.Timeout;
 
@@ -62,7 +69,8 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
           height: '130px',
           backgroundImage: `url(${isDisplayLeft ? yagi_left : backgroundImage})`,
           backgroundSize: 'cover',
-          left: '240px',
+          left: `${position.x}px`,
+          top: `${position.y}px`,
         }}
       />
     </div>
