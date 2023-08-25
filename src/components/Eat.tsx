@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from '../assets/yoro_hana.png';
 import yoro_kazitu from '../assets/yoro_kazitu.png';
