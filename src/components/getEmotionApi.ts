@@ -21,9 +21,6 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
       emoId: 0,
     };
   };
-  const noWord = () =>{
-    
-  }
 
   emotionData = await getWordEmotions(text);
   if(emotionData.emoId === undefined){
@@ -50,7 +47,6 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
     }
     addWordEmotions({ text, emotionData });
   }
-  console.log(emotionData);
 
   updateEmotionData.Joy += emotionData.Joy;
   updateEmotionData.Anger += emotionData.Anger;
