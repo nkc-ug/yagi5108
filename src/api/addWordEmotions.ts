@@ -1,4 +1,4 @@
-import { addDoc, collection, doc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { db } from '../lib/firebase';
 import { COLLECTIONNAME, EmotionDataDBType } from '../lib/firestore';
