@@ -1,18 +1,19 @@
 import axios from 'axios';
 import { EmotionDataType } from '../types/EmotionDataType';
+import { addWordEmotions } from '../api/addWordEmotions';
+import { getWordEmotions } from '../api/getWordEmotions';
 
 type emotionDataType = EmotionDataType;
 
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
-  let ans = {} as emotionDataType;
   let updateEmotionData = {} as emotionDataType;
+  updateEmotionData = emotionData;
   let maxEmotion = '';
   let maxScore = -Infinity;
-  updateEmotionData = emotionData;
   const fetchAPI = async () => {
     const res = await axios.get(`https://callgpt-f6bkalktuq-uc.a.run.app?text=${text}`);
     const fetchEmotionData = res.data as emotionDataType;
-    ans = {
+    emotionData = {
       Joy: Number(fetchEmotionData.Joy),
       Anger: Number(fetchEmotionData.Anger),
       Sorrow: Number(fetchEmotionData.Sorrow),
@@ -20,33 +21,42 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
       emoId: 0,
     };
   };
-  await fetchAPI();
+  const noWord = () =>{
+    
+  }
 
-  for (const emotion in ans) {
-    if (ans[emotion as keyof emotionDataType] > maxScore) {
-      maxEmotion = emotion;
-      maxScore = ans[emotion as keyof emotionDataType];
+  emotionData = await getWordEmotions(text);
+  if(emotionData.emoId === undefined){
+    await fetchAPI();
+    for (const emotion in emotionData) {
+      if (emotionData[emotion as keyof emotionDataType] > maxScore) {
+        maxEmotion = emotion;
+        maxScore = emotionData[emotion as keyof emotionDataType];
+      }
     }
+    switch (maxEmotion) {
+      case 'Joy':
+        emotionData.emoId = 1;
+        break;
+      case 'Anger':
+        emotionData.emoId = 2;
+        break;
+      case 'Sorrow':
+        emotionData.emoId = 3;
+        break;
+      case 'Enjoyable':
+        emotionData.emoId = 4;
+        break;
+    }
+    addWordEmotions({ text, emotionData });
   }
-  switch (maxEmotion) {
-    case 'Joy':
-      updateEmotionData.emoId = 1;
-      break;
-    case 'Anger':
-      updateEmotionData.emoId = 2;
-      break;
-    case 'Sorrow':
-      updateEmotionData.emoId = 3;
-      break;
-    case 'Enjoyable':
-      updateEmotionData.emoId = 4;
-      break;
-  }
+  console.log(emotionData);
 
-  updateEmotionData.Joy += ans.Joy;
-  updateEmotionData.Anger += ans.Anger;
-  updateEmotionData.Sorrow += ans.Sorrow;
-  updateEmotionData.Enjoyable += ans.Enjoyable;
+  updateEmotionData.Joy += emotionData.Joy;
+  updateEmotionData.Anger += emotionData.Anger;
+  updateEmotionData.Sorrow += emotionData.Sorrow;
+  updateEmotionData.Enjoyable += emotionData.Enjoyable;
+  updateEmotionData.emoId = emotionData.emoId;
 
   return updateEmotionData;
 };
