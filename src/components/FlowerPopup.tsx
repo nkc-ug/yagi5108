@@ -1,17 +1,17 @@
 import { FC, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { EmotionDataType } from './types/EmotionDataType';
+import { EmotionDataType } from '../types/EmotionDataType';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_left from './assets/yagi_left.png';
-import yoro_hana from './assets/yoro_hana.png';
-import yoro_kazitu from './assets/yoro_kazitu.png';
-import ikari_hana from './assets/ikari_hana.png';
-import ikari_kazitu from './assets/ikari_kazitu.png';
-import kana_hana from './assets/kana_hana.png';
-import kana_kazitu from './assets/kana_kazitu.png';
-import tano_hana from './assets/tano_hana.png';
-import tano_kazitu from './assets/tano_kazitu.png';
+import yagi_left from '../assets/yagi_left.png';
+import yoro_hana from '../assets/yoro_hana.png';
+import yoro_kazitu from '../assets/yoro_kazitu.png';
+import ikari_hana from '../assets/ikari_hana.png';
+import ikari_kazitu from '../assets/ikari_kazitu.png';
+import kana_hana from '../assets/kana_hana.png';
+import kana_kazitu from '../assets/kana_kazitu.png';
+import tano_hana from '../assets/tano_hana.png';
+import tano_kazitu from '../assets/tano_kazitu.png';
 
 type Props = {
   emotionData: EmotionDataType;
@@ -19,9 +19,10 @@ type Props = {
   popSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
   randomNum: number;
 };
-const FlowerPopup: FC<Props> = (props) => {
-  const emoId = props.emotionData.emoId;
-  const random = props.randomNum;
+
+const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
+  const emoId = emotionData.emoId;
+  const random = randomNum;
 
   type DispItem = {
     text: string;
@@ -34,56 +35,56 @@ const FlowerPopup: FC<Props> = (props) => {
   });
 
   const changeItem = () => {
-    if (emoId == 1 && random == 0) {
+    if (emoId === 1 && random === 0) {
       setDispItem({
         text: 'よろこびの草が',
         img: yoro_hana,
       });
       return;
     }
-    if (emoId == 1 && random == 1) {
+    if (emoId === 1 && random === 1) {
       setDispItem({
         text: 'よろこびの果実が',
         img: yoro_kazitu,
       });
       return;
     }
-    if (emoId == 2 && random == 0) {
+    if (emoId === 2 && random === 0) {
       setDispItem({
         text: '怒りの草が',
         img: ikari_hana,
       });
       return;
     }
-    if (emoId == 2 && random == 1) {
+    if (emoId === 2 && random === 1) {
       setDispItem({
         text: '怒りの果実が',
         img: ikari_kazitu,
       });
       return;
     }
-    if (emoId == 3 && random == 0) {
+    if (emoId === 3 && random === 0) {
       setDispItem({
         text: '悲しみの草が',
         img: kana_hana,
       });
       return;
     }
-    if (emoId == 3 && random == 1) {
+    if (emoId === 3 && random === 1) {
       setDispItem({
         text: '悲しみの果実が',
         img: kana_kazitu,
       });
       return;
     }
-    if (emoId == 4 && random == 0) {
+    if (emoId === 4 && random === 0) {
       setDispItem({
         text: '楽しみの草が',
         img: tano_hana,
       });
       return;
     }
-    if (emoId == 4 && random == 1) {
+    if (emoId === 4 && random === 1) {
       setDispItem({
         text: '楽しみの果実が',
         img: tano_kazitu,
@@ -98,7 +99,7 @@ const FlowerPopup: FC<Props> = (props) => {
 
   return (
     <div>
-      {props.pop ? null : emoId == 0 ? (
+      {pop ? null : emoId === 0 ? (
         <Box
           sx={{
             position: 'absolute' as const,
@@ -149,12 +150,12 @@ const FlowerPopup: FC<Props> = (props) => {
               </Typography>
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <img src={dispItem.img} style={{ width: '100px' }} />
+              <img src={dispItem.img} style={{ width: '100px' }} alt="" />
             </Stack>
             <Button
               size="large"
               variant="contained"
-              onClick={props.popSubmit}
+              onClick={popSubmit}
               sx={{ mx: 2, color: 'white' }}
             >
               食べさせる

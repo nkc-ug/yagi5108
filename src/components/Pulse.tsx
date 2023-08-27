@@ -1,29 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography } from '@mui/material';
-import { FC } from 'react';
-import yagi_left from './assets/yagi_left.png';
-import yagi_ikari from './assets/yagi_iakri.png';
-import yagi_tanosii from './assets/yagi_tanosii.png';
-import yagi_kanasimi from './assets/yagi_kanasimi.png';
-import yagi_yorokobi from './assets/yagi_yorokobi.png';
+import { useState, useEffect, FC } from 'react';
+import { Box } from '@mui/material';
+import yagi_left from '../assets/yagi_left.png';
+import yagi_ikari from '../assets/yagi_iakri.png';
+import yagi_tanosii from '../assets/yagi_tanosii.png';
+import yagi_kanasimi from '../assets/yagi_kanasimi.png';
+import yagi_yorokobi from '../assets/yagi_yorokobi.png';
 
 type Props = {
   typeId: number;
   walkEvo: () => void;
+  containerSize: {
+    width: number;
+    height: number;
+  };
 };
 
-const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
+const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
-
+  const position = {
+    x: (containerSize.width / 5) * 3,
+    y: (containerSize.height / 12) * 11,
+  };
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    //let intervalId: NodeJS.Timeout;
 
     const startBlinking = () => {
       setIsDisplayLeft((prevDisplay) => !prevDisplay);
     };
 
     // eslint-disable-next-line prefer-const
-    intervalId = setInterval(startBlinking, 300); // 300ミリ秒ごとに切り替える
+    const intervalId = setInterval(startBlinking, 300); // 300ミリ秒ごとに切り替える
 
     setTimeout(() => {
       clearInterval(intervalId);
@@ -34,7 +40,7 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [walkEvo]);
 
   const getImagePath = (typeId: number) => {
     switch (typeId) {
@@ -62,7 +68,8 @@ const Pulse: FC<Props> = ({ typeId, walkEvo }) => {
           height: '130px',
           backgroundImage: `url(${isDisplayLeft ? yagi_left : backgroundImage})`,
           backgroundSize: 'cover',
-          left: '240px',
+          left: `${position.x}px`,
+          top: `${position.y}px`,
         }}
       />
     </div>
