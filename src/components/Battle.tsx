@@ -65,7 +65,7 @@ const Battle: FC<Props> = ({ open, monster, openclick, closeclick, eatCount }) =
         setmonsterlabel2('やぎをたのしいかんじょうに');
         break;
     }
-  }, [monster]);
+  }, []);
 
   return (
     <div>
