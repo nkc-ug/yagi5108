@@ -31,7 +31,6 @@ export const Firestore: FC = () => {
       if (doc.id === users) {
         const word = doc.data();
         // setRead(word);
-        console.log(word);
       }
     });
   };

@@ -50,7 +50,6 @@ export const AppView: React.FC = () => {
   };
   useEffect(() => {
     setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
-    //console.log(monster)
   }, [monster]);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
