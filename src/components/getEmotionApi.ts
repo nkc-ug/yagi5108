@@ -1,18 +1,24 @@
 import axios from 'axios';
 import { EmotionDataType } from '../types/EmotionDataType';
+import { addWordEmotions } from '../api/addWordEmotions';
+import { getWordEmotions } from '../api/getWordEmotions';
 
 type emotionDataType = EmotionDataType;
+type addWordObjectType = {
+  text: string;
+  emotionData: EmotionDataType;
+};
 
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
-  let ans = {} as emotionDataType;
-  let updateEmotionData = {} as emotionDataType;
+  let newEmotionData = Object.assign({},emotionData);
   let maxEmotion = '';
-  let maxScore = -Infinity;
-  updateEmotionData = emotionData;
+  let maxScore = 0;
+
   const fetchAPI = async () => {
     const res = await axios.get(`https://callgpt-f6bkalktuq-uc.a.run.app?text=${text}`);
     const fetchEmotionData = res.data as emotionDataType;
-    ans = {
+    
+    newEmotionData = {
       Joy: Number(fetchEmotionData.Joy),
       Anger: Number(fetchEmotionData.Anger),
       Sorrow: Number(fetchEmotionData.Sorrow),
@@ -20,33 +26,44 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
       emoId: 0,
     };
   };
-  await fetchAPI();
 
-  for (const emotion in ans) {
-    if (ans[emotion as keyof emotionDataType] > maxScore) {
-      maxEmotion = emotion;
-      maxScore = ans[emotion as keyof emotionDataType];
+  newEmotionData = await getWordEmotions(text);
+  if(newEmotionData.emoId === undefined){
+    await fetchAPI();
+    for (const emotion in newEmotionData) {
+      if (newEmotionData[emotion as keyof emotionDataType] > maxScore) {
+        maxEmotion = emotion;
+        maxScore = newEmotionData[emotion as keyof emotionDataType];
+      }
     }
-  }
-  switch (maxEmotion) {
-    case 'Joy':
-      updateEmotionData.emoId = 1;
-      break;
-    case 'Anger':
-      updateEmotionData.emoId = 2;
-      break;
-    case 'Sorrow':
-      updateEmotionData.emoId = 3;
-      break;
-    case 'Enjoyable':
-      updateEmotionData.emoId = 4;
-      break;
+    switch (maxEmotion) {
+      case 'Joy':
+        newEmotionData.emoId = 1;
+        break;
+      case 'Anger':
+        newEmotionData.emoId = 2;
+        break;
+      case 'Sorrow':
+        newEmotionData.emoId = 3;
+        break;
+      case 'Enjoyable':
+        newEmotionData.emoId = 4;
+        break;
+    }
+    const addWord: addWordObjectType = {
+      text: text,
+      emotionData: newEmotionData
+    };
+    addWordEmotions(addWord);
   }
 
-  updateEmotionData.Joy += ans.Joy;
-  updateEmotionData.Anger += ans.Anger;
-  updateEmotionData.Sorrow += ans.Sorrow;
-  updateEmotionData.Enjoyable += ans.Enjoyable;
+  const updateEmotionData = {
+    Joy: emotionData.Joy += newEmotionData.Joy,
+    Anger: emotionData.Anger += newEmotionData.Anger,
+    Sorrow: emotionData.Sorrow += newEmotionData.Sorrow,
+    Enjoyable: emotionData.Enjoyable += newEmotionData.Enjoyable,
+    emoId: newEmotionData.emoId,
+  }
 
   return updateEmotionData;
 };

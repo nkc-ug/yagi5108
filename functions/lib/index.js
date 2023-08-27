@@ -96,4 +96,48 @@ ${reqText}というワードがどのような場面で利用されるかを"Joy
         return;
     }
 });
+exports.gptwrapper = (0, https_1.onRequest)({ cors: [/firebase\.com$/, 'flutter.com'] }, async (req, res) => {
+    var _a;
+    /**
+     * 本番環境ではコメントアウトする
+     */
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    //reqText
+    const reqText = req.query.text;
+    if (!reqText) {
+        res.status(400).send('NoText');
+        return;
+    }
+    //context
+    const requestContext = reqText;
+    try {
+        //config
+        if (!apiKey) {
+            res.status(500).send('NoApiKey');
+            return;
+        }
+        const config = new openai_1.Configuration({
+            apiKey: apiKey,
+        });
+        //params
+        const params = {
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: requestContext }],
+        };
+        //OpenAI
+        const aiInstance = new openai_1.OpenAIApi(config);
+        const openAiRes = await aiInstance.createChatCompletion(params);
+        const aiResText = (_a = openAiRes.data.choices[0].message) === null || _a === void 0 ? void 0 : _a.content;
+        if (!aiResText) {
+            res.status(500).send('GPTError');
+            return;
+        }
+        res.status(200).send(openAiRes.data);
+        return;
+    }
+    catch (e) {
+        res.status(500).send(e);
+        return;
+    }
+});
 //# sourceMappingURL=index.js.map
