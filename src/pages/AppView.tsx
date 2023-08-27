@@ -165,7 +165,6 @@ export const AppView: React.FC = () => {
                 eatCount={eatCount}
                 monster={monster}
                 open={isBattleModalOpen}
-                openClick={handleBattleModalOpen}
                 closeClick={handleBattleModalClose}
               />
               {/* <Battleacstion
