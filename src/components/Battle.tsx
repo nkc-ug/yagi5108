@@ -11,11 +11,10 @@ type Props = {
   eatCount: number;
   monster: number;
   open: boolean;
-  openClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battle: FC<Props> = ({ open, monster, openClick, closeClick, eatCount }) => {
+const Battle: FC<Props> = ({ open, monster, closeClick, eatCount }) => {
   const [monsterlabel1, setmonsterlabel1] = useState('');
   const [monsterlabel2, setmonsterlabel2] = useState('');
 

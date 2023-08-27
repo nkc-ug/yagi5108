@@ -23,18 +23,10 @@ type Props = {
   eatCount: number;
   open: boolean;
   emotionData: EmotionDataType;
-  openClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battleresult: FC<Props> = ({
-  monster,
-  eatCount,
-  open,
-  emotionData,
-  openClick,
-  closeClick,
-}) => {
+const Battleresult: FC<Props> = ({ monster, eatCount, open, emotionData, closeClick }) => {
   const [monsterimg, setmonsterimg] = useState('');
   const [yagiimg, setyagiimg] = useState('');
   const emoId = emotionData.emoId;
