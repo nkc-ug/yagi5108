@@ -19,6 +19,7 @@ import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/Battle';
 import Battleresult from '../components/Battleresult';
+import Battleacstion from '../components/Battleaction';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -43,6 +44,7 @@ export const AppView: React.FC = () => {
   };
   useEffect(() => {
     setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+    //console.log(monster)
   }, [monster]);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
@@ -160,19 +162,28 @@ export const AppView: React.FC = () => {
                     closeclick={handleTutorialModalClose}
                   />
                   <Battle
+                    eatCount={eatCount}
                     monster={monster}
-                    Bopen={isBattleModalOpen}
-                    Bopenclick={handleBattleModalOpen}
-                    Bcloseclick={handleBattleModalClose}
+                    open={isBattleModalOpen}
+                    openclick={handleBattleModalOpen}
+                    closeclick={handleBattleModalClose}
                   />
-                  <Battleresult
+                   <Battleacstion
                     monster={monster}
                     eatCount={eatCount}
                     emotionData={emotionData}
-                    Bopen={isBattleModalOpen}
-                    Bopenclick={handleBattleModalOpen}
-                    Bcloseclick={handleBattleModalClose}
-                  />
+                    open={isBattleModalOpen}
+                    openclick={handleBattleModalOpen}
+                    closeclick={handleBattleModalClose}
+                  /> 
+                  {/* <Battleresult
+                    monster={monster}
+                    eatCount={eatCount}
+                    emotionData={emotionData}
+                    open={isBattleModalOpen}
+                    openclick={handleBattleModalOpen}
+                    closeclick={handleBattleModalClose}
+                  /> */}
                 </Grid>
                 <Grid item xs={8} />
                 <Grid item xs={2} />
@@ -184,6 +195,7 @@ export const AppView: React.FC = () => {
                     inputText={inputText}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
+                    handleBattleChange={handleBattleModalOpen}
                     isDisableTextField={isDisableTextField()}
                   />
                 </Grid>

@@ -30,16 +30,18 @@ const style = {
 type Props = {
   monster: number;
   eatCount: number;
-  Bopen: boolean;
+  open: boolean;
   emotionData: EmotionDataType;
-  Bopenclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  Bcloseclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
 const Battleresult: FC<Props> = (Props) => {
   const [label, setlabel] = useState('');
   const emoId = Props.emotionData.emoId;
+  console.log("チェック前",emoId,Props.monster)
   useEffect(() => {
+    console.log("チェックあと",emoId,Props.monster)
     if (Props.monster === emoId) {
       setlabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
     } else {
@@ -51,8 +53,8 @@ const Battleresult: FC<Props> = (Props) => {
     <div>
       {Props.eatCount > EATLIMIT ? (
         <Modal
-          open={Props.Bopen}
-          onClose={Props.Bcloseclick}
+          open={Props.open}
+          onClose={Props.closeclick}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{
@@ -61,7 +63,7 @@ const Battleresult: FC<Props> = (Props) => {
             },
           }}
         >
-          <Fade in={Props.Bopen}>
+          <Fade in={Props.open}>
             <Stack sx={style} spacing={3}>
               <Typography
                 id="transition-modal-title"
@@ -79,7 +81,7 @@ const Battleresult: FC<Props> = (Props) => {
                 </Typography>
               </Stack>
               <Stack justifyContent="center" direction="row">
-                <Button variant="contained" sx={{ color: 'white' }} onClick={Props.Bcloseclick}>
+                <Button variant="contained" sx={{ color: 'white' }} onClick={Props.closeclick}>
                   たたかいをつづける
                 </Button>
               </Stack>

@@ -5,6 +5,7 @@ import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import backgroundImage from '../assets/tutorial.png';
 import { Button, Stack } from '@mui/material';
+import { EATLIMIT } from '../const/eatLimit';
 
 const style = {
   position: 'absolute' as const,
@@ -26,13 +27,14 @@ const style = {
 };
 
 type Props = {
+  eatCount: number;
   monster: number;
-  Bopen: boolean;
-  Bopenclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  Bcloseclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  open: boolean;
+  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battle: FC<Props> = ({ Bopen, monster, Bopenclick, Bcloseclick }) => {
+const Battle: FC<Props> = ({ open, monster, openclick, closeclick,eatCount }) => {
   const [monsterlabel1, setmonsterlabel1] = useState('');
   const [monsterlabel2, setmonsterlabel2] = useState('');
   const labelList = [
@@ -67,9 +69,10 @@ const Battle: FC<Props> = ({ Bopen, monster, Bopenclick, Bcloseclick }) => {
 
   return (
     <div>
+      {eatCount > EATLIMIT ? null : (
       <Modal
-        open={Bopen}
-        onClose={Bcloseclick}
+        open={open}
+        onClose={closeclick}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -78,7 +81,7 @@ const Battle: FC<Props> = ({ Bopen, monster, Bopenclick, Bcloseclick }) => {
           },
         }}
       >
-        <Fade in={Bopen}>
+        <Fade in={open}>
           <Stack sx={style} spacing={3}>
             <Typography
               id="transition-modal-title"
@@ -98,13 +101,14 @@ const Battle: FC<Props> = ({ Bopen, monster, Bopenclick, Bcloseclick }) => {
               ))}
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <Button variant="contained" sx={{ color: 'white' }} onClick={Bcloseclick}>
+              <Button variant="contained" sx={{ color: 'white' }} onClick={closeclick}>
                 やぎをそだてる
               </Button>
             </Stack>
           </Stack>
         </Fade>
       </Modal>
+      )}
     </div>
   );
 };

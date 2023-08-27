@@ -8,6 +8,7 @@ type Props = {
   inputText: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
   isDisableTextField: boolean;
 };
 
@@ -59,15 +60,22 @@ const Form: FC<Props> = (props) => {
         </Box>
         <Box textAlign={'center'}>
           {props.isDisableTextField ? (
+            <><Button
+              variant="contained"
+              sx={{ color: 'white' }}
+              onClick={props.handleBattleChange}
+            >
+              モンスターとたたかう
+            </Button>
             <Button
               variant="contained"
               sx={{ color: 'white' }}
               onClick={() => {
                 window.location.reload();
-              }}
+              } }
             >
-              ゲームをリスタートする
-            </Button>
+                ゲームをリスタートする
+              </Button></>                               
           ) : (
             <Button
               variant="contained"
