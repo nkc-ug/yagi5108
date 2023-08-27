@@ -26,7 +26,6 @@ import noon from '../assets/noon.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 
-
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
   const [eat, handleeat] = useState(false); //食事するヤギの表示
@@ -45,7 +44,6 @@ export const AppView: React.FC = () => {
   const [overlap, setOverlap] = useState<boolean>(false);
   const [monster, setmonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
-
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -165,29 +163,29 @@ export const AppView: React.FC = () => {
             }}
           >
             <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-                  <Battle
-                    eatCount={eatCount}
-                    monster={monster}
-                    open={isBattleModalOpen}
-                    openclick={handleBattleModalOpen}
-                    closeclick={handleBattleModalClose}
-                  />
-                   <Battleacstion
-                    monster={monster}
-                    eatCount={eatCount}
-                    emotionData={emotionData}
-                    open={isBattleModalOpen}
-                    openclick={handleBattleModalOpen}
-                    closeclick={handleBattleModalClose}
-                  /> 
-                  {/* <Battleresult
-                    monster={monster}
-                    eatCount={eatCount}
-                    emotionData={emotionData}
-                    open={isBattleModalOpen}
-                    openclick={handleBattleModalOpen}
-                    closeclick={handleBattleModalClose}
-                  /> */}
+              <Battle
+                eatCount={eatCount}
+                monster={monster}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              />
+              {/* <Battleacstion
+                monster={monster}
+                eatCount={eatCount}
+                emotionData={emotionData}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              /> */}
+              <Battleresult
+                monster={monster}
+                eatCount={eatCount}
+                emotionData={emotionData}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              />
               <FlowerPopup
                 emotionData={emotionData}
                 pop={pop}
@@ -205,6 +203,7 @@ export const AppView: React.FC = () => {
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
                   isDisableTextField={isDisableTextField()}
+                  handleBattleChange={handleBattleModalOpen}
                 />
                 <Container
                   style={{

@@ -60,22 +60,24 @@ const Form: FC<Props> = (props) => {
         </Box>
         <Box textAlign={'center'}>
           {props.isDisableTextField ? (
-            <><Button
-              variant="contained"
-              sx={{ color: 'white' }}
-              onClick={props.handleBattleChange}
-            >
-              モンスターとたたかう
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ color: 'white' }}
-              onClick={() => {
-                window.location.reload();
-              } }
-            >
+            <>
+              <Button
+                variant="contained"
+                sx={{ color: 'white' }}
+                onClick={props.handleBattleChange}
+              >
+                モンスターとたたかう
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ color: 'white' }}
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
                 ゲームをリスタートする
-              </Button></>                               
+              </Button>
+            </>
           ) : (
             <Button
               variant="contained"

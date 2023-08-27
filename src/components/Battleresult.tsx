@@ -39,9 +39,7 @@ type Props = {
 const Battleresult: FC<Props> = (Props) => {
   const [label, setlabel] = useState('');
   const emoId = Props.emotionData.emoId;
-  console.log("チェック前",emoId,Props.monster)
   useEffect(() => {
-    console.log("チェックあと",emoId,Props.monster)
     if (Props.monster === emoId) {
       setlabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
     } else {

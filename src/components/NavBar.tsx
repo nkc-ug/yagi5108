@@ -12,7 +12,7 @@ type Props = {
   handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange}) => {
+export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -44,10 +44,10 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange}) =
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
-         label="たたかう"
-         icon={<CoronavirusIcon />}
-         onClick={handleBattleChange}
-         sx={{ color: 'white' }}
+          label="たたかう"
+          icon={<CoronavirusIcon />}
+          onClick={handleBattleChange}
+          sx={{ color: 'white' }}
         />
         <BottomNavigationAction label="やぎをみる" icon={<SearchIcon />} sx={{ color: 'white' }} />
         <BottomNavigationAction
