@@ -4,7 +4,7 @@ import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
-import { getEmotionApi } from '../components/getEmotionApi';
+import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
 import FlowerPopup from '../components/FlowerPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
