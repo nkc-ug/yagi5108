@@ -13,8 +13,12 @@ import { theme } from '../theme/theme';
 import { NavBar } from '../components/NavBar';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
+import { useBatcloser } from '../hooks/useBatcloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
+import Battle from '../components/Battle';
+import Battleresult from '../components/Battleresult';
+import Battleacstion from '../components/Battleaction';
 import noon from '../assets/noon.png';
 // import night from '../assets/night.png';
 // import sougen from '../assets/sougen.png';
@@ -38,15 +42,20 @@ export const AppView: React.FC = () => {
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
+  const [monster, setmonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
+  useEffect(() => {
+    setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+    //console.log(monster)
+  }, [monster]);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
-
+  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } = useBatcloser(false);
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
     const setItem = random === 0 ? 1 : 0;
@@ -154,6 +163,29 @@ export const AppView: React.FC = () => {
             }}
           >
             <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
+              <Battle
+                eatCount={eatCount}
+                monster={monster}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              />
+              {/* <Battleacstion
+                monster={monster}
+                eatCount={eatCount}
+                emotionData={emotionData}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              /> */}
+              <Battleresult
+                monster={monster}
+                eatCount={eatCount}
+                emotionData={emotionData}
+                open={isBattleModalOpen}
+                openclick={handleBattleModalOpen}
+                closeclick={handleBattleModalClose}
+              />
               <FlowerPopup
                 emotionData={emotionData}
                 pop={pop}
@@ -171,6 +203,7 @@ export const AppView: React.FC = () => {
                   handleChange={handleChange}
                   handleSubmit={handleSubmit}
                   isDisableTextField={isDisableTextField()}
+                  handleBattleChange={handleBattleModalOpen}
                 />
                 <Container
                   style={{
@@ -215,7 +248,10 @@ export const AppView: React.FC = () => {
             zIndex: 3,
           }}
         >
-          <NavBar handleTutorialChange={handleTutorialModalOpen} />
+          <NavBar
+            handleTutorialChange={handleTutorialModalOpen}
+            handleBattleChange={handleBattleModalOpen}
+          />
         </Container>
         {dispCircle ? (
           <Container
