@@ -4,7 +4,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Button, Stack } from '@mui/material';
-import { modalStyle } from '../styles/ModalStyle';
+import { modalStyle } from '../styles/modalStyle';
 
 const labelList = new Map([
   [0, 'ことばをたべさせて'],
@@ -14,18 +14,18 @@ const labelList = new Map([
 ]);
 type Props = {
   open: boolean;
-  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Tutorial: FC<Props> = ({ open, closeclick }) => {
+const Tutorial: FC<Props> = ({ open, closeClick }) => {
   return (
     <div>
-      {/* <IconButton onClick={openclick} color="primary">
+      {/* <IconButton onClick={openClick} color="primary">
         <QuestionMarkIcon fontSize="large" color="primary" />
       </IconButton> */}
       <Modal
         open={open}
-        onClose={closeclick}
+        onClose={closeClick}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -54,7 +54,7 @@ const Tutorial: FC<Props> = ({ open, closeclick }) => {
               ))}
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <Button variant="contained" sx={{ color: 'white' }} onClick={closeclick}>
+              <Button variant="contained" sx={{ color: 'white' }} onClick={closeClick}>
                 やぎとあそぶ
               </Button>
             </Stack>

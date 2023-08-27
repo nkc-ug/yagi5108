@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, FC } from 'react';
+import { useRef, useEffect, useState, FC } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_right from '../assets/yagi_right.png';
 

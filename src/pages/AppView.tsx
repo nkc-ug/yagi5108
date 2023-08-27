@@ -13,12 +13,11 @@ import { theme } from '../theme/theme';
 import { NavBar } from '../components/NavBar';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
-import { useBatcloser } from '../hooks/useBatcloser';
+import { useBatCloser } from '../hooks/useBatcloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/Battle';
-import Battleresult from '../components/Battleresult';
-import Battleacstion from '../components/Battleaction';
+import BattleResult from '../components/BattleResult';
 import noon from '../assets/noon.png';
 // import night from '../assets/night.png';
 // import sougen from '../assets/sougen.png';
@@ -27,8 +26,8 @@ import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 
 export const AppView: React.FC = () => {
-  const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
-  const [eat, handleeat] = useState(false); //食事するヤギの表示
+  const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
+  const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
   const [inputText, setInputText] = useState(''); //フォームに入力された文字を管理
   const [eatCount, setEatCount] = useState(1); //食べた回数と進化先の変数の追加(eatCount,typeId)
@@ -36,25 +35,25 @@ export const AppView: React.FC = () => {
   const [EvoPopup, setEvoPopup] = useState(false); //進化するタイミングで表示されるポップアップの表示
   const [dispWalker, setDispWalker] = useState(true); //通常状態の移動するヤギの表示
   const [random, setRandom] = useState<RandomType>(null); //草か果実かを定める
-  const [evoPop, setEvopop] = useState(true); //進化時のポップアップの表示
-  const [evoWalk, setevoWalk] = useState(false); //進化したヤギの表示
+  const [evoPop, setEvoPop] = useState(true); //進化時のポップアップの表示
+  const [evoWalk, setEvoWalk] = useState(false); //進化したヤギの表示
   const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
-  const [monster, setmonster] = useState<number>(0);
+  const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
   };
   useEffect(() => {
-    setmonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
+    setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
   }, [monster]);
 
   const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
     useDiscloser(true);
-  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } = useBatcloser(false);
+  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } = useBatCloser(false);
   type RandomType = 0 | 1 | null;
   const changeRnadom = () => {
     const setItem = random === 0 ? 1 : 0;
@@ -77,27 +76,27 @@ export const AppView: React.FC = () => {
     setInputText('');
     setEmotionData(await getEmotionApi(inputText, emotionData));
     setDispCircle(false);
-    handlepop(false);
+    handlePop(false);
     changeRnadom();
     handleGrass();
   };
   const popSubmit = () => {
-    handlepop(true);
-    handleeat(true);
+    handlePop(true);
+    handleEat(true);
     setDispWalker(false);
     setTimeout(() => {
       setDispWalker(true);
     }, 2000);
   };
   const walking = () => {
-    handleeat(false);
+    handleEat(false);
   };
   const evolution = () => {
     setEvoPopup(true);
-    setEvopop(false);
+    setEvoPop(false);
   };
   const WalkEvo = () => {
-    setevoWalk(true);
+    setEvoWalk(true);
     setEvoPopup(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
@@ -166,24 +165,23 @@ export const AppView: React.FC = () => {
                 eatCount={eatCount}
                 monster={monster}
                 open={isBattleModalOpen}
-                openclick={handleBattleModalOpen}
-                closeclick={handleBattleModalClose}
+                openClick={handleBattleModalOpen}
+                closeClick={handleBattleModalClose}
               />
               {/* <Battleacstion
                 monster={monster}
                 eatCount={eatCount}
                 emotionData={emotionData}
                 open={isBattleModalOpen}
-                openclick={handleBattleModalOpen}
-                closeclick={handleBattleModalClose}
+                openClick={handleBattleModalOpen}
+                closeClick={handleBattleModalClose}
               /> */}
-              <Battleresult
+              <BattleResult
                 monster={monster}
                 eatCount={eatCount}
                 emotionData={emotionData}
                 open={isBattleModalOpen}
-                openclick={handleBattleModalOpen}
-                closeclick={handleBattleModalClose}
+                closeClick={handleBattleModalClose}
               />
               <FlowerPopup
                 emotionData={emotionData}
@@ -191,7 +189,7 @@ export const AppView: React.FC = () => {
                 popSubmit={popSubmit}
                 randomNum={random ?? 0}
               />
-              <Tutorial open={isTutorialModalOpen} closeclick={handleTutorialModalClose} />
+              <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
               {EvoPopup ? (
                 <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
               ) : null}

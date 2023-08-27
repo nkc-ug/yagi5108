@@ -6,34 +6,33 @@ import Typography from '@mui/material/Typography';
 import { Button, Stack } from '@mui/material';
 import { EATLIMIT } from '../const/eatLimit';
 import { EmotionDataType } from '../types/EmotionDataType';
-import { modalStyle } from '../styles/ModalStyle';
+import { modalStyle } from '../styles/modalStyle';
 
 type Props = {
   monster: number;
   eatCount: number;
   open: boolean;
   emotionData: EmotionDataType;
-  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battleresult: FC<Props> = (Props) => {
-  const [label, setlabel] = useState('');
-  const emoId = Props.emotionData.emoId;
+const BattleResult: FC<Props> = ({ monster, eatCount, open, emotionData, closeClick }) => {
+  const [label, setLabel] = useState('');
+  const emoId = emotionData.emoId;
   useEffect(() => {
-    if (Props.monster === emoId) {
-      setlabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
+    if (monster === emoId) {
+      setLabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
     } else {
-      setlabel('ヤギはたたかいにまけてしまった！やぎをはげまそう！');
+      setLabel('ヤギはたたかいにまけてしまった！やぎをはげまそう！');
     }
   }, []);
 
   return (
     <div>
-      {Props.eatCount > EATLIMIT ? (
+      {eatCount > EATLIMIT ? (
         <Modal
-          open={Props.open}
-          onClose={Props.closeclick}
+          open={open}
+          onClose={closeClick}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{
@@ -42,7 +41,7 @@ const Battleresult: FC<Props> = (Props) => {
             },
           }}
         >
-          <Fade in={Props.open}>
+          <Fade in={open}>
             <Stack sx={modalStyle} spacing={3}>
               <Typography
                 id="transition-modal-title"
@@ -60,7 +59,7 @@ const Battleresult: FC<Props> = (Props) => {
                 </Typography>
               </Stack>
               <Stack justifyContent="center" direction="row">
-                <Button variant="contained" sx={{ color: 'white' }} onClick={Props.closeclick}>
+                <Button variant="contained" sx={{ color: 'white' }} onClick={closeClick}>
                   たたかいをつづける
                 </Button>
               </Stack>
@@ -71,4 +70,4 @@ const Battleresult: FC<Props> = (Props) => {
     </div>
   );
 };
-export default Battleresult;
+export default BattleResult;

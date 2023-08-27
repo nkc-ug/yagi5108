@@ -12,14 +12,14 @@ type Props = {
   evoPop: boolean;
 };
 
-const EvolutionPopup: FC<Props> = (props) => {
-  const isDispPop = props.pop && props.evoPop;
+const EvolutionPopup: FC<Props> = ({ eatCount, pop, evolution, evoPop }) => {
+  const isDispPop = pop && evoPop;
 
   return (
     <div>
       {isDispPop ? (
         <div>
-          {props.eatCount > EATLIMIT ? (
+          {eatCount > EATLIMIT ? (
             <Box
               sx={{
                 position: 'absolute',
@@ -47,7 +47,7 @@ const EvolutionPopup: FC<Props> = (props) => {
                 <Button
                   size="large"
                   variant="contained"
-                  onClick={props.evolution}
+                  onClick={evolution}
                   sx={{ mx: 2, color: 'white' }}
                 >
                   ヤギをみまもる

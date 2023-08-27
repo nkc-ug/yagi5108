@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export const useBatcloser = (battleOpen: boolean) => {
-  const [isBattleModalOpen, setisBattleModalOpen] = useState(battleOpen);
+export const useBatCloser = (battleOpen: boolean) => {
+  const [isBattleModalOpen, setIsBattleModalOpen] = useState(battleOpen);
 
-  const handleBattleModalOpen = () => setisBattleModalOpen(true);
-  const handleBattleModalClose = () => setisBattleModalOpen(false);
+  const handleBattleModalOpen = () => setIsBattleModalOpen(true);
+  const handleBattleModalClose = () => setIsBattleModalOpen(false);
 
   return { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose };
 };

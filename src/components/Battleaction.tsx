@@ -16,41 +16,30 @@ import yagi_yorokobi_right from '../assets/yagi_yorokobi_right.png';
 import yagi_ikari_right from '../assets/yagi_iakri_right.png';
 import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
 import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 300,
-  color: '#000',
-
-  backgroundImage: `url(${backgroundImage})`,
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  border: '1.5px solid #FFF',
-  borderRadius: '10px',
-  boxShadow: 24,
-  p: 4,
-  outline: 'none',
-};
+import { modalStyle } from '../styles/modalStyle';
 
 type Props = {
   monster: number;
   eatCount: number;
   open: boolean;
   emotionData: EmotionDataType;
-  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  openClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battleresult: FC<Props> = (Props) => {
+const Battleresult: FC<Props> = ({
+  monster,
+  eatCount,
+  open,
+  emotionData,
+  openClick,
+  closeClick,
+}) => {
   const [monsterimg, setmonsterimg] = useState('');
   const [yagiimg, setyagiimg] = useState('');
-  const emoId = Props.emotionData.emoId;
+  const emoId = emotionData.emoId;
   useEffect(() => {
-    switch (Props.monster) {
+    switch (monster) {
       case 1:
         setmonsterimg(yagi_yorokobi_right);
         break;
@@ -82,10 +71,10 @@ const Battleresult: FC<Props> = (Props) => {
   }, []);
   return (
     <div>
-      {Props.eatCount > EATLIMIT ? (
+      {eatCount > EATLIMIT ? (
         <Modal
-          open={Props.open}
-          onClose={Props.closeclick}
+          open={open}
+          onClose={closeClick}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{
@@ -94,8 +83,8 @@ const Battleresult: FC<Props> = (Props) => {
             },
           }}
         >
-          <Fade in={Props.open}>
-            <Stack sx={style} spacing={3}>
+          <Fade in={open}>
+            <Stack sx={modalStyle} spacing={3}>
               <Stack>
                 {/* <image 
                      src={yagiimg} 
