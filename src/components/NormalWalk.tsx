@@ -1,45 +1,29 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, FC } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_right from '../assets/yagi_right.png';
 
-const NormalWalk: React.FC = () => {
+type Props = {
+  containerSize: {
+    width: number;
+    height: number;
+  };
+};
+
+const NormalWalk: FC<Props> = ({ containerSize }) => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 120, y: -50 });
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [position, setPosition] = useState({
+    x: containerSize.width / 3,
+    y: (containerSize.height / 10) * 5,
+  });
   useEffect(() => {
-    const walkerElement = walkerRef.current;
-    if (!walkerElement) return;
-
-    const containerElement = walkerElement.parentElement;
-    if (!containerElement) return;
-
-    const updateContainerSize = () => {
-      const containerWidth = containerElement.clientWidth;
-      const containerHeight = containerElement.clientHeight;
-      setContainerSize({ width: containerWidth, height: containerHeight });
-    };
-
-    updateContainerSize(); // 初回描画時にコンテナサイズを更新
-
-    const resizeObserver = new ResizeObserver(updateContainerSize);
-    resizeObserver.observe(containerElement);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!walkerRef.current) return; // walkerRef.currentがnullの場合、処理を終了
-
-    const startX = containerSize.width / 2 - 150; // 開始位置のx座標
-    const startY = containerSize.height / 2 - 150; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 100; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 30; // 終了位置のy座標
+    const minX = -50; // 開始位置のx座標
+    const minY = (containerSize.height / 10) * 4; // 開始位置のy座標
+    const maxX = (containerSize.width / 10) * 5; // 終了位置のx座標
+    const maxY = (containerSize.height / 10) * 6; // 終了位置のy座標
 
     const updatePosition = () => {
-      const newX = startX + Math.random() * (endX - startX);
-      const newY = startY + Math.random() * (endY - startY);
+      const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+      const newY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
       setPosition({ x: newX, y: newY });
     };
@@ -51,7 +35,7 @@ const NormalWalk: React.FC = () => {
     };
   }, [containerSize]);
 
-  const backgroundImage = position.x > containerSize.width / 2 ? yagi_right : yagi_left;
+  const backgroundImage = position.x > containerSize.width / 3 ? yagi_right : yagi_left;
 
   return (
     <div

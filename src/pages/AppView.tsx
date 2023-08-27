@@ -3,7 +3,6 @@ import { Container, Stack, Grid, Box, ThemeProvider, CircularProgress } from '@m
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
-import bgImage from '../assets/backGround.png';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../components/getEmotionApi';
 import { Branch } from '../components/Branch';
@@ -16,6 +15,12 @@ import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
+import noon from '../assets/noon.png';
+// import night from '../assets/night.png';
+// import sougen from '../assets/sougen.png';
+// import umi from '../assets/umi.png';
+import mori from '../assets/mori.png';
+import { PageContainer } from '../components/PageContainer';
 
 export const AppView: React.FC = () => {
   const [pop, handlepop] = useState(true); //生成された草のポップアップの表示
@@ -33,6 +38,7 @@ export const AppView: React.FC = () => {
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
+  const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -117,99 +123,85 @@ export const AppView: React.FC = () => {
       // eatがfalseの場合はタイマーをキャンセルする
       setShowImage(true);
     }
-  }, [eat]);
+  }, [eat, showImage]);
 
   const isDisableTextField = () => {
     return eatCount > EATLIMIT;
   };
 
+  const updatePageSize = (
+    newContainerSize: React.SetStateAction<{ width: number; height: number }>
+  ) => {
+    setContainerSize(newContainerSize);
+  };
+
   return (
     <div>
       <ThemeProvider theme={theme}>
+        <PageContainer updatePageSize={updatePageSize} />
         <Stack direction="row" justifyContent="center">
           <Container
             disableGutters
             maxWidth="sm"
-            style={{ position: 'absolute', top: 0, bottom: -1 }}
+            style={{
+              backgroundImage: `url(${noon})`,
+              backgroundSize: '100% 100%',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              height: '70vh',
+              width: '100%',
+              objectFit: 'cover',
+            }}
           >
-            <img
-              src={bgImage}
-              style={{
-                height: '90vh',
-                width: '100%',
-                objectFit: 'cover',
-              }}
-              alt=""
-            />
-            <Box sx={{ bgcolor: '#A6BA3A', height: '10px', mt: -1 }} />
-          </Container>
-          <Container disableGutters maxWidth="sm" sx={{ zIndex: 1, mt: 20 }}>
-            <Box sx={{ height: '80vh' }}>
-              <Grid container>
-                <Grid item xs={2}>
-                  <Tutorial open={isTutorialModalOpen} closeclick={handleTutorialModalClose} />
-                </Grid>
-                <Grid item xs={8} />
-                <Grid item xs={2} />
-              </Grid>
-              <Grid container>
-                <Grid item xs={1} />
-                <Grid item xs={10}>
-                  <Form
-                    inputText={inputText}
-                    handleChange={handleChange}
-                    handleSubmit={handleSubmit}
-                    isDisableTextField={isDisableTextField()}
-                  />
-                </Grid>
-                <Grid item xs={1} />
-              </Grid>
-              <Grid container>
-                <Grid item xs={3}>
-                  <Box sx={{ height: '100px' }} />
-                </Grid>
-                <Grid item xs={6} />
-                <Grid item xs={3} />
-              </Grid>
-              <Grid container>
-                <Grid item xs={2} sx={{ bgcolor: 'yellow' }}>
-                  <FlowerPopup
-                    emotionData={emotionData}
-                    pop={pop}
-                    popSubmit={popSubmit}
-                    randomNum={random ?? 0}
-                  />
-                </Grid>
-                <Grid item xs={6} />
-                <Grid item xs={4}>
-                  {EvoPopup ? <Pulse typeId={typeId} walkEvo={WalkEvo} /> : null}
-                </Grid>
-              </Grid>
-              <Grid item xs={6}>
-                <Eat
-                  emotionData={emotionData}
-                  eat={eat}
-                  showImage={showImage}
-                  randomNum={random ?? 0}
+            <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
+              <FlowerPopup
+                emotionData={emotionData}
+                pop={pop}
+                popSubmit={popSubmit}
+                randomNum={random ?? 0}
+              />
+              <Tutorial open={isTutorialModalOpen} closeclick={handleTutorialModalClose} />
+              {EvoPopup ? (
+                <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
+              ) : null}
+              <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
+              <Box sx={{ height: '80vh' }}>
+                <Form
+                  inputText={inputText}
+                  handleChange={handleChange}
+                  handleSubmit={handleSubmit}
+                  isDisableTextField={isDisableTextField()}
                 />
-              </Grid>
-              <Grid item xs={3} />
-              <Grid container>
-                <Grid item xs={2} bgcolor="yellow">
-                  <EvolutionPopup
-                    eatCount={eatCount}
-                    pop={pop}
-                    evolution={evolution}
-                    evoPop={evoPop}
-                  />
-                </Grid>
-                <Grid item xs={6} bgcolor="red">
-                  {dispWalker && evoPop ? <NormalWalk /> : null}
-                  {evoWalk ? <EvolutionWalk typeId={typeId} /> : null}
-                </Grid>
-                <Grid item xs={4} />
-              </Grid>
-            </Box>
+                <Container
+                  style={{
+                    backgroundImage: `url(${mori})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'bottom',
+                    backgroundRepeat: 'no-repeat',
+                    height: '60vh',
+                    width: '100%',
+                  }}
+                >
+                  <Grid container>
+                    <Grid item xs={2} />
+                    <Grid item xs={6}>
+                      <Eat
+                        emotionData={emotionData}
+                        eat={eat}
+                        showImage={showImage}
+                        randomNum={random ?? 0}
+                        containerSize={containerSize}
+                      />
+                      {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
+                      {evoWalk ? (
+                        <EvolutionWalk typeId={typeId} containerSize={containerSize} />
+                      ) : null}
+                    </Grid>
+                    <Grid item xs={4} />
+                  </Grid>
+                </Container>
+              </Box>
+            </Container>
           </Container>
         </Stack>
         <Container
@@ -219,7 +211,7 @@ export const AppView: React.FC = () => {
             position: 'absolute',
             left: 0,
             right: 0,
-            bottom: 10,
+            bottom: 0,
             zIndex: 3,
           }}
         >

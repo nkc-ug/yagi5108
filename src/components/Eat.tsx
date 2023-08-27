@@ -17,11 +17,20 @@ type Props = {
   eat: boolean;
   showImage: boolean;
   randomNum: number;
+  containerSize: {
+    width: number;
+    height: number;
+  };
 };
 const Eat: FC<Props> = (props) => {
   const emoId = props.emotionData.emoId;
   const random = props.randomNum;
-
+  const position = {
+    x: (props.containerSize.width / 5) * 3,
+    y: (props.containerSize.height / 12) * 11,
+  };
+  const grassTop = position.y + 68;
+  const grassLeft = position.x - 10;
   return (
     <Box>
       <div>
@@ -39,7 +48,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   ) : (
@@ -51,7 +63,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   );
@@ -66,7 +81,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   ) : (
@@ -78,7 +96,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   );
@@ -93,7 +114,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   ) : (
@@ -105,7 +129,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   );
@@ -120,7 +147,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   ) : (
@@ -132,7 +162,10 @@ const Eat: FC<Props> = (props) => {
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
-                        zIndex: 1,
+                        zIndex: 2,
+                        position: 'absolute',
+                        left: `${grassLeft}px`,
+                        top: `${grassTop}px`,
                       }}
                     />
                   );
@@ -152,16 +185,17 @@ const Eat: FC<Props> = (props) => {
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                marginTop: '-130px',
-                marginLeft: '25px',
-                zIndex: -1,
+                left: `${position.x}px`,
+                top: `${position.y}px`,
+                zIndex: 1,
               }}
             />
           ) : (
             <Box
               sx={{
                 position: 'absolute',
-                width: '130px',
+                left: `${position.x}px`,
+                top: `${position.y}px`,
                 height: '130px',
                 backgroundImage: `url(${yagi_left})`,
                 backgroundSize: 'cover',
