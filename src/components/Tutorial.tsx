@@ -12,6 +12,7 @@ const labelList = new Map([
   [2, 'ことばによって '],
   [3, 'ヤギのようすがかわるよ'],
 ]);
+
 type Props = {
   open: boolean;
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;

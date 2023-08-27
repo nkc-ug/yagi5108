@@ -3,6 +3,13 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { Stack } from '@mui/material';
+
+const boxStyles = {
+  padding: 1,
+  margin: 3,
+  '& .MuiTextField-root': { m: 2, width: '25ch' },
+};
 
 type Props = {
   inputText: string;
@@ -10,12 +17,6 @@ type Props = {
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
   isDisableTextField: boolean;
-};
-
-const boxStyles = {
-  padding: 1,
-  margin: 3,
-  '& .MuiTextField-root': { m: 2, width: '25ch' },
 };
 
 const Form: FC<Props> = ({
@@ -66,7 +67,7 @@ const Form: FC<Props> = ({
         </Box>
         <Box textAlign={'center'}>
           {isDisableTextField ? (
-            <>
+            <Stack spacing={3} sx={{ mx: 8 }}>
               <Button variant="contained" sx={{ color: 'white' }} onClick={handleBattleChange}>
                 モンスターとたたかう
               </Button>
@@ -79,7 +80,7 @@ const Form: FC<Props> = ({
               >
                 ゲームをリスタートする
               </Button>
-            </>
+            </Stack>
           ) : (
             <Button
               variant="contained"

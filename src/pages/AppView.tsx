@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box, ThemeProvider, CircularProgress } from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+import { Container, Stack, Grid, Box, ThemeProvider } from '@mui/material';
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
@@ -10,10 +10,8 @@ import FlowerPopup from '../components/FlowerPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import { theme } from '../theme/theme';
-import { NavBar } from '../components/NavBar';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
-import { useBatCloser } from '../hooks/useBatcloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/Battle';
@@ -25,8 +23,20 @@ import noon from '../assets/noon.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
+import { CircleProgressCon } from '../components/common/CircleProgressCon';
+import { NavBarCon } from '../components/NavBarCon';
 
-export const AppView: React.FC = () => {
+type RandomType = 0 | 1 | null;
+
+const emotionInitialData = {
+  Joy: 0,
+  Anger: 0,
+  Sorrow: 0,
+  Enjoyable: 0,
+  emoId: 0,
+};
+
+export const AppView: FC = () => {
   const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
@@ -44,30 +54,18 @@ export const AppView: React.FC = () => {
   const [overlap, setOverlap] = useState<boolean>(false);
   const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
+  const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
+  const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
+    useDiscloser(true);
+  const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
+  const changeRandome = () => {
+    const setItem = random === 0 ? 1 : 0;
+    setRandom(setItem);
+  };
 
   useEffect(() => {
     setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
   }, [monster]);
-
-  const { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose } =
-    useDiscloser(true);
-  const { isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose } = useBatCloser(false);
-  type RandomType = 0 | 1 | null;
-  const changeRnadom = () => {
-    const setItem = random === 0 ? 1 : 0;
-    setRandom(setItem);
-  };
-  type emotionDataType = EmotionDataType;
-
-  const emotionInitialData = {
-    Joy: 0,
-    Anger: 0,
-    Sorrow: 0,
-    Enjoyable: 0,
-    emoId: 0,
-  };
-
-  const [emotionData, setEmotionData] = useState<emotionDataType>(emotionInitialData);
 
   const handleSubmit = async () => {
     setDispCircle(true);
@@ -75,7 +73,7 @@ export const AppView: React.FC = () => {
     setEmotionData(await getEmotionApi(inputText, emotionData));
     setDispCircle(false);
     handlePop(false);
-    changeRnadom();
+    changeRandome();
     handleGrass();
   };
   const popSubmit = () => {
@@ -231,36 +229,15 @@ export const AppView: React.FC = () => {
             </Container>
           </Container>
         </Stack>
-        <Container
-          maxWidth="sm"
-          disableGutters
-          sx={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 3,
-          }}
-        >
-          <NavBar
-            handleTutorialChange={handleTutorialModalOpen}
-            handleBattleChange={handleBattleModalOpen}
-          />
-        </Container>
-        {dispCircle ? (
-          <Container
-            maxWidth="sm"
-            disableGutters
-            sx={{
-              position: 'absolute',
-              top: '30vh',
-            }}
-          >
-            <Stack direction="row" justifyContent="center" zIndex={10}>
-              <CircularProgress size={60} />
-            </Stack>
-          </Container>
-        ) : null}
+
+        {/* ナビゲーションバー */}
+        <NavBarCon
+          handleTutorialModalOpen={handleTutorialModalOpen}
+          handleBattleModalOpen={handleBattleModalOpen}
+        />
+
+        {/* ロード画面 */}
+        <CircleProgressCon isOpen={dispCircle} />
       </ThemeProvider>
     </div>
   );

@@ -2,9 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Typography from '@mui/material/Typography';
-import backgroundImage from '../assets/tutorial.png';
-import { Button, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import { EATLIMIT } from '../const/eatLimit';
 import { EmotionDataType } from '../types/EmotionDataType';
 
@@ -26,7 +24,7 @@ type Props = {
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battleresult: FC<Props> = ({ monster, eatCount, open, emotionData, closeClick }) => {
+export const BattleAction: FC<Props> = ({ monster, eatCount, open, emotionData, closeClick }) => {
   const [monsterimg, setmonsterimg] = useState('');
   const [yagiimg, setyagiimg] = useState('');
   const emoId = emotionData.emoId;
@@ -109,4 +107,3 @@ const Battleresult: FC<Props> = ({ monster, eatCount, open, emotionData, closeCl
     </div>
   );
 };
-export default Battleresult;
