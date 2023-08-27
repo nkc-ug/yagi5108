@@ -4,7 +4,7 @@ import { addWordEmotions } from '../api/addWordEmotions';
 import { getWordEmotions } from '../api/getWordEmotions';
 
 type emotionDataType = EmotionDataType;
-type addWordProps = {
+type addWordObjectType = {
   text: string;
   emotionData: EmotionDataType;
 };
@@ -12,7 +12,7 @@ type addWordProps = {
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
   let newEmotionData = Object.assign({},emotionData);
   let maxEmotion = '';
-  let maxScore = -Infinity;
+  let maxScore = 0;
 
   const fetchAPI = async () => {
     const res = await axios.get(`https://callgpt-f6bkalktuq-uc.a.run.app?text=${text}`);
@@ -50,7 +50,7 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
         newEmotionData.emoId = 4;
         break;
     }
-    const addWord: addWordProps = {
+    const addWord: addWordObjectType = {
       text: text,
       emotionData: newEmotionData
     };
