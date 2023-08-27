@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-export const useDiscloser = (initOpen: boolean) => {
-  const [isTutorialModalOpen, setisTutorialModalOpen] = useState(initOpen);
+type UseDiscloserType = [boolean, () => void, () => void];
 
-  const handleTutorialModalOpen = () => setisTutorialModalOpen(true);
-  const handleTutorialModalClose = () => setisTutorialModalOpen(false);
+export const useDiscloser = (initOpen: boolean): UseDiscloserType => {
+  const [isTutorialModalOpen, setIsTutorialModalOpen] = useState(initOpen);
 
-  return { isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose };
+  const handleTutorialModalOpen = () => setIsTutorialModalOpen(true);
+  const handleTutorialModalClose = () => setIsTutorialModalOpen(false);
+
+  return [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose];
 };
-
-// useHooks

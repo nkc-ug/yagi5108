@@ -17,7 +17,6 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
   const [isPlaying, setIsPlaying] = useState(false);
 
   const toggleBGM = () => {
-    console.log('toggleBGM');
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();

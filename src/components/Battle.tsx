@@ -3,40 +3,21 @@ import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import backgroundImage from '../assets/tutorial.png';
 import { Button, Stack } from '@mui/material';
 import { EATLIMIT } from '../const/eatLimit';
-
-const style = {
-  position: 'absolute' as const,
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 300,
-  color: '#000',
-
-  backgroundImage: `url(${backgroundImage})`,
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  border: '1.5px solid #FFF',
-  borderRadius: '10px',
-  boxShadow: 24,
-  p: 4,
-  outline: 'none',
-};
+import { modalStyle } from '../styles/modalStyle';
 
 type Props = {
   eatCount: number;
   monster: number;
   open: boolean;
-  openclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  closeclick: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const Battle: FC<Props> = ({ open, monster, openclick, closeclick, eatCount }) => {
+const Battle: FC<Props> = ({ open, monster, closeClick, eatCount }) => {
   const [monsterlabel1, setmonsterlabel1] = useState('');
   const [monsterlabel2, setmonsterlabel2] = useState('');
+
   const labelList = [
     'このモンスターは',
     monsterlabel1,
@@ -72,7 +53,7 @@ const Battle: FC<Props> = ({ open, monster, openclick, closeclick, eatCount }) =
       {eatCount > EATLIMIT ? null : (
         <Modal
           open={open}
-          onClose={closeclick}
+          onClose={closeClick}
           closeAfterTransition
           slots={{ backdrop: Backdrop }}
           slotProps={{
@@ -82,7 +63,7 @@ const Battle: FC<Props> = ({ open, monster, openclick, closeclick, eatCount }) =
           }}
         >
           <Fade in={open}>
-            <Stack sx={style} spacing={3}>
+            <Stack sx={modalStyle} spacing={3}>
               <Typography
                 id="transition-modal-title"
                 variant="h5"
@@ -101,7 +82,7 @@ const Battle: FC<Props> = ({ open, monster, openclick, closeclick, eatCount }) =
                 ))}
               </Stack>
               <Stack justifyContent="center" direction="row">
-                <Button variant="contained" sx={{ color: 'white' }} onClick={closeclick}>
+                <Button variant="contained" sx={{ color: 'white' }} onClick={closeClick}>
                   やぎをそだてる
                 </Button>
               </Stack>

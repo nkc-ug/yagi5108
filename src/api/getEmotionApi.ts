@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { EmotionDataType } from '../types/EmotionDataType';
-import { addWordEmotions } from '../api/addWordEmotions';
-import { getWordEmotions } from '../api/getWordEmotions';
+import { addWordEmotions } from './addWordEmotions';
+import { getWordEmotions } from './getWordEmotions';
 
 type emotionDataType = EmotionDataType;
 type addWordObjectType = {

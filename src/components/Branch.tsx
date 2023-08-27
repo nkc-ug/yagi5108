@@ -1,4 +1,3 @@
-import { useState, FC } from 'react';
 import { EmotionDataType } from '../types/EmotionDataType';
 
 type Props = {

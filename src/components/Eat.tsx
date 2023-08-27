@@ -22,19 +22,20 @@ type Props = {
     height: number;
   };
 };
-const Eat: FC<Props> = (props) => {
-  const emoId = props.emotionData.emoId;
-  const random = props.randomNum;
+
+const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize }) => {
+  const emoId = emotionData.emoId;
+  const random = randomNum;
   const position = {
-    x: (props.containerSize.width / 5) * 3,
-    y: (props.containerSize.height / 12) * 11,
+    x: (containerSize.width / 5) * 3,
+    y: (containerSize.height / 12) * 11,
   };
   const grassTop = position.y + 68;
   const grassLeft = position.x - 10;
   return (
     <Box>
       <div>
-        {props.eat
+        {eat
           ? (() => {
               switch (emoId) {
                 //嬉
@@ -174,8 +175,8 @@ const Eat: FC<Props> = (props) => {
               }
             })()
           : null}
-        {props.eat ? (
-          props.showImage ? (
+        {eat ? (
+          showImage ? (
             <Box
               sx={{
                 position: 'absolute',

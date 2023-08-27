@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { Box } from '@mui/material';
-import { FC } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_ikari from '../assets/yagi_iakri.png';
 import yagi_tanosii from '../assets/yagi_tanosii.png';
