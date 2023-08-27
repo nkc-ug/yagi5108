@@ -24,12 +24,13 @@ import noon from '../assets/noon.png';
 // import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
+import { useInput } from '../hooks/useInput';
 
 export const AppView: React.FC = () => {
   const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
-  const [inputText, setInputText] = useState(''); //フォームに入力された文字を管理
+  const [inputText, setInputText, handleInputText] = useInput(''); //フォームに入力された文字を管理
   const [eatCount, setEatCount] = useState(1); //食べた回数と進化先の変数の追加(eatCount,typeId)
   const [typeId, setTypeId] = useState(-1); //進化先のIDを格納
   const [EvoPopup, setEvoPopup] = useState(false); //進化するタイミングで表示されるポップアップの表示
@@ -44,9 +45,6 @@ export const AppView: React.FC = () => {
   const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputText(event.target.value);
-  };
   useEffect(() => {
     setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
   }, [monster]);
@@ -196,7 +194,7 @@ export const AppView: React.FC = () => {
               <Box sx={{ height: '80vh' }}>
                 <Form
                   inputText={inputText}
-                  handleChange={handleChange}
+                  handleChange={handleInputText}
                   handleSubmit={handleSubmit}
                   isDisableTextField={isDisableTextField()}
                   handleBattleChange={handleBattleModalOpen}
