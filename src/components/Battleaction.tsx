@@ -98,8 +98,8 @@ const Battleresult: FC<Props> = (Props) => {
         >
           <Fade in={Props.open}>
             <Stack sx={style} spacing={3}>
-                <Stack>
-                    <img 
+                 <Stack>
+                    {/* <image 
                      src={yagiimg} 
                      style={{
                         width: '200px',  // 画像の幅を調整
@@ -121,7 +121,7 @@ const Battleresult: FC<Props> = (Props) => {
                         transform: 'translateX(-50%)',  // 左右中央揃え
                       }}
 
-                    />
+                    /> */}
                     
                 </Stack>
             </Stack>
