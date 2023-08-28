@@ -17,9 +17,9 @@ import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/Battle';
 import BattleResult from '../components/BattleResult';
 import noon from '../assets/noon.png';
-// import night from '../assets/night.png';
-// import sougen from '../assets/sougen.png';
-// import umi from '../assets/umi.png';
+import night from '../assets/night.png';
+import sougen from '../assets/sougen.png';
+import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
@@ -177,7 +177,7 @@ export const AppView: FC = () => {
             disableGutters
             maxWidth="sm"
             style={{
-              backgroundImage: `url(${noon})`,
+              backgroundImage: `url(${skyImage})`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -229,7 +229,7 @@ export const AppView: FC = () => {
                 />
                 <Container
                   style={{
-                    backgroundImage: `url(${mori})`,
+                    backgroundImage: `url(${groundImage})`,
                     backgroundSize: '100% 100%',
                     backgroundPosition: 'bottom',
                     backgroundRepeat: 'no-repeat',

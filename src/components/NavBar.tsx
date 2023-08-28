@@ -6,6 +6,7 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import bgm from '../Audio/Bgm.mp3';
+import { Link } from 'react-router-dom';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -48,7 +49,15 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
           onClick={handleBattleChange}
           sx={{ color: 'white' }}
         />
-        <BottomNavigationAction label="やぎをみる" icon={<SearchIcon />} sx={{ color: 'white' }} />
+
+        <BottomNavigationAction
+          label="やぎをみる"
+          icon={<SearchIcon />}
+          sx={{ color: 'white' }}
+          onClick={() => {
+            location.pathname = '/CostumeView';
+          }}
+        />
         <BottomNavigationAction
           label="おんがく"
           icon={isPlaying ? <MusicOffIcon /> : <MusicNoteIcon />}
