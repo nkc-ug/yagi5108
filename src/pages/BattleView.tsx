@@ -16,8 +16,8 @@ import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/battle/Battle';
 import BattleResult from '../components/battle/BattleResult';
-import noon from '../assets/noon.png';
-// import night from '../assets/night.png';
+//import noon from '../assets/noon.png';
+import night from '../assets/night.png';
 // import sougen from '../assets/sougen.png';
 // import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
@@ -36,7 +36,7 @@ const emotionInitialData = {
   emoId: 0,
 };
 
-export const AppView: FC = () => {
+export const BattleView: FC = () => {
   const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
@@ -147,7 +147,7 @@ export const AppView: FC = () => {
             disableGutters
             maxWidth="sm"
             style={{
-              backgroundImage: `url(${noon})`,
+              backgroundImage: `url(${night})`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',

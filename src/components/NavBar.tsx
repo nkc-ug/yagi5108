@@ -1,4 +1,5 @@
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { FC, useRef, useState } from 'react';
 import HelpIcon from '@mui/icons-material/Help';
 import SearchIcon from '@mui/icons-material/Search';
@@ -15,6 +16,7 @@ type Props = {
 export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const navigate = useNavigate();
 
   const toggleBGM = () => {
     if (audioRef.current) {
@@ -45,7 +47,9 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
         <BottomNavigationAction
           label="たたかう"
           icon={<CoronavirusIcon />}
-          onClick={handleBattleChange}
+          onClick={() => {
+            navigate('/Battle');
+          }}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction label="やぎをみる" icon={<SearchIcon />} sx={{ color: 'white' }} />
