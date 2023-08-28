@@ -26,7 +26,6 @@ export const CostumeView = () => {
             width: '250px',
             height: '250px',
             backgroundSize: 'cover',
-            backgroundImage: `$`,
             padding: '0',
           }}
         >
@@ -36,10 +35,9 @@ export const CostumeView = () => {
               width: '250px',
               height: '250px',
               backgroundSize: 'cover',
-              backgroundImage: `$`,
               padding: '0',
             }}
-          ></Container>
+          />
         </Container>
       </Container>
     </Stack>
