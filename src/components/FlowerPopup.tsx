@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_left from '../assets/yagi_left.png';
+import yagi from '../assets/yagi.png';
 import yoro_hana from '../assets/yoro_hana.png';
 import yoro_kazitu from '../assets/yoro_kazitu.png';
 import ikari_hana from '../assets/ikari_hana.png';
@@ -112,7 +112,7 @@ const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
             border: '2px solid #FFF',
             boxShadow: 24,
             p: 4,
-            backgroundImage: `url(${yagi_left})`,
+            backgroundImage: `url(${yagi})`,
             backgroundPosition: '-50px -300px',
             backgroundColor: 'brack',
             zIndex: 1,
