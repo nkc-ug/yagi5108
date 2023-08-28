@@ -16,9 +16,9 @@ import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
 import noon from '../assets/noon.png';
-// import night from '../assets/night.png';
-// import sougen from '../assets/sougen.png';
-// import umi from '../assets/umi.png';
+import night from '../assets/night.png';
+import sougen from '../assets/sougen.png';
+import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 
@@ -39,6 +39,34 @@ export const AppView: React.FC = () => {
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
+
+  const [ground, setGround] = useState<number>(1); //1草原２海３森
+  const setGroundImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return sougen;
+        case 2:
+          return umi;
+        case 3:
+          return mori;
+      }
+    }
+  };
+  const groundImage = setGroundImage(ground); //背景(地面の設定)
+
+  const [sky, setSky] = useState<number>(1); //1昼２夜
+  const setSkyImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return noon;
+        case 2:
+          return night;
+      }
+    }
+  };
+  const skyImage = setSkyImage(ground); //背景(空の設定)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(event.target.value);
@@ -144,7 +172,7 @@ export const AppView: React.FC = () => {
             disableGutters
             maxWidth="sm"
             style={{
-              backgroundImage: `url(${noon})`,
+              backgroundImage: `url(${skyImage})`,
               backgroundSize: '100% 100%',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
@@ -174,7 +202,7 @@ export const AppView: React.FC = () => {
                 />
                 <Container
                   style={{
-                    backgroundImage: `url(${mori})`,
+                    backgroundImage: `url(${groundImage})`,
                     backgroundSize: '100% 100%',
                     backgroundPosition: 'bottom',
                     backgroundRepeat: 'no-repeat',
