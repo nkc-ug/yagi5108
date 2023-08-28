@@ -5,7 +5,6 @@ import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
-import FlowerPopup from '../components/FlowerPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import Pulse from '../components/Pulse';
@@ -21,8 +20,11 @@ import night from '../assets/night.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
-import { CircleProgressCon } from '../components/common/CircleProgressCon';
+import { CircleProgressCon } from '../components/common/CircleProgressCon'; 
 import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
+import { NavBarCon } from '../components/navbar/NavBarCon';
+import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -173,9 +175,9 @@ export const BattleView: FC = () => {
               open={isBattleModalOpen}
               closeClick={handleBattleModalClose}
             />
-            <FlowerPopup
+            <ShowNewGrassModal
               emotionData={emotionData}
-              pop={pop}
+              isOpen={pop}
               popSubmit={popSubmit}
               randomNum={random ?? 0}
             />
