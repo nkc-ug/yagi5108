@@ -8,6 +8,7 @@ import yagi_ikari_right from '../assets/yagi_iakri_right.png';
 import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
 import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
 import yagi_efect from '../Audio/やぎの鳴き声.mp3';
+import { Button } from '@mui/material';
 
 type Props = {
   typeId: number;
@@ -52,7 +53,7 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
   const audioPlay = () => {
     yagiAudio();
   };
-  
+
   const getImagePath = (typeId: number) => {
     switch (typeId) {
       case 1:
@@ -69,7 +70,7 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
   };
 
   const backgroundImage = getImagePath(typeId);
-  
+
   return (
     <div
       style={{
@@ -78,20 +79,22 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
         height: '100%',
       }}
     >
-      <div
-        ref={walkerRef}
-        style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
-        }}
-        onClick={audioPlay}
-      />
+      <Button variant="text" onClick={audioPlay}>
+        <div
+          ref={walkerRef}
+          style={{
+            position: 'absolute',
+            width: '130px',
+            height: '130px',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
+          }}
+          onClick={audioPlay}
+        />
+      </Button>
     </div>
   );
 };
