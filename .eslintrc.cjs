@@ -12,6 +12,6 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': 'warn',
     'react-hooks/exhaustive-deps': 'off',
-    'no-unused-vars': { argsIgnorePattern: '^_' },
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
   },
 };
