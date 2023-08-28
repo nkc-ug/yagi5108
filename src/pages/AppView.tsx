@@ -24,6 +24,7 @@ import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { Auth } from '../components/AuthGoogleSigninPopup';
 
 type RandomType = 0 | 1 | null;
 
@@ -97,6 +98,7 @@ export const AppView: FC = () => {
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = () => {
     setEatCount(eatCount + 1);
+    Auth();
 
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
