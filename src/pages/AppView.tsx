@@ -6,7 +6,7 @@ import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
-import FlowerPopup from '../components/FlowerPopup';
+import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import Pulse from '../components/Pulse';
@@ -36,7 +36,14 @@ const emotionInitialData = {
 };
 
 export const AppView: FC = () => {
-  const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
+  /**
+   * Popupの表示
+   *
+   * - isShowGrassPopup: 草のポップアップ
+   *
+   */
+  const [isShowNewGrassModal, setIsShowNewGrassModal] = useState<boolean>(false);
+
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
   const [inputText, setInputText, handleInputText] = useInput(''); //フォームに入力された文字を管理
@@ -97,22 +104,36 @@ export const AppView: FC = () => {
   }, [monster]);
 
   const handleSubmit = async () => {
+    // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
+
+    // 感情データの取得
     setEmotionData(await getEmotionApi(inputText, emotionData));
+
+    // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
-    handlePop(false);
+    setIsShowNewGrassModal(true);
     changeRandome();
     handleGrass();
   };
-  const popSubmit = () => {
-    handlePop(true);
+
+  /**
+   * 草が生えました！のポップアップのsubmit
+   */
+  const showGrassModalSubmit = () => {
+    // 草が生えました！のポップアップを非表示・食事するヤギの表示・通常のヤギを非表示
+    setIsShowNewGrassModal(false);
     handleEat(true);
     setDispWalker(false);
+
+    // 2秒後 食事するヤギを非表示・通常のヤギを表示
     setTimeout(() => {
+      handleEat(false);
       setDispWalker(true);
     }, 2000);
   };
+
   const walking = () => {
     handleEat(false);
   };
@@ -206,17 +227,22 @@ export const AppView: FC = () => {
               open={isBattleModalOpen}
               closeClick={handleBattleModalClose}
             />
-            <FlowerPopup
+            <ShowNewGrassModal
               emotionData={emotionData}
-              pop={pop}
-              popSubmit={popSubmit}
+              isOpen={isShowNewGrassModal}
+              popSubmit={showGrassModalSubmit}
               randomNum={random ?? 0}
             />
             <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
             {EvoPopup ? (
               <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
             ) : null}
-            <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
+            <EvolutionPopup
+              eatCount={eatCount}
+              pop={!isShowNewGrassModal}
+              evolution={evolution}
+              evoPop={evoPop}
+            />
             <Box sx={{ height: '80vh' }}>
               <Form
                 inputText={inputText}
