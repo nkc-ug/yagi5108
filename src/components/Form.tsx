@@ -15,17 +15,10 @@ type Props = {
   inputText: string;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
   isDisableTextField: boolean;
 };
 
-const Form: FC<Props> = ({
-  inputText,
-  handleChange,
-  handleSubmit,
-  handleBattleChange,
-  isDisableTextField,
-}) => {
+const Form: FC<Props> = ({ inputText, handleChange, handleSubmit, isDisableTextField }) => {
   return (
     <div>
       <Box
@@ -68,9 +61,6 @@ const Form: FC<Props> = ({
         <Box textAlign={'center'}>
           {isDisableTextField ? (
             <Stack spacing={3} sx={{ mx: 8 }}>
-              <Button variant="contained" sx={{ color: 'white' }} onClick={handleBattleChange}>
-                モンスターとたたかう
-              </Button>
               <Button
                 variant="contained"
                 sx={{ color: 'white' }}
