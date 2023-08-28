@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, FC, useCallback } from 'react';
+import { useRef, useLayoutEffect, FC, useCallback } from 'react';
 import { Container } from '@mui/material';
 
 type Props = {

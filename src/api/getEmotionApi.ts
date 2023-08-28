@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { EmotionDataType } from '../types/EmotionDataType';
-import { addWordEmotions } from '../api/addWordEmotions';
-import { getWordEmotions } from '../api/getWordEmotions';
+import { addWordEmotions } from './addWordEmotions';
+import { getWordEmotions } from './getWordEmotions';
 
 type emotionDataType = EmotionDataType;
 type addWordObjectType = {
@@ -10,14 +10,14 @@ type addWordObjectType = {
 };
 
 export const getEmotionApi = async (text: string, emotionData: emotionDataType) => {
-  let newEmotionData = Object.assign({},emotionData);
+  let newEmotionData = Object.assign({}, emotionData);
   let maxEmotion = '';
   let maxScore = 0;
 
   const fetchAPI = async () => {
     const res = await axios.get(`https://callgpt-f6bkalktuq-uc.a.run.app?text=${text}`);
     const fetchEmotionData = res.data as emotionDataType;
-    
+
     newEmotionData = {
       Joy: Number(fetchEmotionData.Joy),
       Anger: Number(fetchEmotionData.Anger),
@@ -28,7 +28,7 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
   };
 
   newEmotionData = await getWordEmotions(text);
-  if(newEmotionData.emoId === undefined){
+  if (newEmotionData.emoId === undefined) {
     await fetchAPI();
     for (const emotion in newEmotionData) {
       if (newEmotionData[emotion as keyof emotionDataType] > maxScore) {
@@ -52,18 +52,18 @@ export const getEmotionApi = async (text: string, emotionData: emotionDataType) 
     }
     const addWord: addWordObjectType = {
       text: text,
-      emotionData: newEmotionData
+      emotionData: newEmotionData,
     };
     addWordEmotions(addWord);
   }
 
   const updateEmotionData = {
-    Joy: emotionData.Joy += newEmotionData.Joy,
-    Anger: emotionData.Anger += newEmotionData.Anger,
-    Sorrow: emotionData.Sorrow += newEmotionData.Sorrow,
-    Enjoyable: emotionData.Enjoyable += newEmotionData.Enjoyable,
+    Joy: (emotionData.Joy += newEmotionData.Joy),
+    Anger: (emotionData.Anger += newEmotionData.Anger),
+    Sorrow: (emotionData.Sorrow += newEmotionData.Sorrow),
+    Enjoyable: (emotionData.Enjoyable += newEmotionData.Enjoyable),
     emoId: newEmotionData.emoId,
-  }
+  };
 
   return updateEmotionData;
 };
