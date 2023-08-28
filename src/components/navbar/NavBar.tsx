@@ -61,8 +61,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            setIsOpenStyleMenu(true);
-            setAnchorEl(document.getElementById('styleMenuNav'));
+            location.pathname = '/CostumeView';
           }}
           sx={{ color: 'white' }}
         />

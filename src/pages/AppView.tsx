@@ -16,9 +16,9 @@ import { EATLIMIT } from '../const/eatLimit';
 import Battle from '../components/battle/Battle';
 import BattleResult from '../components/battle/BattleResult';
 import noon from '../assets/noon.png';
-// import night from '../assets/night.png';
-// import sougen from '../assets/sougen.png';
-// import umi from '../assets/umi.png';
+import night from '../assets/night.png';
+import sougen from '../assets/sougen.png';
+import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
@@ -57,6 +57,36 @@ export const AppView: FC = () => {
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
     useDiscloser(true);
   const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
+  const [costume, setCostume] = useState<number>(0); //0何もなし1着ぐるみ2着物3メイド4水着5ナース6警察7セーラー服8童貞殺セーター9郵便
+
+  const [ground, setGround] = useState<number>(1); //1草原２海３森
+  const setGroundImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return sougen;
+        case 2:
+          return umi;
+        case 3:
+          return mori;
+      }
+    }
+  };
+  const groundImage = setGroundImage(ground); //背景(地面の設定)
+
+  const [sky, setSky] = useState<number>(1); //1昼２夜
+  const setSkyImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return noon;
+        case 2:
+          return night;
+      }
+    }
+  };
+  const skyImage = setSkyImage(ground); //背景(空の設定)
+
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
@@ -145,7 +175,7 @@ export const AppView: FC = () => {
           disableGutters
           maxWidth="sm"
           style={{
-            backgroundImage: `url(${noon})`,
+            backgroundImage: `url(${skyImage})`,
             backgroundSize: '100% 100%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -197,7 +227,7 @@ export const AppView: FC = () => {
               />
               <Container
                 style={{
-                  backgroundImage: `url(${mori})`,
+                  backgroundImage: `url(${groundImage})`,
                   backgroundSize: '100% 100%',
                   backgroundPosition: 'bottom',
                   backgroundRepeat: 'no-repeat',
