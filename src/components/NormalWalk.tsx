@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import yagi_left from '../assets/yagi_left.png';
 import yagi_right from '../assets/yagi_right.png';
 import yagi_efect from '../Audio/やぎの鳴き声.mp3';
+import { Button } from '@mui/material';
 
 const NormalWalk: React.FC = () => {
   const walkerRef = useRef<HTMLDivElement>(null);
@@ -71,20 +72,21 @@ const NormalWalk: React.FC = () => {
         height: '100%',
       }}
     >
-      <div
-        ref={walkerRef}
-        style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
-        }}
-        onClick={audioPlay}
-      />
+      <Button variant="text" onClick={audioPlay}>
+        <div
+          ref={walkerRef}
+          style={{
+            position: 'absolute',
+            width: '130px',
+            height: '130px',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
+          }}
+        />
+      </Button>
     </div>
   );
 };
