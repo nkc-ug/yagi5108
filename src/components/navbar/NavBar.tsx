@@ -11,10 +11,9 @@ import { StyleMenu } from './StyleMenu';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
-  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) => {
+export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();

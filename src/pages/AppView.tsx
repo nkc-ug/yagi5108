@@ -13,8 +13,6 @@ import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import Battle from '../components/battle/Battle';
-import BattleResult from '../components/battle/BattleResult';
 import noon from '../assets/noon.png';
 // import night from '../assets/night.png';
 // import sougen from '../assets/sougen.png';
@@ -56,7 +54,6 @@ export const AppView: FC = () => {
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
     useDiscloser(true);
-  const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
@@ -155,27 +152,6 @@ export const AppView: FC = () => {
           }}
         >
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-            <Battle
-              eatCount={eatCount}
-              monster={monster}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
-            />
-            {/* <Battleacstion
-                monster={monster}
-                eatCount={eatCount}
-                emotionData={emotionData}
-                open={isBattleModalOpen}
-                openClick={handleBattleModalOpen}
-                closeClick={handleBattleModalClose}
-              /> */}
-            <BattleResult
-              monster={monster}
-              eatCount={eatCount}
-              emotionData={emotionData}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
-            />
             <FlowerPopup
               emotionData={emotionData}
               pop={pop}
@@ -193,7 +169,6 @@ export const AppView: FC = () => {
                 handleChange={handleInputText}
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
-                handleBattleChange={handleBattleModalOpen}
               />
               <Container
                 style={{
@@ -229,10 +204,7 @@ export const AppView: FC = () => {
       </Stack>
 
       {/* ナビゲーションバー */}
-      <NavBarCon
-        handleTutorialModalOpen={handleTutorialModalOpen}
-        handleBattleModalOpen={handleBattleModalOpen}
-      />
+      <NavBarCon handleTutorialModalOpen={handleTutorialModalOpen} />
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />
