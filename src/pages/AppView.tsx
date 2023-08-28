@@ -58,6 +58,36 @@ export const AppView: FC = () => {
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
     useDiscloser(true);
   const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
+  const [costume, setCostume] = useState<number>(0); //0何もなし1着ぐるみ2着物3メイド4水着5ナース6警察7セーラー服8童貞殺セーター9郵便
+
+  const [ground, setGround] = useState<number>(1); //1草原２海３森
+  const setGroundImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return sougen;
+        case 2:
+          return umi;
+        case 3:
+          return mori;
+      }
+    }
+  };
+  const groundImage = setGroundImage(ground); //背景(地面の設定)
+
+  const [sky, setSky] = useState<number>(1); //1昼２夜
+  const setSkyImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return noon;
+        case 2:
+          return night;
+      }
+    }
+  };
+  const skyImage = setSkyImage(ground); //背景(空の設定)
+
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
