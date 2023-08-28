@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box, ThemeProvider } from '@mui/material';
+import { Container, Stack, Grid, Box } from '@mui/material';
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
@@ -9,7 +9,6 @@ import { Branch } from '../components/Branch';
 import FlowerPopup from '../components/FlowerPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
-import { theme } from '../theme/theme';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
@@ -24,7 +23,7 @@ import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
-import { NavBarCon } from '../components/NavBarCon';
+import { NavBarCon } from '../components/navbar/NavBarCon';
 
 type RandomType = 0 | 1 | null;
 
@@ -140,30 +139,29 @@ export const AppView: FC = () => {
 
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <PageContainer updatePageSize={updatePageSize} />
-        <Stack direction="row" justifyContent="center">
-          <Container
-            disableGutters
-            maxWidth="sm"
-            style={{
-              backgroundImage: `url(${noon})`,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-              height: '70vh',
-              width: '100%',
-              objectFit: 'cover',
-            }}
-          >
-            <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-              <Battle
-                eatCount={eatCount}
-                monster={monster}
-                open={isBattleModalOpen}
-                closeClick={handleBattleModalClose}
-              />
-              {/* <Battleacstion
+      <PageContainer updatePageSize={updatePageSize} />
+      <Stack direction="row" justifyContent="center">
+        <Container
+          disableGutters
+          maxWidth="sm"
+          style={{
+            backgroundImage: `url(${noon})`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            height: '70vh',
+            width: '100%',
+            objectFit: 'cover',
+          }}
+        >
+          <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
+            <Battle
+              eatCount={eatCount}
+              monster={monster}
+              open={isBattleModalOpen}
+              closeClick={handleBattleModalClose}
+            />
+            {/* <Battleacstion
                 monster={monster}
                 eatCount={eatCount}
                 emotionData={emotionData}
@@ -171,74 +169,73 @@ export const AppView: FC = () => {
                 openClick={handleBattleModalOpen}
                 closeClick={handleBattleModalClose}
               /> */}
-              <BattleResult
-                monster={monster}
-                eatCount={eatCount}
-                emotionData={emotionData}
-                open={isBattleModalOpen}
-                closeClick={handleBattleModalClose}
+            <BattleResult
+              monster={monster}
+              eatCount={eatCount}
+              emotionData={emotionData}
+              open={isBattleModalOpen}
+              closeClick={handleBattleModalClose}
+            />
+            <FlowerPopup
+              emotionData={emotionData}
+              pop={pop}
+              popSubmit={popSubmit}
+              randomNum={random ?? 0}
+            />
+            <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
+            {EvoPopup ? (
+              <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
+            ) : null}
+            <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
+            <Box sx={{ height: '80vh' }}>
+              <Form
+                inputText={inputText}
+                handleChange={handleInputText}
+                handleSubmit={handleSubmit}
+                isDisableTextField={isDisableTextField()}
+                handleBattleChange={handleBattleModalOpen}
               />
-              <FlowerPopup
-                emotionData={emotionData}
-                pop={pop}
-                popSubmit={popSubmit}
-                randomNum={random ?? 0}
-              />
-              <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
-              {EvoPopup ? (
-                <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
-              ) : null}
-              <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
-              <Box sx={{ height: '80vh' }}>
-                <Form
-                  inputText={inputText}
-                  handleChange={handleInputText}
-                  handleSubmit={handleSubmit}
-                  isDisableTextField={isDisableTextField()}
-                  handleBattleChange={handleBattleModalOpen}
-                />
-                <Container
-                  style={{
-                    backgroundImage: `url(${mori})`,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'bottom',
-                    backgroundRepeat: 'no-repeat',
-                    height: '60vh',
-                    width: '100%',
-                  }}
-                >
-                  <Grid container>
-                    <Grid item xs={2} />
-                    <Grid item xs={6}>
-                      <Eat
-                        emotionData={emotionData}
-                        eat={eat}
-                        showImage={showImage}
-                        randomNum={random ?? 0}
-                        containerSize={containerSize}
-                      />
-                      {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
-                      {evoWalk ? (
-                        <EvolutionWalk typeId={typeId} containerSize={containerSize} />
-                      ) : null}
-                    </Grid>
-                    <Grid item xs={4} />
+              <Container
+                style={{
+                  backgroundImage: `url(${mori})`,
+                  backgroundSize: '100% 100%',
+                  backgroundPosition: 'bottom',
+                  backgroundRepeat: 'no-repeat',
+                  height: '60vh',
+                  width: '100%',
+                }}
+              >
+                <Grid container>
+                  <Grid item xs={2} />
+                  <Grid item xs={6}>
+                    <Eat
+                      emotionData={emotionData}
+                      eat={eat}
+                      showImage={showImage}
+                      randomNum={random ?? 0}
+                      containerSize={containerSize}
+                    />
+                    {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
+                    {evoWalk ? (
+                      <EvolutionWalk typeId={typeId} containerSize={containerSize} />
+                    ) : null}
                   </Grid>
-                </Container>
-              </Box>
-            </Container>
+                  <Grid item xs={4} />
+                </Grid>
+              </Container>
+            </Box>
           </Container>
-        </Stack>
+        </Container>
+      </Stack>
 
-        {/* ナビゲーションバー */}
-        <NavBarCon
-          handleTutorialModalOpen={handleTutorialModalOpen}
-          handleBattleModalOpen={handleBattleModalOpen}
-        />
+      {/* ナビゲーションバー */}
+      <NavBarCon
+        handleTutorialModalOpen={handleTutorialModalOpen}
+        handleBattleModalOpen={handleBattleModalOpen}
+      />
 
-        {/* ロード画面 */}
-        <CircleProgressCon isOpen={dispCircle} />
-      </ThemeProvider>
+      {/* ロード画面 */}
+      <CircleProgressCon isOpen={dispCircle} />
     </div>
   );
 };

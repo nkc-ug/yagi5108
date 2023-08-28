@@ -6,7 +6,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
-import bgm from '../Audio/Bgm.mp3';
+import bgm from '../../Audio/Bgm.mp3';
+import { StyleMenu } from './StyleMenu';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -17,6 +18,9 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
+
+  const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const toggleBGM = () => {
     if (audioRef.current) {
@@ -48,11 +52,20 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
           label="たたかう"
           icon={<CoronavirusIcon />}
           onClick={() => {
-            navigate('/Battle');
+            navigate('/battle');
           }}
           sx={{ color: 'white' }}
         />
-        <BottomNavigationAction label="やぎをみる" icon={<SearchIcon />} sx={{ color: 'white' }} />
+        <BottomNavigationAction
+          id="styleMenuNav"
+          label="やぎをみる"
+          icon={<SearchIcon />}
+          onClick={() => {
+            setIsOpenStyleMenu(true);
+            setAnchorEl(document.getElementById('styleMenuNav'));
+          }}
+          sx={{ color: 'white' }}
+        />
         <BottomNavigationAction
           label="おんがく"
           icon={isPlaying ? <MusicOffIcon /> : <MusicNoteIcon />}
@@ -60,6 +73,14 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
+
+      <StyleMenu
+        anchorEl={anchorEl}
+        open={isOpenStyleMenu}
+        handleClose={() => {
+          setIsOpenStyleMenu(false);
+        }}
+      />
     </Box>
   );
 };

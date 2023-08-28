@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState, FC } from 'react';
-import yagi_left from '../assets/yagi_left.png';
-import yagi_right from '../assets/yagi_right.png';
+import { useRef, useEffect, useState, FC, useContext } from 'react';
 import yagi_efect from '../Audio/やぎの鳴き声.mp3';
 import { Button } from '@mui/material';
+import { GoatContext } from '../provider/ContextProviders';
+import { convertGoat } from '../util/convertGoat';
 
 type Props = {
   containerSize: {
@@ -12,6 +12,9 @@ type Props = {
 };
 
 const NormalWalk: FC<Props> = ({ containerSize }) => {
+  // ヤギの姿を保持するcontext
+  const [goatUrl] = useContext(GoatContext);
+
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
     x: containerSize.width / 3,
@@ -37,7 +40,10 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
     };
   }, [containerSize]);
 
-  const backgroundImage = position.x > containerSize.width / 3 ? yagi_right : yagi_left;
+  const backgroundImage = convertGoat({
+    goatImgUrl: goatUrl,
+    isRight: position.x > containerSize.width / 3,
+  });
 
   const [play, isPlaying] = useState(true);
   const yagiAudio = () => {
