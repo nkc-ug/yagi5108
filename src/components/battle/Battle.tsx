@@ -4,8 +4,8 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Button, Stack } from '@mui/material';
-import { EATLIMIT } from '../const/eatLimit';
-import { modalStyle } from '../styles/modalStyle';
+import { EATLIMIT } from '../../const/eatLimit';
+import { modalStyle } from '../../styles/modalStyle';
 
 type Props = {
   eatCount: number;
