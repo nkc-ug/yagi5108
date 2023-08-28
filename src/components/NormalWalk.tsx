@@ -1,6 +1,8 @@
-import { useRef, useEffect, useState, FC } from 'react';
-import yagi_left from '../assets/yagi_left.png';
-import yagi_right from '../assets/yagi_right.png';
+import { useRef, useEffect, useState, FC, useContext } from 'react';
+import yagi_efect from '../Audio/やぎの鳴き声.mp3';
+import { Button } from '@mui/material';
+import { GoatContext } from '../provider/ContextProviders';
+import { convertGoat } from '../util/convertGoat';
 
 type Props = {
   containerSize: {
@@ -10,6 +12,9 @@ type Props = {
 };
 
 const NormalWalk: FC<Props> = ({ containerSize }) => {
+  // ヤギの姿を保持するcontext
+  const [goatUrl] = useContext(GoatContext);
+
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
     x: containerSize.width / 3,
@@ -35,7 +40,19 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
     };
   }, [containerSize]);
 
-  const backgroundImage = position.x > containerSize.width / 3 ? yagi_right : yagi_left;
+  const backgroundImage = convertGoat({
+    goatImgUrl: goatUrl,
+    isRight: position.x > containerSize.width / 3,
+  });
+
+  const [play, isPlaying] = useState(true);
+  const yagiAudio = () => {
+    isPlaying(!play);
+    new Audio(yagi_efect).play();
+  };
+  const audioPlay = () => {
+    yagiAudio();
+  };
 
   return (
     <div
@@ -45,19 +62,21 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
         height: '100%',
       }}
     >
-      <div
-        ref={walkerRef}
-        style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
-        }}
-      />
+      <Button variant="text" onClick={audioPlay}>
+        <div
+          ref={walkerRef}
+          style={{
+            position: 'absolute',
+            width: '130px',
+            height: '130px',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
+          }}
+        />
+      </Button>
     </div>
   );
 };

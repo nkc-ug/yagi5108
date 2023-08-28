@@ -13,7 +13,7 @@ export const NavBarCon: FC<Props> = ({ handleTutorialModalOpen, handleBattleModa
       maxWidth="sm"
       disableGutters
       sx={{
-        position: 'absolute',
+        position: 'fixed',
         left: 0,
         right: 0,
         bottom: 0,

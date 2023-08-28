@@ -3,8 +3,8 @@ import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { Stack } from '@mui/material';
-import { EATLIMIT } from '../const/eatLimit';
-import { EmotionDataType } from '../types/EmotionDataType';
+import { EATLIMIT } from '../../const/eatLimit';
+import { EmotionDataType } from '../../types/EmotionDataType';
 
 import yagi_yorokobi from '../assets/yagi_yorokobi.png';
 import yagi_ikari from '../assets/yagi_iakri.png';
@@ -14,7 +14,7 @@ import yagi_yorokobi_right from '../assets/yagi_yorokobi_right.png';
 import yagi_ikari_right from '../assets/yagi_iakri_right.png';
 import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
 import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
-import { modalStyle } from '../styles/modalStyle';
+import { modalStyle } from '../../styles/modalStyle';
 
 type Props = {
   monster: number;

@@ -1,7 +1,7 @@
 import { useState, useEffect, FC } from 'react';
 import { Box } from '@mui/material';
-import yagi_left from '../assets/yagi_left.png';
-import yagi_ikari from '../assets/yagi_iakri.png';
+import yagi from '../assets/yagi.png';
+import yagi_ikari from '../assets/yagi_ikari.png';
 import yagi_tanosii from '../assets/yagi_tanosii.png';
 import yagi_kanasimi from '../assets/yagi_kanasimi.png';
 import yagi_yorokobi from '../assets/yagi_yorokobi.png';
@@ -66,7 +66,7 @@ const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
           position: 'absolute',
           width: '130px',
           height: '130px',
-          backgroundImage: `url(${isDisplayLeft ? yagi_left : backgroundImage})`,
+          backgroundImage: `url(${isDisplayLeft ? yagi : backgroundImage})`,
           backgroundSize: 'cover',
           left: `${position.x}px`,
           top: `${position.y}px`,
