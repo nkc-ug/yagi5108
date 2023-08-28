@@ -50,7 +50,7 @@ export const BattleNavBar: FC<Props> = ({ handleBattleChange }) => {
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
-          label="たたかう"
+          label="モンスターをみる"
           icon={<CoronavirusIcon />}
           onClick={handleBattleChange}
           sx={{ color: 'white' }}
