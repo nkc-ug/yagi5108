@@ -3,13 +3,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
-type Props = {
-  inputText: string;
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  isDisableTextField: boolean;
-};
+import { Stack } from '@mui/material';
 
 const boxStyles = {
   padding: 1,
@@ -17,7 +11,21 @@ const boxStyles = {
   '& .MuiTextField-root': { m: 2, width: '25ch' },
 };
 
-const Form: FC<Props> = (props) => {
+type Props = {
+  inputText: string;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  isDisableTextField: boolean;
+};
+
+const Form: FC<Props> = ({
+  inputText,
+  handleChange,
+  handleSubmit,
+  handleBattleChange,
+  isDisableTextField,
+}) => {
   return (
     <div>
       <Box
@@ -30,18 +38,18 @@ const Form: FC<Props> = (props) => {
           variant="h5"
           textAlign={'center'}
           sx={{
-            opacity: props.isDisableTextField ? 0 : 1,
+            opacity: isDisableTextField ? 0 : 1,
           }}
         >
           ヤギにたべさせる
         </Typography>
         <Typography variant="h5" textAlign="center">
-          {props.isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
+          {isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
         <Box
           textAlign={'center'}
           sx={{
-            opacity: props.isDisableTextField ? 0 : 1,
+            opacity: isDisableTextField ? 0 : 1,
           }}
         >
           <TextField
@@ -50,30 +58,35 @@ const Form: FC<Props> = (props) => {
             type="text"
             variant="standard"
             autoCapitalize="off"
-            value={props.inputText}
-            onChange={props.handleChange}
+            value={inputText}
+            onChange={handleChange}
             inputProps={{
               maxLength: 10,
             }}
           />
         </Box>
         <Box textAlign={'center'}>
-          {props.isDisableTextField ? (
-            <Button
-              variant="contained"
-              sx={{ color: 'white' }}
-              onClick={() => {
-                window.location.reload();
-              }}
-            >
-              ゲームをリスタートする
-            </Button>
+          {isDisableTextField ? (
+            <Stack spacing={3} sx={{ mx: 8 }}>
+              <Button variant="contained" sx={{ color: 'white' }} onClick={handleBattleChange}>
+                モンスターとたたかう
+              </Button>
+              <Button
+                variant="contained"
+                sx={{ color: 'white' }}
+                onClick={() => {
+                  window.location.reload();
+                }}
+              >
+                ゲームをリスタートする
+              </Button>
+            </Stack>
           ) : (
             <Button
               variant="contained"
               sx={{ color: 'white' }}
-              onClick={props.inputText.trim() !== '' ? props.handleSubmit : undefined}
-              disabled={props.inputText.trim() === ''}
+              onClick={inputText.trim() !== '' ? handleSubmit : undefined}
+              disabled={inputText.trim() === ''}
             >
               草をあげる
             </Button>

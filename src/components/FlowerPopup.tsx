@@ -19,9 +19,10 @@ type Props = {
   popSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
   randomNum: number;
 };
-const FlowerPopup: FC<Props> = (props) => {
-  const emoId = props.emotionData.emoId;
-  const random = props.randomNum;
+
+const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
+  const emoId = emotionData.emoId;
+  const random = randomNum;
 
   type DispItem = {
     text: string;
@@ -98,7 +99,7 @@ const FlowerPopup: FC<Props> = (props) => {
 
   return (
     <div>
-      {props.pop ? null : emoId === 0 ? (
+      {pop ? null : emoId === 0 ? (
         <Box
           sx={{
             position: 'absolute' as const,
@@ -154,7 +155,7 @@ const FlowerPopup: FC<Props> = (props) => {
             <Button
               size="large"
               variant="contained"
-              onClick={props.popSubmit}
+              onClick={popSubmit}
               sx={{ mx: 2, color: 'white' }}
             >
               食べさせる

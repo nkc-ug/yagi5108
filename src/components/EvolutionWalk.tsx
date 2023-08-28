@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, FC } from 'react';
 import yagi_yorokobi from '../assets/yagi_yorokobi.png';
 import yagi_ikari from '../assets/yagi_iakri.png';
 import yagi_kanasimi from '../assets/yagi_kanasimi.png';
@@ -11,64 +11,28 @@ import yagi_efect from '../Audio/やぎの鳴き声.mp3';
 
 type Props = {
   typeId: number;
+  containerSize: {
+    width: number;
+    height: number;
+  };
 };
 
-const EvolutionWalk: React.FC<Props> = (props) => {
+const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
   const walkerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 65, y: -130 });
-  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
-
-  const getImagePath = (typeId: number) => {
-    switch (typeId) {
-      case 1:
-        return position.x > containerSize.width / 2 ? yagi_yorokobi_right : yagi_yorokobi;
-      case 2:
-        return position.x > containerSize.width / 2 ? yagi_ikari_right : yagi_ikari;
-      case 3:
-        return position.x > containerSize.width / 2 ? yagi_kanasimi_right : yagi_kanasimi;
-      case 4:
-        return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
-      default:
-        return null;
-    }
-  };
-
-  const backgroundImage = getImagePath(props.typeId);
+  const [position, setPosition] = useState({
+    x: containerSize.width / 3,
+    y: (containerSize.height / 10) * 5,
+  });
 
   useEffect(() => {
-    const walkerElement = walkerRef.current;
-    if (!walkerElement) return;
-
-    const containerElement = walkerElement.parentElement;
-    if (!containerElement) return;
-
-    const updateContainerSize = () => {
-      const containerWidth = containerElement.clientWidth;
-      const containerHeight = containerElement.clientHeight;
-      setContainerSize({ width: containerWidth, height: containerHeight });
-    };
-
-    updateContainerSize(); // 初回描画時にコンテナサイズを更新
-
-    const resizeObserver = new ResizeObserver(updateContainerSize);
-    resizeObserver.observe(containerElement);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!walkerRef.current) return; // walkerRef.currentがnullの場合、処理を終了
-
-    const startX = containerSize.width / 2 - 150; // 開始位置のx座標
-    const startY = containerSize.height / 2 - 150; // 開始位置のy座標
-    const endX = containerSize.width / 2 + 150; // 終了位置のx座標
-    const endY = containerSize.height / 2 + 150; // 終了位置のy座標
+    const minX = -50; // 開始位置のx座標
+    const minY = (containerSize.height / 10) * 4; // 開始位置のy座標
+    const maxX = (containerSize.width / 10) * 5; // 終了位置のx座標
+    const maxY = (containerSize.height / 10) * 6; // 終了位置のy座標
 
     const updatePosition = () => {
-      const newX = startX + Math.random() * (endX - startX);
-      const newY = startY + Math.random() * (endY - startY);
+      const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+      const newY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
       setPosition({ x: newX, y: newY });
     };
@@ -88,7 +52,24 @@ const EvolutionWalk: React.FC<Props> = (props) => {
   const audioPlay = () => {
     yagiAudio();
   };
+  
+  const getImagePath = (typeId: number) => {
+    switch (typeId) {
+      case 1:
+        return position.x > containerSize.width / 3 ? yagi_yorokobi_right : yagi_yorokobi;
+      case 2:
+        return position.x > containerSize.width / 3 ? yagi_ikari_right : yagi_ikari;
+      case 3:
+        return position.x > containerSize.width / 3 ? yagi_kanasimi_right : yagi_kanasimi;
+      case 4:
+        return position.x > containerSize.width / 3 ? yagi_tanosii_right : yagi_tanosii;
+      default:
+        return null;
+    }
+  };
 
+  const backgroundImage = getImagePath(typeId);
+  
   return (
     <div
       style={{
