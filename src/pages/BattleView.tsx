@@ -11,7 +11,6 @@ import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import Battle from '../components/battle/Battle';
 import BattleResult from '../components/battle/BattleResult';
 //import noon from '../assets/noon.png';
 import night from '../assets/night.png';
@@ -20,11 +19,9 @@ import night from '../assets/night.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
-import { CircleProgressCon } from '../components/common/CircleProgressCon'; 
+import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
-import { NavBarCon } from '../components/navbar/NavBarCon';
 import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
-
 
 type RandomType = 0 | 1 | null;
 
@@ -60,10 +57,6 @@ export const BattleView: FC = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
   };
-
-  useEffect(() => {
-    setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
-  }, [monster]);
 
   const handleSubmit = async () => {
     setDispCircle(true);
@@ -154,12 +147,6 @@ export const BattleView: FC = () => {
           }}
         >
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-            <Battle
-              eatCount={eatCount}
-              monster={monster}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
-            />
             {/* <Battleacstion
                 monster={monster}
                 eatCount={eatCount}

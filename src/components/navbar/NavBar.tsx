@@ -51,7 +51,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="たたかう"
           icon={<CoronavirusIcon />}
           onClick={() => {
-            navigate('/battle');
+            navigate('/MonsterView');
           }}
           sx={{ color: 'white' }}
         />
