@@ -204,7 +204,7 @@ export const AppView: FC = () => {
           }}
         >
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-            <FlowerPopup
+            <ShowNewGrassModal
               emotionData={emotionData}
               isOpen={isShowNewGrassModal}
               popSubmit={showGrassModalSubmit}
