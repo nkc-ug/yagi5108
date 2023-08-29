@@ -48,8 +48,8 @@ export const AppView: FC = () => {
   const [evoPop, setEvoPop] = useState(true); //進化時のポップアップの表示
   const [evoWalk, setEvoWalk] = useState(false); //進化したヤギの表示
   const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
-  const [EmotionMax, setMax] = useState<number>(0);
-  const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
+  const [EmotionMax, setEmotionMax] = useState<number>(0);
+  const [EmotionList, setEmotionList] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
   const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
@@ -99,11 +99,14 @@ export const AppView: FC = () => {
   const handleSubmit = async () => {
     setDispCircle(true);
     setInputText('');
-    setEmotionData(await getEmotionApi(inputText, emotionData));
+
+    const fetchEmotionData = await getEmotionApi(inputText, emotionData);
+    setEmotionData(fetchEmotionData);
     setDispCircle(false);
     handlePop(false);
     changeRandome();
-    handleGrass();
+
+    handleGrass(fetchEmotionData);
   };
   const popSubmit = () => {
     handlePop(true);
@@ -125,17 +128,17 @@ export const AppView: FC = () => {
     setEvoPopup(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
-  const handleGrass = () => {
+  const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
-
+    const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
       Branch({
         emotionData,
         EmotionMax,
-        setMax,
-        Emotion,
-        setEmotion,
+        setEmotionMax,
+        EmotionList,
+        setEmotionList,
         overlap,
         setOverlap,
       })
