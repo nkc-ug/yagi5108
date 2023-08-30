@@ -44,7 +44,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            location.pathname = '/CostumeView';
+            navigate('CostumeView');
           }}
           sx={{ color: 'white' }}
         />
@@ -53,7 +53,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           icon={<SettingsIcon />}
           onClick={
             () => {
-              location.pathname = '/SettingsView';
+              navigate('SettingsView');
             }
             // toggleBGM
           }
