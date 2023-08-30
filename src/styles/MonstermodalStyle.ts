@@ -12,7 +12,6 @@ export const MonstermodalStyle = {
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
   backgroundPosition: 'center',
-  border: '1.5px solid #FFF',
   borderRadius: '10px',
   p: 4,
   outline: 'none',

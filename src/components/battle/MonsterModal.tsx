@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { MonstermodalStyle } from '../../styles/MonstermodalStyle';
 import { useNavigate } from 'react-router-dom';
 type Props = {
-  monsternumber: number;
+  monsternumber: string;
   open: boolean;
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
@@ -12,23 +12,7 @@ type Props = {
 export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => {
   const labelList = (() => {
     switch (monsternumber) {
-      case 1:
-        return (
-          <div>
-            このモンスターは
-            <br />
-            よろこびのかんじょうに
-            <br />
-            よわいようだ!
-            <br />
-            ことばをたべさせて
-            <br />
-            やぎをよろこびのかんじょうに
-            <br />
-            そだてよう
-          </div>
-        );
-      case 2:
+      case 'monster_ikari':
         return (
           <div>
             このモンスターは
@@ -39,17 +23,33 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             ことばをたべさせて
             <br />
+            やぎをよろこびのかんじょうに
+            <br />
+            そだてよう
+          </div>
+        );
+      case 'monster_kanasii':
+        return (
+          <div>
+            このモンスターは
+            <br />
+            かなしいのかんじょうに
+            <br />
+            よわいようだ!
+            <br />
+            ことばをたべさせて
+            <br />
             やぎをいかりのかんじょうに
             <br />
             そだてよう
           </div>
         );
-      case 3:
+      case 'monster_tanosii':
         return (
           <div>
             このモンスターは
             <br />
-            かなしいかんじょうに
+            たのしいかんじょうに
             <br />
             よわいようだ!
             <br />
@@ -60,12 +60,12 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             そだてよう
           </div>
         );
-      case 4:
+      case 'monster_yorokobi':
         return (
           <div>
             このモンスターは
             <br />
-            たのしいのかんじょうに
+            うれしいのかんじょうに
             <br />
             よわいようだ!
             <br />
@@ -82,6 +82,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
   return (
     <div>
       <Modal
+        hideBackdrop={true}
         open={open}
         onClose={closeClick}
         closeAfterTransition
