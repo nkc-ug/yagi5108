@@ -9,7 +9,7 @@ import kana_kazitu from '../assets/kana_kazitu.png';
 import tano_hana from '../assets/tano_hana.png';
 import tano_kazitu from '../assets/tano_kazitu.png';
 import yagi_syokuzi from '../assets/yagi_syokuzi.png';
-import yagi_left from '../assets/yagi_left.png';
+import yagi from '../assets/yagi.png';
 import { EmotionDataType } from '../types/EmotionDataType';
 
 type Props = {
@@ -198,7 +198,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                 left: `${position.x}px`,
                 top: `${position.y}px`,
                 height: '130px',
-                backgroundImage: `url(${yagi_left})`,
+                backgroundImage: `url(${yagi})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',

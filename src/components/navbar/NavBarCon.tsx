@@ -4,26 +4,22 @@ import { NavBar } from './NavBar';
 
 type Props = {
   handleTutorialModalOpen: () => void;
-  handleBattleModalOpen: () => void;
 };
 
-export const NavBarCon: FC<Props> = ({ handleTutorialModalOpen, handleBattleModalOpen }) => {
+export const NavBarCon: FC<Props> = ({ handleTutorialModalOpen }) => {
   return (
     <Container
       maxWidth="sm"
       disableGutters
       sx={{
-        position: 'absolute',
+        position: 'fixed',
         left: 0,
         right: 0,
         bottom: 0,
         zIndex: 3,
       }}
     >
-      <NavBar
-        handleTutorialChange={handleTutorialModalOpen}
-        handleBattleChange={handleBattleModalOpen}
-      />
+      <NavBar handleTutorialChange={handleTutorialModalOpen} />
     </Container>
   );
 };

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { Stack, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import yagi_left from '../assets/yagi_left.png';
 import yoro_hana from '../assets/yoro_hana.png';
 import yoro_kazitu from '../assets/yoro_kazitu.png';
 import ikari_hana from '../assets/ikari_hana.png';
@@ -13,21 +12,28 @@ import kana_kazitu from '../assets/kana_kazitu.png';
 import tano_hana from '../assets/tano_hana.png';
 import tano_kazitu from '../assets/tano_kazitu.png';
 
+type DispItem = {
+  text: string;
+  img: string;
+};
+
 type Props = {
   emotionData: EmotionDataType;
-  pop: boolean;
+  isOpen: boolean;
   popSubmit: React.MouseEventHandler<HTMLButtonElement> | undefined;
   randomNum: number;
 };
 
-const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
+/**
+ * 草が生えました！のポップアップを表示するコンポーネント
+ *
+ * @param emotionData - 感情データ
+ * @param isOpen - ポップアップの表示
+ * @param popSubmit - ポップアップのボタンを押した時の処理
+ * @param randomNum - 草か果実かを定めている乱数
+ */
+export const ShowNewGrassModal: FC<Props> = ({ emotionData, isOpen, popSubmit, randomNum }) => {
   const emoId = emotionData.emoId;
-  const random = randomNum;
-
-  type DispItem = {
-    text: string;
-    img: string;
-  };
 
   const [dispItem, setDispItem] = useState<DispItem>({
     text: '',
@@ -35,56 +41,56 @@ const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
   });
 
   const changeItem = () => {
-    if (emoId === 1 && random === 0) {
+    if (emoId === 1 && randomNum === 0) {
       setDispItem({
         text: 'よろこびの草が',
         img: yoro_hana,
       });
       return;
     }
-    if (emoId === 1 && random === 1) {
+    if (emoId === 1 && randomNum === 1) {
       setDispItem({
         text: 'よろこびの果実が',
         img: yoro_kazitu,
       });
       return;
     }
-    if (emoId === 2 && random === 0) {
+    if (emoId === 2 && randomNum === 0) {
       setDispItem({
         text: '怒りの草が',
         img: ikari_hana,
       });
       return;
     }
-    if (emoId === 2 && random === 1) {
+    if (emoId === 2 && randomNum === 1) {
       setDispItem({
         text: '怒りの果実が',
         img: ikari_kazitu,
       });
       return;
     }
-    if (emoId === 3 && random === 0) {
+    if (emoId === 3 && randomNum === 0) {
       setDispItem({
         text: '悲しみの草が',
         img: kana_hana,
       });
       return;
     }
-    if (emoId === 3 && random === 1) {
+    if (emoId === 3 && randomNum === 1) {
       setDispItem({
         text: '悲しみの果実が',
         img: kana_kazitu,
       });
       return;
     }
-    if (emoId === 4 && random === 0) {
+    if (emoId === 4 && randomNum === 0) {
       setDispItem({
         text: '楽しみの草が',
         img: tano_hana,
       });
       return;
     }
-    if (emoId === 4 && random === 1) {
+    if (emoId === 4 && randomNum === 1) {
       setDispItem({
         text: '楽しみの果実が',
         img: tano_kazitu,
@@ -95,38 +101,11 @@ const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
 
   useEffect(() => {
     changeItem();
-  }, [emoId, random]);
+  }, [emoId, randomNum]);
 
   return (
     <div>
-      {pop ? null : emoId === 0 ? (
-        <Box
-          sx={{
-            position: 'absolute' as const,
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '300px',
-            height: '300px',
-            color: '#000',
-            border: '2px solid #FFF',
-            boxShadow: 24,
-            p: 4,
-            backgroundImage: `url(${yagi_left})`,
-            backgroundPosition: '-50px -300px',
-            backgroundColor: 'brack',
-            zIndex: 1,
-          }}
-        >
-          <Typography
-            id="transition-modal-description"
-            sx={{ mt: 2, fontSize: '25px' }}
-            textAlign={'center'}
-          >
-            草生成中！
-          </Typography>
-        </Box>
-      ) : (
+      {isOpen && emoId !== 0 ? (
         <Box
           sx={{
             position: 'absolute',
@@ -162,8 +141,7 @@ const FlowerPopup: FC<Props> = ({ emotionData, pop, popSubmit, randomNum }) => {
             </Button>
           </Stack>
         </Box>
-      )}
+      ) : null}
     </div>
   );
 };
-export default FlowerPopup;

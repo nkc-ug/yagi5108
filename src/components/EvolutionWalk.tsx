@@ -1,12 +1,16 @@
-import { useRef, useEffect, useState, FC } from 'react';
+import { useRef, useEffect, useState, FC, useContext } from 'react';
 import yagi_yorokobi from '../assets/yagi_yorokobi.png';
-import yagi_ikari from '../assets/yagi_iakri.png';
+import yagi_ikari from '../assets/yagi_ikari.png';
 import yagi_kanasimi from '../assets/yagi_kanasimi.png';
 import yagi_tanosii from '../assets/yagi_tanosii.png';
 import yagi_yorokobi_right from '../assets/yagi_yorokobi_right.png';
-import yagi_ikari_right from '../assets/yagi_iakri_right.png';
+import yagi_ikari_right from '../assets/yagi_ikari_right.png';
 import yagi_kanasimi_right from '../assets/yagi_kanasimi_right.png';
 import yagi_tanosii_right from '../assets/yagi_tanosii_right.png';
+import yagi_efect from '../Audio/やぎの鳴き声.mp3';
+import { Box, Button } from '@mui/material';
+import { convertCostume } from '../util/convertCostume';
+import { GoatClothesContext } from '../provider/ContextProviders';
 
 type Props = {
   typeId: number;
@@ -17,6 +21,9 @@ type Props = {
 };
 
 const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
+  //やぎの衣装を保持するcontext
+  const [clothesUrl] = useContext(GoatClothesContext);
+
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
     x: containerSize.width / 3,
@@ -43,6 +50,20 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
     };
   }, [containerSize]);
 
+  const costumeImage = convertCostume({
+    costumeImgUrl: clothesUrl,
+    isRight: position.x > containerSize.width / 3,
+  });
+
+  const [play, isPlaying] = useState(true);
+  const yagiAudio = () => {
+    isPlaying(!play);
+    new Audio(yagi_efect).play();
+  };
+  const audioPlay = () => {
+    yagiAudio();
+  };
+
   const getImagePath = (typeId: number) => {
     switch (typeId) {
       case 1:
@@ -68,19 +89,30 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
         height: '100%',
       }}
     >
-      <div
-        ref={walkerRef}
-        style={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
-        }}
-      />
+      <Button variant="text" onClick={audioPlay}>
+        <div
+          ref={walkerRef}
+          style={{
+            position: 'absolute',
+            width: '130px',
+            height: '130px',
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: 'cover',
+            left: `${position.x}px`,
+            top: `${position.y}px`,
+            transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（2秒）
+          }}
+        >
+          <Box //衣装用のbox
+            sx={{
+              width: '100%',
+              height: '100%',
+              backgroundSize: 'cover',
+              backgroundImage: `url(${costumeImage})`,
+            }}
+          />
+        </div>
+      </Button>
     </div>
   );
 };
