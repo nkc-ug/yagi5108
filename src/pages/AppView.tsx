@@ -19,8 +19,6 @@ import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
-import { Auth } from '../components/AuthGoogleSigninPopup';
-
 
 type RandomType = 0 | 1 | null;
 
