@@ -8,7 +8,6 @@ type Props = {
 };
 
 export const convertMonster = ({ monsterImgUrl }: Props): string => {
-  // 画像名と左右から画像をswitchで判定
   switch (monsterImgUrl) {
     // 怒り
     case 'monster_ikari':
@@ -22,8 +21,7 @@ export const convertMonster = ({ monsterImgUrl }: Props): string => {
     // 喜び
     case 'monster_yorokobi':
       return monster_uresii;
-
     default:
-      return monster_uresii;
+      return '';
   }
 };
