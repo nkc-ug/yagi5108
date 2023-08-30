@@ -1,8 +1,9 @@
 import { useRef, useEffect, useState, FC, useContext } from 'react';
 import yagi_efect from '../Audio/やぎの鳴き声.mp3';
-import { Button } from '@mui/material';
-import { GoatContext } from '../provider/ContextProviders';
+import { Box, Button } from '@mui/material';
+import { GoatClothesContext, GoatContext } from '../provider/ContextProviders';
 import { convertGoat } from '../util/convertGoat';
+import { convertCostume } from '../util/convertCostume';
 
 type Props = {
   containerSize: {
@@ -14,6 +15,7 @@ type Props = {
 const NormalWalk: FC<Props> = ({ containerSize }) => {
   // ヤギの姿を保持するcontext
   const [goatUrl] = useContext(GoatContext);
+  const [clothesUrl] = useContext(GoatClothesContext);
 
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
@@ -40,11 +42,14 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
     };
   }, [containerSize]);
 
-  const backgroundImage = convertGoat({
+  const goatImage = convertGoat({
     goatImgUrl: goatUrl,
     isRight: position.x > containerSize.width / 3,
   });
-
+  const costumeImage = convertCostume({
+    costumeImgUrl: clothesUrl,
+    isRight: position.x > containerSize.width / 3,
+  });
   const [play, isPlaying] = useState(true);
   const yagiAudio = () => {
     isPlaying(!play);
@@ -69,13 +74,22 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
             position: 'absolute',
             width: '130px',
             height: '130px',
-            backgroundImage: `url(${backgroundImage})`,
+            backgroundImage: `url(${goatImage})`,
             backgroundSize: 'cover',
             left: `${position.x}px`,
             top: `${position.y}px`,
             transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
           }}
-        />
+        >
+          <Box //衣装用のbox
+            sx={{
+              width: '100%',
+              height: '100%',
+              backgroundSize: 'cover',
+              backgroundImage: `url(${costumeImage})`,
+            }}
+          />
+        </div>
       </Button>
     </div>
   );

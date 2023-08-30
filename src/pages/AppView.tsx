@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
@@ -13,16 +13,14 @@ import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import noon from '../assets/noon.png';
-import night from '../assets/night.png';
-import sougen from '../assets/sougen.png';
-import umi from '../assets/umi.png';
-import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { BackgroundContext } from '../provider/ContextProviders';
+import { convertBackGroundImg } from '../util/convertBackGroundImg';
 import { Auth } from '../components/AuthGoogleSigninPopup';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -61,37 +59,7 @@ export const AppView: FC = () => {
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
     useDiscloser(true);
-  const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
-  const [costume, setCostume] = useState<number>(0); //0何もなし1着ぐるみ2着物3メイド4水着5ナース6警察7セーラー服8童貞殺セーター9郵便
-
-  const [ground, setGround] = useState<number>(1); //1草原２海３森
-  const setGroundImage = (ground: number) => {
-    {
-      switch (ground) {
-        case 1:
-          return sougen;
-        case 2:
-          return umi;
-        case 3:
-          return mori;
-      }
-    }
-  };
-  const groundImage = setGroundImage(ground); //背景(地面の設定)
-
-  const [sky, setSky] = useState<number>(1); //1昼２夜
-  const setSkyImage = (ground: number) => {
-    {
-      switch (ground) {
-        case 1:
-          return noon;
-        case 2:
-          return night;
-      }
-    }
-  };
-  const skyImage = setSkyImage(ground); //背景(空の設定)
-
+  const [backgroundUrl] = useContext(BackgroundContext);
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
@@ -101,7 +69,6 @@ export const AppView: FC = () => {
     // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
-
 
     // 感情データの取得
     const fetchEmotionData = await getEmotionApi(inputText, emotionData);
@@ -184,6 +151,12 @@ export const AppView: FC = () => {
     setContainerSize(newContainerSize);
   };
 
+  //背景画像を追加
+  const backGround = convertBackGroundImg({
+    skyUrl: backgroundUrl.skyUrl,
+    groundUrl: backgroundUrl.groundUrl,
+  });
+
   return (
     <div>
       <PageContainer updatePageSize={updatePageSize} />
@@ -192,7 +165,7 @@ export const AppView: FC = () => {
           disableGutters
           maxWidth="sm"
           style={{
-            backgroundImage: `url(${skyImage})`,
+            backgroundImage: `url(${backGround.skyUrl})`,
             backgroundSize: '100% 100%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -227,7 +200,7 @@ export const AppView: FC = () => {
               />
               <Container
                 style={{
-                  backgroundImage: `url(${groundImage})`,
+                  backgroundImage: `url(${backGround.groundUrl})`,
                   backgroundSize: '100% 100%',
                   backgroundPosition: 'bottom',
                   backgroundRepeat: 'no-repeat',
