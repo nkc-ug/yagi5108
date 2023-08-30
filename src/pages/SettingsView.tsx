@@ -25,10 +25,10 @@ export const SettingsView = () => {
   const loginButton = async () => {
     if (!login) {
       const fetchEmail = String(
-        localStorage.getItem('email') !== null ? localStorage.getItem('email') : 'null'
+        localStorage.getItem('email') !== null ? localStorage.getItem('email') : ''
       );
       setEmail(fetchEmail);
-      if (fetchEmail === 'null') {
+      if (fetchEmail === '') {
         const fetchEmail = await Auth();
         setEmail(fetchEmail);
         localStorage.setItem('email', fetchEmail);
@@ -37,7 +37,7 @@ export const SettingsView = () => {
       setLogin(true);
     } else {
       localStorage.clear();
-      setEmail('null');
+      setEmail('');
       setLoginButtonText('ろぐいん');
       setLogin(false);
     }
