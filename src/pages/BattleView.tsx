@@ -71,13 +71,13 @@ export const BattleView: FC = () => {
     setInputText('');
 
     // 感情データの取得
-    setEmotionData(await getEmotionApi(inputText, emotionData));
-
+    const fetchEmotionData = await getEmotionApi(inputText, emotionData);
+    setEmotionData(fetchEmotionData);
     // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
     setIsShowNewGrassModal(true);
     changeRandome();
-    handleGrass();
+    handleGrass(fetchEmotionData);
   };
 
   /**
@@ -108,9 +108,9 @@ export const BattleView: FC = () => {
     setEvoPopup(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
-  const handleGrass = () => {
+  const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
-
+    const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
       Branch({

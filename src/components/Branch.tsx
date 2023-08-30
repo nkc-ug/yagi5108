@@ -35,6 +35,7 @@ export const Branch = ({
   switch (emotionData.emoId) {
     case 1:
       increaseEmotion(0);
+      console.log('test');
       // 同じ感情が来ているかどうか確認
       if (EmotionList[0] > 1) {
         setOverlap(true);
@@ -42,18 +43,21 @@ export const Branch = ({
       break;
     case 2:
       increaseEmotion(1);
+      console.log('test');
       if (EmotionList[1] > 1) {
         setOverlap(true);
       }
       break;
     case 3:
       increaseEmotion(2);
+      console.log('test');
       if (EmotionList[2] > 1) {
         setOverlap(true);
       }
       break;
     case 4:
       increaseEmotion(3);
+      console.log('test');
       if (EmotionList[3] > 1) {
         setOverlap(true);
       }
