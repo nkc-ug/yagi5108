@@ -21,3 +21,14 @@ export const COLLECTIONNAME = 'words';
 
 // 文字列を格納するフィールド名
 export const FIELDNAME = 'documentWord';
+
+// UserDBの型定義
+export type UserDBType = {
+  userName: string;
+};
+
+// コレクションの名前
+export const USERCOLLECTIONNAME = 'users';
+
+// ユーザー名を格納するフィールド名
+export const USERNAMEFIELDNAME = 'userName';

@@ -22,6 +22,7 @@ import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { Auth } from '../components/AuthGoogleSigninPopup';
 
 type RandomType = 0 | 1 | null;
 
