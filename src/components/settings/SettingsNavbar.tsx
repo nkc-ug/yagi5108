@@ -17,17 +17,6 @@ export const SettingsNavBar: FC = () => {
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-  //   const toggleBGM = () => {
-  //     if (audioRef.current) {
-  //       if (isPlaying) {
-  //         audioRef.current.pause();
-  //       } else {
-  //         audioRef.current.play();
-  //       }
-  //       setIsPlaying(!isPlaying);
-  //     }
-  //   };
-
   return (
     <Box>
       {/* <audio ref={audioRef} src={bgm} loop /> */}
