@@ -6,19 +6,17 @@ import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
-import FlowerPopup from '../components/FlowerPopup';
+import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import Battle from '../components/battle/Battle';
-import BattleResult from '../components/battle/BattleResult';
 import noon from '../assets/noon.png';
-// import night from '../assets/night.png';
-// import sougen from '../assets/sougen.png';
-// import umi from '../assets/umi.png';
+import night from '../assets/night.png';
+import sougen from '../assets/sougen.png';
+import umi from '../assets/umi.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
@@ -37,7 +35,14 @@ const emotionInitialData = {
 };
 
 export const AppView: FC = () => {
-  const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
+  /**
+   * Popupの表示
+   *
+   * - isShowGrassPopup: 草のポップアップ
+   *
+   */
+  const [isShowNewGrassModal, setIsShowNewGrassModal] = useState<boolean>(false);
+
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
   const [inputText, setInputText, handleInputText] = useInput(''); //フォームに入力された文字を管理
@@ -58,6 +63,36 @@ export const AppView: FC = () => {
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
     useDiscloser(true);
   const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
+  const [costume, setCostume] = useState<number>(0); //0何もなし1着ぐるみ2着物3メイド4水着5ナース6警察7セーラー服8童貞殺セーター9郵便
+
+  const [ground, setGround] = useState<number>(1); //1草原２海３森
+  const setGroundImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return sougen;
+        case 2:
+          return umi;
+        case 3:
+          return mori;
+      }
+    }
+  };
+  const groundImage = setGroundImage(ground); //背景(地面の設定)
+
+  const [sky, setSky] = useState<number>(1); //1昼２夜
+  const setSkyImage = (ground: number) => {
+    {
+      switch (ground) {
+        case 1:
+          return noon;
+        case 2:
+          return night;
+      }
+    }
+  };
+  const skyImage = setSkyImage(ground); //背景(空の設定)
+
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
@@ -68,22 +103,36 @@ export const AppView: FC = () => {
   }, [monster]);
 
   const handleSubmit = async () => {
+    // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
+
+    // 感情データの取得
     setEmotionData(await getEmotionApi(inputText, emotionData));
+
+    // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
-    handlePop(false);
+    setIsShowNewGrassModal(true);
     changeRandome();
     handleGrass();
   };
-  const popSubmit = () => {
-    handlePop(true);
+
+  /**
+   * 草が生えました！のポップアップのsubmit
+   */
+  const showGrassModalSubmit = () => {
+    // 草が生えました！のポップアップを非表示・食事するヤギの表示・通常のヤギを非表示
+    setIsShowNewGrassModal(false);
     handleEat(true);
     setDispWalker(false);
+
+    // 2秒後 食事するヤギを非表示・通常のヤギを表示
     setTimeout(() => {
+      handleEat(false);
       setDispWalker(true);
     }, 2000);
   };
+
   const walking = () => {
     handleEat(false);
   };
@@ -147,7 +196,7 @@ export const AppView: FC = () => {
           disableGutters
           maxWidth="sm"
           style={{
-            backgroundImage: `url(${noon})`,
+            backgroundImage: `url(${skyImage})`,
             backgroundSize: '100% 100%',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -157,49 +206,32 @@ export const AppView: FC = () => {
           }}
         >
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-            <Battle
-              eatCount={eatCount}
-              monster={monster}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
-            />
-            {/* <Battleacstion
-                monster={monster}
-                eatCount={eatCount}
-                emotionData={emotionData}
-                open={isBattleModalOpen}
-                openClick={handleBattleModalOpen}
-                closeClick={handleBattleModalClose}
-              /> */}
-            <BattleResult
-              monster={monster}
-              eatCount={eatCount}
+            <ShowNewGrassModal
               emotionData={emotionData}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
-            />
-            <FlowerPopup
-              emotionData={emotionData}
-              pop={pop}
-              popSubmit={popSubmit}
+              isOpen={isShowNewGrassModal}
+              popSubmit={showGrassModalSubmit}
               randomNum={random ?? 0}
             />
             <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
             {EvoPopup ? (
               <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
             ) : null}
-            <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
+            <EvolutionPopup
+              eatCount={eatCount}
+              pop={!isShowNewGrassModal}
+              evolution={evolution}
+              evoPop={evoPop}
+            />
             <Box sx={{ height: '80vh' }}>
               <Form
                 inputText={inputText}
                 handleChange={handleInputText}
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
-                handleBattleChange={handleBattleModalOpen}
               />
               <Container
                 style={{
-                  backgroundImage: `url(${mori})`,
+                  backgroundImage: `url(${groundImage})`,
                   backgroundSize: '100% 100%',
                   backgroundPosition: 'bottom',
                   backgroundRepeat: 'no-repeat',
@@ -231,10 +263,7 @@ export const AppView: FC = () => {
       </Stack>
 
       {/* ナビゲーションバー */}
-      <NavBarCon
-        handleTutorialModalOpen={handleTutorialModalOpen}
-        handleBattleModalOpen={handleBattleModalOpen}
-      />
+      <NavBarCon handleTutorialModalOpen={handleTutorialModalOpen} />
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />

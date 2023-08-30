@@ -1,12 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
-import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
-import FlowerPopup from '../components/FlowerPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import Pulse from '../components/Pulse';
@@ -22,8 +20,11 @@ import night from '../assets/night.png';
 import mori from '../assets/mori.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
-import { CircleProgressCon } from '../components/common/CircleProgressCon';
+import { CircleProgressCon } from '../components/common/CircleProgressCon'; 
+import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -54,9 +55,7 @@ export const BattleView: FC = () => {
   const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
-  const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
-    useDiscloser(true);
-  const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(false);
+  const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(true);
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
@@ -176,13 +175,12 @@ export const BattleView: FC = () => {
               open={isBattleModalOpen}
               closeClick={handleBattleModalClose}
             />
-            <FlowerPopup
+            <ShowNewGrassModal
               emotionData={emotionData}
-              pop={pop}
+              isOpen={pop}
               popSubmit={popSubmit}
               randomNum={random ?? 0}
             />
-            <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
             {EvoPopup ? (
               <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
             ) : null}
@@ -193,7 +191,6 @@ export const BattleView: FC = () => {
                 handleChange={handleInputText}
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
-                handleBattleChange={handleBattleModalOpen}
               />
               <Container
                 style={{
@@ -229,10 +226,7 @@ export const BattleView: FC = () => {
       </Stack>
 
       {/* ナビゲーションバー */}
-      <NavBarCon
-        handleTutorialModalOpen={handleTutorialModalOpen}
-        handleBattleModalOpen={handleBattleModalOpen}
-      />
+      <BattleNavBarCon handleBattleModalOpen={handleBattleModalOpen} />
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />

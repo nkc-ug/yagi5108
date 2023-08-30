@@ -15,38 +15,74 @@ type Props = {
 };
 
 const Battle: FC<Props> = ({ open, monster, closeClick, eatCount }) => {
-  const [monsterlabel1, setmonsterlabel1] = useState('');
-  const [monsterlabel2, setmonsterlabel2] = useState('');
-
-  const labelList = [
-    'このモンスターは',
-    monsterlabel1,
-    'よわいようだ！',
-    'ことばをたべさせて',
-    monsterlabel2,
-    'やぎをそだてよう',
-  ];
-
-  useEffect(() => {
+  const labelList = (() => {
     switch (monster) {
       case 1:
-        setmonsterlabel1('よろこびのかんじょうに');
-        setmonsterlabel2('やぎをよろこびのかんじょうに');
-        break;
+        return (
+          <div>
+            このモンスターは
+            <br />
+            よろこびのかんじょうに
+            <br />
+            よわいようだ!
+            <br />
+            ことばをたべさせて
+            <br />
+            やぎをよろこびのかんじょうに
+            <br />
+            そだてよう
+          </div>
+        );
       case 2:
-        setmonsterlabel1('いかりのかんじょうに');
-        setmonsterlabel2('やぎをいかりのかんじょうに');
-        break;
+        return (
+          <div>
+            このモンスターは
+            <br />
+            いかりのかんじょうに
+            <br />
+            よわいようだ!
+            <br />
+            ことばをたべさせて
+            <br />
+            やぎをいかりのかんじょうに
+            <br />
+            そだてよう;
+          </div>
+        );
       case 3:
-        setmonsterlabel1('かなしいのかんじょうに');
-        setmonsterlabel2('やぎをかなしいのかんじょうに');
-        break;
+        return (
+          <div>
+            このモンスターは
+            <br />
+            かなしいかんじょうに
+            <br />
+            よわいようだ!
+            <br />
+            ことばをたべさせて
+            <br />
+            かなしいかんじょうに
+            <br />
+            そだてよう;
+          </div>
+        );
       case 4:
-        setmonsterlabel1('たのしいのかんじょうに');
-        setmonsterlabel2('やぎをたのしいかんじょうに');
-        break;
+        return (
+          <div>
+            このモンスターは
+            <br />
+            たのしいのかんじょうに
+            <br />
+            よわいようだ!
+            <br />
+            ことばをたべさせて
+            <br />
+            たのしいのかんじょうに
+            <br />
+            そだてよう;
+          </div>
+        );
     }
-  }, []);
+  })();
 
   return (
     <div>
@@ -75,11 +111,9 @@ const Battle: FC<Props> = ({ open, monster, closeClick, eatCount }) => {
                 モンスターがあらわれた！！
               </Typography>
               <Stack justifyContent="center" spacing={1}>
-                {labelList.map((label) => (
-                  <Typography key={label} variant="h6" textAlign={'center'}>
-                    {label}
-                  </Typography>
-                ))}
+                <Typography variant="h6" textAlign={'center'}>
+                  {labelList}
+                </Typography>
               </Stack>
               <Stack justifyContent="center" direction="row">
                 <Button variant="contained" sx={{ color: 'white' }} onClick={closeClick}>

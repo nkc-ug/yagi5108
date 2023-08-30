@@ -24,6 +24,8 @@ export const GoatContext = createContext<StringContextType>({} as StringContextT
 export const BackgroundContext = createContext<BackgroundUrlContextType>(
   {} as BackgroundUrlContextType
 );
+//モンスターを保持するコンテキスト
+export const MonsterContext = createContext<StringContextType>({} as StringContextType);
 
 export const ContextProviders: FC<Props> = ({ children }) => {
   // ヤギの服を保持するステート
@@ -35,12 +37,16 @@ export const ContextProviders: FC<Props> = ({ children }) => {
     skyUrl: '',
     groundUrl: '',
   });
+  // モンスターを保持するステート
+  const [monsterUrl, setMonsterUrl] = useState('');
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
       <GoatContext.Provider value={[goatUrl, setGoatUrl]}>
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
-          {children}
+          <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
+            {children}
+          </MonsterContext.Provider>
         </BackgroundContext.Provider>
       </GoatContext.Provider>
     </GoatClothesContext.Provider>

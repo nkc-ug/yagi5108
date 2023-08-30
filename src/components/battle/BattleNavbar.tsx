@@ -1,24 +1,40 @@
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FC, useRef, useState } from 'react';
-import HelpIcon from '@mui/icons-material/Help';
+import ReplyIcon from '@mui/icons-material/Reply';
 import SearchIcon from '@mui/icons-material/Search';
-import SettingsIcon from '@mui/icons-material/Settings';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import MusicOffIcon from '@mui/icons-material/MusicOff';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
-import { StyleMenu } from './StyleMenu';
+import bgm from '../../Audio/Bgm.mp3';
+import { StyleMenu } from '../navbar/StyleMenu';
 
 type Props = {
-  handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
+  handleBattleChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
+export const BattleNavBar: FC<Props> = ({ handleBattleChange }) => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
 
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
+  const toggleBGM = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <Box>
+      <audio ref={audioRef} src={bgm} loop />
       <BottomNavigation
         showLabels
         sx={{
@@ -26,17 +42,17 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
         }}
       >
         <BottomNavigationAction
-          label="あそびかた"
-          icon={<HelpIcon />}
-          onClick={handleTutorialChange}
+          label="たたかいをやめる"
+          icon={<ReplyIcon />}
+          onClick={() => {
+            navigate('/');
+          }}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
-          label="たたかう"
+          label="モンスターをみる"
           icon={<CoronavirusIcon />}
-          onClick={() => {
-            navigate('/battle');
-          }}
+          onClick={handleBattleChange}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
@@ -44,19 +60,15 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            navigate('CostumeView');
+            setIsOpenStyleMenu(true);
+            setAnchorEl(document.getElementById('styleMenuNav'));
           }}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
-          label="せってい"
-          icon={<SettingsIcon />}
-          onClick={
-            () => {
-              navigate('SettingsView');
-            }
-            // toggleBGM
-          }
+          label="おんがく"
+          icon={isPlaying ? <MusicOffIcon /> : <MusicNoteIcon />}
+          onClick={toggleBGM}
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
