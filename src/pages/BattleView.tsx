@@ -51,8 +51,8 @@ export const BattleView: FC = () => {
   const [evoPop, setEvoPop] = useState(true); //進化時のポップアップの表示
   const [evoWalk, setEvoWalk] = useState(false); //進化したヤギの表示
   const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
-  const [EmotionMax, setMax] = useState<number>(0);
-  const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
+  const [EmotionMax, setEmotionMax] = useState<number>(0);
+  const [EmotionList, setEmotionList] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
@@ -116,9 +116,9 @@ export const BattleView: FC = () => {
       Branch({
         emotionData,
         EmotionMax,
-        setMax,
-        Emotion,
-        setEmotion,
+        setEmotionMax,
+        EmotionList,
+        setEmotionList,
         overlap,
         setOverlap,
       })
