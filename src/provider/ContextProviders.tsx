@@ -16,6 +16,8 @@ type BackgroundUrlContextType = [
   setState: React.Dispatch<React.SetStateAction<BackgroundUrlType>>
 ];
 
+type BooleanContextType = [state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>];
+
 // ヤギの服を保持するコンテキスト
 export const GoatClothesContext = createContext<StringContextType>({} as StringContextType);
 // ヤギの姿を保持するコンテキスト
@@ -26,6 +28,10 @@ export const BackgroundContext = createContext<BackgroundUrlContextType>(
 );
 //モンスターを保持するコンテキスト
 export const MonsterContext = createContext<StringContextType>({} as StringContextType);
+// ログイン状態を保持するコンテキスト
+export const LoginContext = createContext<BooleanContextType>({} as BooleanContextType);
+// ユーザーのEmailを保持するコンテキスト
+export const EmailContext = createContext<StringContextType>({} as StringContextType);
 
 export const ContextProviders: FC<Props> = ({ children }) => {
   // ヤギの服を保持するステート
@@ -39,13 +45,19 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   });
   // モンスターを保持するステート
   const [monsterUrl, setMonsterUrl] = useState('');
+  // ログイン状態を保持するステート
+  const [login, setLogin] = useState(false);
+  // ユーザーのEmailを保持するステート
+  const [email, setEmail] = useState('null');
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
       <GoatContext.Provider value={[goatUrl, setGoatUrl]}>
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
-            {children}
+            <LoginContext.Provider value={[login, setLogin]}>
+              <EmailContext.Provider value={[email, setEmail]}>{children}</EmailContext.Provider>
+            </LoginContext.Provider>
           </MonsterContext.Provider>
         </BackgroundContext.Provider>
       </GoatContext.Provider>
