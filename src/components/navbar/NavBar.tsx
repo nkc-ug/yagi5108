@@ -3,10 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { FC, useContext, useRef, useState } from 'react';
 import HelpIcon from '@mui/icons-material/Help';
 import SearchIcon from '@mui/icons-material/Search';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import MusicOffIcon from '@mui/icons-material/MusicOff';
+import SettingsIcon from '@mui/icons-material/Settings';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
-import bgm from '../../Audio/Bgm.mp3';
 import { StyleMenu } from './StyleMenu';
 import { MonsterContext, MonsterNumberContext } from '../../provider/ContextProviders';
 
@@ -15,24 +13,11 @@ type Props = {
 };
 
 export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [_, setMonsterUrl] = useContext(MonsterContext);
   const [__, setMonsterNumber] = useContext(MonsterNumberContext);
-
-  const toggleBGM = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
 
   const handleMonster = () => {
     const monsternumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
@@ -57,7 +42,6 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
 
   return (
     <Box>
-      <audio ref={audioRef} src={bgm} loop />
       <BottomNavigation
         showLabels
         sx={{
@@ -83,14 +67,19 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            location.pathname = '/CostumeView';
+            navigate('/CostumePage');
           }}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
-          label="おんがく"
-          icon={isPlaying ? <MusicOffIcon /> : <MusicNoteIcon />}
-          onClick={toggleBGM}
+          label="せってい"
+          icon={<SettingsIcon />}
+          onClick={
+            () => {
+              navigate('SettingsView');
+            }
+            // toggleBGM
+          }
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
