@@ -25,7 +25,6 @@ const BattleResult: FC<Props> = ({ eatCount, open, typeId, closeClick }) => {
     } else {
       setLabel('ヤギはたたかいにまけてしまった！やぎをはげまそう！');
     }
-    console.log(monster, typeId);
   }, [monster, typeId]);
 
   return (
@@ -57,8 +56,6 @@ const BattleResult: FC<Props> = ({ eatCount, open, typeId, closeClick }) => {
               <Stack justifyContent="center" spacing={1}>
                 <Typography variant="h6" textAlign={'center'}>
                   {label}
-                  {monster}
-                  {typeId}
                 </Typography>
               </Stack>
               <Stack justifyContent="center" direction="row">
