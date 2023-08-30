@@ -1,6 +1,6 @@
 import backgroundImage from '../assets/sougen.png';
 
-export const MonstermodalStyle = {
+export const MonsterModalStyle = {
   position: 'absolute' as const,
   top: '65%',
   left: '50%',

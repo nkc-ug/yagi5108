@@ -1,7 +1,7 @@
 import { Backdrop, Button, Fade, Stack, Typography } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import { FC } from 'react';
-import { MonstermodalStyle } from '../../styles/MonstermodalStyle';
+import { MonsterModalStyle } from '../../styles/MonsterModalStyle';
 import { useNavigate } from 'react-router-dom';
 type Props = {
   monsternumber: string;
@@ -94,7 +94,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
         }}
       >
         <Fade in={open}>
-          <Stack sx={MonstermodalStyle} spacing={3}>
+          <Stack sx={MonsterModalStyle} spacing={3}>
             <Typography
               id="transition-modal-title"
               variant="h5"
