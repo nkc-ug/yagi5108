@@ -34,8 +34,8 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   const [goatUrl, setGoatUrl] = useState('');
   // 背景（空・地面）を保持するステート
   const [backgroundUrl, setBackgroundUrl] = useState({
-    skyUrl: '',
-    groundUrl: '',
+    skyUrl: 'noon',
+    groundUrl: 'sougen',
   });
   // モンスターを保持するステート
   const [monsterUrl, setMonsterUrl] = useState('');

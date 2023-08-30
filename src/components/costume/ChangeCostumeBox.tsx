@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Grid } from '@mui/material';
+import { useContext } from 'react';
+import { Button, Grid } from '@mui/material';
 import costume_kigurumi_left from '../../assets/costume_kigurumi_left.png';
 import costume_kimono_left from '../../assets/costume_kimono_left.png';
 import costume_maid_left from '../../assets/costume_maid_left.png';
@@ -24,95 +24,95 @@ export const ChangeCostumeBox = () => {
       sx={{ alignItems: 'center', alignContent: 'center', wrap: 'wrap', height: '100%' }}
     >
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('yagi');
           }}
         >
           <CostumeBox CostumeImage={yagi_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('kigurumi');
           }}
         >
           <CostumeBox CostumeImage={costume_kigurumi_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('kimono');
           }}
         >
           <CostumeBox CostumeImage={costume_kimono_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('maid');
           }}
         >
           <CostumeBox CostumeImage={costume_maid_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('mizugi');
           }}
         >
           <CostumeBox CostumeImage={costume_mizugi_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('nurse');
           }}
         >
           <CostumeBox CostumeImage={costume_nurse_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('police');
           }}
         >
           <CostumeBox CostumeImage={costume_police_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('serahuku');
           }}
         >
           <CostumeBox CostumeImage={costume_serahuku_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('seta');
           }}
         >
           <CostumeBox CostumeImage={costume_seta_left} />
-        </div>
+        </Button>
       </Grid>
       <Grid item xs={4} />
       <Grid item xs={4}>
-        <div
+        <Button
           onClick={() => {
             setClothesUrl('yubin');
           }}
         >
           <CostumeBox CostumeImage={costume_yubin_left} />
-        </div>
+        </Button>
       </Grid>
 
       <Grid item xs={4} />

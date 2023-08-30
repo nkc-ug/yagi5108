@@ -42,7 +42,7 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
     };
   }, [containerSize]);
 
-  const backgroundImage = convertGoat({
+  const goatImage = convertGoat({
     goatImgUrl: goatUrl,
     isRight: position.x > containerSize.width / 3,
   });
@@ -74,7 +74,7 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
             position: 'absolute',
             width: '130px',
             height: '130px',
-            backgroundImage: `url(${backgroundImage})`,
+            backgroundImage: `url(${goatImage})`,
             backgroundSize: 'cover',
             left: `${position.x}px`,
             top: `${position.y}px`,
