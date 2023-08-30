@@ -19,6 +19,8 @@ import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+import { Auth } from '../components/AuthGoogleSigninPopup';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -53,7 +55,6 @@ export const AppView: FC = () => {
   const [EmotionMax, setEmotionMax] = useState<number>(0);
   const [EmotionList, setEmotionList] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
-  const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
@@ -63,10 +64,6 @@ export const AppView: FC = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
   };
-
-  useEffect(() => {
-    setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
-  }, [monster]);
 
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化

@@ -2,16 +2,16 @@ import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FC, useRef, useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
-import CoronavirusIcon from '@mui/icons-material/Coronavirus';
-import bgm from '../../Audio/Bgm.mp3';
+// import bgm from '../../Audio/Bgm.mp3';
 import { StyleMenu } from '../navbar/StyleMenu';
 
-type Props = {
-  handleMonsterModalChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
+// type Props = {
+//   handleSettingsChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
+// };
 
-export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+export const SettingsNavBar: FC = () => {
+  //   const audioRef = useRef<HTMLAudioElement | null>(null);
+  //   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
 
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
@@ -19,7 +19,7 @@ export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
 
   return (
     <Box>
-      <audio ref={audioRef} src={bgm} loop />
+      {/* <audio ref={audioRef} src={bgm} loop /> */}
       <BottomNavigation
         showLabels
         sx={{
@@ -27,18 +27,10 @@ export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
         }}
       >
         <BottomNavigationAction
-          label="たたかいをやめる"
+          label="もどる"
           icon={<ReplyIcon />}
           onClick={() => {
             navigate('/');
-          }}
-          sx={{ color: 'white' }}
-        />
-        <BottomNavigationAction
-          label="モンスターをみる"
-          icon={<CoronavirusIcon />}
-          onClick={() => {
-            navigate('/MonsterView');
           }}
           sx={{ color: 'white' }}
         />
