@@ -10,6 +10,23 @@ import { BackgroundContext } from '../../provider/ContextProviders';
 
 export const ChangeBgImageBox = () => {
   const [BackgroundUrl, setBackgroundUrl] = useContext(BackgroundContext);
+  type ImgItemType = {
+    itemNumber: number;
+    setItem: {
+      groundUrl?: string;
+      skyUrl?: string;
+    };
+    bgImgUrl: string;
+  };
+
+  const imgItemList: ImgItemType[] = [
+    { itemNumber: 0, setItem: { groundUrl: 'sougen' }, bgImgUrl: sougen },
+    { itemNumber: 1, setItem: { skyUrl: 'noon' }, bgImgUrl: noon },
+    { itemNumber: 2, setItem: { groundUrl: 'umi' }, bgImgUrl: umi },
+    { itemNumber: 3, setItem: { skyUrl: 'night' }, bgImgUrl: night },
+    { itemNumber: 4, setItem: { groundUrl: 'mori' }, bgImgUrl: mori },
+  ];
+
   return (
     <Grid
       container
@@ -18,51 +35,19 @@ export const ChangeBgImageBox = () => {
       justifyContent="center"
       sx={{ alignItems: 'center', alignContent: 'center', wrap: 'wrap', height: '100%' }}
     >
-      <Grid item xs={6}>
-        <Button
-          onClick={() => {
-            setBackgroundUrl({ ...BackgroundUrl, groundUrl: 'sougen' });
-          }}
-        >
-          <BgImageBox BgImageUrl={sougen} />
-        </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          onClick={() => {
-            setBackgroundUrl({ ...BackgroundUrl, skyUrl: 'noon' });
-          }}
-        >
-          <BgImageBox BgImageUrl={noon} />
-        </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          onClick={() => {
-            setBackgroundUrl({ ...BackgroundUrl, groundUrl: 'umi' });
-          }}
-        >
-          <BgImageBox BgImageUrl={umi} />
-        </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          onClick={() => {
-            setBackgroundUrl({ ...BackgroundUrl, skyUrl: 'night' });
-          }}
-        >
-          <BgImageBox BgImageUrl={night} />
-        </Button>
-      </Grid>
-      <Grid item xs={6}>
-        <Button
-          onClick={() => {
-            setBackgroundUrl({ ...BackgroundUrl, groundUrl: 'mori' });
-          }}
-        >
-          <BgImageBox BgImageUrl={mori} />
-        </Button>
-      </Grid>
+      {imgItemList.map((item) => {
+        return (
+          <Grid item key={item.itemNumber} xs={6}>
+            <Button
+              onClick={() => {
+                setBackgroundUrl({ ...BackgroundUrl, ...item.setItem });
+              }}
+            >
+              <BgImageBox BgImageUrl={item.bgImgUrl} />
+            </Button>
+          </Grid>
+        );
+      })}
       <Grid item xs={6} />
     </Grid>
   );

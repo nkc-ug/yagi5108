@@ -18,19 +18,13 @@ export const convertBackGroundImg = ({
   switch (groundUrl) {
     //草原
     case 'sougen':
-      return skyUrl === 'noon'
-        ? { skyUrl: noon, groundUrl: sougen }
-        : { skyUrl: night, groundUrl: sougen };
+      return { skyUrl: skyUrl === 'noon' ? noon : night, groundUrl: sougen };
     //海
     case 'umi':
-      return skyUrl === 'noon'
-        ? { skyUrl: noon, groundUrl: umi }
-        : { skyUrl: night, groundUrl: umi };
+      return { skyUrl: skyUrl === 'noon' ? noon : night, groundUrl: umi };
     //森
     case 'mori':
-      return skyUrl === 'noon'
-        ? { skyUrl: noon, groundUrl: mori }
-        : { skyUrl: night, groundUrl: mori };
+      return { skyUrl: skyUrl === 'noon' ? noon : night, groundUrl: mori };
     //エラー時の処理
     default:
       return { skyUrl: noon, groundUrl: sougen };
