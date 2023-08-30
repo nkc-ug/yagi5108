@@ -44,7 +44,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            navigate('CostumeView');
+            navigate('/CostumePage');
           }}
           sx={{ color: 'white' }}
         />
