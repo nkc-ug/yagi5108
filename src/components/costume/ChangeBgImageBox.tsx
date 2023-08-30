@@ -13,10 +13,7 @@ export const ChangeBgImageBox = () => {
       spacing={1}
       direction="row"
       justifyContent="center"
-      alignItems="center"
-      alignContent="center"
-      wrap="wrap"
-      height={'100%'}
+      sx={{ alignItems: 'center', alignContent: 'center', wrap: 'wrap', height: '100%' }}
     >
       <Grid item xs={6}>
         <BgImageBox BgImageUrl={sougen} />

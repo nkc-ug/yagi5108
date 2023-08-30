@@ -11,7 +11,7 @@ export const CostumePage = () => {
     setValue(newValue);
   };
   return (
-    <Stack direction="row" justifyContent="center" bgcolor={'black'}>
+    <Stack direction="row" justifyContent="center" sx={{ bgcolor: 'black' }}>
       <Container
         maxWidth="sm"
         sx={{
@@ -26,10 +26,7 @@ export const CostumePage = () => {
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
-          alignContent="center"
-          wrap="wrap"
-          marginTop={'10px'}
+          sx={{ alignItems: 'center', alignContent: 'center', wrap: 'wrap', marginTop: '10px' }}
         >
           <Box //やぎ用のbox
             sx={{
@@ -55,9 +52,7 @@ export const CostumePage = () => {
           spacing={1}
           direction="row"
           justifyContent="flex-start"
-          alignItems="flex-start"
-          alignContent="stretch"
-          wrap="wrap"
+          sx={{ alignItems: 'flex-start', alignContent: 'stretch', wrap: 'wrap' }}
         >
           <Container sx={{ width: '100%', marginTop: '10px' }}>
             <Tabs

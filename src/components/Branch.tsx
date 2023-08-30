@@ -21,17 +21,13 @@ export const Branch = ({
 }: Props) => {
   //Emotionの配列コピーして足して戻す関数
   const increaseEmotion = (index: number) => {
-    const newEmotion2 = EmotionList.map((item, activeIndex) => {
+    const CopyMaxValueEmotion = EmotionList.map((item, activeIndex) => {
       if (index === activeIndex) {
         return item + 1;
       }
       return item;
     });
-    setEmotionList(newEmotion2);
-
-    // const newEmotion = [...Emotion];
-    // newEmotion[index] += 1;
-    // setEmotion(newEmotion);
+    setEmotionList(CopyMaxValueEmotion);
   };
   setEmotionMax(emotionData.emoId);
   // switch文の中にロジックを移動
@@ -65,9 +61,7 @@ export const Branch = ({
     default:
       console.log('error');
   }
-  // overlap === true
-  //   ? setEmotionMax(EmotionList.indexOf(Math.max(...EmotionList)))
-  //   : setEmotionMax(Math.floor(Math.random() * 3));
+
   setEmotionMax(EmotionList.indexOf(Math.max(...EmotionList)));
   return EmotionMax + 1;
 };

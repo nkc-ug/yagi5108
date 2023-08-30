@@ -18,9 +18,7 @@ export const ChangeCostumeBox = () => {
       spacing={1}
       direction="row"
       justifyContent="center"
-      alignItems="center"
-      alignContent="center"
-      wrap="wrap"
+      sx={{ alignItems: 'center', alignContent: 'center', wrap: 'wrap', height: '100%' }}
     >
       <Grid item xs={4}>
         <CostumeBox CostumeImage={yagi_left} />

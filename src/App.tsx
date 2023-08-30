@@ -4,12 +4,10 @@ import { Providers } from './provider/Providers';
 
 const App: React.FC = () => {
   return (
-    <>
+    <Providers>
       <CssBaseline />
-      <Providers>
-        <Router />
-      </Providers>
-    </>
+      <Router />
+    </Providers>
   );
 };
 
