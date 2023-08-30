@@ -3,10 +3,10 @@ import { FC } from 'react';
 import { BattleNavBar } from './BattleNavbar';
 
 type Props = {
-  handleBattleModalOpen: () => void;
+  handleMonsterModalOpen: () => void;
 };
 
-export const BattleNavBarCon: FC<Props> = ({ handleBattleModalOpen }) => {
+export const BattleNavBarCon: FC<Props> = ({ handleMonsterModalOpen }) => {
   return (
     <Container
       maxWidth="sm"
@@ -19,7 +19,7 @@ export const BattleNavBarCon: FC<Props> = ({ handleBattleModalOpen }) => {
         zIndex: 3,
       }}
     >
-      <BattleNavBar handleBattleChange={handleBattleModalOpen} />
+      <BattleNavBar handleMonsterModalChange={handleMonsterModalOpen} />
     </Container>
   );
 };

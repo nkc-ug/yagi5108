@@ -5,7 +5,7 @@ type Props = {
 };
 
 type StringContextType = [state: string, setState: React.Dispatch<React.SetStateAction<string>>];
-
+type NumberContextType = [state: number, setState: React.Dispatch<React.SetStateAction<number>>];
 type BackgroundUrlType = {
   skyUrl: string;
   groundUrl: string;
@@ -28,6 +28,8 @@ export const BackgroundContext = createContext<BackgroundUrlContextType>(
 );
 //モンスターを保持するコンテキスト
 export const MonsterContext = createContext<StringContextType>({} as StringContextType);
+//バトルのためにモンスターの属性値を保持するコンテキスト
+export const MonsterNumberContext = createContext<NumberContextType>({} as NumberContextType);
 // ログイン状態を保持するコンテキスト
 export const LoginContext = createContext<BooleanContextType>({} as BooleanContextType);
 // ユーザーのEmailを保持するコンテキスト
@@ -45,6 +47,8 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   });
   // モンスターを保持するステート
   const [monsterUrl, setMonsterUrl] = useState('');
+  //monsterの属性値を保持するステート
+  const [monsternumber, setMonsterNumber] = useState(0);
   // ログイン状態を保持するステート
   const [login, setLogin] = useState(false);
   // ユーザーのEmailを保持するステート
@@ -55,9 +59,13 @@ export const ContextProviders: FC<Props> = ({ children }) => {
       <GoatContext.Provider value={[goatUrl, setGoatUrl]}>
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
-            <LoginContext.Provider value={[login, setLogin]}>
-              <EmailContext.Provider value={[email, setEmail]}>{children}</EmailContext.Provider>
-            </LoginContext.Provider>
+            <MonsterNumberContext.Provider value={[monsternumber, setMonsterNumber]}>
+              <LoginContext.Provider value={[login, setLogin]}>
+               <EmailContext.Provider value={[email, setEmail]}>
+                 {children}
+                </EmailContext.Provider>
+              </LoginContext.Provider>
+            </MonsterNumberContext.Provider>
           </MonsterContext.Provider>
         </BackgroundContext.Provider>
       </GoatContext.Provider>

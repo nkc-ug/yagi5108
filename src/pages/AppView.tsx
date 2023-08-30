@@ -54,10 +54,9 @@ export const AppView: FC = () => {
   const [evoPop, setEvoPop] = useState(true); //進化時のポップアップの表示
   const [evoWalk, setEvoWalk] = useState(false); //進化したヤギの表示
   const [dispCircle, setDispCircle] = useState(false); //ロード画面の表示
-  const [EmotionMax, setMax] = useState<number>(0);
-  const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
+  const [EmotionMax, setEmotionMax] = useState<number>(0);
+  const [EmotionList, setEmotionList] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
-  const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
   const [isTutorialModalOpen, handleTutorialModalOpen, handleTutorialModalClose] =
@@ -98,23 +97,21 @@ export const AppView: FC = () => {
     setRandom(setItem);
   };
 
-  useEffect(() => {
-    setMonster(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
-  }, [monster]);
-
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
 
-    // 感情データの取得
-    setEmotionData(await getEmotionApi(inputText, emotionData));
 
+    // 感情データの取得
+    const fetchEmotionData = await getEmotionApi(inputText, emotionData);
+    setEmotionData(fetchEmotionData);
     // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
     setIsShowNewGrassModal(true);
     changeRandome();
-    handleGrass();
+
+    handleGrass(fetchEmotionData);
   };
 
   /**
@@ -145,18 +142,17 @@ export const AppView: FC = () => {
     setEvoPopup(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
-  const handleGrass = () => {
+  const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
-    Auth();
-
+    const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
       Branch({
         emotionData,
         EmotionMax,
-        setMax,
-        Emotion,
-        setEmotion,
+        setEmotionMax,
+        EmotionList,
+        setEmotionList,
         overlap,
         setOverlap,
       })
