@@ -61,7 +61,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange, handleBattleChange }) 
           label="やぎをみる"
           icon={<SearchIcon />}
           onClick={() => {
-            location.pathname = '/CostumeView';
+            navigate('/CostumePage');
           }}
           sx={{ color: 'white' }}
         />
