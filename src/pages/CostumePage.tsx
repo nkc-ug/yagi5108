@@ -1,17 +1,31 @@
-import { useState } from 'react';
-import { Container, Stack, Grid, Box, Typography, AppBar, Tabs, Tab } from '@mui/material';
+import { useContext, useState } from 'react';
+import { Container, Stack, Grid, Box, Tabs, Tab } from '@mui/material';
 import { ChangeCostumeBox } from '../components/costume/ChangeCostumeBox';
 import { ChangeBgImageBox } from '../components/costume/ChangeBgImageBox';
 import { CostumeHeader } from '../components/costume/CostumeHeader';
+import { convertCostume } from '../util/convertCostume';
+import { GoatClothesContext } from '../provider/ContextProviders';
+import { GoatContext } from '../provider/ContextProviders';
+import { convertGoat } from '../util/convertGoat';
 
 export const CostumePage = () => {
   const [value, setValue] = useState('1');
+  const [clothesUrl] = useContext(GoatClothesContext);
+  const [goatUrl] = useContext(GoatContext);
 
   const handleCostumeTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+  const costumeImage = convertCostume({
+    costumeImgUrl: clothesUrl,
+    isRight: false,
+  });
+  const goatImage = convertGoat({
+    goatImgUrl: goatUrl,
+    isRight: false,
+  });
   return (
-    <Stack direction="row" justifyContent="center" sx={{ bgcolor: 'black' }}>
+    <Stack direction="row" justifyContent="center" sx={{ bgcolor: 'white' }}>
       <Container
         maxWidth="sm"
         sx={{
@@ -35,6 +49,7 @@ export const CostumePage = () => {
               backgroundSize: 'cover',
               padding: '0',
               bgcolor: 'red',
+              backgroundImage: `url(${goatImage})`,
             }}
           >
             <Box //衣装用のbox
@@ -42,7 +57,7 @@ export const CostumePage = () => {
                 width: '100%',
                 height: '100%',
                 backgroundSize: 'cover',
-                bgcolor: 'blue',
+                backgroundImage: `url(${costumeImage})`,
               }}
             />
           </Box>
