@@ -1,6 +1,6 @@
 import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { FC, useRef, useState } from 'react';
+import { FC, useContext, useRef, useState } from 'react';
 import HelpIcon from '@mui/icons-material/Help';
 import SearchIcon from '@mui/icons-material/Search';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
@@ -8,6 +8,7 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import bgm from '../../Audio/Bgm.mp3';
 import { StyleMenu } from './StyleMenu';
+import { MonsterContext, MonsterNumberContext } from '../../provider/ContextProviders';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -17,9 +18,10 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
-
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [_, setMonsterUrl] = useContext(MonsterContext);
+  const [__, setMonsterNumber] = useContext(MonsterNumberContext);
 
   const toggleBGM = () => {
     if (audioRef.current) {
@@ -30,6 +32,27 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const handleMonster = () => {
+    const monsternumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+    const monsterstring = (() => {
+      switch (monsternumber) {
+        case 1:
+          return 'monster_yorokobi';
+        case 2:
+          return 'monster_ikari';
+        case 3:
+          return 'monster_kanasii';
+        case 4:
+          return 'monster_tanosii';
+        default:
+          return '';
+      }
+    })();
+    setMonsterUrl(monsterstring);
+    setMonsterNumber(monsternumber);
+    navigate('/MonsterView');
   };
 
   return (
@@ -51,7 +74,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           label="たたかう"
           icon={<CoronavirusIcon />}
           onClick={() => {
-            navigate('/MonsterView');
+            handleMonster();
           }}
           sx={{ color: 'white' }}
         />

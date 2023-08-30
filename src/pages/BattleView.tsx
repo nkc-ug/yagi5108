@@ -1,28 +1,26 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
-import Form from '../components/Form';
+import { BattleForm } from '../components/battle/BattleForm';
 import Eat from '../components/Eat';
 import NormalWalk from '../components/NormalWalk';
 import { getEmotionApi } from '../api/getEmotionApi';
 import { Branch } from '../components/Branch';
+import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
 import EvolutionPopup from '../components/EvolutionPopup';
 import EvolutionWalk from '../components/EvolutionWalk';
 import Pulse from '../components/Pulse';
 import { useDiscloser } from '../hooks/useDiscloser';
 import { EmotionDataType } from '../types/EmotionDataType';
 import { EATLIMIT } from '../const/eatLimit';
-import BattleResult from '../components/battle/BattleResult';
-//import noon from '../assets/noon.png';
 import night from '../assets/night.png';
-// import sougen from '../assets/sougen.png';
-// import umi from '../assets/umi.png';
-import mori from '../assets/mori.png';
+import sougen from '../assets/sougen.png';
 import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
-import { ShowNewGrassModal } from '../components/ShowNewGrassModal';
-
+import BattleResult from '../components/battle/BattleResult';
+import { MonsterContext } from '../provider/ContextProviders';
+import { convertMonster } from '../util/convertMonster';
 type RandomType = 0 | 1 | null;
 
 const emotionInitialData = {
@@ -34,7 +32,14 @@ const emotionInitialData = {
 };
 
 export const BattleView: FC = () => {
-  const [pop, handlePop] = useState(true); //生成された草のポップアップの表示
+  /**
+   * Popupの表示
+   *
+   * - isShowGrassPopup: 草のポップアップ
+   *
+   */
+  const [isShowNewGrassModal, setIsShowNewGrassModal] = useState<boolean>(false);
+  const [monsterUrl] = useContext(MonsterContext);
   const [eat, handleEat] = useState(false); //食事するヤギの表示
   const [showImage, setShowImage] = useState(false); //生成された草の表示（これいらんかもしれん）
   const [inputText, setInputText, handleInputText] = useInput(''); //フォームに入力された文字を管理
@@ -49,32 +54,48 @@ export const BattleView: FC = () => {
   const [EmotionMax, setMax] = useState<number>(0);
   const [Emotion, setEmotion] = useState([0, 0, 0, 0]);
   const [overlap, setOverlap] = useState<boolean>(false);
-  const [monster, setMonster] = useState<number>(0);
   const [containerSize, setContainerSize] = useState({ width: 260, height: 600 });
   const [emotionData, setEmotionData] = useState<EmotionDataType>(emotionInitialData);
   const [isBattleModalOpen, handleBattleModalOpen, handleBattleModalClose] = useDiscloser(true);
+  const [isBattleresultModalOpen, handleBattleresultModalOpen, handleBattleresultModalClose] =
+    useDiscloser(false);
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
   };
+  const monsterImg = convertMonster({ monsterImgUrl: monsterUrl });
 
   const handleSubmit = async () => {
+    // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
+
+    // 感情データの取得
     setEmotionData(await getEmotionApi(inputText, emotionData));
+
+    // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
-    handlePop(false);
+    setIsShowNewGrassModal(true);
     changeRandome();
     handleGrass();
   };
-  const popSubmit = () => {
-    handlePop(true);
+
+  /**
+   * 草が生えました！のポップアップのsubmit
+   */
+  const showGrassModalSubmit = () => {
+    // 草が生えました！のポップアップを非表示・食事するヤギの表示・通常のヤギを非表示
+    setIsShowNewGrassModal(false);
     handleEat(true);
     setDispWalker(false);
+
+    // 2秒後 食事するヤギを非表示・通常のヤギを表示
     setTimeout(() => {
+      handleEat(false);
       setDispWalker(true);
     }, 2000);
   };
+
   const walking = () => {
     handleEat(false);
   };
@@ -147,41 +168,39 @@ export const BattleView: FC = () => {
           }}
         >
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
-            {/* <Battleacstion
-                monster={monster}
-                eatCount={eatCount}
-                emotionData={emotionData}
-                open={isBattleModalOpen}
-                openClick={handleBattleModalOpen}
-                closeClick={handleBattleModalClose}
-              /> */}
             <BattleResult
-              monster={monster}
               eatCount={eatCount}
-              emotionData={emotionData}
-              open={isBattleModalOpen}
-              closeClick={handleBattleModalClose}
+              typeId={typeId}
+              open={isBattleresultModalOpen}
+              closeClick={handleBattleresultModalClose}
             />
             <ShowNewGrassModal
               emotionData={emotionData}
-              isOpen={pop}
-              popSubmit={popSubmit}
+              isOpen={isShowNewGrassModal}
+              popSubmit={showGrassModalSubmit}
               randomNum={random ?? 0}
             />
             {EvoPopup ? (
               <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
             ) : null}
-            <EvolutionPopup eatCount={eatCount} pop={pop} evolution={evolution} evoPop={evoPop} />
+            <EvolutionPopup
+              eatCount={eatCount}
+              pop={!isShowNewGrassModal}
+              evolution={evolution}
+              evoPop={evoPop}
+            />
+
             <Box sx={{ height: '80vh' }}>
-              <Form
+              <BattleForm
                 inputText={inputText}
                 handleChange={handleInputText}
                 handleSubmit={handleSubmit}
+                handleResultChange={handleBattleresultModalOpen}
                 isDisableTextField={isDisableTextField()}
               />
               <Container
                 style={{
-                  backgroundImage: `url(${mori})`,
+                  backgroundImage: `url(${sougen})`,
                   backgroundSize: '100% 100%',
                   backgroundPosition: 'bottom',
                   backgroundRepeat: 'no-repeat',
@@ -190,7 +209,19 @@ export const BattleView: FC = () => {
                 }}
               >
                 <Grid container>
-                  <Grid item xs={2} />
+                  <Grid item xs={2}>
+                    <Container
+                      disableGutters
+                      style={{
+                        backgroundImage: `url(${monsterImg})`,
+                        backgroundSize: '100% 100%',
+                        backgroundPosition: 'bottom',
+                        backgroundRepeat: 'no-repeat',
+                        width: '300px',
+                        height: '300px',
+                      }}
+                    />
+                  </Grid>
                   <Grid item xs={6}>
                     <Eat
                       emotionData={emotionData}
@@ -213,7 +244,7 @@ export const BattleView: FC = () => {
       </Stack>
 
       {/* ナビゲーションバー */}
-      <BattleNavBarCon handleBattleModalOpen={handleBattleModalOpen} />
+      <BattleNavBarCon handleMonsterModalOpen={handleBattleModalOpen} />
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />

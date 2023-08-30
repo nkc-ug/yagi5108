@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
@@ -7,25 +7,26 @@ import { Button, Stack } from '@mui/material';
 import { EATLIMIT } from '../../const/eatLimit';
 import { EmotionDataType } from '../../types/EmotionDataType';
 import { modalStyle } from '../../styles/modalStyle';
+import { MonsterNumberContext } from '../../provider/ContextProviders';
 
 type Props = {
-  monster: number;
   eatCount: number;
   open: boolean;
-  emotionData: EmotionDataType;
+  typeId: number;
   closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-const BattleResult: FC<Props> = ({ monster, eatCount, open, emotionData, closeClick }) => {
+const BattleResult: FC<Props> = ({ eatCount, open, typeId, closeClick }) => {
+  const [monster] = useContext(MonsterNumberContext);
   const [label, setLabel] = useState('');
-  const emoId = emotionData.emoId;
   useEffect(() => {
-    if (monster === emoId) {
+    if (monster === typeId) {
       setLabel('ヤギはたたかいにかったようだ！やぎをほめよう！');
     } else {
       setLabel('ヤギはたたかいにまけてしまった！やぎをはげまそう！');
     }
-  }, []);
+    console.log(monster, typeId);
+  }, [monster, typeId]);
 
   return (
     <div>
@@ -56,6 +57,8 @@ const BattleResult: FC<Props> = ({ monster, eatCount, open, emotionData, closeCl
               <Stack justifyContent="center" spacing={1}>
                 <Typography variant="h6" textAlign={'center'}>
                   {label}
+                  {monster}
+                  {typeId}
                 </Typography>
               </Stack>
               <Stack justifyContent="center" direction="row">

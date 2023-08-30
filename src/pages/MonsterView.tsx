@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
 import night from '../assets/night.png';
 import sougen from '../assets/sougen.png';
@@ -8,28 +8,9 @@ import { MonsterModal } from '../components/battle/MonsterModal';
 import { useDiscloser } from '../hooks/useDiscloser';
 
 export const MonsterView: FC = () => {
-  const [_, setMonsterUrl] = useContext(MonsterContext);
-  const [monsternumber, setmonsternumber] = useState(0);
-  const [monsterstring, setmonsterstring] = useState('');
+  const [monsterUrl] = useContext(MonsterContext);
   const [isMonsterModalOpen, __, handleMonsterModalClose] = useDiscloser(true);
-  useEffect(() => {
-    setmonsternumber(Math.floor(Math.random() * (4 - 1 + 1)) + 1);
-  }, [monsternumber]);
-
-  useEffect(() => {
-    switch (monsternumber) {
-      case 1:
-        setmonsterstring('monster_ikari');
-      case 2:
-        setmonsterstring('monster_kanasii');
-      case 3:
-        setmonsterstring('monster_tanosii');
-      case 4:
-        setmonsterstring('monster_yorokobi');
-    }
-  }, [monsterstring]);
-  const monsterImg = convertMonster({ monsterImgUrl: monsterstring });
-  setMonsterUrl(monsterImg); //コンバーターの方でやったほうがいい？
+  const monsterImg = convertMonster({ monsterImgUrl: monsterUrl });
 
   return (
     <div>
@@ -77,7 +58,7 @@ export const MonsterView: FC = () => {
                     <Grid item xs={2} />
                     <Grid item xs={8}>
                       <MonsterModal
-                        monsternumber={monsternumber}
+                        monsternumber={monsterUrl}
                         open={isMonsterModalOpen}
                         closeClick={handleMonsterModalClose}
                       />
