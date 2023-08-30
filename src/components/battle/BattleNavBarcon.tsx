@@ -1,12 +1,12 @@
 import { Container } from '@mui/material';
 import { FC } from 'react';
-import { NavBar } from './NavBar';
+import { BattleNavBar } from './BattleNavbar';
 
 type Props = {
-  handleTutorialModalOpen: () => void;
+  handleBattleModalOpen: () => void;
 };
 
-export const NavBarCon: FC<Props> = ({ handleTutorialModalOpen }) => {
+export const BattleNavBarCon: FC<Props> = ({ handleBattleModalOpen }) => {
   return (
     <Container
       maxWidth="sm"
@@ -19,7 +19,7 @@ export const NavBarCon: FC<Props> = ({ handleTutorialModalOpen }) => {
         zIndex: 3,
       }}
     >
-      <NavBar handleTutorialChange={handleTutorialModalOpen} />
+      <BattleNavBar handleBattleChange={handleBattleModalOpen} />
     </Container>
   );
 };
