@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Box from '@mui/material/Box';
 import yoro_hana from '../assets/yoro_hana.png';
 import yoro_kazitu from '../assets/yoro_kazitu.png';
@@ -11,6 +11,8 @@ import tano_kazitu from '../assets/tano_kazitu.png';
 import yagi_syokuzi from '../assets/yagi_syokuzi.png';
 import yagi from '../assets/yagi.png';
 import { EmotionDataType } from '../types/EmotionDataType';
+import { convertCostume } from '../util/convertCostume';
+import { GoatClothesContext } from '../provider/ContextProviders';
 
 type Props = {
   emotionData: EmotionDataType;
@@ -32,6 +34,12 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
   };
   const grassTop = position.y + 68;
   const grassLeft = position.x - 10;
+  const [clothesUrl] = useContext(GoatClothesContext);
+  const costumeImage = convertCostume({
+    costumeImgUrl: clothesUrl,
+    isRight: false,
+  });
+
   return (
     <Box>
       <div>
@@ -190,7 +198,16 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                 top: `${position.y}px`,
                 zIndex: 1,
               }}
-            />
+            >
+              <Box //衣装用のbox
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  backgroundSize: 'cover',
+                  backgroundImage: `url(${costumeImage})`,
+                }}
+              />
+            </Box>
           ) : (
             <Box
               sx={{
