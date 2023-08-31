@@ -99,7 +99,9 @@ export const AppView: FC = () => {
   };
 
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext); //音楽
-  const playBgm = () => {};
+  const playBgm = () => {
+    setMusicPlaying(true);
+  };
 
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
