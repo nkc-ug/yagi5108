@@ -20,6 +20,9 @@ import { NavBarCon } from '../components/navbar/NavBarCon';
 import { MusicContext } from '../provider/ContextProviders';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
+import { EmailContext } from '../provider/ContextProviders';
+import { IsLoginContext } from '../provider/ContextProviders';
 
 
 type RandomType = 0 | 1 | null;
@@ -64,6 +67,8 @@ export const AppView: FC = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
   };
+  const [email] = useContext(EmailContext);
+  const [isLogin] = useContext(IsLoginContext);
 
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext); //音楽
   const playBgm = () => {
@@ -116,6 +121,7 @@ export const AppView: FC = () => {
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
+    AddTotalEatCount(email, isLogin);
     const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(

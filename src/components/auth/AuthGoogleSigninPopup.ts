@@ -1,7 +1,8 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, User } from 'firebase/auth';
 import { provider } from '../../lib/AuthGoogleProviderCreate';
-import { addAuth } from './addAuth';
+import { SetupUserData } from './SetupUserData';
 import { UserProps } from '../../types/UserDataType';
+import { GetUserData } from './GetUserData';
 
 export const Auth = async () => {
   const auth = await getAuth();
@@ -20,6 +21,9 @@ export const Auth = async () => {
     userId: email,
     userName: userName,
   };
-  addAuth(addUser);
+  if (!(await GetUserData(email))) {
+    // ユーザーがFireStoreに登録されていない場合、初期データを設定する。
+    SetupUserData(addUser);
+  }
   return email;
 };
