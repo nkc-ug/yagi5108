@@ -20,11 +20,31 @@ export const ChangeBgImageBox = () => {
   };
 
   const imgItemList: ImgItemType[] = [
-    { itemNumber: 0, setItem: { groundUrl: 'sougen' }, bgImgUrl: sougen },
-    { itemNumber: 1, setItem: { skyUrl: 'noon' }, bgImgUrl: noon },
-    { itemNumber: 2, setItem: { groundUrl: 'umi' }, bgImgUrl: umi },
-    { itemNumber: 3, setItem: { skyUrl: 'night' }, bgImgUrl: night },
-    { itemNumber: 4, setItem: { groundUrl: 'mori' }, bgImgUrl: mori },
+    {
+      itemNumber: 0,
+      setItem: { groundUrl: 'sougen' },
+      bgImgUrl: sougen,
+    },
+    {
+      itemNumber: 1,
+      setItem: { skyUrl: 'noon' },
+      bgImgUrl: noon,
+    },
+    {
+      itemNumber: 2,
+      setItem: { groundUrl: 'umi' },
+      bgImgUrl: umi,
+    },
+    {
+      itemNumber: 3,
+      setItem: { skyUrl: 'night' },
+      bgImgUrl: night,
+    },
+    {
+      itemNumber: 4,
+      setItem: { groundUrl: 'mori' },
+      bgImgUrl: mori,
+    },
   ];
 
   return (
@@ -41,6 +61,15 @@ export const ChangeBgImageBox = () => {
             <Button
               onClick={() => {
                 setBackgroundUrl({ ...BackgroundUrl, ...item.setItem });
+              }}
+              sx={{
+                border: item.setItem.groundUrl
+                  ? BackgroundUrl.groundUrl === item.setItem.groundUrl
+                    ? '5px solid #e8d64d'
+                    : ''
+                  : BackgroundUrl.skyUrl === item.setItem.skyUrl
+                  ? '5px solid #e8d64d'
+                  : '',
               }}
             >
               <BgImageBox BgImageUrl={item.bgImgUrl} />
