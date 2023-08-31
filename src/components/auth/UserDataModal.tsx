@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, Stack } from '@mui/material';
 import { modalStyle } from '../../styles/modalStyle';
 import { EmailContext } from '../../provider/ContextProviders';
-import { getAuth } from './getAuth';
+import { GetUserData } from './GetUserData';
 import { UserDataType } from '../../types/UserDataType';
 
 type Props = {
@@ -15,12 +15,12 @@ type Props = {
 };
 
 export const UserDataModal: FC<Props> = ({ open, closeClick }) => {
-  const [email, setEmail] = useContext(EmailContext);
+  const [email] = useContext(EmailContext);
   const [userData, setUserData] = useState<UserDataType>();
   useEffect(() => {
     // useEffect自体ではasyncの関数を受け取れないので内部で関数を定義して呼び出す。
     const access_db = async () => {
-      const response = await getAuth(email);
+      const response = await GetUserData(email);
       setUserData(response);
     };
     access_db();
@@ -30,6 +30,8 @@ export const UserDataModal: FC<Props> = ({ open, closeClick }) => {
     [1, email],
     [2, 'ゆーざーねーむ'],
     [3, userData?.userName],
+    [4, 'ことばをたべたかいすう'],
+    [5, `${String(userData?.totalEatCount)}かい`],
   ]);
 
   return (

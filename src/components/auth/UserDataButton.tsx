@@ -5,7 +5,7 @@ import { UserDataModal } from './UserDataModal';
 import { useDiscloser } from '../../hooks/useDiscloser';
 
 export const UserDataButton = () => {
-  const [isLogin, setIsLogin] = useContext(IsLoginContext);
+  const [isLogin] = useContext(IsLoginContext);
   const [modalOpen, handleUserModalOpen, handleUserModalClose] = useDiscloser(false);
 
   const userDataButton = async () => {
