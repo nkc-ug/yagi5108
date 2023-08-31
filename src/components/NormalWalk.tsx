@@ -72,9 +72,6 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
         top: `${position.y}px`,
         transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
       }}
-      onClick={() => {
-        audioPlay;
-      }}
     >
       <Box //衣装用のbox
         sx={{
@@ -83,7 +80,9 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
           backgroundSize: 'cover',
           backgroundImage: `url(${costumeImage})`,
         }}
-      />
+      >
+        <Button onClick={audioPlay} sx={{ width: '100%', height: '100%' }} />
+      </Box>
     </div>
   );
 };
