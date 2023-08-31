@@ -23,7 +23,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             ことばをたべさせて
             <br />
-            やぎをよろこびのかんじょうに
+            やぎをいかりのかんじょうに
             <br />
             そだてよう
           </div>
@@ -39,7 +39,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             ことばをたべさせて
             <br />
-            やぎをいかりのかんじょうに
+            やぎをかなしいかんじょうに
             <br />
             そだてよう
           </div>
@@ -55,7 +55,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             ことばをたべさせて
             <br />
-            かなしいかんじょうに
+            やぎをたのしいのかんじょうに
             <br />
             そだてよう
           </div>
@@ -71,7 +71,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             ことばをたべさせて
             <br />
-            たのしいのかんじょうに
+            やぎをよろこびのかんじょうに
             <br />
             そだてよう
           </div>
