@@ -52,7 +52,7 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   // ログイン状態を保持するステート
   const [login, setLogin] = useState(false);
   // ユーザーのEmailを保持するステート
-  const [email, setEmail] = useState('null');
+  const [email, setEmail] = useState('');
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
@@ -61,9 +61,7 @@ export const ContextProviders: FC<Props> = ({ children }) => {
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
             <MonsterNumberContext.Provider value={[monsternumber, setMonsterNumber]}>
               <LoginContext.Provider value={[login, setLogin]}>
-               <EmailContext.Provider value={[email, setEmail]}>
-                 {children}
-                </EmailContext.Provider>
+                <EmailContext.Provider value={[email, setEmail]}>{children}</EmailContext.Provider>
               </LoginContext.Provider>
             </MonsterNumberContext.Provider>
           </MonsterContext.Provider>
