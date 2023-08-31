@@ -39,7 +39,7 @@ export const MonsterContext = createContext<StringContextType>({} as StringConte
 //バトルのためにモンスターの属性値を保持するコンテキスト
 export const MonsterNumberContext = createContext<NumberContextType>({} as NumberContextType);
 // ログイン状態を保持するコンテキスト
-export const LoginContext = createContext<BooleanContextType>({} as BooleanContextType);
+export const IsLoginContext = createContext<BooleanContextType>({} as BooleanContextType);
 // ユーザーのEmailを保持するコンテキスト
 export const EmailContext = createContext<StringContextType>({} as StringContextType);
 
@@ -50,19 +50,20 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   const [goatUrl, setGoatUrl] = useState('');
   // 背景（空・地面）を保持するステート
   const [backgroundUrl, setBackgroundUrl] = useState({
-    skyUrl: '',
-    groundUrl: '',
+    skyUrl: 'noon',
+    groundUrl: 'sougen',
   });
   // モンスターを保持するステート
   const [monsterUrl, setMonsterUrl] = useState('');
   //monsterの属性値を保持するステート
   const [monsternumber, setMonsterNumber] = useState(0);
   // ログイン状態を保持するステート
-  const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   // ユーザーのEmailを保持するステート
-  const [email, setEmail] = useState('null');
+  const [email, setEmail] = useState('');
   // 音楽を保持するステート
   const [isMusicPlaying, setMusicPlaying] = useState(false);
+
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
@@ -70,13 +71,13 @@ export const ContextProviders: FC<Props> = ({ children }) => {
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
             <MonsterNumberContext.Provider value={[monsternumber, setMonsterNumber]}>
-              <LoginContext.Provider value={[login, setLogin]}>
+              <IsLoginContext.Provider value={[isLogin, setIsLogin]}>
                 <EmailContext.Provider value={[email, setEmail]}>
                   <MusicContext.Provider value={[isMusicPlaying, setMusicPlaying]}>
                     {children}
                   </MusicContext.Provider>
                 </EmailContext.Provider>
-              </LoginContext.Provider>
+              </IsLoginContext.Provider>
             </MonsterNumberContext.Provider>
           </MonsterContext.Provider>
         </BackgroundContext.Provider>

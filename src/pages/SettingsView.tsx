@@ -14,6 +14,8 @@ import backgroundgImage from '../assets/backGround.png';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
 import { MusicContext } from '../provider/ContextProviders';
+import { LoginButton } from '../components/auth/LoginButton';
+import { UserDataButton } from '../components/auth/UserDataButton';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
@@ -21,10 +23,6 @@ export const SettingsView = () => {
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
-
-  const [loginButtonText, setLoginButtonText] = useState('ろぐいん');
-  const [login, setLogin] = useContext(LoginContext);
-  const [email, setEmail] = useContext(EmailContext);
 
   const handleChange = (event: Event, newValue: number | number[]) => {
     setValue(newValue as number);
@@ -71,27 +69,6 @@ export const SettingsView = () => {
     }
   };
 
-  const loginButton = async () => {
-    if (!login) {
-      const fetchEmail = String(
-        localStorage.getItem('email') !== null ? localStorage.getItem('email') : ''
-      );
-      setEmail(fetchEmail);
-      if (fetchEmail === '') {
-        const fetchEmail = await Auth();
-        setEmail(fetchEmail);
-        localStorage.setItem('email', fetchEmail);
-      }
-      setLoginButtonText('ろぐあうと');
-      setLogin(true);
-    } else {
-      localStorage.clear();
-      setEmail('');
-      setLoginButtonText('ろぐいん');
-      setLogin(false);
-    }
-  };
-
   return (
     <div>
       <Stack direction="row" justifyContent="center" spacing={2}>
@@ -125,12 +102,11 @@ export const SettingsView = () => {
             <Slider aria-label="Volume" value={value} onChange={handleChange} />
             <VolumeUp />
           </Stack>{' '}
-          <Button variant="contained" onClick={loginButton}>
-            {loginButtonText}
-          </Button>
-        </Container>
-      </Stack>
-      <SettingsNavBarCon />
-    </div>
+        <UserDataButton />
+        <LoginButton />
+      </Container>
+    </Stack>
+　 <SettingsNavBarCon />
+  </div>
   );
 };
