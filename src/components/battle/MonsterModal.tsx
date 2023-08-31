@@ -100,7 +100,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
               variant="h5"
               textAlign={'center'}
               sx={{
-                fontSize: '40px',
+                fontSize: '25px',
               }}
             >
               モンスターがあらわれた！
