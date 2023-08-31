@@ -31,7 +31,7 @@ export const MonsterContext = createContext<StringContextType>({} as StringConte
 //バトルのためにモンスターの属性値を保持するコンテキスト
 export const MonsterNumberContext = createContext<NumberContextType>({} as NumberContextType);
 // ログイン状態を保持するコンテキスト
-export const LoginContext = createContext<BooleanContextType>({} as BooleanContextType);
+export const IsLoginContext = createContext<BooleanContextType>({} as BooleanContextType);
 // ユーザーのEmailを保持するコンテキスト
 export const EmailContext = createContext<StringContextType>({} as StringContextType);
 
@@ -50,9 +50,9 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   //monsterの属性値を保持するステート
   const [monsternumber, setMonsterNumber] = useState(0);
   // ログイン状態を保持するステート
-  const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   // ユーザーのEmailを保持するステート
-  const [email, setEmail] = useState('null');
+  const [email, setEmail] = useState('');
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
@@ -60,11 +60,9 @@ export const ContextProviders: FC<Props> = ({ children }) => {
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
             <MonsterNumberContext.Provider value={[monsternumber, setMonsterNumber]}>
-              <LoginContext.Provider value={[login, setLogin]}>
-               <EmailContext.Provider value={[email, setEmail]}>
-                 {children}
-                </EmailContext.Provider>
-              </LoginContext.Provider>
+              <IsLoginContext.Provider value={[isLogin, setIsLogin]}>
+                <EmailContext.Provider value={[email, setEmail]}>{children}</EmailContext.Provider>
+              </IsLoginContext.Provider>
             </MonsterNumberContext.Provider>
           </MonsterContext.Provider>
         </BackgroundContext.Provider>
