@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { Auth } from '../components/auth/AuthGoogleSigninPopup';
 import { getAuth } from '../components/auth/getAuth';
 import { UserDataType } from '../types/UserDataType';
-import { LoginContext } from '../provider/ContextProviders';
+import { IsLoginContext } from '../provider/ContextProviders';
 import { EmailContext } from '../provider/ContextProviders';
 import bgm from '../Audio/Bgm.mp3';
 import { VolumeDown, VolumeUp } from '@mui/icons-material';
@@ -102,11 +102,11 @@ export const SettingsView = () => {
             <Slider aria-label="Volume" value={value} onChange={handleChange} />
             <VolumeUp />
           </Stack>{' '}
-        <UserDataButton />
-        <LoginButton />
-      </Container>
-    </Stack>
-　 <SettingsNavBarCon />
-  </div>
+          <UserDataButton />
+          <LoginButton />
+        </Container>
+      </Stack>
+      <SettingsNavBarCon />
+    </div>
   );
 };
