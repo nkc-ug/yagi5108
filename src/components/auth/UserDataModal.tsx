@@ -52,9 +52,9 @@ export const UserDataModal: FC<Props> = ({ open, closeClick }) => {
           <Stack sx={modalStyle} spacing={3}>
             <Typography
               id="transition-modal-title"
-              variant="h5"
-              textAlign={'center'}
               sx={{
+                variant: 'h5',
+                textAlign: 'center',
                 fontSize: '30px',
               }}
             >
@@ -62,7 +62,7 @@ export const UserDataModal: FC<Props> = ({ open, closeClick }) => {
             </Typography>
             <Stack justifyContent="center" spacing={1}>
               {[...labelList].map(([key]) => (
-                <Typography key={key} variant="h6" textAlign={'center'} sx={{ mt: 2 }}>
+                <Typography key={key} sx={{ mt: 2, variant: 'h6', textAlign: 'center' }}>
                   {labelList.get(key)}
                 </Typography>
               ))}

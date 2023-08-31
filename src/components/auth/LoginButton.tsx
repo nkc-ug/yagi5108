@@ -1,16 +1,16 @@
 import { useState, useContext } from 'react';
 import { Button } from '@mui/material';
 import { Auth } from './AuthGoogleSigninPopup';
-import { LoginContext } from '../../provider/ContextProviders';
+import { IsLoginContext } from '../../provider/ContextProviders';
 import { EmailContext } from '../../provider/ContextProviders';
 
 export const LoginButton = () => {
   const [loginButtonText, setLoginButtonText] = useState('ろぐいん');
-  const [login, setLogin] = useContext(LoginContext);
+  const [isLogin, setIsLogin] = useContext(IsLoginContext);
   const [email, setEmail] = useContext(EmailContext);
 
-  const loginButton = async () => {
-    if (!login) {
+  const handleLoginClick = async () => {
+    if (!isLogin) {
       // ログイン作業の分岐
       const fetchEmail = String(
         localStorage.getItem('email') !== null ? localStorage.getItem('email') : ''
@@ -19,23 +19,22 @@ export const LoginButton = () => {
       if (fetchEmail === '') {
         // ローカルストレージにEmailが格納されていない場合の処理(Authでログインし、Emailを取得後ローカルストレージに格納)
         const fetchEmail = await Auth();
-        // const fetchEmail = 'hogehogge@hoge.ho.ge';
         setEmail(fetchEmail);
         localStorage.setItem('email', fetchEmail);
       }
-      setLogin(true);
+      setIsLogin(true);
     } else {
       // ログアウト作業の分岐
       localStorage.clear();
       setEmail('');
-      setLogin(false);
+      setIsLogin(false);
     }
     setLoginButtonText(loginButtonText === 'ろぐいん' ? 'ろぐあうと' : 'ろぐいん');
-    setLogin(!login);
+    setIsLogin(!isLogin);
   };
 
   return (
-    <Button variant="contained" onClick={loginButton}>
+    <Button variant="contained" onClick={handleLoginClick}>
       {loginButtonText}
     </Button>
   );
