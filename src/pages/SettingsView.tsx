@@ -2,12 +2,6 @@ import { BottomNavigationAction, Slider, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import React, { useEffect, useState, useContext } from 'react';
-import { Button } from '@mui/material';
-import { Auth } from '../components/auth/AuthGoogleSigninPopup';
-import { getAuth } from '../components/auth/getAuth';
-import { UserDataType } from '../types/UserDataType';
-import { IsLoginContext } from '../provider/ContextProviders';
-import { EmailContext } from '../provider/ContextProviders';
 import bgm from '../Audio/Bgm.mp3';
 import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import backgroundgImage from '../assets/backGround.png';
@@ -58,16 +52,16 @@ export const SettingsView = () => {
     };
   }, [value]);
 
-  const toggleBGM = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
+  // const toggleBGM = () => {
+  //   if (audioRef.current) {
+  //     if (isPlaying) {
+  //       audioRef.current.pause();
+  //     } else {
+  //       audioRef.current.play();
+  //     }
+  //     setIsPlaying(!isPlaying);
+  //   }
+  // };
 
   return (
     <div>
@@ -97,11 +91,11 @@ export const SettingsView = () => {
           >
             <BottomNavigationAction
               icon={isPlaying && value > 0 ? <VolumeDown /> : <VolumeOffIcon />}
-              onClick={toggleBGM}
+              // onClick={toggleBGM}
             />
-            <Slider aria-label="Volume" value={value} onChange={handleChange} />
+            <Slider aria-label="Volume" value={value} /*onChange={handleChange}*/ />
             <VolumeUp />
-          </Stack>{' '}
+          </Stack>
           <UserDataButton />
           <LoginButton />
         </Container>
