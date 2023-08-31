@@ -95,14 +95,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
       >
         <Fade in={open}>
           <Stack sx={MonsterModalStyle} spacing={3}>
-            <Typography
-              id="transition-modal-title"
-              variant="h5"
-              textAlign={'center'}
-              sx={{
-                fontSize: '25px',
-              }}
-            >
+            <Typography id="transition-modal-title" variant="h5" textAlign={'center'}>
               モンスターがあらわれた！
             </Typography>
             <Stack justifyContent="center" spacing={1}>
