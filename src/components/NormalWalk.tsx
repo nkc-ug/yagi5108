@@ -19,14 +19,14 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
 
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
-    x: containerSize.width / 3,
+    x: containerSize.width / 2,
     y: (containerSize.height / 10) * 5,
   });
   useEffect(() => {
-    const minX = -50; // 開始位置のx座標
-    const minY = (containerSize.height / 10) * 4; // 開始位置のy座標
-    const maxX = (containerSize.width / 10) * 5; // 終了位置のx座標
-    const maxY = (containerSize.height / 10) * 6; // 終了位置のy座標
+    const minX = 0; // 開始位置のx座標
+    const minY = 0; // 開始位置のy座標
+    const maxX = containerSize.width - 100; // 終了位置のx座標
+    const maxY = containerSize.height - 100; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
@@ -61,36 +61,27 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
 
   return (
     <div
+      ref={walkerRef}
       style={{
-        position: 'relative',
-        width: '100%',
-        height: '100%',
+        position: 'sticky',
+        width: '130px',
+        height: '130px',
+        backgroundImage: `url(${goatImage})`,
+        backgroundSize: 'cover',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
       }}
+      onClick={audioPlay}
     >
-      <Button variant="text" onClick={audioPlay}>
-        <div
-          ref={walkerRef}
-          style={{
-            position: 'absolute',
-            width: '130px',
-            height: '130px',
-            backgroundImage: `url(${goatImage})`,
-            backgroundSize: 'cover',
-            left: `${position.x}px`,
-            top: `${position.y}px`,
-            transition: 'left 3s ease-in-out, top 3s ease-in-out', // 移動アニメーションの時間を延長（3秒）
-          }}
-        >
-          <Box //衣装用のbox
-            sx={{
-              width: '100%',
-              height: '100%',
-              backgroundSize: 'cover',
-              backgroundImage: `url(${costumeImage})`,
-            }}
-          />
-        </div>
-      </Button>
+      <Box //衣装用のbox
+        sx={{
+          width: '100%',
+          height: '100%',
+          backgroundSize: 'cover',
+          backgroundImage: `url(${costumeImage})`,
+        }}
+      />
     </div>
   );
 };

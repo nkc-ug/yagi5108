@@ -8,9 +8,10 @@ type Props = {
       height: number;
     }>
   ) => void;
+  children: React.ReactNode;
 };
 
-export const PageContainer: FC<Props> = ({ updatePageSize }) => {
+export const PageContainer: FC<Props> = ({ updatePageSize, children }) => {
   const walkerRef = useRef<HTMLDivElement>(null);
 
   const updateContainerSize = useCallback(() => {
@@ -43,9 +44,8 @@ export const PageContainer: FC<Props> = ({ updatePageSize }) => {
   }, [updateContainerSize]);
 
   return (
-    <Container
-      ref={walkerRef}
-      style={{ position: 'absolute', width: '100%', height: '100%', padding: 0, margin: 0 }}
-    />
+    <Container ref={walkerRef} style={{ width: '100%', height: '100%', padding: 0, margin: 0 }}>
+      {children}
+    </Container>
   );
 };
