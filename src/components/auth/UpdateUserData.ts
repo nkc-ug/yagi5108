@@ -19,13 +19,17 @@ updateData: 更新したいデータを入力
 3,SetupUserData.tsにフィールド名:初期値を追加
 */
 
-export const UpdateUserData = async (userId: string, updateDataName: string, updateData: any) => {
+export const UpdateUserData = async (
+  userId: string,
+  updateDataName: string,
+  updateData: string | number | boolean
+) => {
   const collectionRef = doc(db, USERCOLLECTIONNAME, userId);
   const docData = dataPackage(updateDataName, updateData);
   await setDoc(collectionRef, docData, { merge: true });
 };
 
-const dataPackage = (updateDataName: string, updateData: any) => {
+const dataPackage = (updateDataName: string, updateData: string | number | boolean) => {
   switch (updateDataName) {
     case 'userName':
       return { userName: updateData };
