@@ -9,6 +9,7 @@ import { GoatContext } from '../provider/ContextProviders';
 import { convertGoat } from '../util/convertGoat';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+import { CostumeNavBarCon } from '../components/costume/CostumeNavBarcon';
 
 export const CostumePage = () => {
   const [value, setValue] = useState('1');
@@ -118,6 +119,7 @@ export const CostumePage = () => {
           </div>
         </Grid>
       </Container>
+      <CostumeNavBarCon />
     </Stack>
   );
 };

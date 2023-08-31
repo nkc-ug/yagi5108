@@ -15,16 +15,7 @@ export const CostumeHeader = () => {
         padding: '10px',
       }}
     >
-      <Grid item xs={2}>
-        <IconButton
-          aria-label="ArrowBackIcon"
-          onClick={() => {
-            navigate('/');
-          }}
-        >
-          <ArrowBackIcon />
-        </IconButton>
-      </Grid>
+      <Grid item xs={2} />
       <Grid item xs={8}>
         <Typography variant="h4">いまのヤギ</Typography>
       </Grid>
