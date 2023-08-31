@@ -4,14 +4,9 @@ import { FC, useRef, useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
 // import bgm from '../../Audio/Bgm.mp3';
 import { StyleMenu } from '../navbar/StyleMenu';
-
-// type Props = {
-//   handleSettingsChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
-// };
+import React from 'react';
 
 export const SettingsNavBar: FC = () => {
-  //   const audioRef = useRef<HTMLAudioElement | null>(null);
-  //   const [isPlaying, setIsPlaying] = useState(false);
   const navigate = useNavigate();
 
   const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
@@ -19,7 +14,6 @@ export const SettingsNavBar: FC = () => {
 
   return (
     <Box>
-      {/* <audio ref={audioRef} src={bgm} loop /> */}
       <BottomNavigation
         showLabels
         sx={{

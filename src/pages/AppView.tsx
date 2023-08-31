@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Container, Stack, Grid, Box } from '@mui/material';
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
@@ -22,7 +22,8 @@ import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
-import { Auth } from '../components/AuthGoogleSigninPopup';
+// import { Auth } from '../components/AuthGoogleSigninPopup';
+import { MusicContext } from '../provider/ContextProviders';
 
 type RandomType = 0 | 1 | null;
 
@@ -97,11 +98,13 @@ export const AppView: FC = () => {
     setRandom(setItem);
   };
 
+  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext); //音楽
+  const playBgm = () => {};
+
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
     setDispCircle(true);
     setInputText('');
-
 
     // 感情データの取得
     const fetchEmotionData = await getEmotionApi(inputText, emotionData);
