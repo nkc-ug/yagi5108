@@ -1,9 +1,6 @@
-import { BottomNavigationAction, Slider, Typography } from '@mui/material';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Button } from '@mui/material';
 import { Auth } from './AuthGoogleSigninPopup';
-import { getAuth } from './getAuth';
-import { UserDataType } from '../../types/UserDataType';
 import { LoginContext } from '../../provider/ContextProviders';
 import { EmailContext } from '../../provider/ContextProviders';
 
