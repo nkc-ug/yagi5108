@@ -164,7 +164,6 @@ export const AppView: FC = () => {
 
   return (
     <div>
-      <PageContainer updatePageSize={updatePageSize} />
       <Stack direction="row" justifyContent="center">
         <Container
           disableGutters
@@ -203,34 +202,35 @@ export const AppView: FC = () => {
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
               />
-              <Container
-                style={{
-                  backgroundImage: `url(${backGround.groundUrl})`,
-                  backgroundSize: '100% 100%',
-                  backgroundPosition: 'bottom',
-                  backgroundRepeat: 'no-repeat',
-                  height: '60vh',
-                  width: '100%',
-                }}
-              >
-                <Grid container>
-                  <Grid item xs={2} />
-                  <Grid item xs={6}>
-                    <Eat
-                      emotionData={emotionData}
-                      eat={eat}
-                      showImage={showImage}
-                      randomNum={random ?? 0}
-                      containerSize={containerSize}
-                    />
-                    {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
-                    {evoWalk ? (
-                      <EvolutionWalk typeId={typeId} containerSize={containerSize} />
-                    ) : null}
+              <PageContainer updatePageSize={updatePageSize}>
+                <Container
+                  style={{
+                    backgroundImage: `url(${backGround.groundUrl})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'bottom',
+                    backgroundRepeat: 'no-repeat',
+                    height: '60vh',
+                    width: '100%',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
+                  {evoWalk ? <EvolutionWalk typeId={typeId} containerSize={containerSize} /> : null}
+                  <Grid container>
+                    <Grid item xs={2} />
+                    <Grid item xs={6}>
+                      <Eat
+                        emotionData={emotionData}
+                        eat={eat}
+                        showImage={showImage}
+                        randomNum={random ?? 0}
+                        containerSize={containerSize}
+                      />
+                    </Grid>
+                    <Grid item xs={4} />
                   </Grid>
-                  <Grid item xs={4} />
-                </Grid>
-              </Container>
+                </Container>
+              </PageContainer>
             </Box>
           </Container>
         </Container>

@@ -1,9 +1,6 @@
 import { Grid, Typography, Button, IconButton } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
 
 export const CostumeHeader = () => {
-  const navigate = useNavigate();
   return (
     <Grid
       container
