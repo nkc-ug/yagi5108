@@ -2,18 +2,25 @@ import { BottomNavigationAction, Slider, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import React, { useEffect, useState, useContext } from 'react';
-import VolumeDownIcon from '@mui/icons-material/VolumeDown';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { Button } from '@mui/material';
+import { Auth } from '../components/auth/AuthGoogleSigninPopup';
+import { getAuth } from '../components/auth/getAuth';
+import { UserDataType } from '../types/UserDataType';
+import { IsLoginContext } from '../provider/ContextProviders';
+import { EmailContext } from '../provider/ContextProviders';
 import bgm from '../Audio/Bgm.mp3';
 import { VolumeDown, VolumeUp } from '@mui/icons-material';
-import backgroundgImage from '../assets/tutorial.png';
+import backgroundgImage from '../assets/backGround.png';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
+import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
 import { UserDataButton } from '../components/auth/UserDataButton';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
@@ -21,6 +28,12 @@ export const SettingsView = () => {
     setValue(newValue as number);
     if (audioRef.current) {
       audioRef.current.volume = (newValue as number) / 100;
+    }
+
+    if (newValue === 0) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
     }
   };
 
@@ -57,31 +70,43 @@ export const SettingsView = () => {
   };
 
   return (
-    <Stack direction="row" justifyContent="center" spacing={2}>
-      <Container
-        maxWidth="sm"
-        sx={{
-          padding: '50px',
-          marginTop: '50%',
-          textAlign: 'center',
-          backgroundImage: `url(${backgroundgImage})`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        }}
-      >
-        <Typography variant="h4">おんりょう</Typography>
-        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-          <BottomNavigationAction
-            icon={isPlaying ? <VolumeDown /> : <VolumeOffIcon />}
-            onClick={toggleBGM}
-          />
-          <Slider aria-label="Volume" value={value} onChange={handleChange} />
-          <VolumeUp />
-        </Stack>{' '}
-        <UserDataButton />
-        <LoginButton />
-      </Container>
-    </Stack>
+    <div>
+      <Stack direction="row" justifyContent="center" spacing={2}>
+        <Container
+          maxWidth="sm"
+          sx={{
+            padding: '50px',
+            marginTop: '50%',
+            minHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            textAlign: 'center',
+            backgroundImage: `url(${backgroundgImage})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+          }}
+        >
+          <Typography variant="h4">おんりょう</Typography>
+          <Stack
+            spacing={2}
+            direction="row"
+            sx={{ mb: 1 }}
+            alignItems="center"
+            style={{ marginTop: '30%' }}
+          >
+            <BottomNavigationAction
+              icon={isPlaying && value > 0 ? <VolumeDown /> : <VolumeOffIcon />}
+              onClick={toggleBGM}
+            />
+            <Slider aria-label="Volume" value={value} onChange={handleChange} />
+            <VolumeUp />
+          </Stack>{' '}
+          <UserDataButton />
+          <LoginButton />
+        </Container>
+      </Stack>
+      <SettingsNavBarCon />
+    </div>
   );
 };

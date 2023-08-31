@@ -1,10 +1,7 @@
 import { Container } from '@mui/material';
 import { FC } from 'react';
 import { SettingsNavBar } from './SettingsNavbar';
-
-// type Props = {
-//   handleTutorialModalOpen: () => void;
-// };
+import React from 'react';
 
 export const SettingsNavBarCon: FC = () => {
   return (

@@ -17,8 +17,10 @@ import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { MusicContext } from '../provider/ContextProviders';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -61,6 +63,11 @@ export const AppView: FC = () => {
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
+  };
+
+  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext); //音楽
+  const playBgm = () => {
+    setMusicPlaying(true);
   };
 
   const handleSubmit = async () => {
