@@ -61,11 +61,11 @@ export const UserDataDisplay: FC = () => {
           </div>
           <div>
             <h3>ことばをたべさせたかいすう</h3>
-            <h4>{String(userData?.totalEatCount)}かい</h4>
+            <h4>{userData?.totalEatCount ? String(userData?.totalEatCount) : '0'}かい</h4>
           </div>
           <div>
             <h3>バトルでかったかいすう</h3>
-            <h4>{String(userData?.battleWinCount)}かい</h4>
+            <h4>{userData?.battleWinCount ? String(userData?.battleWinCount) : '0'}かい</h4>
           </div>
         </Box>
       </Box>
