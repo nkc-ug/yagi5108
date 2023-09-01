@@ -24,7 +24,6 @@ import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
 import { EmailContext } from '../provider/ContextProviders';
 import { IsLoginContext } from '../provider/ContextProviders';
 
-
 type RandomType = 0 | 1 | null;
 
 const emotionInitialData = {
@@ -192,9 +191,6 @@ export const AppView: FC = () => {
               randomNum={random ?? 0}
             />
             <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
-            {EvoPopup ? (
-              <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
-            ) : null}
             <EvolutionPopup
               eatCount={eatCount}
               pop={!isShowNewGrassModal}
@@ -222,19 +218,16 @@ export const AppView: FC = () => {
                 >
                   {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
                   {evoWalk ? <EvolutionWalk typeId={typeId} containerSize={containerSize} /> : null}
-                  <Grid container>
-                    <Grid item xs={2} />
-                    <Grid item xs={6}>
-                      <Eat
-                        emotionData={emotionData}
-                        eat={eat}
-                        showImage={showImage}
-                        randomNum={random ?? 0}
-                        containerSize={containerSize}
-                      />
-                    </Grid>
-                    <Grid item xs={4} />
-                  </Grid>
+                  <Eat
+                    emotionData={emotionData}
+                    eat={eat}
+                    showImage={showImage}
+                    randomNum={random ?? 0}
+                    containerSize={containerSize}
+                  />
+                  {EvoPopup ? (
+                    <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
+                  ) : null}
                 </Container>
               </PageContainer>
             </Box>

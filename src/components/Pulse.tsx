@@ -22,8 +22,8 @@ const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   const [clothesUrl] = useContext(GoatClothesContext);
 
   const position = {
-    x: (containerSize.width / 5) * 3,
-    y: (containerSize.height / 12) * 11,
+    x: containerSize.width / 2 - 120,
+    y: (containerSize.height / 10) * 8,
   };
   useEffect(() => {
     //let intervalId: NodeJS.Timeout;
@@ -69,28 +69,26 @@ const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   });
 
   return (
-    <div>
-      <Box
+    <Box
+      sx={{
+        position: 'sticky',
+        width: '130px',
+        height: '130px',
+        backgroundImage: `url(${isDisplayLeft ? yagi : backgroundImage})`,
+        backgroundSize: 'cover',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+      }}
+    >
+      <Box //衣装用のbox
         sx={{
-          position: 'absolute',
-          width: '130px',
-          height: '130px',
-          backgroundImage: `url(${isDisplayLeft ? yagi : backgroundImage})`,
+          width: '100%',
+          height: '100%',
           backgroundSize: 'cover',
-          left: `${position.x}px`,
-          top: `${position.y}px`,
+          backgroundImage: `url(${costumeImage})`,
         }}
-      >
-        <Box //衣装用のbox
-          sx={{
-            width: '100%',
-            height: '100%',
-            backgroundSize: 'cover',
-            backgroundImage: `url(${costumeImage})`,
-          }}
-        />
-      </Box>
-    </div>
+      />
+    </Box>
   );
 };
 
