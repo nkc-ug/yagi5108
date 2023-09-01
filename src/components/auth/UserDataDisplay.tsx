@@ -29,15 +29,14 @@ export const UserDataDisplay: FC = () => {
           borderRadius: '30px',
           padding: '15px',
           margin: '0px auto 10px auto',
-          width: '450px',
+          width: '350px',
         }}
       >
         <Typography
-          variant="h2"
+          variant="h4"
           sx={{
             backgroundColor: 'rgba(190, 190, 190, 0.6)',
             borderRadius: '20px',
-            fontSize: '40px',
             margin: '0px 0px 20px 0px',
             padding: '10px',
           }}
