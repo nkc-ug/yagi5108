@@ -4,6 +4,12 @@ import { USERCOLLECTIONNAME } from '../../lib/firestore';
 import { GetUserData } from './GetUserData';
 
 export const AddUserData = async (email: string) => {
+  const trophy = {
+    eatCount5: false,
+    eatCount10: false,
+    battleWinCount3: false,
+    battleWinCount5: false,
+  };
   const userData = await GetUserData(email);
   const collectionRef = doc(db, USERCOLLECTIONNAME, email);
   const docData = {
@@ -12,6 +18,7 @@ export const AddUserData = async (email: string) => {
     battleWinCount: 0,
     goatType: '',
     goatClothes: 'yagi',
+    trophy: trophy,
   };
   if (docData.userName !== 'NoLogin') {
     await setDoc(collectionRef, docData);

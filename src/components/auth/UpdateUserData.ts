@@ -1,6 +1,7 @@
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import { USERCOLLECTIONNAME, UserDBType } from '../../lib/firestore';
+import { TrophyType } from '../../types/UserDataType';
 
 /*
 ～UpdateUserDataについて～
@@ -22,14 +23,17 @@ updateData: 更新したいデータを入力
 export const UpdateUserData = async (
   userId: string,
   updateDataName: string,
-  updateData: string | number | boolean
+  updateData: string | number | boolean | TrophyType
 ) => {
   const collectionRef = doc(db, USERCOLLECTIONNAME, userId);
   const docData = dataPackage(updateDataName, updateData);
   await setDoc(collectionRef, docData, { merge: true });
 };
 
-const dataPackage = (updateDataName: string, updateData: string | number | boolean) => {
+const dataPackage = (
+  updateDataName: string,
+  updateData: string | number | boolean | TrophyType
+) => {
   switch (updateDataName) {
     case 'userName':
       return { userName: updateData };
@@ -41,5 +45,7 @@ const dataPackage = (updateDataName: string, updateData: string | number | boole
       return { totalEatCount: updateData };
     case 'battleWinCount':
       return { battleWinCount: updateData };
+    case 'trophy':
+      return { trophy: updateData };
   }
 };

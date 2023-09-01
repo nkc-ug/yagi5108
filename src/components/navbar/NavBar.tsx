@@ -5,6 +5,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { StyleMenu } from './StyleMenu';
 import {
   MonsterContext,
@@ -75,6 +76,14 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           icon={<SearchIcon />}
           onClick={() => {
             navigate('/CostumePage');
+          }}
+          sx={{ color: 'white' }}
+        />
+        <BottomNavigationAction
+          label="トロフィー"
+          icon={<EmojiEventsIcon />}
+          onClick={() => {
+            navigate('/TrophyPage');
           }}
           sx={{ color: 'white' }}
         />
