@@ -24,6 +24,7 @@ import { convertMonster } from '../util/convertMonster';
 import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
 import { EmailContext } from '../provider/ContextProviders';
 import { IsLoginContext } from '../provider/ContextProviders';
+import { AddBattleWinCount } from '../components/auth/update/BattleWinCount';
 type RandomType = 0 | 1 | null;
 
 const emotionInitialData = {
@@ -69,6 +70,7 @@ export const BattleView: FC = () => {
   const monsterImg = convertMonster({ monsterImgUrl: monsterUrl });
   const [email] = useContext(EmailContext);
   const [isLogin] = useContext(IsLoginContext);
+  const [monster] = useContext(MonsterContext);
 
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
@@ -118,17 +120,37 @@ export const BattleView: FC = () => {
     AddTotalEatCount(email, isLogin);
     const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
-    setTypeId(
-      Branch({
-        emotionData,
-        EmotionMax,
-        setEmotionMax,
-        EmotionList,
-        setEmotionList,
-        overlap,
-        setOverlap,
-      })
-    );
+    const newTypeId = Branch({
+      emotionData,
+      EmotionMax,
+      setEmotionMax,
+      EmotionList,
+      setEmotionList,
+      overlap,
+      setOverlap,
+    });
+    setTypeId(newTypeId);
+    const newEatCount = eatCount + 1;
+    newEatCount > EATLIMIT ? resultCheck(newTypeId) : null;
+  };
+
+  const resultCheck = (newTypeId: number) => {
+    newTypeId === convertMonsterEmotion() ? AddBattleWinCount(email, isLogin) : null;
+  };
+
+  const convertMonsterEmotion = () => {
+    switch (monster) {
+      case 'monster_yorokobi':
+        return 1;
+      case 'monster_ikari':
+        return 2;
+      case 'monster_kanasii':
+        return 3;
+      case 'monster_tanosii':
+        return 4;
+      default:
+        return 0;
+    }
   };
 
   useEffect(() => {
