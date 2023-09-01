@@ -4,6 +4,7 @@ import { BattleView } from '../pages/BattleView';
 import { MonsterView } from '../pages/MonsterView';
 import { CostumePage } from '../pages/CostumePage';
 import { SettingsView } from '../pages/SettingsView';
+import { TrophyPage } from '../pages/TrophyPage';
 
 export const Router = () => {
   return (
@@ -14,6 +15,7 @@ export const Router = () => {
         <Route path={'/battle'} element={<BattleView />} />
         <Route path={'/CostumePage'} element={<CostumePage />} />
         <Route path={'/SettingsView'} element={<SettingsView />} />
+        <Route path={'/TrophyPage'} element={<TrophyPage />} />
       </Routes>
     </BrowserRouter>
   );

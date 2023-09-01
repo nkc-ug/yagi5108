@@ -1,11 +1,10 @@
-import { BottomNavigationAction, Slider, Typography } from '@mui/material';
+import { Button, ButtonGroup, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
+import Paper from '@mui/material/Paper';
 import React, { useEffect, useState, useContext } from 'react';
 import bgm from '../Audio/Bgm.mp3';
-import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import backgroundgImage from '../assets/backGround.png';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
 import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
@@ -17,19 +16,6 @@ export const SettingsView = () => {
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
-    if (audioRef.current) {
-      audioRef.current.volume = (newValue as number) / 100;
-    }
-
-    if (newValue === 0) {
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-    }
-  };
 
   useEffect(() => {
     // 初回マウント時に音声要素を作成
@@ -52,16 +38,41 @@ export const SettingsView = () => {
     };
   }, [value]);
 
-  // const toggleBGM = () => {
-  //   if (audioRef.current) {
-  //     if (isPlaying) {
-  //       audioRef.current.pause();
-  //     } else {
-  //       audioRef.current.play();
-  //     }
-  //     setIsPlaying(!isPlaying);
-  //   }
-  // };
+  const toggleBGM = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const setVolume = (volume: number) => {
+    setValue(volume);
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+
+    if (volume === 0) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+    }
+  };
+
+  const playLoud = () => {
+    setVolume(100);
+  };
+
+  const playMedium = () => {
+    setVolume(50);
+  };
+
+  const playSoft = () => {
+    setVolume(20);
+  };
 
   return (
     <div>
@@ -87,14 +98,15 @@ export const SettingsView = () => {
             direction="row"
             sx={{ mb: 1 }}
             alignItems="center"
-            style={{ marginTop: '30%' }}
+            justifyContent="center"
+            style={{ marginTop: '10%' }}
           >
-            <BottomNavigationAction
-              icon={isPlaying && value > 0 ? <VolumeDown /> : <VolumeOffIcon />}
-              // onClick={toggleBGM}
-            />
-            <Slider aria-label="Volume" value={value} /*onChange={handleChange}*/ />
-            <VolumeUp />
+            <ButtonGroup variant="contained" aria-label="音量調節">
+              <Button onClick={playLoud}>おおきい</Button>
+              <Button onClick={playMedium}>ふつう</Button>
+              <Button onClick={playSoft}>ちいさい</Button>
+              <Button onClick={toggleBGM}>けす</Button>
+            </ButtonGroup>
           </Stack>
           <UserDataDisplay />
           <LoginButton />

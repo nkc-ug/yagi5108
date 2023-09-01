@@ -2,7 +2,7 @@ name: ci
 
 on:
   push:
-    branches: ['main', 'develop']
+    branches: 'develop'
   pull_request:
     branches: ['main', 'develop']
 
@@ -18,6 +18,9 @@ jobs:
         run: |
           npm install eslint@8.47.0
           npm install @microsoft/eslint-formatter-sarif@2.1.7
+
+      - name: Build #build test
+        run: npm run build
 
       - name: Run ESLint #ESLintを実行する
         run: npx eslint ./src --ext .js,.jsx,.ts,.tsx --format @microsoft/eslint-formatter-sarif
@@ -39,7 +42,10 @@ jobs:
 
       - name: Install Rome #romeをインストールする
         run: |
-          npm install rome@12.0.0
+          npm install rome@12.0.0\
+
+      - name: Build #build test
+        run: npm run build
 
       - name: Run Rome #romeを実行
         run: npx rome check ./src
