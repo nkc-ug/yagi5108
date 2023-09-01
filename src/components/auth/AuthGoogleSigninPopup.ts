@@ -3,6 +3,7 @@ import { provider } from '../../lib/AuthGoogleProviderCreate';
 import { SetupUserData } from './SetupUserData';
 import { UserProps } from '../../types/UserDataType';
 import { GetUserData } from './GetUserData';
+import { AddUserData } from './AddUserData';
 
 export const Auth = async () => {
   const auth = await getAuth();
@@ -24,6 +25,8 @@ export const Auth = async () => {
   if (!(await GetUserData(email))) {
     // ユーザーがFireStoreに登録されていない場合、初期データを設定する。
     SetupUserData(addUser);
+  } else {
+    AddUserData(email);
   }
   return email;
 };

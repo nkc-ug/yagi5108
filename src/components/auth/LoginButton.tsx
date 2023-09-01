@@ -3,6 +3,8 @@ import { Button } from '@mui/material';
 import { Auth } from './AuthGoogleSigninPopup';
 import { IsLoginContext } from '../../provider/ContextProviders';
 import { EmailContext } from '../../provider/ContextProviders';
+import { SetupUserData } from './SetupUserData';
+import { AddUserData } from './AddUserData';
 
 export const LoginButton = () => {
   const [isLogin, setIsLogin] = useContext(IsLoginContext);
@@ -19,6 +21,7 @@ export const LoginButton = () => {
         setEmail(fetchEmail);
         setLoginButtonText('ログアウト');
         setIsLogin(true);
+        AddUserData(fetchEmail);
       }
     }
   }, []);
