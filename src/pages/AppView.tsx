@@ -23,6 +23,7 @@ import { convertBackGroundImg } from '../util/convertBackGroundImg';
 import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
 import { EmailContext } from '../provider/ContextProviders';
 import { IsLoginContext } from '../provider/ContextProviders';
+import { useNavigate } from 'react-router-dom';
 
 type RandomType = 0 | 1 | null;
 
@@ -190,7 +191,7 @@ export const AppView: FC = () => {
               popSubmit={showGrassModalSubmit}
               randomNum={random ?? 0}
             />
-            <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
+            <Tutorial />
             <EvolutionPopup
               eatCount={eatCount}
               pop={!isShowNewGrassModal}

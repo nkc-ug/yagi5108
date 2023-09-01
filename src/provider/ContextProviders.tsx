@@ -23,6 +23,11 @@ type MusicContextType = [
   setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
 ];
 
+type TutorialModalType = [
+  isModalOpen: boolean,
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
+];
+
 // ヤギの服を保持するコンテキスト
 export const GoatClothesContext = createContext<StringContextType>({} as StringContextType);
 // ヤギの姿を保持するコンテキスト
@@ -33,7 +38,6 @@ export const BackgroundContext = createContext<BackgroundUrlContextType>(
 );
 // 音楽を保持するコンテキスト
 export const MusicContext = createContext<MusicContextType>({} as MusicContextType);
-
 //モンスターを保持するコンテキスト
 export const MonsterContext = createContext<StringContextType>({} as StringContextType);
 //バトルのためにモンスターの属性値を保持するコンテキスト
@@ -42,6 +46,8 @@ export const MonsterNumberContext = createContext<NumberContextType>({} as Numbe
 export const IsLoginContext = createContext<BooleanContextType>({} as BooleanContextType);
 // ユーザーのEmailを保持するコンテキスト
 export const EmailContext = createContext<StringContextType>({} as StringContextType);
+//チュートリアルモーダルの状態を保持するコンテキスト
+export const TutorialContext = createContext<TutorialModalType>({} as TutorialModalType);
 
 export const ContextProviders: FC<Props> = ({ children }) => {
   // ヤギの服を保持するステート
@@ -63,7 +69,8 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   const [email, setEmail] = useState('');
   // 音楽を保持するステート
   const [isMusicPlaying, setMusicPlaying] = useState(false);
-
+  //チュートリアルモーダルの状態を保持するステート
+  const [isTutorialModal, setIsTutorialModal] = useState(true);
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
@@ -74,7 +81,9 @@ export const ContextProviders: FC<Props> = ({ children }) => {
               <IsLoginContext.Provider value={[isLogin, setIsLogin]}>
                 <EmailContext.Provider value={[email, setEmail]}>
                   <MusicContext.Provider value={[isMusicPlaying, setMusicPlaying]}>
-                    {children}
+                    <TutorialContext.Provider value={[isTutorialModal, setIsTutorialModal]}>
+                      {children}
+                    </TutorialContext.Provider>
                   </MusicContext.Provider>
                 </EmailContext.Provider>
               </IsLoginContext.Provider>
