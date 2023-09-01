@@ -19,14 +19,14 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
 
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
-    x: containerSize.width / 2,
-    y: (containerSize.height / 10) * 5,
+    x: 150, //同期前にcontainerSizeを読み取って値が0になるので妥協
+    y: (containerSize.height / 10) * 8,
   });
   useEffect(() => {
     const minX = 0; // 開始位置のx座標
     const minY = 0; // 開始位置のy座標
-    const maxX = containerSize.width - 100; // 終了位置のx座標
-    const maxY = containerSize.height - 100; // 終了位置のy座標
+    const maxX = containerSize.width - 130; // 終了位置のx座標
+    const maxY = containerSize.height - 130; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
@@ -44,11 +44,11 @@ const NormalWalk: FC<Props> = ({ containerSize }) => {
 
   const goatImage = convertGoat({
     goatImgUrl: goatUrl,
-    isRight: position.x > containerSize.width / 3,
+    isRight: position.x > containerSize.width / 2,
   });
   const costumeImage = convertCostume({
     costumeImgUrl: clothesUrl,
-    isRight: position.x > containerSize.width / 3,
+    isRight: position.x > containerSize.width / 2,
   });
   const [play, isPlaying] = useState(true);
   const yagiAudio = () => {

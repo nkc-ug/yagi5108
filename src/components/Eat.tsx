@@ -29,8 +29,8 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
   const emoId = emotionData.emoId;
   const random = randomNum;
   const position = {
-    x: (containerSize.width / 5) * 3,
-    y: (containerSize.height / 12) * 11,
+    x: containerSize.width / 2 - 130,
+    y: (containerSize.height / 10) * 8,
   };
   const grassTop = position.y + 68;
   const grassLeft = position.x - 10;
@@ -58,7 +58,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -73,7 +73,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -91,7 +91,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -106,7 +106,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -124,7 +124,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -139,7 +139,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -157,7 +157,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -172,7 +172,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
                         zIndex: 2,
-                        position: 'absolute',
+                        position: 'sticky',
                         left: `${grassLeft}px`,
                         top: `${grassTop}px`,
                       }}
@@ -187,7 +187,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
           showImage ? (
             <Box
               sx={{
-                position: 'absolute',
+                position: 'sticky',
                 width: '130px',
                 height: '130px',
                 backgroundImage: `url(${yagi_syokuzi})`,
@@ -211,7 +211,7 @@ const Eat: FC<Props> = ({ emotionData, eat, showImage, randomNum, containerSize 
           ) : (
             <Box
               sx={{
-                position: 'absolute',
+                position: 'sticky',
                 left: `${position.x}px`,
                 top: `${position.y}px`,
                 height: '130px',
