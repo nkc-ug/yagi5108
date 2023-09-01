@@ -181,6 +181,18 @@ export const AppView: FC = () => {
     groundUrl: backgroundUrl.groundUrl,
   });
 
+  //やぎの進化後に状態をリセットするハンドラ
+  const pageResetHandler = () => {
+    setEatCount(1);
+    setTypeId(-1);
+    setDispWalker(true);
+    setEvoWalk(false);
+    setEmotionMax(0);
+    setEmotionList([0, 0, 0, 0]);
+    setOverlap(false);
+    setEvoPop(true);
+  };
+
   return (
     <div>
       <Stack direction="row" justifyContent="center">
@@ -230,6 +242,7 @@ export const AppView: FC = () => {
                 handleChange={handleInputText}
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
+                pageResetHandler={pageResetHandler}
               />
               <PageContainer updatePageSize={updatePageSize}>
                 <Container

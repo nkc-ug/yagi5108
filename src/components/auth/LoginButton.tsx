@@ -3,12 +3,13 @@ import { Button } from '@mui/material';
 import { Auth } from './AuthGoogleSigninPopup';
 import { IsLoginContext } from '../../provider/ContextProviders';
 import { EmailContext } from '../../provider/ContextProviders';
+import { SetupUserData } from './SetupUserData';
+import { AddUserData } from './AddUserData';
 
 export const LoginButton = () => {
   const [isLogin, setIsLogin] = useContext(IsLoginContext);
   const [email, setEmail] = useContext(EmailContext);
   const [loginButtonText, setLoginButtonText] = useState(!isLogin ? 'ろぐいん' : 'ろぐあうと');
-  const [newUser, setNewUser] = useState(false);
 
   useEffect(() => {
     if (!isLogin) {
@@ -20,6 +21,7 @@ export const LoginButton = () => {
         setEmail(fetchEmail);
         setLoginButtonText('ログアウト');
         setIsLogin(true);
+        AddUserData(fetchEmail);
       }
     }
   }, []);
@@ -38,7 +40,16 @@ export const LoginButton = () => {
   };
 
   return (
-    <Button variant="contained" onClick={handleLoginClick}>
+    <Button
+      variant="contained"
+      onClick={handleLoginClick}
+      sx={{
+        backgroundColor: !isLogin ? 'rgba(0,161,255, 1)' : 'rgba(243,113,114, 1)',
+        '&:hover': {
+          backgroundColor: !isLogin ? 'rgba(0,161,255, 0.75)' : 'rgba(243,113,114, 0.75)',
+        },
+      }}
+    >
       {loginButtonText}
     </Button>
   );

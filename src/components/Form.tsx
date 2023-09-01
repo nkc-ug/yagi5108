@@ -16,9 +16,16 @@ type Props = {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isDisableTextField: boolean;
+  pageResetHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-const Form: FC<Props> = ({ inputText, handleChange, handleSubmit, isDisableTextField }) => {
+const Form: FC<Props> = ({
+  inputText,
+  handleChange,
+  handleSubmit,
+  isDisableTextField,
+  pageResetHandler,
+}) => {
   return (
     <div>
       <Box
@@ -61,13 +68,7 @@ const Form: FC<Props> = ({ inputText, handleChange, handleSubmit, isDisableTextF
         <Box textAlign={'center'}>
           {isDisableTextField ? (
             <Stack spacing={3} sx={{ mx: 8 }}>
-              <Button
-                variant="contained"
-                sx={{ color: 'white' }}
-                onClick={() => {
-                  window.location.reload();
-                }}
-              >
+              <Button variant="contained" sx={{ color: 'white' }} onClick={pageResetHandler}>
                 ゲームをリスタートする
               </Button>
             </Stack>
