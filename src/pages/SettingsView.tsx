@@ -1,11 +1,12 @@
 import { BottomNavigationAction, Slider, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
+import { VolumeDown, VolumeUp } from '@mui/icons-material';
+import Paper from '@mui/material/Paper';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import React, { useEffect, useState, useContext } from 'react';
 import bgm from '../Audio/Bgm.mp3';
-import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import backgroundgImage from '../assets/backGround.png';
-import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
 import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
@@ -81,21 +82,48 @@ export const SettingsView = () => {
             backgroundPosition: 'center',
           }}
         >
-          <Typography variant="h4">おんりょう</Typography>
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ mb: 1 }}
-            alignItems="center"
-            style={{ marginTop: '30%' }}
+          <Paper
+            sx={{
+              backgroundColor: 'rgba(80, 80, 80, 0.5)',
+              borderRadius: '30px',
+              padding: '15px',
+              margin: '0px auto 10px auto',
+              width: '450px',
+            }}
           >
-            <BottomNavigationAction
-              icon={isPlaying && value > 0 ? <VolumeDown /> : <VolumeOffIcon />}
-              // onClick={toggleBGM}
-            />
-            <Slider aria-label="Volume" value={value} /*onChange={handleChange}*/ />
-            <VolumeUp />
-          </Stack>
+            <Typography
+              variant="h4"
+              sx={{
+                backgroundColor: 'rgba(220, 220, 220, 0.6)',
+                borderRadius: '20px',
+                fontSize: '40px',
+                margin: '0px 0px 20px 0px',
+                padding: '10px',
+              }}
+            >
+              おんりょう
+            </Typography>
+            <Stack
+              spacing={2}
+              direction="row"
+              sx={{
+                mb: 1,
+                backgroundColor: 'rgba(220, 220, 220, 0.6)',
+                borderRadius: '20px',
+                fontSize: '40px',
+                margin: '0px 0px 0px 0px',
+                padding: '10px',
+              }}
+              alignItems="center"
+            >
+              <BottomNavigationAction
+                icon={isPlaying && value > 0 ? <VolumeDown /> : <VolumeOffIcon />}
+                // onClick={toggleBGM}
+              />
+              <Slider aria-label="Volume" value={value} /*onChange={handleChange}*/ />
+              <VolumeUp />
+            </Stack>
+          </Paper>
           <UserDataDisplay />
           <LoginButton />
         </Container>
