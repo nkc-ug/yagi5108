@@ -46,7 +46,7 @@ export const ChangeCostumeBox = () => {
     >
       {imgItemList.map((item) => {
         return (
-          <Grid item key={item.itemNumber} xs={3}>
+          <Grid item key={item.itemNumber} xs={4}>
             <Button
               onClick={() => {
                 setClothesUrl(item.setItem.costumeImgUrl);
