@@ -194,17 +194,16 @@ export const AppView: FC = () => {
   };
 
   return (
-    <div>
-      <Stack direction="row" justifyContent="center">
+    <Container disableGutters maxWidth="sm">
+      <Stack justifyContent="center">
         <Container
           disableGutters
-          maxWidth="sm"
           style={{
             backgroundImage: `url(${backGround.skyUrl})`,
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
+            backgroundSize: '100%',
+            backgroundPosition: 'center top',
             backgroundRepeat: 'no-repeat',
-            height: '70vh',
+            height: '50dvh',
             width: '100%',
             objectFit: 'cover',
           }}
@@ -222,7 +221,7 @@ export const AppView: FC = () => {
             emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
           />
 
-          <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
+          <Container disableGutters sx={{ mt: 10 }}>
             <ShowNewGrassModal
               emotionData={emotionData}
               isOpen={isShowNewGrassModal}
@@ -236,7 +235,7 @@ export const AppView: FC = () => {
               evolution={evolution}
               evoPop={evoPop}
             />
-            <Box sx={{ height: '80vh' }}>
+            <Box>
               <Form
                 inputText={inputText}
                 handleChange={handleInputText}
@@ -246,12 +245,9 @@ export const AppView: FC = () => {
               />
               <PageContainer updatePageSize={updatePageSize}>
                 <Container
+                  disableGutters
                   style={{
-                    backgroundImage: `url(${backGround.groundUrl})`,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'bottom',
-                    backgroundRepeat: 'no-repeat',
-                    height: '60vh',
+                    height: '43vh',
                     width: '100%',
                     overflow: 'hidden',
                   }}
@@ -273,6 +269,15 @@ export const AppView: FC = () => {
             </Box>
           </Container>
         </Container>
+        {/* 地面表示用のコンテナ */}
+        <Container
+          disableGutters
+          sx={{
+            marginTop: '-5dvh',
+            backgroundImage: `url(${backGround.groundUrl})`,
+            height: '50vh',
+          }}
+        />
       </Stack>
 
       {/* ナビゲーションバー */}
@@ -280,6 +285,6 @@ export const AppView: FC = () => {
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />
-    </div>
+    </Container>
   );
 };
