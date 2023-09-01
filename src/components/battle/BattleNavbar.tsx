@@ -4,7 +4,6 @@ import { FC, useRef, useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import bgm from '../../Audio/Bgm.mp3';
-import { StyleMenu } from '../navbar/StyleMenu';
 
 type Props = {
   handleMonsterModalChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -13,9 +12,6 @@ type Props = {
 export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const navigate = useNavigate();
-
-  const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
     <Box>
@@ -43,14 +39,6 @@ export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
-
-      <StyleMenu
-        anchorEl={anchorEl}
-        open={isOpenStyleMenu}
-        handleClose={() => {
-          setIsOpenStyleMenu(false);
-        }}
-      />
     </Box>
   );
 };

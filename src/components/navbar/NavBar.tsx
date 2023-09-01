@@ -6,7 +6,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { StyleMenu } from './StyleMenu';
 import {
   MonsterContext,
   MonsterNumberContext,
@@ -19,8 +18,6 @@ type Props = {
 
 export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
   const navigate = useNavigate();
-  const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [_, setMonsterUrl] = useContext(MonsterContext);
   const [__, setMonsterNumber] = useContext(MonsterNumberContext);
   const [___, setIsTutorialModal] = useContext(TutorialContext);
@@ -99,14 +96,6 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
-
-      <StyleMenu
-        anchorEl={anchorEl}
-        open={isOpenStyleMenu}
-        handleClose={() => {
-          setIsOpenStyleMenu(false);
-        }}
-      />
     </Box>
   );
 };
