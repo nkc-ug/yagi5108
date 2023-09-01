@@ -7,14 +7,14 @@ import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import backgroundgImage from '../assets/backGround.png';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
-import { MusicContext } from '../provider/ContextProviders';
+// import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
 import { UserDataDisplay } from '../components/auth/UserDataDisplay';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
+  // const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
