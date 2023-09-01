@@ -17,8 +17,13 @@ import { PageContainer } from '../components/PageContainer';
 import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { NavBarCon } from '../components/navbar/NavBarCon';
+import { MusicContext } from '../provider/ContextProviders';
 import { BackgroundContext } from '../provider/ContextProviders';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
+import { EmailContext } from '../provider/ContextProviders';
+import { IsLoginContext } from '../provider/ContextProviders';
+
 
 type RandomType = 0 | 1 | null;
 
@@ -61,6 +66,13 @@ export const AppView: FC = () => {
   const changeRandome = () => {
     const setItem = random === 0 ? 1 : 0;
     setRandom(setItem);
+  };
+  const [email] = useContext(EmailContext);
+  const [isLogin] = useContext(IsLoginContext);
+
+  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext); //音楽
+  const playBgm = () => {
+    setMusicPlaying(true);
   };
 
   const handleSubmit = async () => {
@@ -109,6 +121,7 @@ export const AppView: FC = () => {
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
   const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
+    AddTotalEatCount(email, isLogin);
     const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
@@ -157,7 +170,6 @@ export const AppView: FC = () => {
 
   return (
     <div>
-      <PageContainer updatePageSize={updatePageSize} />
       <Stack direction="row" justifyContent="center">
         <Container
           disableGutters
@@ -196,34 +208,35 @@ export const AppView: FC = () => {
                 handleSubmit={handleSubmit}
                 isDisableTextField={isDisableTextField()}
               />
-              <Container
-                style={{
-                  backgroundImage: `url(${backGround.groundUrl})`,
-                  backgroundSize: '100% 100%',
-                  backgroundPosition: 'bottom',
-                  backgroundRepeat: 'no-repeat',
-                  height: '60vh',
-                  width: '100%',
-                }}
-              >
-                <Grid container>
-                  <Grid item xs={2} />
-                  <Grid item xs={6}>
-                    <Eat
-                      emotionData={emotionData}
-                      eat={eat}
-                      showImage={showImage}
-                      randomNum={random ?? 0}
-                      containerSize={containerSize}
-                    />
-                    {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
-                    {evoWalk ? (
-                      <EvolutionWalk typeId={typeId} containerSize={containerSize} />
-                    ) : null}
+              <PageContainer updatePageSize={updatePageSize}>
+                <Container
+                  style={{
+                    backgroundImage: `url(${backGround.groundUrl})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'bottom',
+                    backgroundRepeat: 'no-repeat',
+                    height: '60vh',
+                    width: '100%',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
+                  {evoWalk ? <EvolutionWalk typeId={typeId} containerSize={containerSize} /> : null}
+                  <Grid container>
+                    <Grid item xs={2} />
+                    <Grid item xs={6}>
+                      <Eat
+                        emotionData={emotionData}
+                        eat={eat}
+                        showImage={showImage}
+                        randomNum={random ?? 0}
+                        containerSize={containerSize}
+                      />
+                    </Grid>
+                    <Grid item xs={4} />
                   </Grid>
-                  <Grid item xs={4} />
-                </Grid>
-              </Container>
+                </Container>
+              </PageContainer>
             </Box>
           </Container>
         </Container>

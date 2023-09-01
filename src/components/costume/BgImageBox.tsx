@@ -11,8 +11,8 @@ export const BgImageBox: FC<Props> = ({ BgImageUrl }) => {
       sx={{
         backgroundColor: '#a0a0a0',
         backgroundImage: `url(${BgImageUrl})`,
-        width: '200px',
-        height: '200px',
+        width: '170px',
+        height: '190px',
         backgroundSize: 'cover',
       }}
     />

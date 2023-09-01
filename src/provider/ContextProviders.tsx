@@ -18,6 +18,11 @@ type BackgroundUrlContextType = [
 
 type BooleanContextType = [state: boolean, setState: React.Dispatch<React.SetStateAction<boolean>>];
 
+type MusicContextType = [
+  isPlaying: boolean,
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>
+];
+
 // ヤギの服を保持するコンテキスト
 export const GoatClothesContext = createContext<StringContextType>({} as StringContextType);
 // ヤギの姿を保持するコンテキスト
@@ -26,12 +31,15 @@ export const GoatContext = createContext<StringContextType>({} as StringContextT
 export const BackgroundContext = createContext<BackgroundUrlContextType>(
   {} as BackgroundUrlContextType
 );
+// 音楽を保持するコンテキスト
+export const MusicContext = createContext<MusicContextType>({} as MusicContextType);
+
 //モンスターを保持するコンテキスト
 export const MonsterContext = createContext<StringContextType>({} as StringContextType);
 //バトルのためにモンスターの属性値を保持するコンテキスト
 export const MonsterNumberContext = createContext<NumberContextType>({} as NumberContextType);
 // ログイン状態を保持するコンテキスト
-export const LoginContext = createContext<BooleanContextType>({} as BooleanContextType);
+export const IsLoginContext = createContext<BooleanContextType>({} as BooleanContextType);
 // ユーザーのEmailを保持するコンテキスト
 export const EmailContext = createContext<StringContextType>({} as StringContextType);
 
@@ -50,9 +58,12 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   //monsterの属性値を保持するステート
   const [monsternumber, setMonsterNumber] = useState(0);
   // ログイン状態を保持するステート
-  const [login, setLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   // ユーザーのEmailを保持するステート
-  const [email, setEmail] = useState('null');
+  const [email, setEmail] = useState('');
+  // 音楽を保持するステート
+  const [isMusicPlaying, setMusicPlaying] = useState(false);
+
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
@@ -60,11 +71,13 @@ export const ContextProviders: FC<Props> = ({ children }) => {
         <BackgroundContext.Provider value={[backgroundUrl, setBackgroundUrl]}>
           <MonsterContext.Provider value={[monsterUrl, setMonsterUrl]}>
             <MonsterNumberContext.Provider value={[monsternumber, setMonsterNumber]}>
-              <LoginContext.Provider value={[login, setLogin]}>
-               <EmailContext.Provider value={[email, setEmail]}>
-                 {children}
+              <IsLoginContext.Provider value={[isLogin, setIsLogin]}>
+                <EmailContext.Provider value={[email, setEmail]}>
+                  <MusicContext.Provider value={[isMusicPlaying, setMusicPlaying]}>
+                    {children}
+                  </MusicContext.Provider>
                 </EmailContext.Provider>
-              </LoginContext.Provider>
+              </IsLoginContext.Provider>
             </MonsterNumberContext.Provider>
           </MonsterContext.Provider>
         </BackgroundContext.Provider>

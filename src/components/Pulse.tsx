@@ -1,10 +1,12 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, useContext } from 'react';
 import { Box } from '@mui/material';
 import yagi from '../assets/yagi.png';
 import yagi_ikari from '../assets/yagi_ikari.png';
 import yagi_tanosii from '../assets/yagi_tanosii.png';
 import yagi_kanasimi from '../assets/yagi_kanasimi.png';
 import yagi_yorokobi from '../assets/yagi_yorokobi.png';
+import { convertCostume } from '../util/convertCostume';
+import { GoatClothesContext } from '../provider/ContextProviders';
 
 type Props = {
   typeId: number;
@@ -17,6 +19,8 @@ type Props = {
 
 const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
   const [isDisplayLeft, setIsDisplayLeft] = useState(true);
+  const [clothesUrl] = useContext(GoatClothesContext);
+
   const position = {
     x: (containerSize.width / 5) * 3,
     y: (containerSize.height / 12) * 11,
@@ -59,6 +63,11 @@ const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
 
   const backgroundImage = getImagePath(typeId);
 
+  const costumeImage = convertCostume({
+    costumeImgUrl: clothesUrl,
+    isRight: false,
+  });
+
   return (
     <div>
       <Box
@@ -71,7 +80,16 @@ const Pulse: FC<Props> = ({ typeId, walkEvo, containerSize }) => {
           left: `${position.x}px`,
           top: `${position.y}px`,
         }}
-      />
+      >
+        <Box //衣装用のbox
+          sx={{
+            width: '100%',
+            height: '100%',
+            backgroundSize: 'cover',
+            backgroundImage: `url(${costumeImage})`,
+          }}
+        />
+      </Box>
     </div>
   );
 };

@@ -21,6 +21,9 @@ import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
 import BattleResult from '../components/battle/BattleResult';
 import { MonsterContext } from '../provider/ContextProviders';
 import { convertMonster } from '../util/convertMonster';
+import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
+import { EmailContext } from '../provider/ContextProviders';
+import { IsLoginContext } from '../provider/ContextProviders';
 type RandomType = 0 | 1 | null;
 
 const emotionInitialData = {
@@ -64,6 +67,8 @@ export const BattleView: FC = () => {
     setRandom(setItem);
   };
   const monsterImg = convertMonster({ monsterImgUrl: monsterUrl });
+  const [email] = useContext(EmailContext);
+  const [isLogin] = useContext(IsLoginContext);
 
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
@@ -71,13 +76,13 @@ export const BattleView: FC = () => {
     setInputText('');
 
     // 感情データの取得
-    setEmotionData(await getEmotionApi(inputText, emotionData));
-
+    const fetchEmotionData = await getEmotionApi(inputText, emotionData);
+    setEmotionData(fetchEmotionData);
     // ロード画面を非表示・草が生えました！のポップアップを表示・ランダム
     setDispCircle(false);
     setIsShowNewGrassModal(true);
     changeRandome();
-    handleGrass();
+    handleGrass(fetchEmotionData);
   };
 
   /**
@@ -108,9 +113,10 @@ export const BattleView: FC = () => {
     setEvoPopup(false);
   };
   //草生成用のハンドルを追加(食事回数と条件達成で進化先の分析)
-  const handleGrass = () => {
+  const handleGrass = (fetchEmotionData: EmotionDataType) => {
     setEatCount(eatCount + 1);
-
+    AddTotalEatCount(email, isLogin);
+    const emotionData = fetchEmotionData;
     // setTypeId(Branch(emotionData,EmotionMax={EmotionMax},setMax={setMax},Emotion,setEmotion,overlap,setOverlap));
     setTypeId(
       Branch({
@@ -152,7 +158,6 @@ export const BattleView: FC = () => {
 
   return (
     <div>
-      <PageContainer updatePageSize={updatePageSize} />
       <Stack direction="row" justifyContent="center">
         <Container
           disableGutters
@@ -198,46 +203,48 @@ export const BattleView: FC = () => {
                 handleResultChange={handleBattleresultModalOpen}
                 isDisableTextField={isDisableTextField()}
               />
-              <Container
-                style={{
-                  backgroundImage: `url(${sougen})`,
-                  backgroundSize: '100% 100%',
-                  backgroundPosition: 'bottom',
-                  backgroundRepeat: 'no-repeat',
-                  height: '60vh',
-                  width: '100%',
-                }}
-              >
-                <Grid container>
-                  <Grid item xs={2}>
-                    <Container
-                      disableGutters
-                      style={{
-                        backgroundImage: `url(${monsterImg})`,
-                        backgroundSize: '100% 100%',
-                        backgroundPosition: 'bottom',
-                        backgroundRepeat: 'no-repeat',
-                        width: '300px',
-                        height: '300px',
-                      }}
-                    />
+              <PageContainer updatePageSize={updatePageSize}>
+                <Container
+                  style={{
+                    backgroundImage: `url(${sougen})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'bottom',
+                    backgroundRepeat: 'no-repeat',
+                    height: '60vh',
+                    width: '100%',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
+                  {evoWalk ? <EvolutionWalk typeId={typeId} containerSize={containerSize} /> : null}
+
+                  <Grid container>
+                    <Grid item xs={2}>
+                      <Container
+                        disableGutters
+                        style={{
+                          backgroundImage: `url(${monsterImg})`,
+                          backgroundSize: '100% 100%',
+                          backgroundPosition: 'bottom',
+                          backgroundRepeat: 'no-repeat',
+                          width: '300px',
+                          height: '300px',
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Eat
+                        emotionData={emotionData}
+                        eat={eat}
+                        showImage={showImage}
+                        randomNum={random ?? 0}
+                        containerSize={containerSize}
+                      />
+                    </Grid>
+                    <Grid item xs={4} />
                   </Grid>
-                  <Grid item xs={6}>
-                    <Eat
-                      emotionData={emotionData}
-                      eat={eat}
-                      showImage={showImage}
-                      randomNum={random ?? 0}
-                      containerSize={containerSize}
-                    />
-                    {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
-                    {evoWalk ? (
-                      <EvolutionWalk typeId={typeId} containerSize={containerSize} />
-                    ) : null}
-                  </Grid>
-                  <Grid item xs={4} />
-                </Grid>
-              </Container>
+                </Container>
+              </PageContainer>
             </Box>
           </Container>
         </Container>

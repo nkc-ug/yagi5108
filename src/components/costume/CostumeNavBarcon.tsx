@@ -1,12 +1,7 @@
 import { Container } from '@mui/material';
-import { FC } from 'react';
-import { SettingsNavBar } from './SettingsNavbar';
+import { CostumeNavBar } from './CostumeNavbar';
 
-// type Props = {
-//   handleTutorialModalOpen: () => void;
-// };
-
-export const SettingsNavBarCon: FC = () => {
+export const CostumeNavBarCon = () => {
   return (
     <Container
       maxWidth="sm"
@@ -19,7 +14,7 @@ export const SettingsNavBarCon: FC = () => {
         zIndex: 3,
       }}
     >
-      <SettingsNavBar />
+      <CostumeNavBar />
     </Container>
   );
 };
