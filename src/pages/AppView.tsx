@@ -26,6 +26,7 @@ import { IsLoginContext } from '../provider/ContextProviders';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { FieldValue } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 type RandomType = 0 | 1 | null;
 
@@ -216,10 +217,7 @@ export const AppView: FC = () => {
               popSubmit={showGrassModalSubmit}
               randomNum={random ?? 0}
             />
-            <Tutorial open={isTutorialModalOpen} closeClick={handleTutorialModalClose} />
-            {EvoPopup ? (
-              <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
-            ) : null}
+            <Tutorial />
             <EvolutionPopup
               eatCount={eatCount}
               pop={!isShowNewGrassModal}
@@ -247,19 +245,16 @@ export const AppView: FC = () => {
                 >
                   {dispWalker && evoPop ? <NormalWalk containerSize={containerSize} /> : null}
                   {evoWalk ? <EvolutionWalk typeId={typeId} containerSize={containerSize} /> : null}
-                  <Grid container>
-                    <Grid item xs={2} />
-                    <Grid item xs={6}>
-                      <Eat
-                        emotionData={emotionData}
-                        eat={eat}
-                        showImage={showImage}
-                        randomNum={random ?? 0}
-                        containerSize={containerSize}
-                      />
-                    </Grid>
-                    <Grid item xs={4} />
-                  </Grid>
+                  <Eat
+                    emotionData={emotionData}
+                    eat={eat}
+                    showImage={showImage}
+                    randomNum={random ?? 0}
+                    containerSize={containerSize}
+                  />
+                  {EvoPopup ? (
+                    <Pulse typeId={typeId} walkEvo={WalkEvo} containerSize={containerSize} />
+                  ) : null}
                 </Container>
               </PageContainer>
             </Box>

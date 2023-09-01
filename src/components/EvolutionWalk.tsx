@@ -26,15 +26,15 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
 
   const walkerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({
-    x: containerSize.width / 3,
-    y: (containerSize.height / 10) * 5,
+    x: containerSize.width / 2 - 130,
+    y: (containerSize.height / 10) * 8,
   });
 
   useEffect(() => {
     const minX = 0; // 開始位置のx座標
     const minY = 0; // 開始位置のy座標
-    const maxX = containerSize.width - 100; // 終了位置のx座標
-    const maxY = containerSize.height - 100; // 終了位置のy座標
+    const maxX = containerSize.width - 130; // 終了位置のx座標
+    const maxY = containerSize.height - 130; // 終了位置のy座標
 
     const updatePosition = () => {
       const newX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
@@ -52,7 +52,7 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
 
   const costumeImage = convertCostume({
     costumeImgUrl: clothesUrl,
-    isRight: position.x > containerSize.width / 3,
+    isRight: position.x > containerSize.width / 2,
   });
 
   const [play, isPlaying] = useState(true);
@@ -67,13 +67,13 @@ const EvolutionWalk: FC<Props> = ({ typeId, containerSize }) => {
   const getImagePath = (typeId: number) => {
     switch (typeId) {
       case 1:
-        return position.x > containerSize.width / 3 ? yagi_yorokobi_right : yagi_yorokobi;
+        return position.x > containerSize.width / 2 ? yagi_yorokobi_right : yagi_yorokobi;
       case 2:
-        return position.x > containerSize.width / 3 ? yagi_ikari_right : yagi_ikari;
+        return position.x > containerSize.width / 2 ? yagi_ikari_right : yagi_ikari;
       case 3:
-        return position.x > containerSize.width / 3 ? yagi_kanasimi_right : yagi_kanasimi;
+        return position.x > containerSize.width / 2 ? yagi_kanasimi_right : yagi_kanasimi;
       case 4:
-        return position.x > containerSize.width / 3 ? yagi_tanosii_right : yagi_tanosii;
+        return position.x > containerSize.width / 2 ? yagi_tanosii_right : yagi_tanosii;
       default:
         return null;
     }

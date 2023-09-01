@@ -9,7 +9,7 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
 // import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
-import { UserDataButton } from '../components/auth/UserDataButton';
+import { UserDataDisplay } from '../components/auth/UserDataDisplay';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
@@ -96,7 +96,7 @@ export const SettingsView = () => {
             <Slider aria-label="Volume" value={value} /*onChange={handleChange}*/ />
             <VolumeUp />
           </Stack>
-          <UserDataButton />
+          <UserDataDisplay />
           <LoginButton />
         </Container>
       </Stack>

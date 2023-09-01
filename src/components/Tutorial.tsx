@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { useContext } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Button, Stack } from '@mui/material';
 import { modalStyle } from '../styles/modalStyle';
+import { TutorialContext } from '../provider/ContextProviders';
 
 const labelList = new Map([
   [0, 'ことばをたべさせて'],
@@ -13,20 +14,15 @@ const labelList = new Map([
   [3, 'ヤギのようすがかわるよ'],
 ]);
 
-type Props = {
-  open: boolean;
-  closeClick: React.MouseEventHandler<HTMLButtonElement> | undefined;
-};
-
-const Tutorial: FC<Props> = ({ open, closeClick }) => {
+const Tutorial = () => {
+  const [isTutorialModal, setIsTutorialModal] = useContext(TutorialContext);
   return (
     <div>
-      {/* <IconButton onClick={openClick} color="primary">
-        <QuestionMarkIcon fontSize="large" color="primary" />
-      </IconButton> */}
       <Modal
-        open={open}
-        onClose={closeClick}
+        open={isTutorialModal}
+        onClose={() => {
+          setIsTutorialModal(false);
+        }}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -35,7 +31,7 @@ const Tutorial: FC<Props> = ({ open, closeClick }) => {
           },
         }}
       >
-        <Fade in={open}>
+        <Fade in={isTutorialModal}>
           <Stack sx={modalStyle} spacing={3}>
             <Typography
               id="transition-modal-title"
@@ -55,7 +51,13 @@ const Tutorial: FC<Props> = ({ open, closeClick }) => {
               ))}
             </Stack>
             <Stack justifyContent="center" direction="row">
-              <Button variant="contained" sx={{ color: 'white' }} onClick={closeClick}>
+              <Button
+                variant="contained"
+                sx={{ color: 'white' }}
+                onClick={() => {
+                  setIsTutorialModal(false);
+                }}
+              >
                 やぎとあそぶ
               </Button>
             </Stack>
