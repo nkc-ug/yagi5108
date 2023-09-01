@@ -32,6 +32,8 @@ export const UserDataModal: FC<Props> = ({ open, closeClick }) => {
     [3, userData?.userName],
     [4, 'ことばをたべたかいすう'],
     [5, `${String(userData?.totalEatCount)}かい`],
+    [6, 'バトルでかったかいすう'],
+    [7, `${String(userData?.battleWinCount)}かい`],
   ]);
 
   return (
