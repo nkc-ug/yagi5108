@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
-import { Container, Stack, Grid, Box } from '@mui/material';
+import { Container, Stack, Grid, Box, Typography, Rating, styled } from '@mui/material';
 import Tutorial from '../components/Tutorial';
 import Form from '../components/Form';
 import Eat from '../components/Eat';
@@ -23,7 +23,9 @@ import { convertBackGroundImg } from '../util/convertBackGroundImg';
 import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
 import { EmailContext } from '../provider/ContextProviders';
 import { IsLoginContext } from '../provider/ContextProviders';
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { FieldValue } from 'firebase/firestore';
 
 type RandomType = 0 | 1 | null;
 
@@ -156,6 +158,16 @@ export const AppView: FC = () => {
     return eatCount > EATLIMIT;
   };
 
+  //進化するまでのゲージ
+  const StyledRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+      color: '#ff6d75',
+    },
+    '& .MuiRating-iconHover': {
+      color: '#ff3d47',
+    },
+  });
+
   const updatePageSize = (
     newContainerSize: React.SetStateAction<{ width: number; height: number }>
   ) => {
@@ -184,6 +196,19 @@ export const AppView: FC = () => {
             objectFit: 'cover',
           }}
         >
+          <Typography component="legend">しんかするまであと{4 - eatCount}かい</Typography>
+          <StyledRating
+            name="customized-color"
+            value={eatCount}
+            max={4}
+            readOnly
+            defaultValue={2}
+            getLabelText={(value: number) => `${value} Heart${value !== 1 ? 's' : ''}`}
+            precision={0.5}
+            icon={<FavoriteIcon fontSize="inherit" />}
+            emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+          />
+
           <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
             <ShowNewGrassModal
               emotionData={emotionData}
