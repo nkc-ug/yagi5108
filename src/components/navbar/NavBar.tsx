@@ -6,7 +6,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import { StyleMenu } from './StyleMenu';
-import { MonsterContext, MonsterNumberContext } from '../../provider/ContextProviders';
+import {
+  MonsterContext,
+  MonsterNumberContext,
+  TutorialContext,
+} from '../../provider/ContextProviders';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -18,6 +22,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [_, setMonsterUrl] = useContext(MonsterContext);
   const [__, setMonsterNumber] = useContext(MonsterNumberContext);
+  const [___, setIsTutorialModal] = useContext(TutorialContext);
 
   const handleMonster = () => {
     const monsternumber = Math.floor(Math.random() * (4 - 1 + 1)) + 1;
@@ -51,7 +56,9 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
         <BottomNavigationAction
           label="あそびかた"
           icon={<HelpIcon />}
-          onClick={handleTutorialChange}
+          onClick={() => {
+            setIsTutorialModal(true);
+          }}
           sx={{ color: 'white' }}
         />
         <BottomNavigationAction
