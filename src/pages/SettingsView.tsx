@@ -1,35 +1,20 @@
-import { BottomNavigationAction, Button, ButtonGroup, Slider, Typography } from '@mui/material';
+import { Button, ButtonGroup, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import bgm from '../Audio/Bgm.mp3';
-// import { VolumeDown, VolumeUp } from '@mui/icons-material';
 import backgroundgImage from '../assets/backGround.png';
-// import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
 import { MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
-// import { UserDataButton } from '../components/auth/UserDataButton';
+import { UserDataButton } from '../components/auth/UserDataButton';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
   const [isPlaying, setIsPlaying] = useState(true);
-  // const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
+  const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number);
-    if (audioRef.current) {
-      audioRef.current.volume = (newValue as number) / 100;
-    }
-
-    if (newValue === 0) {
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-    }
-  };
 
   useEffect(() => {
     // 初回マウント時に音声要素を作成
@@ -122,7 +107,7 @@ export const SettingsView = () => {
               <Button onClick={toggleBGM}>けす</Button>
             </ButtonGroup>
           </Stack>
-          {/* <UserDataButton /> */}
+          <UserDataButton />
           <LoginButton />
         </Container>
       </Stack>
