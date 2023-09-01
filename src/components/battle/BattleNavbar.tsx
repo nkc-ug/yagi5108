@@ -4,6 +4,7 @@ import { FC, useRef, useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import bgm from '../../Audio/Bgm.mp3';
+import { VerticalDivider } from '../common/VerticalDivider';
 
 type Props = {
   handleMonsterModalChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -20,6 +21,8 @@ export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
         showLabels
         sx={{
           bgcolor: '#D4B178',
+          boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.6)',
+          py: 1.5,
         }}
       >
         <BottomNavigationAction
@@ -30,6 +33,7 @@ export const BattleNavBar: FC<Props> = ({ handleMonsterModalChange }) => {
           }}
           sx={{ color: 'white' }}
         />
+        <VerticalDivider />
         <BottomNavigationAction
           label="モンスターをみる"
           icon={<CoronavirusIcon />}
