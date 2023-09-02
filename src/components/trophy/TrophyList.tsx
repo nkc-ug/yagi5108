@@ -44,6 +44,24 @@ export const TrophyList = () => {
                 <Typography>ヤギにことばを１０かいたべさせる</Typography>
               </Paper>
             </Grid>
+            <Grid item xs={6}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+                <Typography sx={{ fontSize: '24px' }}>
+                  {userData?.trophy.battleWinCount3 ? 'さんしょくだんご' : '？？？'}
+                </Typography>
+                <Typography fontWeight="bold">かくとくほうほう</Typography>
+                <Typography>３かいモンスターにかつ</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+                <Typography sx={{ fontSize: '24px' }}>
+                  {userData?.trophy.battleWinCount5 ? 'おれたちのたたかいはこれからだ！' : '？？？'}
+                </Typography>
+                <Typography fontWeight="bold">かくとくほうほう</Typography>
+                <Typography>５かいモンスターにかつ</Typography>
+              </Paper>
+            </Grid>
           </Grid>
         </Box>
       </Box>
