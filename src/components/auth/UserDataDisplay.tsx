@@ -34,23 +34,14 @@ export const UserDataDisplay: FC = () => {
         }}
       >
         <Typography
-          variant="h4"
+          variant="h5"
           sx={{
-            backgroundColor: 'rgba(190, 190, 190, 0.6)',
-            borderRadius: '20px',
-            margin: '0px 0px 20px 0px',
-            padding: '10px',
+            textAlign: 'center',
           }}
         >
           ゆーざーでーた
         </Typography>
-        <Box
-          sx={{
-            backgroundColor: 'rgba(190, 190, 190, 0.6)',
-            borderRadius: '20px',
-            padding: '20px 0px 30px 0px',
-          }}
-        >
+        <Box>
           <div>
             <h3>ゆーざーID</h3>
             <h4>{email}</h4>
