@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Divider, Slider, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Divider, Slider, Switch, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -15,8 +15,8 @@ import VolumeUpIcon from '@mui/icons-material/VolumeDown';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 export const SettingsView = () => {
-  const [value, setValue] = useState<number>(50);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [value, setValue] = useState<number>(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
   const [backgroundUrl] = useContext(BackgroundContext);
 
@@ -104,11 +104,21 @@ export const SettingsView = () => {
               mb: 1,
             }}
           >
-            おんりょう
+            おんがく
           </Typography>
+          <Stack justifyContent="center" alignItems="center" direction="row">
+            <Switch
+              value={isMusicPlaying}
+              onChange={() => {
+                toggleBGM();
+              }}
+            />
+            <Typography variant="body2">オン・オフ</Typography>
+          </Stack>
           <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
             {value === 0 ? <VolumeOffIcon /> : <VolumeDownIcon />}
             <Slider
+              disabled={!isMusicPlaying}
               aria-label="Volume"
               value={value}
               onChange={(_, newValue) => {
@@ -134,6 +144,7 @@ export const SettingsView = () => {
         }}
       >
         <Container
+          maxWidth="sm"
           disableGutters
           sx={{
             backgroundImage: `url(${backGround.skyUrl})`,
@@ -146,6 +157,7 @@ export const SettingsView = () => {
           }}
         />
         <Container
+          maxWidth="sm"
           disableGutters
           sx={{
             marginTop: '-5dvh',
