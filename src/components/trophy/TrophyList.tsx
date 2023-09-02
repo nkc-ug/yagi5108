@@ -27,7 +27,7 @@ export const TrophyList = () => {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '175px' }}>
                 <Typography sx={{ fontSize: '24px' }}>
                   {userData?.trophy.eatCount5 ? 'おなかいっぱいメェ～' : '？？？'}
                 </Typography>
@@ -36,16 +36,16 @@ export const TrophyList = () => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '175px' }}>
                 <Typography sx={{ fontSize: '24px' }}>
-                  {userData?.trophy.eatCount5 ? 'もうたべれないメェー！！！' : '？？？'}
+                  {userData?.trophy.eatCount10 ? 'もうたべれないメェー！！！' : '？？？'}
                 </Typography>
                 <Typography fontWeight="bold">かくとくほうほう</Typography>
                 <Typography>ヤギにことばを１０かいたべさせる</Typography>
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '175px' }}>
                 <Typography sx={{ fontSize: '24px' }}>
                   {userData?.trophy.battleWinCount3 ? 'さんしょくだんご' : '？？？'}
                 </Typography>
@@ -54,7 +54,7 @@ export const TrophyList = () => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '150px' }}>
+              <Paper sx={{ backgroundColor: 'rgba(128, 128, 128, 0.75)', height: '175px' }}>
                 <Typography sx={{ fontSize: '24px' }}>
                   {userData?.trophy.battleWinCount5 ? 'おれたちのたたかいはこれからだ！' : '？？？'}
                 </Typography>
