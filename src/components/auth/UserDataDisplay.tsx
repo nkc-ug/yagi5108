@@ -29,7 +29,8 @@ export const UserDataDisplay: FC = () => {
           borderRadius: '30px',
           padding: '15px',
           margin: '0px auto 10px auto',
-          width: '350px',
+          width: '90%',
+          maxWidth: '350px',
         }}
       >
         <Typography
