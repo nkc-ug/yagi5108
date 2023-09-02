@@ -9,6 +9,7 @@
 # ドキュメント
 
 - [ディレクトリ構成](./doc/composition.md)
+- [chatGPTAPI 仕様](./doc/api.md)
 
 # 技術スタック
 
