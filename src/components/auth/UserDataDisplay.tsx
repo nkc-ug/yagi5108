@@ -44,21 +44,23 @@ export const UserDataDisplay: FC = () => {
         >
           <Box>
             <Typography variant="h6">ゆーざーID</Typography>
-            <Typography variant="h6">{email}</Typography>
+            <Typography variant="body1">{email}</Typography>
           </Box>
           <Box>
             <Typography variant="h6">ゆーざーねーむ</Typography>
-            <Typography variant="h6">{userData?.userName ?? 'ユーザネームがありません'}</Typography>
+            <Typography variant="body1">
+              {userData?.userName === '' ? 'ユーザネームがありません' : ''}
+            </Typography>
           </Box>
           <Box>
             <Typography variant="h6">ことばをたべさせたかいすう</Typography>
-            <Typography variant="h6">
+            <Typography variant="body1">
               {userData?.totalEatCount ? String(userData?.totalEatCount) : '0'}かい
             </Typography>
           </Box>
           <Box>
             <Typography variant="h6">バトルでかったかいすう</Typography>
-            <Typography variant="h6">
+            <Typography variant="body1">
               {userData?.battleWinCount ? String(userData?.battleWinCount) : '0'}かい
             </Typography>
           </Box>

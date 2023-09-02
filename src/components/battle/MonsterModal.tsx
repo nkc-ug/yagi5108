@@ -21,6 +21,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             よわいようだ!
             <br />
+            <br />
             ことばをたべさせて
             <br />
             やぎをいかりのかんじょうに
@@ -36,6 +37,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             かなしいのかんじょうに
             <br />
             よわいようだ!
+            <br />
             <br />
             ことばをたべさせて
             <br />
@@ -53,6 +55,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             <br />
             よわいようだ!
             <br />
+            <br />
             ことばをたべさせて
             <br />
             やぎをたのしいのかんじょうに
@@ -68,6 +71,7 @@ export const MonsterModal: FC<Props> = ({ open, closeClick, monsternumber }) => 
             うれしいのかんじょうに
             <br />
             よわいようだ!
+            <br />
             <br />
             ことばをたべさせて
             <br />
