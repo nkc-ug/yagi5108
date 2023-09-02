@@ -1,4 +1,4 @@
-import { FC, createContext, useState } from 'react';
+import { FC, createContext, useRef, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -71,6 +71,8 @@ export const ContextProviders: FC<Props> = ({ children }) => {
   const [isMusicPlaying, setMusicPlaying] = useState(false);
   //チュートリアルモーダルの状態を保持するステート
   const [isTutorialModal, setIsTutorialModal] = useState(true);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   return (
     <GoatClothesContext.Provider value={[clothesUrl, setClothesUrl]}>
