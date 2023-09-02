@@ -235,9 +235,9 @@ export const BattleView: FC = () => {
               <PageContainer updatePageSize={updatePageSize}>
                 <Container
                   style={{
-                    paddingBottom: '6dvh',
+                    paddingBottom: '15dvh',
                     backgroundImage: `url(${backGround.groundUrl})`,
-                    height: '60dvh',
+                    height: '62dvh',
                     width: '100%',
                     overflow: 'hidden',
                   }}

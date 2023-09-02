@@ -4,7 +4,7 @@ import { GetUserData } from './GetUserData';
 import { UserDataType } from '../../types/UserDataType';
 import { IsLoginContext } from '../../provider/ContextProviders';
 import { EmailContext } from '../../provider/ContextProviders';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 
 export const UserDataDisplay: FC = () => {
   const [isLogin] = useContext(IsLoginContext);
@@ -25,12 +25,7 @@ export const UserDataDisplay: FC = () => {
     <div>
       <Box
         sx={{
-          backgroundColor: 'rgba(80, 80, 80, 0.5)',
-          borderRadius: '30px',
-          padding: '15px',
-          margin: '0px auto 10px auto',
-          width: '90%',
-          maxWidth: '350px',
+          mx: 1,
         }}
       >
         <Typography
@@ -41,24 +36,33 @@ export const UserDataDisplay: FC = () => {
         >
           ゆーざーでーた
         </Typography>
-        <Box>
-          <div>
-            <h3>ゆーざーID</h3>
-            <h4>{email}</h4>
-          </div>
-          <div>
-            <h3>ゆーざーねーむ</h3>
-            <h4>{userData?.userName}</h4>
-          </div>
-          <div>
-            <h3>ことばをたべさせたかいすう</h3>
-            <h4>{userData?.totalEatCount ? String(userData?.totalEatCount) : '0'}かい</h4>
-          </div>
-          <div>
-            <h3>バトルでかったかいすう</h3>
-            <h4>{userData?.battleWinCount ? String(userData?.battleWinCount) : '0'}かい</h4>
-          </div>
-        </Box>
+        <Stack
+          spacing={3}
+          sx={{
+            my: 3,
+          }}
+        >
+          <Box>
+            <Typography variant="h6">ゆーざーID</Typography>
+            <Typography variant="h6">{email}</Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6">ゆーざーねーむ</Typography>
+            <Typography variant="h6">{userData?.userName ?? 'ユーザネームがありません'}</Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6">ことばをたべさせたかいすう</Typography>
+            <Typography variant="h6">
+              {userData?.totalEatCount ? String(userData?.totalEatCount) : '0'}かい
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h6">バトルでかったかいすう</Typography>
+            <Typography variant="h6">
+              {userData?.battleWinCount ? String(userData?.battleWinCount) : '0'}かい
+            </Typography>
+          </Box>
+        </Stack>
       </Box>
     </div>
   ) : null;

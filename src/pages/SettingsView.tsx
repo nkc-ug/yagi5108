@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Divider, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Divider, Slider, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -10,6 +10,9 @@ import { BackgroundContext, MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
 import { UserDataDisplay } from '../components/auth/UserDataDisplay';
 import { convertBackGroundImg } from '../util/convertBackGroundImg';
+import VolumeDownIcon from '@mui/icons-material/VolumeUp';
+import VolumeUpIcon from '@mui/icons-material/VolumeDown';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
@@ -103,13 +106,17 @@ export const SettingsView = () => {
           >
             おんりょう
           </Typography>
-          <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
-            <ButtonGroup variant="contained" aria-label="音量調節">
-              <Button onClick={playLoud}>おおきい</Button>
-              <Button onClick={playMedium}>ふつう</Button>
-              <Button onClick={playSoft}>ちいさい</Button>
-              <Button onClick={toggleBGM}>けす</Button>
-            </ButtonGroup>
+          <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+            {value === 0 ? <VolumeOffIcon /> : <VolumeDownIcon />}
+            <VolumeDownIcon />
+            <Slider
+              aria-label="Volume"
+              value={value}
+              onChange={(_, newValue) => {
+                setVolume(newValue as number);
+              }}
+            />
+            <VolumeUpIcon />
           </Stack>
         </Box>
         <Divider />

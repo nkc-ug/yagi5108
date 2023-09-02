@@ -247,7 +247,7 @@ export const AppView: FC = () => {
                 <Container
                   disableGutters
                   style={{
-                    height: '43vh',
+                    height: '43dvh',
                     width: '100%',
                     overflow: 'hidden',
                   }}
