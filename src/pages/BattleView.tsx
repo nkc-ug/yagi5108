@@ -19,12 +19,13 @@ import { useInput } from '../hooks/useInput';
 import { CircleProgressCon } from '../components/common/CircleProgressCon';
 import { BattleNavBarCon } from '../components/battle/BattleNavBarcon';
 import BattleResult from '../components/battle/BattleResult';
-import { MonsterContext } from '../provider/ContextProviders';
+import { BackgroundContext, MonsterContext } from '../provider/ContextProviders';
 import { convertMonster } from '../util/convertMonster';
 import { AddTotalEatCount } from '../components/auth/update/TotalEatCount';
 import { EmailContext } from '../provider/ContextProviders';
 import { IsLoginContext } from '../provider/ContextProviders';
 import { AddBattleWinCount } from '../components/auth/update/BattleWinCount';
+import { convertBackGroundImg } from '../util/convertBackGroundImg';
 type RandomType = 0 | 1 | null;
 
 const emotionInitialData = {
@@ -71,6 +72,13 @@ export const BattleView: FC = () => {
   const [email] = useContext(EmailContext);
   const [isLogin] = useContext(IsLoginContext);
   const [monster] = useContext(MonsterContext);
+  //背景画像を追加
+  const [backgroundUrl] = useContext(BackgroundContext);
+
+  const backGround = convertBackGroundImg({
+    skyUrl: backgroundUrl.skyUrl,
+    groundUrl: backgroundUrl.groundUrl,
+  });
 
   const handleSubmit = async () => {
     // ロード画面の表示・入力欄の初期化
@@ -179,22 +187,21 @@ export const BattleView: FC = () => {
   };
 
   return (
-    <div>
-      <Stack direction="row" justifyContent="center">
+    <Container disableGutters maxWidth="sm">
+      <Stack justifyContent="center">
         <Container
           disableGutters
-          maxWidth="sm"
           style={{
             backgroundImage: `url(${night})`,
-            backgroundSize: '100% 100%',
-            backgroundPosition: 'center',
+            backgroundSize: '100%',
+            backgroundPosition: 'center top',
             backgroundRepeat: 'no-repeat',
-            height: '70vh',
+            height: '100dvh',
             width: '100%',
             objectFit: 'cover',
           }}
         >
-          <Container disableGutters maxWidth="sm" sx={{ mt: 10 }}>
+          <Container disableGutters sx={{ mt: 10 }}>
             <BattleResult
               eatCount={eatCount}
               typeId={typeId}
@@ -217,7 +224,7 @@ export const BattleView: FC = () => {
               evoPop={evoPop}
             />
 
-            <Box sx={{ height: '80vh' }}>
+            <Box>
               <BattleForm
                 inputText={inputText}
                 handleChange={handleInputText}
@@ -228,11 +235,9 @@ export const BattleView: FC = () => {
               <PageContainer updatePageSize={updatePageSize}>
                 <Container
                   style={{
-                    backgroundImage: `url(${sougen})`,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'bottom',
-                    backgroundRepeat: 'no-repeat',
-                    height: '60vh',
+                    paddingBottom: '6dvh',
+                    backgroundImage: `url(${backGround.groundUrl})`,
+                    height: '60dvh',
                     width: '100%',
                     overflow: 'hidden',
                   }}
@@ -244,13 +249,14 @@ export const BattleView: FC = () => {
                     <Grid item xs={2}>
                       <Container
                         disableGutters
-                        style={{
+                        sx={{
+                          position: 'fixed',
                           backgroundImage: `url(${monsterImg})`,
                           backgroundSize: '100% 100%',
                           backgroundPosition: 'bottom',
                           backgroundRepeat: 'no-repeat',
-                          width: '300px',
-                          height: '300px',
+                          width: '200px',
+                          height: '200px',
                         }}
                       />
                     </Grid>
@@ -277,6 +283,6 @@ export const BattleView: FC = () => {
 
       {/* ロード画面 */}
       <CircleProgressCon isOpen={dispCircle} />
-    </div>
+    </Container>
   );
 };

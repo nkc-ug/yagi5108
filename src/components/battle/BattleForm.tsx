@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
+import { BackgroundContext } from '../../provider/ContextProviders';
+import { textfieldStyle } from '../../styles/textFieldStyle';
 const boxStyles = {
   padding: 1,
   margin: 3,
@@ -26,6 +28,8 @@ export const BattleForm: FC<Props> = ({
   isDisableTextField,
 }) => {
   //const navigate = useNavigate();
+  const [backgroundUrl] = useContext(BackgroundContext);
+  const isNight = backgroundUrl.skyUrl === 'night';
   return (
     <div>
       <Box
@@ -38,13 +42,19 @@ export const BattleForm: FC<Props> = ({
           variant="h5"
           textAlign={'center'}
           sx={{
-            color: 'white',
+            color: isNight ? 'white' : 'black',
             opacity: isDisableTextField ? 0 : 1,
           }}
         >
           ヤギにたべさせる
         </Typography>
-        <Typography variant="h5" textAlign="center" color="white">
+        <Typography
+          variant="h5"
+          sx={{
+            color: isNight ? 'white' : 'black',
+            textAlign: 'center',
+          }}
+        >
           {isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
         <Box
@@ -65,6 +75,13 @@ export const BattleForm: FC<Props> = ({
               maxLength: 10,
               style: { color: 'white' },
             }}
+            sx={
+              isNight
+                ? {
+                    ...textfieldStyle,
+                  }
+                : {}
+            }
           />
         </Box>
         <Box textAlign={'center'}>
@@ -77,11 +94,20 @@ export const BattleForm: FC<Props> = ({
           ) : (
             <Button
               variant="contained"
-              sx={{ color: 'white' }}
+              sx={{
+                color: isNight ? 'white' : 'black',
+              }}
               onClick={inputText.trim() !== '' ? handleSubmit : undefined}
               disabled={inputText.trim() === ''}
             >
-              草をあげる
+              <Typography
+                variant="button"
+                sx={{
+                  color: isNight ? 'white' : 'black',
+                }}
+              >
+                草をあげる
+              </Typography>
             </Button>
           )}
         </Box>

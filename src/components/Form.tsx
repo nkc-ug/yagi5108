@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/material';
+import { BackgroundContext } from '../provider/ContextProviders';
+import { textfieldStyle } from '../styles/textFieldStyle';
 
 const boxStyles = {
   padding: 1,
@@ -26,6 +28,9 @@ const Form: FC<Props> = ({
   isDisableTextField,
   pageResetHandler,
 }) => {
+  const [backgroundUrl] = useContext(BackgroundContext);
+  const isNight = backgroundUrl.skyUrl === 'night';
+
   return (
     <div>
       <Box
@@ -38,12 +43,19 @@ const Form: FC<Props> = ({
           variant="h5"
           textAlign={'center'}
           sx={{
+            color: isNight ? 'white' : 'black',
             opacity: isDisableTextField ? 0 : 1,
           }}
         >
           ヤギにたべさせる
         </Typography>
-        <Typography variant="h5" textAlign="center">
+        <Typography
+          variant="h5"
+          sx={{
+            color: isNight ? 'white' : 'black',
+            textAlign: 'center',
+          }}
+        >
           {isDisableTextField ? 'やぎはお腹いっぱい' : 'ことばをいれてね'}
         </Typography>
         <Box
@@ -63,6 +75,13 @@ const Form: FC<Props> = ({
             inputProps={{
               maxLength: 10,
             }}
+            sx={
+              isNight
+                ? {
+                    ...textfieldStyle,
+                  }
+                : {}
+            }
           />
         </Box>
         <Box textAlign={'center'}>
@@ -79,7 +98,14 @@ const Form: FC<Props> = ({
               onClick={inputText.trim() !== '' ? handleSubmit : undefined}
               disabled={inputText.trim() === ''}
             >
-              草をあげる
+              <Typography
+                variant="button"
+                sx={{
+                  color: isNight ? 'white' : 'black',
+                }}
+              >
+                草をあげる
+              </Typography>
             </Button>
           )}
         </Box>

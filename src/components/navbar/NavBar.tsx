@@ -1,4 +1,4 @@
-import { BottomNavigation, BottomNavigationAction, Box } from '@mui/material';
+import { BottomNavigation, BottomNavigationAction, Box, Divider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { FC, useContext, useRef, useState } from 'react';
 import HelpIcon from '@mui/icons-material/Help';
@@ -6,12 +6,13 @@ import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CoronavirusIcon from '@mui/icons-material/Coronavirus';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { StyleMenu } from './StyleMenu';
 import {
   MonsterContext,
   MonsterNumberContext,
   TutorialContext,
 } from '../../provider/ContextProviders';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import { VerticalDivider } from '../common/VerticalDivider';
 
 type Props = {
   handleTutorialChange: React.MouseEventHandler<HTMLButtonElement> | undefined;
@@ -19,8 +20,6 @@ type Props = {
 
 export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
   const navigate = useNavigate();
-  const [isOpenStyleMenu, setIsOpenStyleMenu] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [_, setMonsterUrl] = useContext(MonsterContext);
   const [__, setMonsterNumber] = useContext(MonsterNumberContext);
   const [___, setIsTutorialModal] = useContext(TutorialContext);
@@ -52,24 +51,27 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
         showLabels
         sx={{
           bgcolor: '#D4B178',
+          boxShadow: '5px 5px 10px rgba(0, 0, 0, 0.6)',
+          py: 1.5,
         }}
       >
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           label="あそびかた"
           icon={<HelpIcon />}
           onClick={() => {
             setIsTutorialModal(true);
           }}
           sx={{ color: 'white' }}
-        />
+        /> */}
         <BottomNavigationAction
           label="たたかう"
-          icon={<CoronavirusIcon />}
+          icon={<LocalFireDepartmentIcon />}
           onClick={() => {
             handleMonster();
           }}
           sx={{ color: 'white' }}
         />
+        <VerticalDivider />
         <BottomNavigationAction
           id="styleMenuNav"
           label="やぎをみる"
@@ -79,6 +81,7 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           }}
           sx={{ color: 'white' }}
         />
+        <VerticalDivider />
         <BottomNavigationAction
           label="トロフィー"
           icon={<EmojiEventsIcon />}
@@ -87,26 +90,16 @@ export const NavBar: FC<Props> = ({ handleTutorialChange }) => {
           }}
           sx={{ color: 'white' }}
         />
+        <VerticalDivider />
         <BottomNavigationAction
           label="せってい"
           icon={<SettingsIcon />}
-          onClick={
-            () => {
-              navigate('SettingsView');
-            }
-            // toggleBGM
-          }
+          onClick={() => {
+            navigate('SettingsView');
+          }}
           sx={{ color: 'white' }}
         />
       </BottomNavigation>
-
-      <StyleMenu
-        anchorEl={anchorEl}
-        open={isOpenStyleMenu}
-        handleClose={() => {
-          setIsOpenStyleMenu(false);
-        }}
-      />
     </Box>
   );
 };
