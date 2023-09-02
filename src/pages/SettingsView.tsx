@@ -108,7 +108,6 @@ export const SettingsView = () => {
           </Typography>
           <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
             {value === 0 ? <VolumeOffIcon /> : <VolumeDownIcon />}
-            <VolumeDownIcon />
             <Slider
               aria-label="Volume"
               value={value}
