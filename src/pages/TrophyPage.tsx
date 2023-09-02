@@ -27,7 +27,7 @@ export const TrophyPage = () => {
         }}
       >
         <Typography
-          variant="h2"
+          variant="h3"
           sx={{
             margin: '0px',
             padding: '20px',
