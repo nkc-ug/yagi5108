@@ -9,7 +9,9 @@ import { AddUserData } from './AddUserData';
 export const LoginButton = () => {
   const [isLogin, setIsLogin] = useContext(IsLoginContext);
   const [email, setEmail] = useContext(EmailContext);
-  const [loginButtonText, setLoginButtonText] = useState(!isLogin ? 'ろぐいん' : 'ろぐあうと');
+  const [loginButtonText, setLoginButtonText] = useState(
+    !isLogin ? 'ろぐいんする' : 'ろぐあうとする'
+  );
 
   useEffect(() => {
     if (!isLogin) {
@@ -35,7 +37,7 @@ export const LoginButton = () => {
       localStorage.clear();
       setEmail('');
     }
-    setLoginButtonText(isLogin ? 'ろぐいん' : 'ろぐあうと');
+    setLoginButtonText(isLogin ? 'ろぐいんする' : 'ろぐあうとする');
     setIsLogin(!isLogin);
   };
 
