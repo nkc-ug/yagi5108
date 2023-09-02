@@ -23,7 +23,16 @@ export const UserDataDisplay: FC = () => {
 
   return isLogin ? (
     <div>
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: 'rgba(80, 80, 80, 0.5)',
+          borderRadius: '30px',
+          padding: '15px',
+          margin: '0px auto 10px auto',
+          width: '90%',
+          maxWidth: '350px',
+        }}
+      >
         <Typography
           variant="h5"
           sx={{
