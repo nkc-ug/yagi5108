@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Typography } from '@mui/material';
+import { Box, Button, ButtonGroup, Divider, Typography } from '@mui/material';
 import { Container } from '@mui/material';
 import { Stack } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -6,16 +6,23 @@ import React, { useEffect, useState, useContext } from 'react';
 import bgm from '../Audio/Bgm.mp3';
 import backgroundgImage from '../assets/backGround.png';
 import { SettingsNavBarCon } from '../components/settings/SettingsNavBarCon';
-import { MusicContext } from '../provider/ContextProviders';
+import { BackgroundContext, MusicContext } from '../provider/ContextProviders';
 import { LoginButton } from '../components/auth/LoginButton';
 import { UserDataDisplay } from '../components/auth/UserDataDisplay';
+import { convertBackGroundImg } from '../util/convertBackGroundImg';
 
 export const SettingsView = () => {
   const [value, setValue] = useState<number>(50);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMusicPlaying, setMusicPlaying] = useContext(MusicContext);
+  const [backgroundUrl] = useContext(BackgroundContext);
 
   const audioRef = React.useRef<HTMLAudioElement | null>(null);
+
+  const backGround = convertBackGroundImg({
+    skyUrl: backgroundUrl.skyUrl,
+    groundUrl: backgroundUrl.groundUrl,
+  });
 
   useEffect(() => {
     // 初回マウント時に音声要素を作成
@@ -75,32 +82,28 @@ export const SettingsView = () => {
   };
 
   return (
-    <div>
-      <Stack direction="row" justifyContent="center" spacing={2}>
-        <Container
-          maxWidth="sm"
-          sx={{
-            padding: '50px',
-            marginTop: '50%',
-            minHeight: '100vh',
-            height: '100%',
-            width: '100%',
-            textAlign: 'center',
-            backgroundImage: `url(${backgroundgImage})`,
-            backgroundSize: 'cover',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-          }}
-        >
-          <Typography variant="h4">おんりょう</Typography>
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ mb: 1 }}
-            alignItems="center"
-            justifyContent="center"
-            style={{ marginTop: '10%' }}
+    <Container disableGutters maxWidth="sm">
+      <Stack
+        spacing={3}
+        sx={{
+          m: 5,
+          p: 4,
+          bgcolor: 'white',
+          borderRadius: 2,
+          boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        <Box>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: 'center',
+              mb: 1,
+            }}
           >
+            おんりょう
+          </Typography>
+          <Stack spacing={2} direction="row" alignItems="center" justifyContent="center">
             <ButtonGroup variant="contained" aria-label="音量調節">
               <Button onClick={playLoud}>おおきい</Button>
               <Button onClick={playMedium}>ふつう</Button>
@@ -108,11 +111,44 @@ export const SettingsView = () => {
               <Button onClick={toggleBGM}>けす</Button>
             </ButtonGroup>
           </Stack>
-          <UserDataDisplay />
-          <LoginButton />
-        </Container>
+        </Box>
+        <Divider />
+        <UserDataDisplay />
+        <LoginButton />
+      </Stack>
+      <Stack
+        justifyContent="center"
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+        }}
+      >
+        <Container
+          disableGutters
+          sx={{
+            backgroundImage: `url(${backGround.skyUrl})`,
+            backgroundSize: '100%',
+            backgroundPosition: 'center top',
+            backgroundRepeat: 'no-repeat',
+            height: '60dvh',
+            width: '100%',
+            objectFit: 'cover',
+          }}
+        />
+        <Container
+          disableGutters
+          sx={{
+            marginTop: '-5dvh',
+            backgroundImage: `url(${backGround.groundUrl})`,
+            height: '45dvh',
+          }}
+        />
       </Stack>
       <SettingsNavBarCon />
-    </div>
+    </Container>
   );
 };
